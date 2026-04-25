@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- saved from url=(0034)https://sandybpatterson.github.io/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sandy B. Patterson</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
@@ -144,17 +144,23 @@
       .book.locked .book-label { color: #b8a98a; }
     </style>
   </head>
-  <body>
-    <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">&#9790;</button>
+  <body class="">
+    <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">☾</button>
     <div class="author-name">Sandy B. Patterson</div>
     <div class="author-tagline">Stories from the American South</div>
     <div class="divider"></div>
     <div class="shelf">
-      <a href="/stories/" class="book">
+      <a href="https://sandybpatterson.github.io/stories/" class="book">
         <div class="book-cover">
           <div class="book-cover-title">Stories from Winchester</div>
-          <div class="book-cover-ornament">&#10022;</div>
+          <div class="book-cover-ornament">✦</div>
           <div class="book-cover-author">Sandy B. Patterson</div>
+        </div>
+        <div class="book-label">Read Now</div>
+      </a>
+      <a href="#" class="book">
+        <div class="book-cover" style="background: none; padding: 0;">
+          <img src="/images/tobcover.png" alt="The Original Bug" style="width:160px; height:220px; object-fit:cover; border-radius: 3px 6px 6px 3px;">
         </div>
         <div class="book-label">Read Now</div>
       </a>
@@ -164,13 +170,7 @@
         </div>
         <div class="book-label">Coming Soon</div>
       </div>
-      <a href="#" class="book">
-        <div class="book-cover" style="background: none; padding: 0;">
-          <img src="/images/tobcover.png" alt="The Original Bug" style="width:160px; height:220px; object-fit:cover; border-radius: 3px 6px 6px 3px;">
         </div>
-        <div class="book-label">Read Now</div>
-      </a>
-    </div>
     <script>
       if (localStorage.getItem('darkMode') === 'on') {
         document.body.classList.add('dark');
@@ -180,5 +180,6 @@
         localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'on' : 'off');
       }
     </script>
-  </body>
-</html>
+  
+
+</body></html>
