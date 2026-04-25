@@ -6,9 +6,7 @@
       <title>Sandy B. Patterson</title>
     <style>
           @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
-
           * { margin: 0; padding: 0; box-sizing: border-box; }
-
           body {
                   background-color: #f5f0e8;
                   color: #2c2416;
@@ -19,7 +17,6 @@
                   align-items: center;
                   padding: 5rem 2rem 6rem;
           }
-
           .author-name {
                   font-family: 'Cinzel', serif;
                   font-size: 2.2rem;
@@ -29,7 +26,6 @@
                   text-align: center;
                   margin-bottom: 0.5rem;
           }
-
           .author-tagline {
                   font-family: 'EB Garamond', serif;
                   font-style: italic;
@@ -38,21 +34,18 @@
                   text-align: center;
                   margin-bottom: 4rem;
           }
-
           .divider {
                   width: 60px;
                   height: 1px;
                   background: #b8a98a;
                   margin: 0 auto 4rem;
           }
-
           .shelf {
                   display: flex;
                   gap: 3rem;
                   flex-wrap: wrap;
                   justify-content: center;
           }
-
           .book {
                   display: flex;
                   flex-direction: column;
@@ -60,7 +53,6 @@
                   text-decoration: none;
                   width: 160px;
           }
-
           .book-cover {
                   width: 160px;
                   height: 220px;
@@ -75,23 +67,18 @@
                   transition: transform 0.2s ease, box-shadow 0.2s ease;
                   position: relative;
           }
-
           .book-cover::before {
                   content: '';
                   position: absolute;
-                  left: 0;
-                  top: 0;
-                  bottom: 0;
+                  left: 0; top: 0; bottom: 0;
                   width: 12px;
                   background: rgba(255,255,255,0.06);
                   border-radius: 3px 0 0 3px;
           }
-
           .book:hover .book-cover {
                   transform: translateY(-6px);
                   box-shadow: 0 12px 30px rgba(44,36,22,0.22);
           }
-
           .book-cover-title {
                   font-family: 'Cinzel', serif;
                   font-size: 0.78rem;
@@ -101,14 +88,12 @@
                   letter-spacing: 0.08em;
                   line-height: 1.5;
           }
-
           .book-cover-ornament {
                   color: #b8a98a;
                   font-size: 1rem;
                   margin: 0.8rem 0;
                   letter-spacing: 0.3em;
           }
-
           .book-cover-author {
                   font-family: 'EB Garamond', serif;
                   font-style: italic;
@@ -118,7 +103,6 @@
                   position: absolute;
                   bottom: 1rem;
           }
-
           .book-label {
                   margin-top: 1rem;
                   font-family: 'Cinzel', serif;
@@ -128,49 +112,38 @@
                   text-align: center;
                   text-transform: uppercase;
           }
-
           .book.locked .book-cover {
                   background: #a89880;
                   opacity: 0.6;
                   cursor: default;
           }
-
           .book.locked:hover .book-cover {
                   transform: none;
                   box-shadow: 4px 6px 18px rgba(44,36,22,0.3);
           }
-
-          .book.locked .book-label {
-                  color: #b8a98a;
-          }
+          .book.locked .book-label { color: #b8a98a; }
         </style>
   </head>
   <body>
-
       <div class="author-name">Sandy B. Patterson</div>div>
       <div class="author-tagline">Stories from the American South</div>div>
       <div class="divider"></div>div>
-
       <div class="shelf">
-
             <a href="/stories/" class="book">
                     <div class="book-cover">
                               <div class="book-cover-title">Stories from Winchester</div>div>
-                              <div class="book-cover-ornament">✦</div>div>
+                              <div class="book-cover-ornament">&#10022;</div>div>
                               <div class="book-cover-author">Sandy B. Patterson</div>div>
                     </div>div>
                     <div class="book-label">Read Now</div>div>
             </a>a>
-
             <div class="book locked">
                     <div class="book-cover">
                               <div class="book-cover-title">Coming Soon</div>div>
                     </div>div>
                     <div class="book-label">Coming Soon</div>div>
             </div>div>
-
       </div>div>
-
   </body>
 </html>html>
   </body>
