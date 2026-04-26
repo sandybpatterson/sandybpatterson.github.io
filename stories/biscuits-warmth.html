@@ -451,8 +451,8 @@
     ═══════════════════════════════════════ -->
 
     <div class="player-wrap">
-      <button class="play-btn" id="playBtn" onclick="handlePlay()">▶ Listen</button>
-      <button class="pause-btn" id="pauseBtn" onclick="handlePause()">⏸ Pause</button>
+      <button class="play-btn" id="playBtn" onclick="handlePlay()">Listen</button>
+      <button class="pause-btn" id="pauseBtn" onclick="handlePause()">Pause</button>
 
       <select class="voice-select" id="voiceSelect" onchange="handleSourceChange()">
         <option value="" disabled selected>Voices</option>
@@ -989,30 +989,53 @@
         return;
       }
 
-      // Only show local voices — cloud-dependent voices fail silently
+      // Only local voices — cloud-dependent ones fail silently
       const localVoices = allVoices.filter(v => v.localService !== false);
-      console.log('✓ ' + allVoices.length + ' total voice(s) found, ' + localVoices.length + ' reliable local voice(s) available.');
+      const useVoices   = localVoices.length > 0 ? localVoices : allVoices;
 
       if (localVoices.length === 0) {
-        // Fallback — show everything with a console warning
         console.warn('⚠ No local voices found — showing all voices. Some may not work reliably.');
-        allVoices.forEach((voice) => {
+      }
+
+      // Apple novelty/sound-effect voices that claim en-US but aren't real narrators
+      const noveltyNames = [
+        'bad news', 'bahh', 'bells', 'boing', 'bubbles', 'cellos', 'good news',
+        'jester', 'organ', 'superstar', 'trinoids', 'whisper', 'wobble', 'zarvox',
+        'pipe organ', 'hysterical', 'junior', 'kathy', 'ralph', 'deranged',
+        'albert', 'bruce', 'fred', 'princess', 'vicki', 'victoria'
+      ];
+
+      function isNovelty(voice) {
+        const name = voice.name.toLowerCase();
+        return noveltyNames.some(n => name.includes(n));
+      }
+
+      // English real voices at top, novelty + non-English at bottom
+      const englishVoices = useVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en') && !isNovelty(v));
+      const otherVoices   = useVoices.filter(v => !v.lang || !v.lang.toLowerCase().startsWith('en') || isNovelty(v));
+
+      console.log('✓ ' + englishVoices.length + ' English voice(s), ' + otherVoices.length + ' other voice(s).');
+
+      function addVoicesToGroup(group, voices) {
+        voices.forEach((voice) => {
           availableVoices.push(voice);
           const opt = document.createElement('option');
           opt.value = 'voice_' + (availableVoices.length - 1);
-          opt.textContent = voice.name + (voice.lang ? '  (' + voice.lang + ')' : '');
-          systemGroup.appendChild(opt);
+          opt.textContent = voice.name;
+          group.appendChild(opt);
         });
-        return;
       }
 
-      localVoices.forEach((voice) => {
-        availableVoices.push(voice);
-        const opt = document.createElement('option');
-        opt.value = 'voice_' + (availableVoices.length - 1);
-        opt.textContent = voice.name + (voice.lang ? '  (' + voice.lang + ')' : '');
-        systemGroup.appendChild(opt);
-      });
+      // English voices go into the existing systemVoicesGroup
+      addVoicesToGroup(systemGroup, englishVoices);
+
+      // Other voices get their own optgroup below
+      if (otherVoices.length > 0) {
+        const otherGroup = document.createElement('optgroup');
+        otherGroup.label = 'Other Voices';
+        voiceSelect.appendChild(otherGroup);
+        addVoicesToGroup(otherGroup, otherVoices);
+      }
     }
 
     if (window.speechSynthesis) {
