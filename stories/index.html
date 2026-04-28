@@ -4,24 +4,81 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stories from Winchester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
     <script>
-      if (localStorage.getItem('darkMode') !== 'off') {
-        document.documentElement.classList.add('dark');
-      }
+      (function () {
+        const saved = localStorage.getItem('colorMode');
+        if (saved) document.documentElement.classList.add(saved);
+        else document.documentElement.classList.add('dark');
+      })();
     </script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
 
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      /* ───────────────────────────────────────────
+         CSS VARIABLE SYSTEM
+      ─────────────────────────────────────────── */
+
+      :root {
+        --bg:           #f5f0e8;
+        --text:         #2c2416;
+        --heading:      #1a1008;
+        --muted:        #8a7355;
+        --accent:       #5c3d1e;
+        --border:       #d4c9b0;
+        --toggle-color: #8a7355;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg:           #191714;
+          --text:         #e8e0d0;
+          --heading:      #f5f0e8;
+          --muted:        #9a8a6a;
+          --accent:       #c8a06a;
+          --border:       #38322a;
+          --toggle-color: #9a8a6a;
+        }
+      }
+
+      html.dark {
+        --bg:           #191714;
+        --text:         #e8e0d0;
+        --heading:      #f5f0e8;
+        --muted:        #9a8a6a;
+        --accent:       #c8a06a;
+        --border:       #38322a;
+        --toggle-color: #9a8a6a;
+      }
+
+      html.light {
+        --bg:           #f5f0e8;
+        --text:         #2c2416;
+        --heading:      #1a1008;
+        --muted:        #8a7355;
+        --accent:       #5c3d1e;
+        --border:       #d4c9b0;
+        --toggle-color: #8a7355;
+      }
+
+      /* ───────────────────────────────────────────
+         RESET & BASE
+      ─────────────────────────────────────────── */
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
       body {
-        background-color: #f5f0e8;
-        color: #2c2416;
+        background-color: var(--bg);
+        color: var(--text);
         font-family: 'EB Garamond', Georgia, serif;
         min-height: 100vh;
         padding: 4rem 2rem 6rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
-      html.dark body { background-color: #1a1a1a; color: #e8e0d0; }
+
+      /* ───────────────────────────────────────────
+         MODE TOGGLE
+      ─────────────────────────────────────────── */
 
       .moon-toggle {
         position: fixed;
@@ -29,69 +86,80 @@
         right: 1.5rem;
         font-size: 1.4rem;
         cursor: pointer;
-        color: #4a7fc1;
+        color: var(--toggle-color);
         background: none;
         border: none;
         line-height: 1;
         z-index: 999;
         transition: color 0.3s ease;
+        padding: 0.3rem;
       }
-      html.dark .moon-toggle { color: #ffffff; }
+      .moon-toggle:hover { color: var(--accent); }
+
+      /* ───────────────────────────────────────────
+         PAGE LAYOUT
+      ─────────────────────────────────────────── */
 
       .container { max-width: 680px; margin: 0 auto; }
+
+      /* ───────────────────────────────────────────
+         NAVIGATION
+      ─────────────────────────────────────────── */
 
       .back-link {
         display: inline-block;
         font-family: 'Cinzel', serif;
         font-size: 0.68rem;
         letter-spacing: 0.15em;
-        color: #8a7355;
+        color: var(--muted);
         text-decoration: none;
         text-transform: uppercase;
         margin-bottom: 3rem;
-        transition: color 0.3s ease;
+        transition: color 0.2s ease;
       }
-      html.dark .back-link { color: #a89880; }
-      .back-link:hover { color: #2c2416; }
-      html.dark .back-link:hover { color: #e8e0d0; }
+      .back-link:hover { color: var(--accent); }
+
+      /* ───────────────────────────────────────────
+         HEADER
+      ─────────────────────────────────────────── */
 
       .header {
         text-align: center;
         margin-bottom: 1rem;
         padding-bottom: 2rem;
-        border-bottom: 1px solid #b8a98a;
+        border-bottom: 1px solid var(--border);
         transition: border-color 0.3s ease;
       }
-      html.dark .header { border-bottom-color: #444; }
 
       .header-label {
         font-family: 'Cinzel', serif;
         font-size: 0.7rem;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: #8a7355;
+        color: var(--muted);
         margin-bottom: 0.8rem;
       }
-      html.dark .header-label { color: #a89880; }
 
       .header-title {
         font-family: 'Cinzel', serif;
         font-size: 2rem;
         font-weight: 600;
-        color: #2c2416;
+        color: var(--heading);
         margin-bottom: 0.5rem;
         transition: color 0.3s ease;
       }
-      html.dark .header-title { color: #e8e0d0; }
 
       .header-subtitle {
         font-family: 'EB Garamond', serif;
         font-style: italic;
         font-size: 1rem;
-        color: #6b5a3e;
+        color: var(--muted);
         transition: color 0.3s ease;
       }
-      html.dark .header-subtitle { color: #a89880; }
+
+      /* ───────────────────────────────────────────
+         STORY LIST
+      ─────────────────────────────────────────── */
 
       .story-list { margin-top: 3rem; }
 
@@ -99,69 +167,69 @@
         display: block;
         text-decoration: none;
         padding: 1.8rem 0;
-        border-bottom: 1px solid #d9cfc0;
+        border-bottom: 1px solid var(--border);
         transition: padding-left 0.2s ease, border-color 0.3s ease;
       }
-      html.dark .story-item { border-bottom-color: #333; }
       .story-item:hover { padding-left: 0.5rem; }
 
       .story-date {
         font-family: 'Cinzel', serif;
         font-size: 0.65rem;
         letter-spacing: 0.18em;
-        color: #8a7355;
+        color: var(--muted);
         text-transform: uppercase;
         margin-bottom: 0.4rem;
       }
-      html.dark .story-date { color: #a89880; }
 
       .story-title {
         font-family: 'Cinzel', serif;
         font-size: 1.15rem;
         font-weight: 600;
-        color: #2c2416;
+        color: var(--heading);
         margin-bottom: 0.4rem;
         transition: color 0.3s ease;
       }
-      html.dark .story-title { color: #e8e0d0; }
 
       .story-excerpt {
         font-family: 'EB Garamond', serif;
         font-size: 0.98rem;
-        color: #6b5a3e;
+        color: var(--muted);
         font-style: italic;
         line-height: 1.6;
         transition: color 0.3s ease;
       }
-      html.dark .story-excerpt { color: #a89880; }
+
     </style>
   </head>
   <body>
-    <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">☾</button>
-<div class="container">
-  <a href="https://sandybpatterson.github.io/" class="back-link">← Sandy B. Patterson</a>
-  <div class="header">
-    <div class="header-label">A Collection</div>
-    <div class="header-title">Stories from Winchester</div>
-    <div class="header-subtitle">Winchester, Tennessee &nbsp;·&nbsp; Franklin County</div>
-  </div>
-  <div class="story-list">
-    <a href="https://sandybpatterson.github.io/stories/the-incident-at-first-national.html" class="story-item">
-      <div class="story-date">October the Fourth, 1923</div>
-      <div class="story-title">The Incident at First National</div>
-      <div class="story-excerpt">Winchester woke slowly on the morning of October the fourth, the way it always did when autumn had finally made up its mind about the temperature.</div>
-    </a>
-    <a href="https://sandybpatterson.github.io/stories/biscuits-warmth.html" class="story-item">
-      <div class="story-date">January, 1923</div>
-      <div class="story-title">Biscuit's Warmth</div>
-      <div class="story-excerpt">The morning Elias Cobb set out for the Pruitt farm, the sky was the particular shade of white that Winchester people knew better than to trust.</div>
-    </a>
-  </div>
-</div>
+    <button class="moon-toggle" onclick="toggleMode()" title="Toggle dark mode">☾</button>
+    <div class="container">
+      <a href="https://sandybpatterson.github.io/" class="back-link">← Sandy B. Patterson</a>
+      <div class="header">
+        <div class="header-label">A Collection</div>
+        <div class="header-title">Stories from Winchester</div>
+        <div class="header-subtitle">Winchester, Tennessee &nbsp;·&nbsp; Franklin County</div>
+      </div>
+      <div class="story-list">
+        <a href="https://sandybpatterson.github.io/stories/the-incident-at-first-national.html" class="story-item">
+          <div class="story-date">October the Fourth, 1923</div>
+          <div class="story-title">The Incident at First National</div>
+          <div class="story-excerpt">Winchester woke slowly on the morning of October the fourth, the way it always did when autumn had finally made up its mind about the temperature.</div>
+        </a>
+        <a href="https://sandybpatterson.github.io/stories/biscuits-warmth.html" class="story-item">
+          <div class="story-date">January, 1923</div>
+          <div class="story-title">Biscuit's Warmth</div>
+          <div class="story-excerpt">The morning Elias Cobb set out for the Pruitt farm, the sky was the particular shade of white that Winchester people knew better than to trust.</div>
+        </a>
+      </div>
+    </div>
     <script>
-      function toggleDark() {
-        document.documentElement.classList.toggle('dark');
-        localStorage.setItem('darkMode', document.documentElement.classList.contains('dark') ? 'on' : 'off');
+      function toggleMode() {
+        const html = document.documentElement;
+        const isDark = html.classList.contains('dark');
+        html.classList.remove('dark', 'light');
+        html.classList.add(isDark ? 'light' : 'dark');
+        localStorage.setItem('colorMode', isDark ? 'light' : 'dark');
       }
     </script>
   </body>
