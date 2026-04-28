@@ -4,18 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sandy B. Patterson</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
   <script>
-    if (localStorage.getItem('darkMode') !== 'off') {
-      document.documentElement.classList.add('dark');
-    }
+    (function () {
+      const saved = localStorage.getItem('colorMode');
+      if (saved) document.documentElement.classList.add(saved);
+      else document.documentElement.classList.add('dark');
+    })();
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap');
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ───────────────────────────────────────────
+       CSS VARIABLE SYSTEM
+    ─────────────────────────────────────────── */
 
-    body { margin: 0; background: #f7f2ea; }
-    html.dark body { background: #1a1a1a; color: #e8e0d0; }
+    :root {
+      --bg:           #f7f2ea;
+      --heading:      #1e1810;
+      --muted:        #7a6448;
+      --border:       #c4ae8a;
+      --accent:       #b8a07a;
+      --label:        #9a7d55;
+      --label-hover:  #6a4e2a;
+      --toggle-color: #8a7355;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:           #191714;
+        --heading:      #e8e0d0;
+        --muted:        #9a8a6a;
+        --border:       #4a3a28;
+        --accent:       #c8a06a;
+        --label:        #9a8a6a;
+        --label-hover:  #c8a06a;
+        --toggle-color: #9a8a6a;
+      }
+    }
+
+    html.dark {
+      --bg:           #191714;
+      --heading:      #e8e0d0;
+      --muted:        #9a8a6a;
+      --border:       #4a3a28;
+      --accent:       #c8a06a;
+      --label:        #9a8a6a;
+      --label-hover:  #c8a06a;
+      --toggle-color: #9a8a6a;
+    }
+
+    html.light {
+      --bg:           #f7f2ea;
+      --heading:      #1e1810;
+      --muted:        #7a6448;
+      --border:       #c4ae8a;
+      --accent:       #b8a07a;
+      --label:        #9a7d55;
+      --label-hover:  #6a4e2a;
+      --toggle-color: #8a7355;
+    }
+
+    /* ───────────────────────────────────────────
+       RESET & BASE
+    ─────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ───────────────────────────────────────────
+       MODE TOGGLE
+    ─────────────────────────────────────────── */
 
     .moon-toggle {
       position: fixed;
@@ -23,17 +87,22 @@
       right: 1.5rem;
       font-size: 1.4rem;
       cursor: pointer;
-      color: #4a7fc1;
+      color: var(--toggle-color);
       background: none;
       border: none;
       line-height: 1;
       z-index: 999;
       transition: color 0.3s ease;
+      padding: 0.3rem;
     }
-    html.dark .moon-toggle { color: #ffffff; }
+    .moon-toggle:hover { color: var(--accent); }
+
+    /* ───────────────────────────────────────────
+       PAGE WRAP
+    ─────────────────────────────────────────── */
 
     .sbp-wrap {
-      background: #f7f2ea;
+      background: var(--bg);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -42,31 +111,36 @@
       font-family: 'EB Garamond', Georgia, serif;
       transition: background-color 0.3s ease;
     }
-    html.dark .sbp-wrap { background: #1a1a1a; }
+
+    /* ───────────────────────────────────────────
+       HEADER
+    ─────────────────────────────────────────── */
 
     .sbp-name {
       font-family: 'Cinzel', serif;
       font-size: 2.3rem;
       font-weight: 600;
       letter-spacing: 0.18em;
-      color: #1e1810;
+      color: var(--heading);
       text-align: center;
       margin-bottom: 0.4rem;
       transition: color 0.3s ease;
     }
-    html.dark .sbp-name { color: #e8e0d0; }
 
     .sbp-subtitle {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       font-size: 1rem;
-      color: #7a6448;
+      color: var(--muted);
       text-align: center;
       letter-spacing: 0.08em;
       margin-bottom: 1.4rem;
       transition: color 0.3s ease;
     }
-    html.dark .sbp-subtitle { color: #a89880; }
+
+    /* ───────────────────────────────────────────
+       DECORATIVE RULE
+    ─────────────────────────────────────────── */
 
     .sbp-rule {
       display: flex;
@@ -76,8 +150,12 @@
       max-width: 360px;
       margin-bottom: 3rem;
     }
-    .sbp-rule-line { flex: 1; height: 1px; background: #c4ae8a; }
-    .sbp-rule-diamond { width: 7px; height: 7px; background: #b8a07a; transform: rotate(45deg); flex-shrink: 0; }
+    .sbp-rule-line { flex: 1; height: 1px; background: var(--border); }
+    .sbp-rule-diamond { width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); flex-shrink: 0; }
+
+    /* ───────────────────────────────────────────
+       SHELF
+    ─────────────────────────────────────────── */
 
     .sbp-shelf {
       display: flex;
@@ -90,7 +168,7 @@
       width: 100%;
       max-width: 600px;
       height: 1px;
-      background: linear-gradient(to right, transparent, #c4ae8a 20%, #c4ae8a 80%, transparent);
+      background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
     }
     .sbp-shelf-shadow {
       width: 100%;
@@ -99,6 +177,12 @@
       background: linear-gradient(to bottom, rgba(30,20,10,0.10), transparent);
       margin-bottom: 2rem;
     }
+
+    /* ───────────────────────────────────────────
+       BOOK COVERS
+       Cover colors stay hardcoded — always dark
+       for the book aesthetic regardless of mode.
+    ─────────────────────────────────────────── */
 
     .sbp-book {
       display: flex;
@@ -125,7 +209,7 @@
       transform: translateY(-10px) rotate(-0.5deg);
       box-shadow: 2px 2px 0px #0a0806, 4px 4px 0px #130f09, 8px 18px 28px rgba(30,20,10,0.4), 12px 24px 40px rgba(30,20,10,0.2);
     }
-    .sbp-book:hover .sbp-label { color: #6a4e2a; border-bottom: 1px solid #b8a07a; }
+    .sbp-book:hover .sbp-label { color: var(--label-hover); border-bottom: 1px solid var(--accent); }
 
     .sbp-cover::before {
       content: '';
@@ -173,7 +257,7 @@
       font-family: 'Cinzel', serif;
       font-size: 0.62rem;
       letter-spacing: 0.18em;
-      color: #9a7d55;
+      color: var(--label);
       text-align: center;
       text-transform: uppercase;
       border-bottom: 1px solid transparent;
@@ -188,7 +272,7 @@
       cursor: default;
     }
     .sbp-coming:hover .sbp-cover { transform: none; }
-    .sbp-coming:hover .sbp-label { color: #9a7d55; border-bottom: 1px solid transparent; }
+    .sbp-coming:hover .sbp-label { color: var(--label); border-bottom: 1px solid transparent; }
     .sbp-coming-title {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -208,11 +292,12 @@
       border-radius: 2px 7px 7px 2px;
       display: block;
     }
+
   </style>
 </head>
 <body>
   <div class="sbp-wrap">
-    <button class="moon-toggle" onclick="toggleDark()" title="Toggle dark mode">&#9790;</button>
+    <button class="moon-toggle" onclick="toggleMode()" title="Toggle dark mode">&#9790;</button>
     <div class="sbp-name">Sandy B. Patterson</div>
     <div class="sbp-subtitle">Short Stories &amp; Novels</div>
     <div class="sbp-rule">
@@ -247,9 +332,12 @@
     <div class="sbp-shelf-shadow"></div>
   </div>
   <script>
-    function toggleDark() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('darkMode', document.documentElement.classList.contains('dark') ? 'on' : 'off');
+    function toggleMode() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      html.classList.remove('dark', 'light');
+      html.classList.add(isDark ? 'light' : 'dark');
+      localStorage.setItem('colorMode', isDark ? 'light' : 'dark');
     }
   </script>
 </body>
