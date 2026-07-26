@@ -369,6 +369,7 @@
         if (e.name === 'word') highlightWord(e.charIndex);
       };
       u.onend = () => {
+        // Only the last paragraph triggers the finished state.
         if (i === utterances.length - 1) {
           stopPlayback();
           if (autoplay) {
@@ -380,9 +381,6 @@
             }
           }
           updateStatus('Finished');
-        } else if (isPlaying) {
-          // Chain to the next paragraph one at a time so iOS can't drop the queue.
-          synth.speak(utterances[i + 1]);
         }
       };
       u.onerror = (e) => {
@@ -411,10 +409,9 @@
       setMediaSessionState('playing');
     });
 
-    // Speak only the first utterance. Each utterance's onend chains to the next.
-    // Pre-queuing all at once causes iOS to drop the queue when the screen locks.
-    if (index < utterances.length) synth.speak(utterances[index]);
-    startResumeTimer();
+    for (let i = index; i < utterances.length; i++) {
+      synth.speak(utterances[i]);
+    }
   }
 
   // Three-state toggle: stopped → playing → paused → playing → ...
@@ -443,28 +440,9 @@
     }
   }
 
-  // iOS Safari stalls speechSynthesis silently after ~15 seconds. A periodic
-  // pause+resume keeps it alive both in the foreground and when backgrounded.
-  let _resumeTimer = null;
-
-  function startResumeTimer() {
-    stopResumeTimer();
-    _resumeTimer = setInterval(() => {
-      if (isPlaying && !isPaused && synth.speaking) {
-        synth.pause();
-        synth.resume();
-      }
-    }, 14000);
-  }
-
-  function stopResumeTimer() {
-    if (_resumeTimer) { clearInterval(_resumeTimer); _resumeTimer = null; }
-  }
-
   // Full stop: cancels speech, resets index to 0, clears highlight and progress.
   function stopPlayback() {
     synth.cancel();
-    stopResumeTimer();
     isPlaying = false;
     isPaused = false;
     currentIndex = 0;
