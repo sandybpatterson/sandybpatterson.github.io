@@ -5,231 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>STORY TITLE HERE — Rivoli to Oldham</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
 
-    /* ═══════════════════════════════════════════
-       CSS VARIABLE SYSTEM
-       Edit colors here only — never below.
-    ═══════════════════════════════════════════ */
-
-    :root {
-      --bg:              #f5f0e8;
-      --bg-secondary:    #edeae0;
-      --text:            #2c2416;
-      --heading:         #1a1008;
-      --muted:           #8a7355;
-      --accent:          #5c3d1e;
-      --border:          #d4c9b0;
-      --border-light:    #e8e2d4;
-      --pull-border:     #a08060;
-      --drop-cap:        #2c2416;
-      --player-bg:       #edeae0;
-      --player-border:   #d4c9b0;
-      --btn-bg:          #2c2416;
-      --btn-text:        #f5f0e8;
-      --btn-hover:       #5c3d1e;
-      --select-bg:       #f5f0e8;
-      --select-text:     #2c2416;
-      --select-border:   #d4c9b0;
-      --toggle-color:    #8a7355;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:              #191714;
-        --bg-secondary:    #211e1a;
-        --text:            #e8e0d0;
-        --heading:         #f5f0e8;
-        --muted:           #9a8a6a;
-        --accent:          #c8a06a;
-        --border:          #38322a;
-        --border-light:    #2e2922;
-        --pull-border:     #6a5040;
-        --drop-cap:        #e8e0d0;
-        --player-bg:       #211e1a;
-        --player-border:   #38322a;
-        --btn-bg:          #e8e0d0;
-        --btn-text:        #191714;
-        --btn-hover:       #c8a06a;
-        --select-bg:       #2a2520;
-        --select-text:     #e8e0d0;
-        --select-border:   #38322a;
-        --toggle-color:    #9a8a6a;
-      }
-    }
-
-    html.dark {
-      --bg:              #191714;
-      --bg-secondary:    #211e1a;
-      --text:            #e8e0d0;
-      --heading:         #f5f0e8;
-      --muted:           #9a8a6a;
-      --accent:          #c8a06a;
-      --border:          #38322a;
-      --border-light:    #2e2922;
-      --pull-border:     #6a5040;
-      --drop-cap:        #e8e0d0;
-      --player-bg:       #211e1a;
-      --player-border:   #38322a;
-      --btn-bg:          #e8e0d0;
-      --btn-text:        #191714;
-      --btn-hover:       #c8a06a;
-      --select-bg:       #2a2520;
-      --select-text:     #e8e0d0;
-      --select-border:   #38322a;
-      --toggle-color:    #9a8a6a;
-    }
-
-    html.light {
-      --bg:              #f5f0e8;
-      --bg-secondary:    #edeae0;
-      --text:            #2c2416;
-      --heading:         #1a1008;
-      --muted:           #8a7355;
-      --accent:          #5c3d1e;
-      --border:          #d4c9b0;
-      --border-light:    #e8e2d4;
-      --pull-border:     #a08060;
-      --drop-cap:        #2c2416;
-      --player-bg:       #edeae0;
-      --player-border:   #d4c9b0;
-      --btn-bg:          #2c2416;
-      --btn-text:        #f5f0e8;
-      --btn-hover:       #5c3d1e;
-      --select-bg:       #f5f0e8;
-      --select-text:     #2c2416;
-      --select-border:   #d4c9b0;
-      --toggle-color:    #8a7355;
-    }
-
-    /* ═══════════════════════════════════════════
-       RESET & BASE
-    ═══════════════════════════════════════════ */
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'EB Garamond', Georgia, serif;
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: Georgia, 'Times New Roman', serif;
       font-size: 1.08rem;
       line-height: 1.85;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
     }
 
-    /* ═══════════════════════════════════════════
-       MODE TOGGLE
-    ═══════════════════════════════════════════ */
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    .mode-toggle {
-      position: fixed;
-      top: 1.2rem;
-      right: 1.5rem;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--toggle-color);
-      background: none;
-      border: none;
-      line-height: 1;
-      z-index: 999;
-      transition: color 0.3s ease;
-      padding: 0.3rem;
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1e1e;
     }
-
-    .mode-toggle:hover { color: var(--accent); }
-
-    /* ═══════════════════════════════════════════
-       PAGE LAYOUT
-    ═══════════════════════════════════════════ */
-
-    .page {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 3.5rem 2.5rem 6rem 2.5rem;
-    }
-
-    /* ═══════════════════════════════════════════
-       NAVIGATION
-    ═══════════════════════════════════════════ */
-
-    .back-link {
-      display: inline-block;
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-      text-decoration: none;
+    .nav-brand {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 3rem;
-      transition: color 0.2s ease;
+      color: #c9a84c;
     }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-links a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      padding: 5px 14px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
 
-    .back-link:hover { color: var(--accent); }
-    .back-link::before { content: '← '; }
+    .page { max-width: 680px; margin: 0 auto; padding: 60px 28px 100px; }
 
-    /* ═══════════════════════════════════════════
-       HEADER
-    ═══════════════════════════════════════════ */
-
+    /* ── Header ── */
     .series-label {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
+      color: #c9a84c;
+      margin-bottom: 12px;
     }
-
     .story-title {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: var(--heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #f0f0f0;
       line-height: 1.15;
-      margin-bottom: 0.5rem;
+      margin-bottom: 10px;
     }
-
     .story-date {
-      font-family: 'Cinzel', serif;
+      font-family: 'Courier New', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.15em;
-      color: var(--muted);
+      color: #888;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      margin-bottom: 24px;
     }
 
-    hr.divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 1.8rem 0;
-    }
+    hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
 
-    /* ═══════════════════════════════════════════
-       AUDIO PLAYER
-    ═══════════════════════════════════════════ */
+    /* ── Audio player ── */
+    .player-wrap { margin: 24px 0 0; display: flex; align-items: stretch; gap: 0.6rem; flex-wrap: nowrap; }
 
-    .player-wrap {
-      margin: 1.5rem 0 0 0;
-      display: flex;
-      align-items: stretch; /* all children same height */
-      gap: 0.6rem;
-      flex-wrap: nowrap;
-    }
-
-    /* Play button */
     .play-btn {
-      background: var(--btn-bg);
-      color: var(--btn-text);
+      background: #c9a84c;
+      color: #0a0a0a;
       border: none;
       padding: 0 1.2em;
-      font-family: 'Cinzel', serif;
+      font-family: 'Courier New', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -239,16 +101,14 @@
       line-height: 1;
       transition: background-color 0.2s ease;
     }
+    .play-btn:hover { background: #e0bc5c; }
 
-    .play-btn:hover { background: var(--btn-hover); }
-
-    /* Pause button */
     .pause-btn {
       background: none;
-      color: var(--muted);
-      border: 1px solid var(--border);
+      color: #888;
+      border: 1px solid #1e1e1e;
       padding: 0 1em;
-      font-family: 'Cinzel', serif;
+      font-family: 'Courier New', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -258,179 +118,142 @@
       line-height: 1;
       transition: border-color 0.2s ease, color 0.2s ease;
     }
+    .pause-btn:hover { border-color: #c9a84c; color: #c9a84c; }
 
-    .pause-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Voice / source selector — matches button height */
     .voice-select {
       flex: 1;
       min-width: 0;
-      background: var(--select-bg);
-      color: var(--select-text);
-      border: 1px solid var(--select-border);
+      background: #111;
+      color: #e8e8e8;
+      border: 1px solid #1e1e1e;
       padding: 0.42em 2em 0.42em 0.7em;
-      font-family: 'Cinzel', serif;
+      font-family: 'Courier New', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.1em;
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7355'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.6em center;
       transition: border-color 0.2s ease;
     }
+    .voice-select:focus { outline: none; border-color: #c9a84c; }
 
-    .voice-select:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    /* Skip to — same row, TTS only, hidden by default */
-    .skip-inline {
-      display: none; /* toggled by JS */
-      align-items: stretch;
-      gap: 0.4rem;
-      flex-shrink: 0;
-    }
+    .skip-inline { display: none; align-items: stretch; gap: 0.4rem; flex-shrink: 0; }
 
     .skip-label {
-      font-family: 'Cinzel', serif;
+      font-family: 'Courier New', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #888;
       white-space: nowrap;
       display: flex;
       align-items: center;
     }
 
     .skip-select {
-      background: var(--select-bg);
-      color: var(--select-text);
-      border: 1px solid var(--select-border);
+      background: #111;
+      color: #e8e8e8;
+      border: 1px solid #1e1e1e;
       padding: 0 1.5em 0 0.5em;
-      font-family: 'Cinzel', serif;
+      font-family: 'Courier New', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.1em;
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7355'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.4em center;
       transition: border-color 0.2s ease;
     }
+    .skip-select:focus { outline: none; border-color: #c9a84c; }
 
-    .skip-select:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
+    .progress-wrap { margin: 0.7rem 0 0; display: none; }
+    .progress-track { width: 100%; height: 3px; background: #1e1e1e; cursor: pointer; position: relative; }
+    .progress-fill { height: 100%; width: 0%; background: #c9a84c; transition: width 0.1s linear; pointer-events: none; }
 
-    /* ── Progress bar (recorded audio only) ── */
-    .progress-wrap {
-      margin: 0.7rem 0 0 0;
-      display: none;
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 3px;
-      background: var(--border);
-      cursor: pointer;
-      position: relative;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--accent);
-      transition: width 0.1s linear;
-      pointer-events: none;
-    }
-
-    /* ── Toast error message ── */
     .player-toast {
       margin-top: 0.6rem;
-      font-family: 'Cinzel', serif;
+      font-family: 'Courier New', monospace;
       font-size: 0.62rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #888;
       opacity: 0;
       transition: opacity 0.4s ease;
       min-height: 1em;
     }
-
     .player-toast.visible { opacity: 1; }
 
-    /* Hidden audio element */
     #storyAudio { display: none; }
 
-    /* ═══════════════════════════════════════════
-       STORY TEXT
-    ═══════════════════════════════════════════ */
+    /* ── Story text ── */
+    .story-body p { margin: 0 0 1.2rem; text-indent: 1.8em; text-align: justify; hyphens: auto; }
+    .story-body p.drop-cap, .story-body p.first, .story-body p.no-indent { text-indent: 0; }
 
-    .story-body p {
-      margin: 0 0 1.4em 0;
-      text-align: justify;
-      hyphens: auto;
-    }
-
-    .story-body p.drop-cap::first-letter {
-      font-size: 3.8em;
-      font-weight: 600;
+    .story-body p.drop-cap::first-letter, .story-body p.first::first-letter {
+      font-family: Georgia, serif;
+      font-size: 3.4rem;
+      font-weight: 700;
       float: left;
-      line-height: 0.82;
-      margin-right: 6px;
-      margin-top: 6px;
-      color: var(--drop-cap);
+      line-height: 0.8;
+      margin-right: 0.08em;
+      margin-top: 0.12em;
+      color: #c9a84c;
     }
+
+    .story-body em { font-style: italic; color: #e0e0e0; }
 
     blockquote.pull-quote {
-      border-left: 2px solid var(--pull-border);
+      border-left: 2px solid #c9a84c;
       margin: 2em 0;
       padding: 0.4em 0 0.4em 1.4em;
       font-style: italic;
       font-size: 1.12em;
-      color: var(--muted);
+      color: #c9a84c;
       line-height: 1.7;
     }
 
-    p.section-break {
+    p.section-break, .section-break {
       text-align: center;
-      color: var(--border);
+      margin: 2.8rem 0;
+      color: #444;
+      font-size: 1.3rem;
       letter-spacing: 0.5em;
-      margin: 2.2em 0;
-      font-size: 1em;
     }
 
-    /* ═══════════════════════════════════════════
-       CLOSING
-    ═══════════════════════════════════════════ */
-
+    /* ── Closing ── */
     .closing {
-      margin-top: 3rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid var(--border);
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .author {
-      font-family: 'EB Garamond', Georgia, serif;
+      margin-top: 3.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #1a1a1a;
       font-style: italic;
       font-size: 0.95rem;
-      color: var(--muted);
+      color: #888;
       text-align: center;
-      margin-top: 0.5rem;
+    }
+    .author {
+      font-family: 'Courier New', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: #888;
+      text-align: center;
+      margin-top: 0.6rem;
+      text-transform: uppercase;
+    }
+
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 28px 24px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #333;
+      text-transform: uppercase;
     }
 
   </style>
@@ -438,12 +261,15 @@
 
 <body>
 
-  <button class="mode-toggle" onclick="toggleMode()" title="Toggle dark mode">☽</button>
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/stories/" style="color:#c9a84c;">Stories from Winchester</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/stories/">All Stories</a>
+      <a href="https://sandybpatterson.github.io/bookshelf.html">Bookshelf</a>
+    </div>
+  </nav>
 
   <div class="page">
-
-    <!-- NAVIGATION — update href to point to your stories index -->
-    <a class="back-link" href="../stories/index.html">Stories from Winchester</a>
 
     <!-- HEADER — fill in title and date -->
     <p class="series-label">Rivoli to Oldham</p>
@@ -515,7 +341,7 @@
 
       <p>Continue the story here. Each paragraph is a plain &lt;p&gt; tag. Spacing, justification, and hyphenation are handled for you.</p>
 
-      <p class="section-break">* * *</p>
+      <p class="section-break">✦ &nbsp; ✦ &nbsp; ✦</p>
 
       <p>Use the section break above between major scene shifts.</p>
 
@@ -530,25 +356,9 @@
 
   </div>
 
+  <footer>&copy; Sandy B. Patterson</footer>
 
   <script>
-
-    /* ════════════════════════════════════════════
-       DARK MODE
-    ════════════════════════════════════════════ */
-
-    function toggleMode() {
-      const html = document.documentElement;
-      const isDark = html.classList.contains('dark');
-      html.classList.remove('dark', 'light');
-      html.classList.add(isDark ? 'light' : 'dark');
-      localStorage.setItem('colorMode', isDark ? 'light' : 'dark');
-    }
-
-    (function () {
-      const saved = localStorage.getItem('colorMode');
-      if (saved) document.documentElement.classList.add(saved);
-    })();
 
     // Set initial button state — JS controls this entirely, not CSS
     document.getElementById('playBtn').style.display  = '';

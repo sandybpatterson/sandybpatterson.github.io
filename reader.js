@@ -24,6 +24,105 @@
   //   flag:       emoji flag for the language button
   //   speechLang: the BCP-47 tag used to filter Web Speech API voices
   //               (e.g. 'en-US' will prefer voices whose lang starts with 'en')
+  // Apple novelty/special-effect voices built into macOS and iOS.
+  // These appear in getVoices() but are not useful for reading — hide them.
+  const NOVELTY_VOICES = new Set([
+    'albert', 'bad news', 'bahh', 'bells', 'boing', 'bubbles',
+    'cellos', 'fred', 'good news', 'jester', 'junior', 'kathy',
+    'organ', 'superstar', 'whisper', 'ralph', 'wobble', 'zarvox'
+  ]);
+
+  function isIOS() {
+    return /iPhone|iPad|iPod/.test(navigator.userAgent);
+  }
+
+  // Returns true if the user has any non-novelty, non-Samantha English voice installed.
+  // Samantha is the only pre-installed iOS English voice — anything else means
+  // the user has downloaded something better.
+  function hasGoodVoice() {
+    const usableEnglish = allVoices.filter(v =>
+      !NOVELTY_VOICES.has(v.name.toLowerCase()) &&
+      v.lang.toLowerCase().startsWith('en')
+    );
+    return usableEnglish.some(v => {
+      const n = v.name.toLowerCase();
+      return n !== 'samantha'; // anything other than Samantha counts
+    });
+  }
+
+  function checkVoiceQuality() {
+    if (!isIOS()) return;
+    if (hasGoodVoice()) return;
+    if (localStorage.getItem('sbp-voice-hint-v2')) return;
+    setTimeout(showVoicePrompt, 900);
+  }
+
+  function showVoicePrompt() {
+    if (document.getElementById('sbp-voice-prompt')) return;
+    const reader = document.getElementById('sbp-reader');
+    if (!reader) return;
+
+    const el = document.createElement('div');
+    el.id = 'sbp-voice-prompt';
+    el.className = 'sbp-voice-prompt';
+    el.innerHTML = `
+      <span class="sbp-vp-text">A much better voice is available for your iPhone — free.</span>
+      <button class="sbp-vp-btn sbp-vp-yes" id="sbp-vp-yes">Set up now</button>
+      <button class="sbp-vp-btn sbp-vp-no" id="sbp-vp-no">✕</button>
+    `;
+    reader.appendChild(el);
+
+    document.getElementById('sbp-vp-yes').addEventListener('click', () => {
+      el.remove();
+      showVoiceInstructions();
+    });
+    // ✕ just hides for this session — does NOT set localStorage
+    document.getElementById('sbp-vp-no').addEventListener('click', () => {
+      el.remove();
+    });
+  }
+
+  function showVoiceInstructions() {
+    const overlay = document.createElement('div');
+    overlay.id = 'sbp-voice-overlay';
+    overlay.className = 'sbp-voice-overlay';
+    overlay.innerHTML = `
+      <div class="sbp-voice-modal">
+        <button class="sbp-voice-close" id="sbp-voice-close">✕</button>
+        <p class="sbp-vm-eyebrow">iPhone Voice Setup</p>
+        <h2 class="sbp-vm-title">Download a natural&#8209;sounding voice</h2>
+        <ol class="sbp-vm-steps">
+          <li>Open the <strong>Settings</strong> app ⚙️</li>
+          <li>Tap <strong>Accessibility</strong></li>
+          <li>Tap <strong>Vision</strong> → <strong>Read &amp; Speak</strong><br><span class="sbp-vm-alt">On newer iOS: <strong>Spoken Content</strong></span></li>
+          <li>Tap <strong>Voices</strong> → <strong>English</strong></li>
+          <li>Find a voice with <em>Enhanced</em> — tap ⬇ to download if needed</li>
+          <li>Tap the voice <strong>name</strong> to set it as your default</li>
+        </ol>
+        <p class="sbp-vm-note">iPhone ignores voice changes from web pages and always uses your iOS default. Setting it as default here is what actually changes what you hear. Can't find Voices? Search <strong>"voices"</strong> in the Settings search bar.</p>
+        <label class="sbp-vm-toggle-row">
+          <span class="sbp-vm-toggle-label">Don't remind me again</span>
+          <span class="sbp-toggle">
+            <input type="checkbox" id="sbp-vm-noremind">
+            <span class="sbp-toggle-track"><span class="sbp-toggle-thumb"></span></span>
+          </span>
+        </label>
+        <button class="sbp-vm-done" id="sbp-voice-done">Got it</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    function close() {
+      if (document.getElementById('sbp-vm-noremind')?.checked) {
+        localStorage.setItem('sbp-voice-hint-v2', '1');
+      }
+      overlay.remove();
+    }
+    document.getElementById('sbp-voice-close').addEventListener('click', close);
+    document.getElementById('sbp-voice-done').addEventListener('click', close);
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  }
+
   const LANGUAGES = [
     { code: 'en', label: 'English',    flag: '🇺🇸', speechLang: 'en-US' },
     { code: 'es', label: 'Español',    flag: '🇪🇸', speechLang: 'es-ES' },
@@ -60,6 +159,7 @@
   let translationCache = {};            // keyed by "lang:first40chars" to avoid re-fetching
   let speed = 1.0;                      // playback rate, controlled by the speed slider
   let translating = false;              // true while an async translation is in progress
+  let autoplay = false;                 // true while autoplay-next-chapter is enabled
 
 
   // ── EXTRACT STORY TEXT ───────────────────────────────────────────────────────
@@ -71,8 +171,8 @@
   function extractParagraphs() {
     const container = document.querySelector('.story-body, article, main, .content')
                       || document.body;
-    const paras = Array.from(container.querySelectorAll('p'))
-      .map(p => p.textContent.trim())
+    const paras = Array.from(container.querySelectorAll('h1, h2, h3, h4, p'))
+      .map(el => el.textContent.trim())
       .filter(t => t.length > 10);
     return paras;
   }
@@ -160,6 +260,7 @@
   function loadVoices() {
     allVoices = synth.getVoices();
     populateVoiceSelect();
+    checkVoiceQuality();
   }
 
   // Returns voices sorted by best fit for the given language tag.
@@ -173,16 +274,17 @@
   // fallback that browsers pick when nothing else matches.
   function getBestVoicesForLang(speechLang) {
     const langPrefix = speechLang.split('-')[0].toLowerCase();
+    const usable = allVoices.filter(v => !NOVELTY_VOICES.has(v.name.toLowerCase()));
 
-    let matches = allVoices.filter(v =>
+    let matches = usable.filter(v =>
       v.lang.toLowerCase() === speechLang.toLowerCase()
     );
     if (!matches.length) {
-      matches = allVoices.filter(v =>
+      matches = usable.filter(v =>
         v.lang.toLowerCase().startsWith(langPrefix)
       );
     }
-    if (!matches.length) matches = allVoices;
+    if (!matches.length) matches = usable;
 
     return matches.sort((a, b) => {
       if (a.default && !b.default) return 1;  // push system default down
@@ -197,23 +299,45 @@
   // Fills the voice <select> dropdown with up to 12 voices for the current language.
   // Brand prefixes (Microsoft, Google, Apple) are stripped from display names
   // because they add noise without being useful to the reader.
+  // On iOS, getVoices() returns many names but only two actually work:
+  //   1. Samantha — Apple's built-in voice, always addressable directly
+  //   2. The system default — whatever the user has set in iOS Settings;
+  //      all other voice names silently route here
+  // We find these two real slots and discard everything else.
+  function getIOSRealVoices() {
+    const samantha = allVoices.find(v => v.name.toLowerCase() === 'samantha');
+    const systemDefault = allVoices.find(v => v.default) ||
+                          allVoices.find(v => !NOVELTY_VOICES.has(v.name.toLowerCase()) &&
+                                              v.name.toLowerCase() !== 'samantha' &&
+                                              v.lang.toLowerCase().startsWith('en'));
+    const real = [];
+    if (systemDefault) real.push(systemDefault);
+    if (samantha && samantha !== systemDefault) real.push(samantha);
+    return real;
+  }
+
   function populateVoiceSelect() {
+    if (isIOS()) {
+      // iOS ignores the voice property — the system default is used for everything.
+      // No dropdown to populate; voice is changed via the "Change voice ›" button.
+      selectedVoice = null;
+      return;
+    }
+
     const select = document.getElementById('sbp-voice-select');
     if (!select) return;
 
     const lang = LANGUAGES.find(l => l.code === currentLang) || LANGUAGES[0];
     const voices = getBestVoicesForLang(lang.speechLang);
-
     select.innerHTML = '';
-    voices.slice(0, 12).forEach((v, i) => {
+    voices.forEach((v, i) => {
       const opt = document.createElement('option');
-      opt.value = i;                                                     // index into the sorted voices array
+      opt.value = i;
       opt.textContent = v.name.replace(/Microsoft|Google|Apple/g, '').trim();
-      opt.dataset.voiceUri = v.voiceURI;                                 // stored for reference, not actively used
+      opt.dataset.voiceUri = v.voiceURI;
       select.appendChild(opt);
     });
-
-    selectedVoice = voices[0] || null; // auto-select the best available voice
+    selectedVoice = voices[0] || null;
   }
 
 
@@ -225,9 +349,10 @@
   // of playFrom() before re-queueing from the new index.
 
   function buildUtterances() {
-    // Rebuild the utterance array from the current translatedParagraphs and selectedVoice.
-    // Must be rebuilt whenever voice, speed, or language changes, because
-    // SpeechSynthesisUtterance properties are baked in at speak() time.
+    // Pre-wrap all paragraphs NOW so word spans are in the DOM before
+    // onboundary fires — onboundary can fire almost simultaneously with onstart.
+    getStoryParagraphs().forEach(el => wrapWordsInPara(el));
+
     utterances = translatedParagraphs.map((text, i) => {
       const u = new SpeechSynthesisUtterance(text);
       u.voice = selectedVoice;
@@ -237,14 +362,27 @@
 
       u.onstart = () => {
         currentIndex = i;
-        highlightParagraph(i);                          // visually mark the current paragraph
-        updateProgressBar(i / utterances.length);       // advance the progress bar
+        highlightParagraph(i);
+        updateProgressBar(i / utterances.length);
+      };
+      u.onboundary = (e) => {
+        if (e.name === 'word') highlightWord(e.charIndex);
       };
       u.onend = () => {
-        // Only the last paragraph triggers the finished state.
         if (i === utterances.length - 1) {
           stopPlayback();
+          if (autoplay) {
+            const params = new URLSearchParams(window.location.search);
+            const nextNum = parseInt(params.get('c'), 10) + 1;
+            if (!isNaN(nextNum)) {
+              window.location.href = `chapter.html?c=${nextNum}&autoplay=1`;
+              return;
+            }
+          }
           updateStatus('Finished');
+        } else if (isPlaying) {
+          // Chain to the next paragraph one at a time so iOS can't drop the queue.
+          synth.speak(utterances[i + 1]);
         }
       };
       u.onerror = (e) => {
@@ -266,9 +404,17 @@
     isPaused = false;
     updatePlayButton();
 
-    for (let i = index; i < utterances.length; i++) {
-      synth.speak(utterances[i]);
-    }
+    // Start the silent audio first. iOS won't register Now Playing metadata
+    // until the audio session is established, so we set it after play() resolves.
+    playSilentAudio().then(() => {
+      setupMediaSession();
+      setMediaSessionState('playing');
+    });
+
+    // Speak only the first utterance. Each utterance's onend chains to the next.
+    // Pre-queuing all at once causes iOS to drop the queue when the screen locks.
+    if (index < utterances.length) synth.speak(utterances[index]);
+    startResumeTimer();
   }
 
   // Three-state toggle: stopped → playing → paused → playing → ...
@@ -285,18 +431,40 @@
       isPlaying = false;
       updatePlayButton();
       updateStatus('Paused');
+      setMediaSessionState('paused');
     } else if (isPaused) {
       synth.resume();
       isPaused = false;
       isPlaying = true;
       updatePlayButton();
       updateStatus('Playing');
+      playSilentAudio();
+      setMediaSessionState('playing');
     }
+  }
+
+  // iOS Safari stalls speechSynthesis silently after ~15 seconds. A periodic
+  // pause+resume keeps it alive both in the foreground and when backgrounded.
+  let _resumeTimer = null;
+
+  function startResumeTimer() {
+    stopResumeTimer();
+    _resumeTimer = setInterval(() => {
+      if (isPlaying && !isPaused && synth.speaking) {
+        synth.pause();
+        synth.resume();
+      }
+    }, 14000);
+  }
+
+  function stopResumeTimer() {
+    if (_resumeTimer) { clearInterval(_resumeTimer); _resumeTimer = null; }
   }
 
   // Full stop: cancels speech, resets index to 0, clears highlight and progress.
   function stopPlayback() {
     synth.cancel();
+    stopResumeTimer();
     isPlaying = false;
     isPaused = false;
     currentIndex = 0;
@@ -304,6 +472,88 @@
     updatePlayButton();
     updateProgressBar(0);
     updateStatus('Ready');
+    pauseSilentAudio();
+    setMediaSessionState('none');
+  }
+
+
+  // ── MEDIA SESSION ────────────────────────────────────────────────────────────
+  // Hooks TTS playback into the iOS/Android lock screen media card.
+  // iOS Now Playing only tracks <audio>/<video> elements — Web Audio API and
+  // speechSynthesis alone do not appear on the lock screen. A silent looping
+  // <audio> element holds the audio session open. pauseSilentAudio is only
+  // called on full stop; during TTS pause the element keeps running so the
+  // lock screen card stays visible.
+
+  let _silentAudio = null;
+
+  function getSilentAudio() {
+    if (_silentAudio) return _silentAudio;
+    _silentAudio = document.createElement('audio');
+    // 100ms silent WAV (8000 Hz, 8-bit, mono) — iOS requires real audio data
+    _silentAudio.src = 'data:audio/wav;base64,UklGRkQDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSADAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==';
+    _silentAudio.loop = true;
+    _silentAudio.volume = 1.0;
+    _silentAudio.preload = 'auto';
+    document.body.appendChild(_silentAudio);
+    return _silentAudio;
+  }
+
+  function playSilentAudio() {
+    return getSilentAudio().play().catch(() => {});
+  }
+
+  function pauseSilentAudio() {
+    if (_silentAudio) _silentAudio.pause();
+  }
+
+  function setMediaSessionState(state) {
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = state;
+  }
+
+  function setupMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+
+    // Pull chapter title from the first meaningful heading on the page
+    const heading = document.querySelector('main h1, main h2, main h3, article h1, article h3');
+    const chapterTitle = heading?.textContent?.trim() || document.title || 'The Original Bug';
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: chapterTitle,
+      artist: 'Sandy B. Patterson',
+      album: 'The Original Bug',
+    });
+
+    navigator.mediaSession.setActionHandler('play', () => {
+      if (!isPlaying) togglePlayPause();
+      playSilentAudio();
+      setMediaSessionState('playing');
+    });
+
+    navigator.mediaSession.setActionHandler('pause', () => {
+      if (isPlaying) togglePlayPause();
+      setMediaSessionState('paused');
+      // silent audio keeps running so the lock screen card stays visible
+    });
+
+    navigator.mediaSession.setActionHandler('stop', () => {
+      stopPlayback();
+    });
+
+    // Skip to next / previous chapter
+    const params = new URLSearchParams(window.location.search);
+    const chNum = parseInt(params.get('c'), 10);
+
+    if (!isNaN(chNum) && chNum > 0) {
+      navigator.mediaSession.setActionHandler('previoustrack', () => {
+        window.location.href = `chapter.html?c=${chNum - 1}`;
+      });
+    }
+    if (!isNaN(chNum)) {
+      navigator.mediaSession.setActionHandler('nexttrack', () => {
+        window.location.href = `chapter.html?c=${chNum + 1}&autoplay=1`;
+      });
+    }
   }
 
   // Seeks to a position expressed as a fraction (0–1) of the total paragraph count.
@@ -319,24 +569,55 @@
 
 
   // ── HIGHLIGHT ────────────────────────────────────────────────────────────────
-  // Adds/removes the .sbp-reading CSS class on the current paragraph element.
-  // The index here matches the index in the extracted paragraph array, which
-  // in turn matches the filtered set of <p> elements in the DOM — both use
-  // the same length > 10 filter, so they stay in sync.
+  // Paragraph-level: adds .sbp-reading to the active <p>.
+  // Word-level: wraps each word in a <span data-cs="N"> then adds
+  // .sbp-word-active to the span matching the charIndex from onboundary.
+
+  function wrapWordsInPara(paraEl) {
+    if (paraEl.dataset.sbpWrapped) return;
+    // Trim to match extractParagraphs() so charIndex values from onboundary align.
+    const text = paraEl.textContent.trim();
+    let pos = 0;
+    const html = text.split(/(\s+)/).map(token => {
+      const start = pos;
+      pos += token.length;
+      return /^\s*$/.test(token)
+        ? token
+        : `<span class="sbp-word" data-cs="${start}">${token}</span>`;
+    }).join('');
+    paraEl.innerHTML = html;
+    paraEl.dataset.sbpWrapped = '1';
+  }
+
+  function highlightWord(charIndex) {
+    document.querySelectorAll('.sbp-word-active').forEach(el => el.classList.remove('sbp-word-active'));
+    // Use the already-highlighted paragraph rather than index matching —
+    // avoids any mismatch between utterance index and DOM element order.
+    const activePara = document.querySelector('.sbp-reading');
+    if (!activePara) return;
+    const spans = Array.from(activePara.querySelectorAll('.sbp-word'));
+    if (!spans.length) return;
+    let best = spans[0];
+    for (const span of spans) {
+      if (parseInt(span.dataset.cs, 10) <= charIndex) best = span;
+      else break;
+    }
+    best.classList.add('sbp-word-active');
+  }
 
   function highlightParagraph(index) {
     clearHighlight();
     const paras = getStoryParagraphs();
     if (paras[index]) {
+      wrapWordsInPara(paras[index]);
       paras[index].classList.add('sbp-reading');
       paras[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
 
   function clearHighlight() {
-    document.querySelectorAll('.sbp-reading').forEach(el => {
-      el.classList.remove('sbp-reading');
-    });
+    document.querySelectorAll('.sbp-reading').forEach(el => el.classList.remove('sbp-reading'));
+    document.querySelectorAll('.sbp-word-active').forEach(el => el.classList.remove('sbp-word-active'));
   }
 
   // Must use the same selector and filter as extractParagraphs() so that
@@ -344,8 +625,8 @@
   function getStoryParagraphs() {
     const container = document.querySelector('.story-body, article, main, .content')
                       || document.body;
-    return Array.from(container.querySelectorAll('p'))
-      .filter(p => p.textContent.trim().length > 10);
+    return Array.from(container.querySelectorAll('h1, h2, h3, h4, p'))
+      .filter(el => el.textContent.trim().length > 10);
   }
 
 
@@ -371,10 +652,13 @@
     if (el) el.textContent = text;
   }
 
-  // fraction is 0–1; converts to a CSS percentage width on the fill bar.
+  // fraction is 0–1; updates both the fill bar and the draggable thumb.
   function updateProgressBar(fraction) {
+    const pct = Math.round(fraction * 100);
     const bar = document.getElementById('sbp-progress-fill');
-    if (bar) bar.style.width = `${Math.round(fraction * 100)}%`;
+    const thumb = document.getElementById('sbp-progress-thumb');
+    if (bar) bar.style.width = `${pct}%`;
+    if (thumb) thumb.style.left = `${pct}%`;
   }
 
   // Alias used during translation so the progress bar shows translation progress.
@@ -495,27 +779,61 @@
       }
 
       .sbp-progress-wrap {
-        flex: 1;                /* stretches to fill available horizontal space */
+        flex: 1;
         min-width: 120px;
         display: flex;
         flex-direction: column;
         gap: 0.35rem;
+        overflow: visible;
       }
 
       .sbp-progress-track {
-        height: 2px;
-        background: #2a2a2a;
-        border-radius: 2px;
-        cursor: pointer;        /* click-to-seek is handled in bindEvents() */
+        height: 20px;
+        background: transparent;
+        cursor: pointer;
         position: relative;
       }
+      .sbp-progress-track::before {
+        content: '';
+        position: absolute;
+        left: 0; right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 4px;
+        background: #2a2a2a;
+        border-radius: 2px;
+        pointer-events: none;
+      }
       .sbp-progress-fill {
-        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 4px;
         background: #c8b89a;
         border-radius: 2px;
         width: 0%;
-        transition: width 0.3s ease;
-        pointer-events: none;   /* clicks pass through to the track, not the fill */
+        transition: width 0.25s ease;
+        pointer-events: none;
+      }
+      .sbp-progress-thumb {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        width: 14px;
+        height: 14px;
+        background: #c8b89a;
+        border-radius: 50%;
+        cursor: grab;
+        box-shadow: 0 0 6px rgba(0,0,0,0.6);
+        transition: left 0.25s ease, transform 0.12s ease;
+        z-index: 2;
+      }
+      .sbp-progress-thumb.dragging {
+        cursor: grabbing;
+        transform: translate(-50%, -50%) scale(1.35);
+        transition: transform 0.12s ease;
       }
 
       .sbp-meta {
@@ -569,34 +887,56 @@
         outline: none;
       }
 
-      .sbp-speed-wrap {
+      .sbp-step-speed {
         display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
         align-items: center;
+        gap: 4px;
       }
-      .sbp-speed {
-        font-size: 0.7rem;
+      .sbp-step-btn {
+        background: none;
+        border: 1px solid #3a3a3a;
         color: #888;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-family: inherit;
+        transition: all 0.15s;
+        padding: 0;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+      .sbp-step-btn:hover {
+        border-color: #c8b89a;
+        color: #c8b89a;
+        background: rgba(200,184,154,0.08);
+      }
+      .sbp-speed-display {
+        background: none;
+        border: 1px solid #3a3a3a;
+        color: #888;
+        font-size: 0.68rem;
+        font-family: 'Courier New', monospace;
         letter-spacing: 0.05em;
-        text-align: center;
-      }
-      .sbp-speed-slider {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 80px;
-        height: 2px;
-        background: #2a2a2a;
-        border-radius: 2px;
+        padding: 0 6px;
+        height: 24px;
+        min-width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.15s;
+        flex-shrink: 0;
       }
-      .sbp-speed-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 12px;
-        height: 12px;
-        background: #c8b89a;
-        border-radius: 50%;
-        cursor: pointer;
+      .sbp-speed-display:hover {
+        border-color: #c8b89a;
+        color: #c8b89a;
+        background: rgba(200,184,154,0.08);
       }
 
       .sbp-lang-btn {
@@ -663,6 +1003,14 @@
         background: rgba(200,184,154,0.06);
       }
 
+      /* Word-level highlight — applied by highlightWord() via onboundary events. */
+      .sbp-word-active {
+        background: rgba(200, 184, 154, 0.28);
+        border-radius: 2px;
+        padding: 0 1px;
+        transition: background 0.08s ease;
+      }
+
       /* Applied by highlightParagraph() to the currently-spoken <p> element.
          Also defined in Biscuits-warmth2.html's own <style> block — the version
          injected here takes precedence due to !important. The HTML copy is redundant
@@ -689,6 +1037,217 @@
       @keyframes sbp-spin {
         to { transform: rotate(360deg); }
       }
+
+      .sbp-autoplay-btn {
+        background: none;
+        border: 1px solid #444;
+        color: #888;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .sbp-autoplay-btn.active {
+        border-color: #c8b89a;
+        color: #c8b89a;
+        background: rgba(200,184,154,0.08);
+      }
+      .sbp-autoplay-btn:hover {
+        border-color: #aaa;
+        color: #aaa;
+      }
+      .sbp-autoplay-btn.active:hover {
+        border-color: #c8b89a;
+        color: #c8b89a;
+      }
+
+      /* ── Voice upgrade prompt (iOS only) ── */
+      .sbp-voice-prompt {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        padding: 0.5rem 0 0.1rem;
+        border-top: 1px solid #1a1a1a;
+        margin-top: 0.25rem;
+      }
+      .sbp-vp-text {
+        font-size: 0.72rem;
+        color: #888;
+        flex: 1;
+        min-width: 180px;
+      }
+      .sbp-vp-btn {
+        font-family: inherit;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        padding: 5px 14px;
+        cursor: pointer;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      .sbp-vp-yes {
+        background: #c8b89a;
+        color: #0e0e0e;
+        border: 1px solid #c8b89a;
+      }
+      .sbp-vp-yes:hover { background: #ddd0b8; border-color: #ddd0b8; }
+      .sbp-vp-no {
+        background: none;
+        color: #555;
+        border: 1px solid #2a2a2a;
+      }
+      .sbp-vp-no:hover { color: #888; border-color: #444; }
+
+      /* ── Voice setup modal ── */
+      .sbp-voice-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.78);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        backdrop-filter: blur(4px);
+      }
+      .sbp-voice-modal {
+        background: #111;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 36px 32px 32px;
+        max-width: 400px;
+        width: 100%;
+        position: relative;
+      }
+      .sbp-voice-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        background: none;
+        border: none;
+        color: #555;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 4px 8px;
+        transition: color 0.15s;
+        line-height: 1;
+      }
+      .sbp-voice-close:hover { color: #c8b89a; }
+      .sbp-vm-eyebrow {
+        font-family: 'Courier New', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: #c8b89a;
+        margin-bottom: 10px;
+      }
+      .sbp-vm-title {
+        font-family: Georgia, serif;
+        font-size: 1.25rem;
+        color: #e8e8e8;
+        margin-bottom: 24px;
+        line-height: 1.3;
+      }
+      .sbp-vm-steps {
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+      .sbp-vm-steps li {
+        font-family: Georgia, serif;
+        font-size: 0.88rem;
+        color: #888;
+        line-height: 1.75;
+      }
+      .sbp-vm-steps li strong { color: #e0d8cc; font-weight: 600; }
+      .sbp-vm-steps li em { color: #c8b89a; font-style: normal; }
+      .sbp-vm-alt { font-size: 0.78rem; color: #555; font-style: italic; }
+      .sbp-vm-note {
+        font-size: 0.78rem;
+        color: #555;
+        font-style: italic;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+      .sbp-ios-voice-btn {
+        background: none;
+        border: 1px solid #2a2a2a;
+        color: #c8b89a;
+        font-family: inherit;
+        font-size: 0.72rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: border-color 0.15s;
+        white-space: nowrap;
+      }
+      .sbp-ios-voice-btn:hover { border-color: #c8b89a; }
+
+      .sbp-vm-toggle-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .sbp-vm-toggle-label {
+        font-size: 0.8rem;
+        color: #666;
+      }
+      .sbp-toggle { position: relative; display: inline-block; }
+      .sbp-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+      .sbp-toggle-track {
+        display: block;
+        width: 40px;
+        height: 22px;
+        background: #2a2a2a;
+        border-radius: 999px;
+        border: 1px solid #3a3a3a;
+        transition: background 0.2s;
+        position: relative;
+      }
+      .sbp-toggle input:checked + .sbp-toggle-track {
+        background: #c8b89a;
+        border-color: #c8b89a;
+      }
+      .sbp-toggle-thumb {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 16px;
+        height: 16px;
+        background: #888;
+        border-radius: 50%;
+        transition: left 0.2s, background 0.2s;
+      }
+      .sbp-toggle input:checked + .sbp-toggle-track .sbp-toggle-thumb {
+        left: 20px;
+        background: #0e0e0e;
+      }
+      .sbp-vm-done {
+        font-family: 'Courier New', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: #c8b89a;
+        color: #0e0e0e;
+        border: none;
+        border-radius: 999px;
+        padding: 10px 28px;
+        cursor: pointer;
+        transition: background 0.15s;
+        display: block;
+        width: 100%;
+      }
+      .sbp-vm-done:hover { background: #ddd0b8; }
 
       /* Narrow screens: controls wrap, selects go full-width on second row. */
       @media (max-width: 600px) {
@@ -725,15 +1284,17 @@
         </div>
 
         <div class="sbp-progress-wrap">
-          <div class="sbp-progress-track" id="sbp-progress-track" title="Click to skip">
+          <div class="sbp-progress-track" id="sbp-progress-track" title="Drag to scrub">
             <div class="sbp-progress-fill" id="sbp-progress-fill"></div>
+            <div class="sbp-progress-thumb" id="sbp-progress-thumb"></div>
           </div>
           <div class="sbp-meta">
             <span class="sbp-status" id="sbp-status">Ready</span>
-            <div class="sbp-speed-wrap">
-              <input type="range" class="sbp-speed-slider" id="sbp-speed"
-                min="0.6" max="1.8" step="0.1" value="1.0" aria-label="Speed">
-              <span class="sbp-speed" id="sbp-speed-label">1.0×</span>
+            <div class="sbp-step-speed">
+              <button class="sbp-step-btn" id="sbp-speed-down" aria-label="Decrease speed">−</button>
+              <button class="sbp-speed-display" id="sbp-speed-display" title="Tap to jump +0.5×">1.0×</button>
+              <button class="sbp-step-btn" id="sbp-speed-up" aria-label="Increase speed">+</button>
+              <button class="sbp-autoplay-btn" id="sbp-autoplay" title="Auto-advance to next chapter on finish">Autoplay</button>
             </div>
           </div>
         </div>
@@ -741,7 +1302,10 @@
         <div class="sbp-selects">
           <div class="sbp-select-wrap">
             <span class="sbp-label">Voice</span>
-            <select class="sbp-select" id="sbp-voice-select" aria-label="Voice"></select>
+            ${isIOS()
+              ? `<button class="sbp-ios-voice-btn" id="sbp-ios-voice-btn">Change voice ›</button>`
+              : `<select class="sbp-select" id="sbp-voice-select" aria-label="Voice"></select>`
+            }
           </div>
 
           <div class="sbp-select-wrap">
@@ -803,36 +1367,87 @@
   function bindEvents() {
     document.getElementById('sbp-play-btn')?.addEventListener('click', togglePlayPause);
     document.getElementById('sbp-stop-btn')?.addEventListener('click', stopPlayback);
+    document.getElementById('sbp-ios-voice-btn')?.addEventListener('click', showVoiceInstructions);
 
-    // Click on the progress track → calculate click position as a 0–1 fraction
-    // of the track width, then seek to that paragraph.
-    document.getElementById('sbp-progress-track')?.addEventListener('click', (e) => {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const fraction = (e.clientX - rect.left) / rect.width;
-      if (utterances.length) {
-        buildUtterances();
-        skipTo(Math.max(0, Math.min(1, fraction)));
-      }
+    // Scrubber: click on track, or drag the thumb, to seek.
+    const track = document.getElementById('sbp-progress-track');
+    const thumb = document.getElementById('sbp-progress-thumb');
+    let dragging = false;
+
+    function getFraction(clientX) {
+      const rect = track.getBoundingClientRect();
+      return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    }
+    function doSeek(fraction) {
+      updateProgressBar(fraction);
+      if (utterances.length) { buildUtterances(); skipTo(fraction); }
+    }
+
+    // Click on track (not on thumb)
+    track?.addEventListener('click', (e) => {
+      if (!dragging) doSeek(getFraction(e.clientX));
     });
 
-    // Speed slider: update rate and rebuild utterances if already playing
-    // so the change takes effect immediately without the user stopping and restarting.
-    const speedSlider = document.getElementById('sbp-speed');
-    speedSlider?.addEventListener('input', (e) => {
-      speed = parseFloat(e.target.value);
-      document.getElementById('sbp-speed-label').textContent = `${speed.toFixed(1)}×`;
+    // Mouse drag on thumb
+    thumb?.addEventListener('mousedown', (e) => {
+      dragging = true;
+      thumb.classList.add('dragging');
+      thumb.style.transition = 'transform 0.12s ease'; // disable left transition while dragging
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      doSeek(getFraction(e.clientX));
+    });
+    document.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false;
+      thumb?.classList.remove('dragging');
+      thumb.style.transition = ''; // restore transition
+    });
+
+    // Touch drag on thumb
+    thumb?.addEventListener('touchstart', (e) => {
+      dragging = true;
+      thumb.classList.add('dragging');
+      thumb.style.transition = 'transform 0.12s ease';
+      e.preventDefault();
+    }, { passive: false });
+    document.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      doSeek(getFraction(e.touches[0].clientX));
+    }, { passive: true });
+    document.addEventListener('touchend', () => {
+      if (!dragging) return;
+      dragging = false;
+      thumb?.classList.remove('dragging');
+      thumb.style.transition = '';
+    });
+
+    // Step speed control: − decreases by 0.1, + increases by 0.1, center tap adds 0.5.
+    function setSpeed(newSpeed) {
+      speed = Math.round(Math.max(0.5, Math.min(3.0, newSpeed)) * 10) / 10;
+      document.getElementById('sbp-speed-display').textContent = `${speed.toFixed(1)}×`;
       if (isPlaying || isPaused) {
         const idx = currentIndex;
         buildUtterances();
         playFrom(idx);
       }
-    });
+    }
+    document.getElementById('sbp-speed-down')?.addEventListener('click', () => setSpeed(speed - 0.1));
+    document.getElementById('sbp-speed-up')?.addEventListener('click', () => setSpeed(speed + 0.1));
+    document.getElementById('sbp-speed-display')?.addEventListener('click', () => setSpeed(speed + 0.5));
 
     // Voice dropdown: same pattern — rebuild and restart from the current position.
     document.getElementById('sbp-voice-select')?.addEventListener('change', (e) => {
-      const voices = getBestVoicesForLang(
-        LANGUAGES.find(l => l.code === currentLang)?.speechLang || 'en-US'
-      );
+      if (e.target.value.startsWith('__setup__')) {
+        e.target.value = '0';
+        showVoiceInstructions();
+        return;
+      }
+      const voices = isIOS()
+        ? getIOSRealVoices()
+        : getBestVoicesForLang(LANGUAGES.find(l => l.code === currentLang)?.speechLang || 'en-US');
       selectedVoice = voices[parseInt(e.target.value)] || null;
       if (isPlaying || isPaused) {
         const idx = currentIndex;
@@ -879,6 +1494,12 @@
       await handleLanguageChange(code);
     });
 
+    // Autoplay toggle: flips the autoplay state and reflects it on the button.
+    document.getElementById('sbp-autoplay')?.addEventListener('click', () => {
+      autoplay = !autoplay;
+      document.getElementById('sbp-autoplay')?.classList.toggle('active', autoplay);
+    });
+
     // Some browsers (Firefox, older Safari) fire onvoiceschanged asynchronously.
     // Registering here ensures the dropdown is repopulated when voices arrive.
     if (synth.onvoiceschanged !== undefined) {
@@ -908,7 +1529,23 @@
     bindEvents();
     loadVoices();
 
-    setTimeout(loadVoices, 500); // second call catches async voice loading
+    setTimeout(loadVoices, 500);   // second call for browsers that load voices async
+    setTimeout(loadVoices, 2000);  // third call for iOS which can be slower after install
+
+    // If we arrived here via autoplay navigation, activate the toggle and auto-start.
+    // Delay 650ms so voices have time to load before buildUtterances() runs.
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('autoplay') === '1') {
+      autoplay = true;
+      document.getElementById('sbp-autoplay')?.classList.add('active');
+      setTimeout(() => {
+        buildUtterances();
+        playFrom(0);
+        isPlaying = true;
+        updatePlayButton();
+        updateStatus('Playing');
+      }, 650);
+    }
 
     updateStatus('Ready');
   }

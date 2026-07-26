@@ -4,179 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sandy B. Patterson</title>
-  <script>
-    (function () {
-      const saved = localStorage.getItem('colorMode');
-      if (saved) document.documentElement.classList.add(saved);
-      else document.documentElement.classList.add('dark');
-    })();
-  </script>
   <style>
-
-    /* ───────────────────────────────────────────
-       CSS VARIABLE SYSTEM
-    ─────────────────────────────────────────── */
-
-    :root {
-      --bg:           #f7f2ea;
-      --heading:      #1e1810;
-      --muted:        #7a6448;
-      --border:       #c4ae8a;
-      --accent:       #a8823c;
-      --label:        #9a7d55;
-      --label-hover:  #6a4e2a;
-      --toggle-color: #8a7355;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:           #0a0a0a;
-        --heading:      #f0f0f0;
-        --muted:        #888;
-        --border:       #1e1e1e;
-        --accent:       #c9a84c;
-        --label:        #888;
-        --label-hover:  #c9a84c;
-        --toggle-color: #888;
-      }
-    }
-
-    html.dark {
-      --bg:           #0a0a0a;
-      --heading:      #f0f0f0;
-      --muted:        #888;
-      --border:       #1e1e1e;
-      --accent:       #c9a84c;
-      --label:        #888;
-      --label-hover:  #c9a84c;
-      --toggle-color: #888;
-    }
-
-    html.light {
-      --bg:           #f7f2ea;
-      --heading:      #1e1810;
-      --muted:        #7a6448;
-      --border:       #c4ae8a;
-      --accent:       #a8823c;
-      --label:        #9a7d55;
-      --label-hover:  #6a4e2a;
-      --toggle-color: #8a7355;
-    }
-
-    /* ───────────────────────────────────────────
-       RESET & BASE
-    ─────────────────────────────────────────── */
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--heading);
+      background: #0a0a0a;
+      color: #e8e8e8;
       font-family: Georgia, 'Times New Roman', serif;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
     }
 
-    a { color: var(--accent); }
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    /* ───────────────────────────────────────────
-       NAV
-    ─────────────────────────────────────────── */
-
-    .top-nav {
+    nav {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 10;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 16px 40px;
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      background: rgba(10,10,10,0.85);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: background-color 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid #1e1e1e;
     }
     .nav-brand {
       font-family: 'Courier New', monospace;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: #c9a84c;
     }
-    .moon-toggle {
-      font-size: 1.1rem;
-      cursor: pointer;
-      color: var(--toggle-color);
-      background: none;
-      border: none;
-      line-height: 1;
-      padding: 0.2rem;
-      transition: color 0.3s ease;
-    }
-    .moon-toggle:hover { color: var(--accent); }
 
-    /* ───────────────────────────────────────────
-       PAGE WRAP
-    ─────────────────────────────────────────── */
-
-    .sbp-wrap {
-      background: var(--bg);
-      min-height: calc(100vh - 58px);
+    .hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 80px 28px 48px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 4rem 2rem 0;
-      transition: background-color 0.3s ease;
+      text-align: center;
     }
-
-    /* ───────────────────────────────────────────
-       HEADER
-    ─────────────────────────────────────────── */
-
     .eyebrow {
       font-family: 'Courier New', monospace;
       font-size: 0.7rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      transition: color 0.3s ease;
+      color: #c9a84c;
+      margin-bottom: 16px;
     }
-
-    .sbp-name {
-      font-size: 2.4rem;
+    .hero h1 {
+      font-size: 3rem;
       font-weight: 700;
-      color: var(--heading);
-      text-align: center;
-      margin-bottom: 0.5rem;
+      color: #f0f0f0;
       line-height: 1.1;
-      transition: color 0.3s ease;
+      margin-bottom: 12px;
     }
-
-    .sbp-subtitle {
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: #888;
       font-style: italic;
-      font-size: 1.05rem;
-      color: var(--muted);
-      text-align: center;
-      margin-bottom: 2.5rem;
-      transition: color 0.3s ease;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
-
-    /* ───────────────────────────────────────────
-       DECORATIVE RULE
-    ─────────────────────────────────────────── */
-
     .divider {
       width: 60px;
       height: 1px;
-      background: var(--accent);
-      margin-bottom: 3rem;
-      transition: background-color 0.3s ease;
+      background: #c9a84c;
+      margin: 40px 0;
     }
 
     /* ───────────────────────────────────────────
        SHELF
+       Cover colors stay hardcoded — always dark
+       for the book aesthetic.
     ─────────────────────────────────────────── */
+
+    .shelf-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 28px 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .sbp-shelf {
       display: flex;
@@ -189,7 +101,7 @@
       width: 100%;
       max-width: 600px;
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+      background: linear-gradient(to right, transparent, #1e1e1e 20%, #1e1e1e 80%, transparent);
     }
     .sbp-shelf-shadow {
       width: 100%;
@@ -198,12 +110,6 @@
       background: linear-gradient(to bottom, rgba(0,0,0,0.25), transparent);
       margin-bottom: 2rem;
     }
-
-    /* ───────────────────────────────────────────
-       BOOK COVERS
-       Cover colors stay hardcoded — always dark
-       for the book aesthetic regardless of mode.
-    ─────────────────────────────────────────── */
 
     .sbp-book {
       display: flex;
@@ -230,7 +136,7 @@
       transform: translateY(-10px) rotate(-0.5deg);
       box-shadow: 2px 2px 0px #0a0806, 4px 4px 0px #130f09, 8px 18px 28px rgba(0,0,0,0.5), 12px 24px 40px rgba(0,0,0,0.3);
     }
-    .sbp-book:hover .sbp-label { color: var(--accent); border-color: var(--accent); }
+    .sbp-book:hover .sbp-label { color: #c9a84c; border-color: #c9a84c; }
 
     .sbp-cover::before {
       content: '';
@@ -276,13 +182,13 @@
       font-family: 'Courier New', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.1em;
-      color: var(--label);
+      color: #888;
       text-align: center;
       text-transform: uppercase;
       padding: 5px 14px;
       border: 1px solid transparent;
       border-radius: 999px;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      transition: color 0.15s, border-color 0.15s;
     }
 
     .sbp-img-cover { background: none !important; padding: 0 !important; overflow: hidden; }
@@ -294,45 +200,33 @@
       display: block;
     }
 
-    /* ───────────────────────────────────────────
-       FOOTER
-    ─────────────────────────────────────────── */
-
-    .site-footer {
-      border-top: 1px solid var(--border);
-      margin-top: 4rem;
+    footer {
+      border-top: 1px solid #1a1a1a;
       padding: 28px 24px;
       text-align: center;
       font-family: 'Courier New', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.1em;
-      color: var(--muted);
+      color: #333;
       text-transform: uppercase;
-      transition: border-color 0.3s ease, color 0.3s ease;
     }
-
   </style>
 </head>
 <body>
-  <nav class="top-nav">
+
+  <nav>
     <span class="nav-brand">Sandy B. Patterson</span>
-    <button class="moon-toggle" onclick="toggleMode()" title="Toggle dark mode">&#9790;</button>
   </nav>
 
-  <div class="sbp-wrap">
+  <div class="hero">
     <p class="eyebrow">Author</p>
-    <div class="sbp-name">Sandy B. Patterson</div>
-    <div class="sbp-subtitle">Short Stories &amp; Novels</div>
+    <h1>Sandy B. Patterson</h1>
+    <p class="subtitle">Short Stories &amp; Novels</p>
     <div class="divider"></div>
+  </div>
+
+  <div class="shelf-wrap">
     <div class="sbp-shelf">
-      <a href="https://sandybpatterson.github.io/stories/" class="sbp-book">
-        <div class="sbp-cover">
-          <div class="sbp-cover-title">Stories from Winchester</div>
-          <div class="sbp-cover-ornament">✦</div>
-          <div class="sbp-cover-author">Sandy B. Patterson</div>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
       <a href="https://sandybpatterson.github.io/original-bug-book/" class="sbp-book">
         <div class="sbp-cover sbp-img-cover">
           <img src="/images/tobcover.png" alt="The Original Bug" />
@@ -347,21 +241,20 @@
         </div>
         <div class="sbp-label">Read Now</div>
       </a>
+      <a href="https://sandybpatterson.github.io/stories/" class="sbp-book">
+        <div class="sbp-cover">
+          <div class="sbp-cover-title">Stories from Winchester</div>
+          <div class="sbp-cover-ornament">✦</div>
+          <div class="sbp-cover-author">Sandy B. Patterson</div>
+        </div>
+        <div class="sbp-label">Read Now</div>
+      </a>
     </div>
     <div class="sbp-shelf-floor"></div>
     <div class="sbp-shelf-shadow"></div>
   </div>
 
-  <footer class="site-footer">&copy; Sandy B. Patterson</footer>
+  <footer>&copy; Sandy B. Patterson</footer>
 
-  <script>
-    function toggleMode() {
-      const html = document.documentElement;
-      const isDark = html.classList.contains('dark');
-      html.classList.remove('dark', 'light');
-      html.classList.add(isDark ? 'light' : 'dark');
-      localStorage.setItem('colorMode', isDark ? 'light' : 'dark');
-    }
-  </script>
 </body>
 </html>
