@@ -13,7 +13,8 @@ books live in their own repos; some live as folders inside this repo.
 1. **The Original Bug** — separate repo `original-bug-book` (has its own CLAUDE.md)
 2. **Beyond Ice and Steam** — separate repo `beyond-ice-and-steam` (has its own CLAUDE.md)
 3. **Stories from Winchester** — lives here, in `/stories/`
-4. **Arden Remembers** — lives here, in `/arden-remembers/` (new, empty template — see below)
+4. **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
+5. **Dead Men on Thrones** — lives here, in `/dead-men-on-thrones/` (full 64-chapter outline, no chapters drafted yet — see below)
 
 ---
 
@@ -43,7 +44,8 @@ only touch the branding lines.
 
 Note: this root copy isn't currently loaded by anything in `/stories/`
 (those pages use their own self-contained audio player, not `reader.js`) —
-it's `arden-remembers/chapter.html` that references it via `../reader.js`.
+`arden-remembers/chapter.html` and `dead-men-on-thrones/chapter.html` both
+reference it via `../reader.js`.
 
 ---
 
@@ -69,7 +71,7 @@ Original Bug and Beyond Ice and Steam (`index.html` table-of-contents page +
 pattern used by Stories from Winchester.
 
 Structure in place:
-- `index.html` — hero header + empty "Chapters coming soon" table of contents
+- `index.html` — hero header + table of contents with 3 placeholder rows (Chapter One/Two/Three, status "Coming Soon") so visitors can see where chapters will land
 - `chapter.html` — reader shell with an empty `chapters` map, ready for entries like:
   ```js
   1: { file: 'chapters/ch01.md', title: 'Chapter Title' },
@@ -79,8 +81,35 @@ Structure in place:
 **What to do next:**
 1. Get the premise/blurb from Sandy and replace the "Premise coming soon." placeholder in `index.html`
 2. Write chapters as markdown files in `chapters/`, add each to the `chapters` map in `chapter.html`
-3. Add chapter rows to the `.toc-wrap` in `index.html` as each chapter goes live (see commented example in the file)
+3. Replace the 3 placeholder TOC rows in `index.html` with real chapter rows as each goes live (swap `chapter-status` text to "Read" and add the `ready` class, matching TOB's pattern)
 4. No cover art yet — shelf entry uses the text/gold-ornament placeholder cover, same as Beyond Ice and Steam
+
+---
+
+## Dead Men on Thrones (`/dead-men-on-thrones/`)
+
+**Status: full outline complete, zero chapters drafted.** This is a large
+nonfiction project — a popular history of Christianity and institutional
+power, organized around Marcion of Sinope (excommunicated 144 AD) as the
+throughline. 64 chapters across 8 parts, plus a preface, introduction,
+conclusion, and 5 appendices. Full outline, voice/tone guidance, and chapter-
+by-chapter content notes live in `dead-men-on-thrones/CLAUDE.md` — read that
+file before drafting any chapter, it has the complete brief.
+
+Structure in place, same pattern as The Original Bug / Beyond Ice and Steam:
+- `index.html` — hero + premise + full table of contents with all 64 chapters
+  (plus preface/introduction/conclusion) listed as placeholder rows, status
+  "Coming Soon," organized under their Part headings
+- `chapter.html` — reader shell with an empty `chapters` map. Special string
+  keys `'0'` (Preface), `'i'` (Introduction), `'c'` (Conclusion) are reserved
+  alongside numeric keys `1`–`64`
+- `chapters/` — empty folder, chapters go here as `chNN.md`
+
+**What to do next:**
+1. Sandy picks a chapter to draft first (not necessarily chapter 1 — see CLAUDE.md, chapters don't have to be written in order)
+2. Write it as markdown in `chapters/`, add it to the `chapters` map in `chapter.html`
+3. Swap that chapter's row in `index.html` from "Coming Soon" to "Read" (add the `ready` class) and update the "X of 64 chapters written" count in `.toc-label`
+4. No cover art yet — placeholder cover, same as Beyond Ice and Steam and Arden Remembers
 
 ---
 
@@ -90,8 +119,9 @@ Book cover images live in this repo's `/images/` folder (not in the book's
 own repo) — e.g. `images/tobcover.png` for The Original Bug. A book without
 a cover file just uses the text/gold-ornament placeholder cover in
 `bookshelf.html` (`.sbp-cover-title` + `.sbp-cover-ornament`) instead of an
-`<img>`. Beyond Ice and Steam and Arden Remembers are both currently in this
-placeholder state — no cover files exist for either yet.
+`<img>`. Beyond Ice and Steam, Arden Remembers, and Dead Men on Thrones are
+all currently in this placeholder state — no cover files exist for any of
+them yet.
 
 ---
 
