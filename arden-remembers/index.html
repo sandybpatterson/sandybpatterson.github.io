@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arden Remembers — Sandy B. Patterson</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .nav-brand {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      padding: 5px 14px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover {
+      color: #c9a84c;
+      border-color: #c9a84c44;
+      text-decoration: none;
+    }
+
+    .hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 80px 28px 48px;
+    }
+    .eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #f0f0f0;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: #888;
+      font-style: italic;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .byline {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+    }
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: #c9a84c;
+      margin: 40px 0;
+    }
+
+    .premise {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 28px 60px;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #bbb;
+    }
+    .premise p { margin-bottom: 1.4em; }
+
+    .toc-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 28px 100px;
+    }
+    .toc-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .coming-soon {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: #444;
+      text-transform: uppercase;
+      padding: 24px 0;
+      border-top: 1px solid #161616;
+    }
+
+    .chapter-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #161616;
+      transition: background 0.12s;
+    }
+    .chapter-row:first-of-type { border-top: 1px solid #161616; }
+
+    .chapter-row a {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      width: 100%;
+      color: inherit;
+      text-decoration: none;
+    }
+    .chapter-row a:hover .chapter-title { color: #c9a84c; }
+    .chapter-row a:hover { text-decoration: none; }
+
+    .chapter-num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.68rem;
+      color: #444;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      width: 24px;
+    }
+    .chapter-title {
+      font-size: 1rem;
+      color: #d0d0d0;
+      transition: color 0.15s;
+      flex: 1;
+    }
+    .chapter-status {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #333;
+      flex-shrink: 0;
+    }
+    .chapter-status.ready { color: #4a7c4a; }
+
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 28px 24px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #333;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="index.html" style="color:#c9a84c;">Arden Remembers</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <p class="eyebrow">Sandy B. Patterson</p>
+    <h1>Arden Remembers</h1>
+    <p class="subtitle">A novel</p>
+    <p class="byline">Fiction</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="premise">
+    <p>Premise coming soon.</p>
+  </div>
+
+  <div class="toc-wrap">
+    <p class="toc-label">Table of Contents</p>
+
+    <!-- Placeholder rows — replace title text and swap chapter-status to "ready" as each chapter is written -->
+    <div class="chapter-row"><a href="chapter.html?c=1"><span class="chapter-num">1</span><span class="chapter-title">Chapter One</span><span class="chapter-status">Coming Soon</span></a></div>
+    <div class="chapter-row"><a href="chapter.html?c=2"><span class="chapter-num">2</span><span class="chapter-title">Chapter Two</span><span class="chapter-status">Coming Soon</span></a></div>
+    <div class="chapter-row"><a href="chapter.html?c=3"><span class="chapter-num">3</span><span class="chapter-title">Chapter Three</span><span class="chapter-status">Coming Soon</span></a></div>
+  </div>
+
+  <footer>
+    &copy; Sandy B. Patterson &mdash; Arden Remembers
+  </footer>
+
+</body>
+</html>
