@@ -12,9 +12,9 @@ books live in their own repos; some live as folders inside this repo.
 **Books on the shelf, in shelf order:**
 1. **The Original Bug** — separate repo `original-bug-book` (has its own CLAUDE.md)
 2. **Beyond Ice and Steam** — separate repo `beyond-ice-and-steam` (has its own CLAUDE.md)
-3. **Stories from Winchester** — lives here, in `/stories/`
-4. **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
-5. **Dead Men on Thrones** — lives here, in `/dead-men-on-thrones/` (full 64-chapter outline, no chapters drafted yet — see below)
+3. **Dead Men on Thrones** — lives here, in `/dead-men-on-thrones/` (full 64-chapter outline, no chapters drafted yet — see below)
+4. **Stories from Winchester** — lives here, in `/stories/`
+5. **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
 
 ---
 
