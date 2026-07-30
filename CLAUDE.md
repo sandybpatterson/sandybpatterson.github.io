@@ -109,7 +109,7 @@ Structure in place, same pattern as The Original Bug / Beyond Ice and Steam:
 1. Sandy picks a chapter to draft first (not necessarily chapter 1 — see CLAUDE.md, chapters don't have to be written in order)
 2. Write it as markdown in `chapters/`, add it to the `chapters` map in `chapter.html`
 3. Swap that chapter's row in `index.html` from "Coming Soon" to "Read" (add the `ready` class) and update the "X of 64 chapters written" count in `.toc-label`
-4. No cover art yet — placeholder cover, same as Beyond Ice and Steam and Arden Remembers
+4. Cover art done — `images/dmotcover.jpeg`, already wired into `bookshelf.html`
 
 ---
 
@@ -119,9 +119,9 @@ Book cover images live in this repo's `/images/` folder (not in the book's
 own repo) — e.g. `images/tobcover.png` for The Original Bug. A book without
 a cover file just uses the text/gold-ornament placeholder cover in
 `bookshelf.html` (`.sbp-cover-title` + `.sbp-cover-ornament`) instead of an
-`<img>`. Beyond Ice and Steam, Arden Remembers, and Dead Men on Thrones are
-all currently in this placeholder state — no cover files exist for any of
-them yet.
+`<img>`. Beyond Ice and Steam and Arden Remembers are currently in this
+placeholder state — no cover files exist for either yet. Dead Men on Thrones
+has a real cover: `images/dmotcover.jpeg`.
 
 ---
 
