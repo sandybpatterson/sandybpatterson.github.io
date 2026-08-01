@@ -51,6 +51,23 @@ It is not balanced for the sake of appearing balanced. When the evidence points 
 
 ---
 
+## A NOTE ON THE MARCION FRAMING — READ BEFORE DRAFTING CH. 2, THE INTRODUCTION, OR ANY "SHADOW OF MARCION" CALLBACK
+
+The Marcion-as-organizing-figure choice is strong for part of the book and is doing double duty as a structural device for the rest. Both halves need to be handled honestly, in keeping with this book's own thesis that institutions flatten messy history into a clean story that serves their needs — the book should not do that same thing to Marcion.
+
+**What's genuinely well-founded (roughly 2nd-4th century material, Parts One and Two):** that Marcion's 144 AD excommunication catalyzed canon formation and creedal language is a real historical argument, most associated with Adolf von Harnack's early-20th-century thesis that Marcion essentially invented the idea of a closed "New Testament" and forced the proto-orthodox church to respond in kind. The Apostles' Creed reading as an anti-Marcion document (Ch. 12) is a specific, well-supported claim.
+
+**What's contested and should be flagged as such, at least once, probably in Ch. 2 or the Introduction:** the Harnack thesis is not settled consensus. Judith Lieu's *Marcion and the Making of a Heretic* (2015) — the most important modern scholarly treatment — pushes back hard on treating him as the singular hinge figure. Her argument: nearly everything known about Marcion comes from hostile sources (Tertullian, Irenaeus, Epiphanius) writing decades to centuries later with an axe to grind, and canon formation was a slower, multi-causal process (Gnosticism broadly, Montanism, competing apostolic claims, even the codex replacing the scroll), not one shipowner single-handedly forcing the church's hand. Draft the book's strong version of the Marcion story, but land at least one honest sentence acknowledging this is a live scholarly argument, not settled fact — the same standard the tone section already sets ("when it is contested it says that too").
+
+**Past Part Two, the Marcion thread shifts from history to literary device — keep the distinction visible in the prose.** Some later callbacks are real lineage: the Cathars (Ch. 24) were literally neo-Marcionite dualists — that connection is earned. Others are closer to thematic rhyme than causation and should be worded that way rather than implied as direct descent:
+- Ch. 45 ("The Shipowner Returns," Nazi-era Deutsche Christen) has real intellectual history behind it — Harnack's admiring 1920 Marcion biography did influence German liberal Protestantism, and Susannah Heschel's *The Aryan Jesus* documents genuine continuity — but the chapter should be careful not to overclaim more direct causation than that evidence carries.
+- Ch. 63's "Marcionite DNA" for the Prosperity Gospel is metaphor, not lineage — there's no actual transmission chain, just a shared move (detaching Jesus from the demands of the Hebrew Bible). Word it as a resonance, not a bloodline.
+- Ch. 58's "Marcionite irony" for Christian Nationalism is the same kind of thematic echo, not a claim of descent.
+
+**The instruction elsewhere in this file** ("chapters that don't directly involve him should connect back to the themes his story introduced") is a legitimate structural choice for a 64-chapter, two-thousand-year popular history — it's what gives the reader one thread to hold across the whole book, the same way Tom Holland uses the crucifixion as an organizing symbol in *Dominion*. Keep it. Just don't let the callbacks quietly upgrade themselves from "this rhymes with Marcion's move" into "this happened because of Marcion" without the evidence to back it.
+
+---
+
 ## CHAPTER STRUCTURE
 
 The book has 64 chapters organized into eight parts plus a preface, introduction, conclusion, and five appendices. Every chapter tells a specific story anchored in specific people and specific events. Abstract theology always arrives through human narrative.
