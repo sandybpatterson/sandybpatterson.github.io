@@ -112,15 +112,21 @@
     }
 
     .sbp-book {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: pointer;
       text-decoration: none;
     }
+    @media (hover: hover) and (pointer: fine) {
+      .sbp-book { transition: opacity 0.25s ease; }
+      .sbp-book:hover { z-index: 10; }
+      .sbp-shelf:has(.sbp-book:hover) .sbp-book:not(:hover) { opacity: 0.45; }
+    }
     .sbp-cover {
       container-type: inline-size;
-      width: clamp(190px, 46vw, 400px);
+      width: clamp(160px, 39vw, 340px);
       aspect-ratio: 3 / 4;
       background: linear-gradient(145deg, #1a1712, #0a0806);
       border-radius: 4px 14px 14px 4px;
@@ -201,6 +207,45 @@
       display: block;
     }
 
+    .sbp-summary {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin-left: 1rem;
+      width: 260px;
+      max-width: 60vw;
+      background: linear-gradient(145deg, #171310, #0d0a08);
+      border-left: 3px solid #c9a84c;
+      border-radius: 4px;
+      padding: 1.3rem 1.4rem;
+      box-shadow: 8px 8px 24px rgba(0,0,0,0.5);
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-24px);
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .sbp-summary-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #c9a84c;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+    .sbp-summary p {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: #ccc;
+      margin: 0;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .sbp-book:hover .sbp-summary {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+      }
+    }
+
     /* ───────────────────────────────────────────
        LINK TREE
     ─────────────────────────────────────────── */
@@ -263,17 +308,29 @@
         <div class="sbp-cover sbp-img-cover">
           <img src="/images/tobcover.png" alt="The Original Bug" />
         </div>
+        <div class="sbp-summary">
+          <div class="sbp-summary-title">The Original Bug</div>
+          <p>Every flaw identified in AI — hallucination, overconfidence, pattern obsession, bias, sycophancy — has a precise counterpart in human cognition. The machine is a mirror. The reflection is accurate.</p>
+        </div>
         <div class="sbp-label">Read Now</div>
       </a>
       <a href="https://sandybpatterson.github.io/beyond-ice-and-steam/" class="sbp-book">
         <div class="sbp-cover sbp-img-cover">
           <img src="/images/biascover.png" alt="Beyond Ice and Steam" />
         </div>
+        <div class="sbp-summary">
+          <div class="sbp-summary-title">Beyond Ice and Steam</div>
+          <p>A popular science book about the exclusion zone — water near certain surfaces behaving unlike water in the open. From a Seattle lab in 2003 to the wellness industry that built a billion-dollar empire on a misreading of the science.</p>
+        </div>
         <div class="sbp-label">Read Now</div>
       </a>
       <a href="https://sandybpatterson.github.io/dead-men-on-thrones/" class="sbp-book">
         <div class="sbp-cover sbp-img-cover">
           <img src="/images/dmotcover.jpeg" alt="Dead Men on Thrones" />
+        </div>
+        <div class="sbp-summary">
+          <div class="sbp-summary-title">Dead Men on Thrones</div>
+          <p>A popular history of how institutional power has corrupted, distorted, and weaponized Christianity across two thousand years — organized around Marcion of Sinope, excommunicated from the Roman church in 144 AD.</p>
         </div>
         <div class="sbp-label">Read Now</div>
       </a>
@@ -283,6 +340,10 @@
           <div class="sbp-cover-ornament">✦</div>
           <div class="sbp-cover-author">Sandy B. Patterson</div>
         </div>
+        <div class="sbp-summary">
+          <div class="sbp-summary-title">Stories from Winchester</div>
+          <p>A collection of short stories set in Winchester, Tennessee — Franklin County, told one season and one life at a time.</p>
+        </div>
         <div class="sbp-label">Read Now</div>
       </a>
       <a href="https://sandybpatterson.github.io/arden-remembers/" class="sbp-book">
@@ -290,6 +351,10 @@
           <div class="sbp-cover-title">Arden Remembers</div>
           <div class="sbp-cover-ornament">✦</div>
           <div class="sbp-cover-author">Sandy B. Patterson</div>
+        </div>
+        <div class="sbp-summary">
+          <div class="sbp-summary-title">Arden Remembers</div>
+          <p>A forthcoming novel. Premise coming soon.</p>
         </div>
         <div class="sbp-label">Read Now</div>
       </a>
