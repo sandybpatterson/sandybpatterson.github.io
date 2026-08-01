@@ -260,6 +260,9 @@
     }
     .link-btn {
       display: block;
+      width: 100%;
+      background: transparent;
+      cursor: pointer;
       text-align: center;
       padding: 16px 24px;
       border: 1px solid #c9a84c;
@@ -366,10 +369,22 @@
   <div class="link-tree">
     <a href="https://sandybpatterson.github.io/ai-tools-directory/" class="link-btn">AI Tools</a>
     <a href="https://sandybpatterson.substack.com" class="link-btn" target="_blank" rel="noopener noreferrer">Substack</a>
-    <a href="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/feed.xml" class="link-btn" target="_blank" rel="noopener noreferrer">Podcast</a>
+    <button type="button" class="link-btn" id="podcast-copy-btn" onclick="copyPodcastLink()">Copy Podcast RSS Link</button>
   </div>
 
   <footer>&copy; Sandy B. Patterson</footer>
+
+  <script>
+    function copyPodcastLink() {
+      var url = 'https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/feed.xml';
+      var btn = document.getElementById('podcast-copy-btn');
+      navigator.clipboard.writeText(url).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = original; }, 1800);
+      });
+    }
+  </script>
 
 </body>
 </html>
