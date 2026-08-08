@@ -370,9 +370,36 @@ The reader the book is written for is sitting in their car in a church parking l
 
 ## PROGRESS STATUS
 
-**No chapters written yet.** This CLAUDE.md is the complete outline — preface, introduction, 64 chapters across 8 parts, conclusion, and 5 appendices. Next step is drafting, starting wherever Sandy wants to begin (not necessarily in chapter order).
+**6 of 64 chapters drafted** (Chapters 1–6, all of Part One: The Documents — Before the Book, The Man Who Forced the Question, The Lost Document, Four Accounts One Story, The Cosmic Gospel, The Man Who Built the Theology). Each chapter has been fact-checked against outside sources before publishing and is live in `chapters/ch01.md` through `chapters/ch06.md`, wired into `chapter.html` and marked "Read" in `index.html`.
 
-Site scaffold (`index.html` + `chapter.html`, matching the pattern used by The Original Bug and Beyond Ice and Steam) has placeholder rows only — no chapter files exist in `chapters/` yet.
+Site scaffold (`index.html` + `chapter.html`, matching the pattern used by The Original Bug and Beyond Ice and Steam) is fully wired for the chapters that exist; remaining rows are still placeholders.
+
+**Known site bug, fixed:** `chapter.html`'s CSS had a rule (`#content p:has(> em:only-child)`) meant to style a standalone "* * *" divider paragraph, but `:only-child` doesn't count text nodes, so it mis-styled *any* paragraph containing exactly one italicized phrase as a dim, centered divider. Fixed by removing the rule (all section breaks use `---` / `<hr>` anyway). Same bug existed and was fixed in `arden-remembers/chapter.html`, which shares the template. **If this scaffold is ever copied again — to a new book, or back into the two external-repo books — do not carry this rule over.**
+
+---
+
+## REVISION TODO — CRAFT NOTES FROM THE CH. 1–6 READER'S REPORT
+
+A cold read-through of Chapters 1–6 back to back (not while drafting them one at a time) surfaced patterns that are invisible chapter-by-chapter but obvious in sequence. Read this before drafting Chapter 7 or revising 1–6, so the same tics don't compound over 64 chapters.
+
+### Systemic fixes — apply going forward, retrofit into 1–6 opportunistically
+
+- [ ] **Vary the closing line.** Every chapter so far ends on a single-sentence dramatic sting that withholds a name or detail ("His name was Marcion." / "Nobody has ever found it." / "...the most brilliant and most punished scholar the early church ever produced."). Six in a row is a visible pattern. Some chapters should end on an open question, a quiet image, or a flat statement instead of a reveal.
+- [ ] **Stop cordoning off the "honest caveat" as its own signposted paragraph.** Every chapter has one paragraph that announces itself as the fairness beat ("the honest version of this book has to name it," "here the book owes its reader a caveat," "here is where the honest version of this chapter has to slow down"). The content is right; the announcing is repetitive. Fold the epistemic humility into the narrative instead of flagging it as a distinct move each time.
+- [ ] **Modulate prose rhythm by subject, not just content.** Chapter 5 (John, cosmic register) reads at the same long, cumulative, em-dash cadence as Chapter 2 (institutional excommunication politics). The prose engine currently runs at one speed regardless of what's under the hood. Chapters about mystics, visions, or violence should sound different from chapters about councils and paperwork — shorter/more incantatory for the former, more procedural for the latter.
+- [ ] **Every chapter opens with a dramatized scene, not a compressed description of one.** Chapters 1 and 5 do this well (Ignatius in chains; the stones in the temple). Chapter 6 opens with shorthand fragments ("A light from the sky. A voice.") and reaches the analytical point within two sentences — check new chapters against the Ch. 1 / Ch. 5 standard, not the Ch. 6 one.
+- [ ] **Vary the "almost nothing we know about X comes from X" move.** Used on Marcion (Ch. 2), the aposynagōgos passages (Ch. 5), and Paul via Acts (Ch. 6) — a real and recurring truth about ancient sources, but currently the same sentence shape with the noun swapped each time. Keep the thesis, change the phrasing every time it recurs.
+- [ ] **Find the actual jokes, not just irony.** The brief promises "occasionally darkly funny" and names the Cadaver Synod as the calibration. Six chapters in, real comic material has been left on the table and hedged instead of landed — Epiphanius's virgin-seduction story (Ch. 2) and Luther's "Jimmy into the stove" line (Ch. 6) are both inherently absurd and got treated as careful textual-criticism footnotes rather than being allowed to actually be funny. Part One is the driest material in the outline, so this matters more, not less, going into Part Two — don't let caution suppress the humor instinct once funnier material (Ch. 19 Cadaver Synod, Ch. 20 Pornocracy, Ch. 35 the manure pile) actually arrives.
+- [ ] **Keep building counter-narrative texture gradually, not as a one-off patch.** The Ch. 1 revision (Phoebe, Prisca, Junia, the agape meal) fixed that chapter but hasn't recurred since — Chapters 2–6 are entirely male-populated. Defensible this early (the mystics are Part Six), but watch that it doesn't become "one paragraph, box checked, never revisited."
+
+### Chapter-specific notes
+
+- [ ] **Ch. 6** — rewrite the opening two sentences into an actual dramatized scene (the physical reality of the road, the light, the fall) before the meta-commentary about Acts's three versions kicks in. Currently the weakest opening of the six.
+- [ ] **Ch. 5** — candidate for the prose-rhythm fix above: this is the chapter that most needs to sound different from its neighbors given its subject, and currently doesn't.
+- [ ] **Ch. 2** — vary the caveat-paragraph framing language ("Here the book owes its reader a caveat") and consider letting the Epiphanius virgin story land with more dry humor rather than pure source-critical caution.
+- [ ] **Ch. 1, 3, 4** — no urgent rewrites; use Ch. 1's opening and Ch. 3's caveat-integration as the internal models for the fixes above rather than starting from scratch.
+
+None of this is a request to junk what's there — the fact density, the cross-chapter callbacks (Klinghardt in both Ch. 2 and Ch. 3, the Apostolikon resurfacing in Ch. 5), and the refusal to cheap-shot faith are all working and should be preserved exactly as they are.
 
 ---
 
