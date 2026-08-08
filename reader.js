@@ -568,12 +568,18 @@
 
     // Pull chapter title from the first meaningful heading on the page
     const heading = document.querySelector('main h1, main h2, main h3, article h1, article h3');
-    const chapterTitle = heading?.textContent?.trim() || document.title || 'The Original Bug';
+    const chapterTitle = heading?.textContent?.trim() || document.title || 'Chapter';
+
+    // Book name comes from a <meta name="book-title"> tag each book's own page
+    // declares once — this keeps reader.js identical across every book's repo,
+    // with no per-book branding edits needed in the script itself. Falls back
+    // to the page's own <title> if a book ever forgets to add the tag.
+    const bookTitle = document.querySelector('meta[name="book-title"]')?.content?.trim() || document.title;
 
     navigator.mediaSession.metadata = new MediaMetadata({
       title: chapterTitle,
       artist: 'Sandy B. Patterson',
-      album: 'The Original Bug',
+      album: bookTitle,
     });
 
     navigator.mediaSession.setActionHandler('play', () => {
