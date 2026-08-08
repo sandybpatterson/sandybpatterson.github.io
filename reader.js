@@ -160,6 +160,34 @@
   let speed = 1.0;                      // playback rate, controlled by the speed slider
   let translating = false;              // true while an async translation is in progress
   let autoplay = false;                 // true while autoplay-next-chapter is enabled
+  let keepAliveTimer = null;            // interval that pings pause/resume to dodge Chrome's long-utterance cutoff bug
+
+
+  // ── KEEPALIVE ────────────────────────────────────────────────────────────────
+  // Chrome silently kills the speech queue partway through any single utterance
+  // that runs longer than roughly 15 seconds (long-standing bug, still present
+  // as of this writing: https://bugs.chromium.org/p/chromium/issues/detail?id=679437).
+  // Nonfiction paragraphs here routinely run 60-120+ seconds at 1.0x, so without
+  // a workaround playback reliably stalls partway through almost every chapter.
+  // The fix: periodically pause and immediately resume synthesis. Each pause/resume
+  // cycle resets Chrome's internal timer without any audible gap. Only Chrome needs
+  // this, but pause()/resume() are safe no-ops on engines that don't have the bug.
+  function startKeepAlive() {
+    stopKeepAlive();
+    keepAliveTimer = setInterval(() => {
+      if (synth.speaking && !synth.paused) {
+        synth.pause();
+        synth.resume();
+      }
+    }, 10000);
+  }
+
+  function stopKeepAlive() {
+    if (keepAliveTimer) {
+      clearInterval(keepAliveTimer);
+      keepAliveTimer = null;
+    }
+  }
 
 
   // ── EXTRACT STORY TEXT ───────────────────────────────────────────────────────
@@ -412,6 +440,8 @@
     for (let i = index; i < utterances.length; i++) {
       synth.speak(utterances[i]);
     }
+
+    startKeepAlive();
   }
 
   // Three-state toggle: stopped → playing → paused → playing → ...
@@ -429,6 +459,7 @@
       updatePlayButton();
       updateStatus('Paused');
       setMediaSessionState('paused');
+      stopKeepAlive();
     } else if (isPaused) {
       synth.resume();
       isPaused = false;
@@ -437,6 +468,7 @@
       updateStatus('Playing');
       playSilentAudio();
       setMediaSessionState('playing');
+      startKeepAlive();
     }
   }
 
@@ -447,6 +479,7 @@
     isPaused = false;
     currentIndex = 0;
     clearHighlight();
+    stopKeepAlive();
     updatePlayButton();
     updateProgressBar(0);
     updateStatus('Ready');
