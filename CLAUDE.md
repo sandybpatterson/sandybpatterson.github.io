@@ -32,59 +32,26 @@ Match this system for any new page added to the shelf, whether it lives in this 
 
 ## reader.js
 
-`reader.js` at repo root is the Web Speech API chapter reader (voice picker,
-iOS Media Session lock-screen integration, progress bar, screen wake lock).
+`reader.js` at repo root is the single shared Web Speech API chapter reader
+(voice picker, iOS Media Session lock-screen integration, progress bar,
+screen wake lock, Chrome long-utterance keepalive) for every book on the
+shelf. Edit it here — nowhere else.
 
-Note: this root copy isn't currently loaded by anything in `/stories/`
-(those pages use their own self-contained audio player, not `reader.js`) —
-`arden-remembers/chapter.html` and `dead-men-on-thrones/chapter.html` both
-reference it, and both have a `<meta name="book-title" content="...">` tag
-in `<head>` that `reader.js` reads for Media Session branding — see below.
+Note: this root copy isn't loaded by anything in `/stories/` (those pages
+use their own self-contained audio player, not `reader.js`).
 
-### Migration in progress: three synced copies → one shared hosted file
+Every other book's `chapter.html` loads it from the hosted copy —
+`https://sandybpatterson.github.io/reader.js` — and has a
+`<meta name="book-title" content="...">` tag in `<head>` that `reader.js`
+reads for Media Session branding:
+- `dead-men-on-thrones/chapter.html` and `arden-remembers/chapter.html`
+  (same repo, loaded via the relative `../reader.js` since they're local)
+- `original-bug-book/chapter.html` and `beyond-ice-and-steam/chapter.html`
+  (separate repos, loaded via the hosted URL above — their own local
+  `reader.js` copies were deleted once this migration completed)
 
-Historically this file was copied byte-for-byte into `original-bug-book` and
-`beyond-ice-and-steam` too, kept in sync by hand, with one hardcoded
-difference per copy (the `chapterTitle` fallback / `album` in Media Session
-metadata). That hardcoding is gone — the file now reads the book's name from
-a `<meta name="book-title">` tag on the page instead, so it's identical
-everywhere and needs zero per-book edits. That makes a single hosted copy
-possible: `https://sandybpatterson.github.io/reader.js`.
-
-**Status as of August 2026:**
-- **Done** — this repo. `dead-men-on-thrones/chapter.html` and
-  `arden-remembers/chapter.html` both carry the meta tag and load the local
-  `../reader.js`, which is now the canonical copy (edit it here, nowhere else).
-- **Not done** — `original-bug-book` and `beyond-ice-and-steam`. They still
-  have their own local `reader.js` copies, which are now stale and missing
-  two real fixes made here: a Chrome bug where speech silently stops after
-  ~15 seconds on any single long paragraph (fixed with a 10s pause/resume
-  keepalive), and an iOS bug where the screen's normal auto-lock timeout
-  suspends playback mid-chapter (fixed with the Screen Wake Lock API). Until
-  migrated, both books still have the original "audio doesn't play the
-  chapter all the way through" bug.
-
-**Why it's stuck:** finishing this needs push access to those two repos.
-Repeated `add_repo` attempts mid-session failed with `MCP error -32003: MCP
-tool call requires approval`, even immediately after the user approved —
-looks like a broken approval path for granting new repo access mid-session,
-not a one-off fluke. If a future session has working repo access, finish the
-migration there. Otherwise, do it by hand (GitHub web UI is enough — no
-local git needed) for **both** `original-bug-book` and `beyond-ice-and-steam`:
-
-1. Open `chapter.html` in the repo.
-2. Find the `<script>` tag / line that loads `reader.js` and point it at the
-   hosted copy instead: `https://sandybpatterson.github.io/reader.js`
-3. Add one line in `<head>`, near `<title>`:
-   - Original Bug: `<meta name="book-title" content="The Original Bug">`
-   - Beyond Ice and Steam: `<meta name="book-title" content="Beyond Ice and Steam">`
-4. Delete that repo's local `reader.js` file — no longer used.
-5. Commit and push.
-
-Once both are migrated, delete this whole "migration in progress" section —
-there will just be one file, edited once, that every book loads live, and
-the "kept in sync by hand" framing that used to live here (and in each
-book's own CLAUDE.md, if repeated there) is obsolete and should go too.
+There is now exactly one copy of this file. A fix made here is live for
+every book the moment it's pushed — no per-repo sync needed, ever.
 
 ---
 
@@ -164,4 +131,4 @@ has a real cover: `images/dmotcover.jpeg`.
 
 ---
 
-*Last updated: July 2026*
+*Last updated: August 2026*
