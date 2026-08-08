@@ -161,6 +161,43 @@
   let translating = false;              // true while an async translation is in progress
   let autoplay = false;                 // true while autoplay-next-chapter is enabled
   let keepAliveTimer = null;            // interval that pings pause/resume to dodge Chrome's long-utterance cutoff bug
+  let wakeLock = null;                  // Screen Wake Lock held while playing, so iOS auto-lock doesn't suspend playback
+
+
+  // ── WAKE LOCK ────────────────────────────────────────────────────────────────
+  // iOS auto-locks the screen after a period of no touch input, which happens
+  // easily while just listening to a long paragraph. The instant the screen
+  // locks, Safari suspends the page's JS — including the keepalive interval
+  // above and, empirically, WebKit's own speech queue — so playback stalls
+  // until the phone is woken again. The Screen Wake Lock API (Safari 16.4+)
+  // keeps the screen from auto-locking while a lock is held. It does NOT
+  // override a deliberate press of the power button, only the idle timeout —
+  // so this can't keep audio going if the user manually locks the phone.
+  async function acquireWakeLock() {
+    if (!('wakeLock' in navigator)) return; // unsupported browser — fail silently
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+      wakeLock.addEventListener('release', () => { wakeLock = null; });
+    } catch {
+      wakeLock = null; // request can fail (e.g. Low Power Mode) — not fatal, just no lock
+    }
+  }
+
+  function releaseWakeLock() {
+    if (wakeLock) {
+      wakeLock.release().catch(() => {});
+      wakeLock = null;
+    }
+  }
+
+  // The lock is automatically released whenever the page is hidden (tab/app
+  // switch) and does not reacquire itself — grab it again if playback is
+  // still active once the page becomes visible.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && isPlaying && !wakeLock) {
+      acquireWakeLock();
+    }
+  });
 
 
   // ── KEEPALIVE ────────────────────────────────────────────────────────────────
@@ -442,6 +479,7 @@
     }
 
     startKeepAlive();
+    acquireWakeLock();
   }
 
   // Three-state toggle: stopped → playing → paused → playing → ...
@@ -460,6 +498,7 @@
       updateStatus('Paused');
       setMediaSessionState('paused');
       stopKeepAlive();
+      releaseWakeLock();
     } else if (isPaused) {
       synth.resume();
       isPaused = false;
@@ -469,6 +508,7 @@
       playSilentAudio();
       setMediaSessionState('playing');
       startKeepAlive();
+      acquireWakeLock();
     }
   }
 
@@ -480,6 +520,7 @@
     currentIndex = 0;
     clearHighlight();
     stopKeepAlive();
+    releaseWakeLock();
     updatePlayButton();
     updateProgressBar(0);
     updateStatus('Ready');
