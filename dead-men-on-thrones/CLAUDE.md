@@ -5,6 +5,19 @@
 
 ---
 
+## MANDATORY PRE-PUBLISH CHECKLIST — every chapter, every time, no exceptions
+
+This book makes specific, checkable claims (dates, quotes, numbers, attributions, "the first X to do Y") as a matter of voice — that's the whole point of "specific people, specific decisions" from the formatting notes below. That only works if the claims are actually true. Before pushing any new or revised chapter to `main`:
+
+1. **Fact-check every non-trivial claim** — any date, quote, number, named source, or "first/only/most" superlative — against outside sources (web search) before treating it as final. Don't rely on training-data memory alone for anything specific enough to be wrong. This includes claims that feel safe because they're well-known; several "common knowledge" claims in earlier chapters (e.g. what Athanasius's letter actually was "first" to do) turned out to have real scholarly pushback that made the chapter better once included.
+2. **Re-read the full draft once cold** after writing it, checking it against the "REVISION TODO" craft notes elsewhere in this file — closing-line variety, caveat paragraphs folded into the narrative rather than signposted, prose rhythm matched to subject, a genuinely dramatized opening scene, varied phrasing for recurring moves ("sources are compromised," etc.), real humor where the material supports it.
+3. **Scan for stray characters and typos** — `grep -nP '[^\x00-\x7F]' <file> | grep -vP "[’‘“”—…·]"` catches encoding glitches; read the opening paragraph aloud (or have it read aloud) to catch duplicated-word typos spellcheck won't flag.
+4. **Confirm the wiring** — chapter added to the `chapters` map in `chapter.html`, its `index.html` row flipped to "Read" with the `ready` class, the `.toc-label` count incremented, before any of it is pushed live.
+
+Skipping this because a chapter "feels" solid is exactly how a factual error ends up live on the actual site. Do it every time, not just when something seems risky.
+
+---
+
 ## WHAT THIS BOOK IS
 
 Dead Men on Thrones: What Power Does to Religion is a comprehensive popular history of Christianity examining how institutional power has consistently corrupted, distorted, and weaponized religious faith across two thousand years. The central argument is that the Christianity most people practice today has almost nothing to do with what actually happened and almost everything to do with politics, accidents, power struggles, dead men on thrones, shipowners getting thrown out of churches, and councils arguing over single letters of the Greek alphabet.
@@ -370,7 +383,7 @@ The reader the book is written for is sitting in their car in a church parking l
 
 ## PROGRESS STATUS
 
-**6 of 64 chapters drafted** (Chapters 1–6, all of Part One: The Documents — Before the Book, The Man Who Forced the Question, The Lost Document, Four Accounts One Story, The Cosmic Gospel, The Man Who Built the Theology). Each chapter has been fact-checked against outside sources before publishing and is live in `chapters/ch01.md` through `chapters/ch06.md`, wired into `chapter.html` and marked "Read" in `index.html`.
+**8 of 64 chapters drafted — all of Part One: The Documents is complete** (Chapters 1–8: Before the Book, The Man Who Forced the Question, The Lost Document, Four Accounts One Story, The Cosmic Gospel, The Man Who Built the Theology, The Brilliant Heretic, Closing the Book). Each chapter has been fact-checked against outside sources before publishing and is live in `chapters/ch01.md` through `chapters/ch08.md`, wired into `chapter.html` and marked "Read" in `index.html`. Next up: Part Two — The Councils, starting with Chapter 9, "The Emperor's Church" (Constantine).
 
 Site scaffold (`index.html` + `chapter.html`, matching the pattern used by The Original Bug and Beyond Ice and Steam) is fully wired for the chapters that exist; remaining rows are still placeholders.
 
