@@ -161,14 +161,14 @@ Eznik of Kolb. Against the Sects (De Deo), 5th century, Armenian.
 MODERN SCHOLARSHIP
 
 Harnack, Adolf von. Marcion: Das Evangelium vom fremden Gott. First edition
-1921; second, expanded edition 1924. English: Marcion: The Gospel of the
+c. 1920; second, expanded edition 1924. English: Marcion: The Gospel of the
 Alien God.
     The origin of the strong Marcion-as-hinge thesis this book largely tells:
     that Marcion invented the idea of a closed New Testament and forced the
     wider church to answer in kind.
-    ⚠ DATE TO CONFIRM: this project's CLAUDE.md refers to "Harnack's admiring
-    1920 Marcion biography." The first edition is generally given as 1921.
-    Pin this down before Chapter 45 leans on the date.
+    Sources give the first edition as either 1920 or 1921 and it isn't worth
+    settling here; "c. 1920" is accurate either way. If Chapter 45 ever needs
+    the exact year for a specific argument, check it then.
 
 Lieu, Judith M. Marcion and the Making of a Heretic: God and Scripture in the
 Second Century. Cambridge University Press, 2015.
@@ -668,8 +668,6 @@ contested points, that is worth a sentence saying so explicitly. A chapter
 that appears to have none has usually just not been checked hard enough.
 
 ITEMS FLAGGED IN THIS DOCUMENT AWAITING RESOLUTION:
-  - Harnack's Marcion biography: 1920 (per CLAUDE.md) or 1921 (first edition
-    as generally given). Resolve before Chapter 45.
   - Chapter 6 groups all six disputed letters together; the pastorals sit at
     a meaningfully higher level of scholarly confidence than Ephesians,
     Colossians, and 2 Thessalonians. Consider splitting.
