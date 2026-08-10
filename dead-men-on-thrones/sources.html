@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appendix E: Further Reading — Dead Men on Thrones</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1e1e;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav-brand {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-links a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      padding: 5px 14px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover {
+      color: #c9a84c;
+      border-color: #c9a84c44;
+      text-decoration: none;
+    }
+
+    .header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 28px 24px;
+    }
+    .eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f0f0f0;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .preamble {
+      max-width: 680px;
+      margin: 0 auto 44px;
+      padding: 22px 28px;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .preamble p {
+      font-size: 0.9rem;
+      color: #777;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .preamble p:last-child { margin-bottom: 0; }
+    .preamble strong { color: #c8b89a; font-weight: normal; }
+
+    .jump {
+      max-width: 680px;
+      margin: 0 auto 44px;
+      padding: 0 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .jump a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: #666;
+      padding: 4px 11px;
+      border: 1px solid #1e1e1e;
+      border-radius: 999px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .jump a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 28px 100px; }
+
+    .chapter-block { margin-bottom: 60px; scroll-margin-top: 80px; }
+
+    .chapter-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .chapter-heading .ch-num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #444;
+      flex-shrink: 0;
+    }
+    .chapter-heading a { font-size: 1rem; color: #d0d0d0; transition: color 0.15s; }
+    .chapter-heading a:hover { color: #c9a84c; text-decoration: none; }
+
+    h3.group {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6d6250;
+      margin: 26px 0 12px;
+      font-weight: normal;
+    }
+    .chapter-block > h3.group:first-of-type { margin-top: 0; }
+
+    .src-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .src-list li {
+      font-size: 0.92rem;
+      color: #888;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+    }
+    .src-list li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: #3a3a3a;
+    }
+    .src-list li em {
+      color: #c8b89a;
+      font-style: normal;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .src-list li .note {
+      display: block;
+      margin-top: 4px;
+      color: #6a6a6a;
+      font-size: 0.87rem;
+    }
+
+    .contested {
+      border-left: 2px solid #4a3f28;
+      padding: 4px 0 4px 18px;
+      margin-top: 8px;
+    }
+    .contested .src-list li { padding-left: 0; }
+    .contested .src-list li::before { content: none; }
+
+    .standing-warning {
+      border: 1px solid #2a2418;
+      background: #100e09;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+      color: #857a63;
+      line-height: 1.7;
+    }
+    .standing-warning em {
+      display: block;
+      font-family: 'Courier New', monospace;
+      font-style: normal;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6d6250;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 28px 24px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .header { padding: 44px 22px 22px; }
+      .header h1 { font-size: 1.6rem; }
+      .preamble, .jump, .wrap { padding-left: 22px; padding-right: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="index.html" style="color:#c9a84c;">Dead Men on Thrones</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+      <a href="index.html">All Chapters</a>
+      <a href="book-index.html">Index</a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <p class="eyebrow">Appendix E</p>
+    <h1>Further Reading</h1>
+    <p>The scholars and sources behind this book, chapter by chapter &mdash; including every place it takes a position other serious people disagree with.</p>
+  </div>
+
+  <div class="preamble">
+    <p>This book does not carry footnotes in its main text. That is deliberate: the argument is made in prose, and you should be able to follow it without stepping over a numbered marker every third sentence. But every specific claim in these chapters rests on something, and this is where that something is written down.</p>
+    <p>Each chapter is grouped under three headings. <strong>Primary sources</strong> are the ancient texts the chapter actually draws on &mdash; including the hostile ones, and noting where a text survives only inside a later writer's rebuttal. <strong>Modern scholarship</strong> is the named researchers behind the historical claims. <strong>Where this is contested</strong> is the one that matters most.</p>
+    <p>That third heading exists because this book's whole argument is that institutions flatten messy history into clean stories that serve them. An appendix that hid its own uncertainty would be doing exactly the same thing.</p>
+    <p>Ancient dates in this material are frequently approximate and frequently disputed. Where a date is genuinely argued over, it is marked "c." or the dispute is named outright. Where a firm date appears here, it is firm.</p>
+    <p>Covers Chapters 1&ndash;9. Entries for the remaining chapters will be added as they are written.</p>
+  </div>
+
+  <div class="jump">
+    <a href="#ch1">1</a><a href="#ch2">2</a><a href="#ch3">3</a><a href="#ch4">4</a>
+    <a href="#ch5">5</a><a href="#ch6">6</a><a href="#ch7">7</a><a href="#ch8">8</a>
+    <a href="#ch9">9</a><a href="#general">General</a>
+  </div>
+
+  <div class="wrap">
+
+    <!-- CH 1 -->
+    <div class="chapter-block" id="ch1">
+      <div class="chapter-heading">
+        <span class="ch-num">01</span><a href="chapter.html?c=1">Before the Book</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>Ignatius of Antioch, the seven letters</em>Ephesians, Magnesians, Trallians, Romans, Philadelphians, Smyrnaeans, and Polycarp &mdash; written under guard en route to execution, conventionally c. 107. The "middle recension" of seven is the text scholars generally accept as authentic; a longer thirteen-letter version is a later expansion.<span class="note">The Philadelphians passage about "the archives" is the anecdote this chapter is built on.</span></li>
+        <li><em>Justin Martyr, First Apology, c. 155&ndash;157</em>Chapter 67 describes an ordinary Sunday: "the memoirs of the apostles" read aloud alongside the prophets, for as long as time allows.<span class="note">The single most important sentence in the chapter &mdash; texts acquiring scriptural function in practice, decades before anyone listed which ones.</span></li>
+        <li><em>The Muratorian Fragment</em>A damaged Latin manuscript naming most of what became the New Testament. Discovered by Ludovico Antonio Muratori and published in 1740.</li>
+        <li><em>Tatian, Diatessaron, c. 170s</em>The four gospels woven into one continuous harmony, which became the standard gospel text for Syriac-speaking Christians for generations.</li>
+        <li><em>Gospel of Thomas; Gospel of Peter; Gospel of the Hebrews</em>Thomas survives complete in Coptic from the Nag Hammadi find of 1945; Hebrews survives only in fragments quoted by later writers.</li>
+        <li><em>Paul, Romans 16</em>Phoebe named as deacon, Prisca as co-worker, Junia as "outstanding among the apostles." The chapter's closing section comes straight out of Paul's own greeting list.</li>
+      </ul>
+
+      <h3 class="group">Modern Scholarship</h3>
+      <ul class="src-list">
+        <li><em>Walter Bauer, Orthodoxy and Heresy in Earliest Christianity</em>German original 1934; English translation 1971. The strong thesis that in many regions what later got labeled heresy was simply the local Christianity, with Roman-flavored orthodoxy arriving afterward and rewriting the record.</li>
+        <li><em>Bart D. Ehrman, Lost Christianities (2003)</em>The accessible general treatment of the plural-Christianities picture this chapter describes.</li>
+        <li><em>Bruce M. Metzger, The Canon of the New Testament (1987)</em>Still the standard reference work on how the list got made.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>The date of Ignatius's letters</em>The traditional c. 107 is not settled. A substantial body of scholarship places them in the 130s or 140s, and a minority argues later still.</li>
+          <li><em>The date of the Muratorian Fragment</em>The conventional c. 180 is directly challenged by Albert C. Sundberg, "Canon Muratori: A Fourth-Century List," <em style="display:inline">Harvard Theological Review</em> 66 (1973), and at book length by Geoffrey Mark Hahneman, <em style="display:inline">The Muratorian Fragment and the Development of the Canon</em> (1992). If they are right, the "first canon list" is roughly two centuries later than the textbooks say.</li>
+          <li><em>Bauer's thesis</em>Most historians today think Bauer overstated his case. The picture varied enormously by region, and plenty of communities held something recognizably continuous with later orthodoxy from very early. The strong version is disputed; the floor underneath it is not.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CH 2 -->
+    <div class="chapter-block" id="ch2">
+      <div class="chapter-heading">
+        <span class="ch-num">02</span><a href="chapter.html?c=2">The Man Who Forced the Question</a>
+      </div>
+
+      <div class="standing-warning">
+        <em>A standing warning for this chapter</em>
+        Almost nothing known about Marcion comes from Marcion. No manuscript of his gospel survives. No copy of the Antitheses survives. Every substantive claim about what he taught reaches us through writers trying to destroy his movement, most of them writing decades to centuries after his death. That is not a reason to disbelieve everything they say &mdash; hostile sources quote their opponents at length precisely in order to refute them, which preserves material that would otherwise be lost entirely. It is a reason to hold every biographical detail loosely.
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>Tertullian, Against Marcion, c. 207&ndash;208</em>Five books, and the single fullest source on Marcion's theology and his edited gospel &mdash; written roughly half a century after his death by someone determined to refute him verse by verse. The "wasps building nests from a wasp" line is Tertullian's.</li>
+        <li><em>Irenaeus, Against Heresies, c. 180</em>Carries the Polycarp encounter &mdash; "I recognize the firstborn of Satan." Irenaeus claims the story from people who were present, and is the closest thing to a contemporary witness in the chain.</li>
+        <li><em>Epiphanius of Salamis, Panarion, c. 375&ndash;378</em>The catalogue of heresies carrying the story that Marcion was expelled from his father's church at Sinope for seducing a virgin &mdash; more than two hundred years after the fact, with no earlier source mentioning it.</li>
+        <li><em>Eznik of Kolb, Against the Sects, 5th century</em>Evidence that Marcionite communities were still active, and still worth refuting in Armenia, roughly three hundred years after the excommunication.</li>
+      </ul>
+
+      <h3 class="group">Modern Scholarship</h3>
+      <ul class="src-list">
+        <li><em>Adolf von Harnack, Marcion: The Gospel of the Alien God</em>First edition 1921; second, expanded edition 1924. The origin of the strong Marcion-as-hinge thesis this book largely tells.</li>
+        <li><em>Judith M. Lieu, Marcion and the Making of a Heretic (Cambridge, 2015)</em>The most important modern treatment, and the direct counterweight to Harnack. Argues canon formation was slower and multi-causal, and that the singular-arch-heretic story served the people telling it.</li>
+        <li><em>Matthias Klinghardt, The Oldest Gospel and the Formation of the Canonical Gospels</em>German 2015; English edition 2021. Argues Marcion's gospel was not an edit of Luke but an earlier text that Luke &mdash; and Matthew, and Mark &mdash; drew on.</li>
+        <li><em>Markus Vinzent, Marcion and the Dating of the Synoptic Gospels (2014)</em>Goes further still: the canonical gospels as a set written partly in response to Marcion rather than before him.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>Three live positions</em>Harnack's &mdash; Marcion is the hinge, which is most of this chapter's narrative. Lieu's &mdash; Marcion is the earliest visible symptom of a pressure building anyway, from Gnostic movements broadly, Montanism, competing apostolic claims, and the technical shift from scroll to codex that made large bound collections physically possible. Klinghardt and Vinzent's &mdash; the direction of dependency between Marcion's gospel and Luke may run the other way entirely.</li>
+          <li><em>The chapter's own position</em>It lands on "both things can be true at once, and probably are," and leaves it unresolved. That is the honest answer, not a hedge.</li>
+          <li><em>What is firm</em>The 144 excommunication date. The 200,000 sesterces and its return come from Tertullian and are plausible but single-sourced.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CH 3 -->
+    <div class="chapter-block" id="ch3">
+      <div class="chapter-heading">
+        <span class="ch-num">03</span><a href="chapter.html?c=3">The Lost Document</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>Papias of Hierapolis, Exposition of the Sayings of the Lord</em>Five volumes, first decades of the second century. Lost. Survives only in quotations preserved by later writers, principally Eusebius, <em style="display:inline">Historia Ecclesiastica</em> 3.39, which carries the Elder's remark about Matthew compiling the sayings "in the Hebrew dialect."</li>
+        <li><em>Gospel of Thomas</em>114 sayings, almost no narrative frame, no passion, no resurrection. Recovered complete in Coptic at Nag Hammadi in 1945 &mdash; the chapter's evidence that the sayings-gospel was a real genre and not a scholarly invention required to make Q plausible.</li>
+      </ul>
+
+      <h3 class="group">Modern Scholarship</h3>
+      <ul class="src-list">
+        <li><em>Christian Hermann Weisse (1838)</em>Early formulation of what became the two-source hypothesis.</li>
+        <li><em>B. H. Streeter, The Four Gospels: A Study of Origins (1924)</em>The classic English statement of the case for Q.</li>
+        <li><em>Austin Farrer, "On Dispensing with Q" (1955)</em>Developed by Michael Goulder and, most accessibly, by Mark Goodacre, <em style="display:inline">The Case Against Q</em> (2002). The serious minority position: Mark first, Matthew used Mark, Luke used both. No lost document required.</li>
+        <li><em>Matthias Klinghardt</em>As above. His argument was developed in part specifically to solve the Synoptic Problem without Q.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>Q's entire existence</em>No fragment has ever been found, and no ancient writer quotes it by name or credits it as a source. It is an inference from the agreements between two other documents, not a discovery. The chapter says this plainly and does not retreat from it.</li>
+          <li><em>Papias's testimony</em>Whether the Elder was describing anything like Q, something else entirely, or simply garbling the origins of canonical Matthew is genuinely unresolved.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CH 4 -->
+    <div class="chapter-block" id="ch4">
+      <div class="chapter-heading">
+        <span class="ch-num">04</span><a href="chapter.html?c=4">Four Accounts, One Story</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>Celsus, The True Word, c. 177&ndash;180</em>Lost. Survives only as quoted inside its own rebuttal.</li>
+        <li><em>Origen, Contra Celsum, c. 248</em>Quotes Celsus at such length in order to answer him that the lost attack can be substantially reconstructed. Origen's defense &mdash; that four identical accounts would be the real red flag &mdash; is the argument the chapter puts on the table and declines to settle.</li>
+        <li><em>Josephus, Antiquities of the Jews, Book 18</em>The census under Quirinius, independently dating it to 6 AD.</li>
+        <li><em>Codex Sinaiticus and Codex Vaticanus</em>Both 4th century, and both ending Mark at 16:8. Eusebius and Jerome each report that nearly every Greek manuscript known to them did the same.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>The census problem</em>Matthew places the birth under Herod the Great, who died in 4 BC; Luke ties it to the Quirinius census of 6 AD. Proposed reconciliations include an earlier unrecorded census, a mistranslation of Luke's Greek, and a deliberate literary anachronism. None has carried the field.</li>
+          <li><em>The ending of Mark</em>Textual critics overwhelmingly hold the original ended at 16:8 &mdash; about as close to settled as New Testament textual criticism gets. But Irenaeus appears to know some version of the longer ending by the 170s, so it circulated early and was not invented centuries later.</li>
+          <li><em>The two genealogies</em>The "one of them is secretly Mary's" harmonization is nowhere stated in either text, and would still be beside the point in a culture tracing legal descent through the father.</li>
+        </ul>
+      </div>
+
+      <h3 class="group">If You Want the Full Case</h3>
+      <ul class="src-list">
+        <li><em>Bart D. Ehrman, Jesus, Interrupted (2009)</em>The gospel discrepancies at book length for a general audience.</li>
+        <li><em>Raymond E. Brown, The Birth of the Messiah (1977, rev. 1993) and The Death of the Messiah (1994)</em>The standard scholarly treatments, from a committed Catholic scholar &mdash; useful precisely because they are not written to embarrass the text.</li>
+      </ul>
+    </div>
+
+    <!-- CH 5 -->
+    <div class="chapter-block" id="ch5">
+      <div class="chapter-heading">
+        <span class="ch-num">05</span><a href="chapter.html?c=5">The Cosmic Gospel</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>The Gospel of John</em>The prologue (1:1&ndash;14); the <em style="display:inline">ego eimi</em> sayings; the temple confrontation at 8:58; the farewell discourse (chapters 14&ndash;17), with the vine and branches at chapter 15; Thomas at 20:24&ndash;29.</li>
+        <li><em>Exodus 3:14</em>"I Am Who I Am." The Septuagint, the Greek translation in wide use in the first century, renders it with the same phrase John repeatedly puts in Jesus's mouth.</li>
+        <li><em>Philo of Alexandria</em>The Logos as mediator between an unreachable God and the material world, fusing the Stoic rational principle with Hebrew scripture's creative "word of the Lord." Writing in Greek in roughly the same decades as Jesus's ministry.</li>
+      </ul>
+
+      <h3 class="group">Modern Scholarship</h3>
+      <ul class="src-list">
+        <li><em>J. Louis Martyn, History and Theology in the Fourth Gospel (1968)</em>The influential reconstruction tying John's <em style="display:inline">aposynagogos</em> passages to the Birkat ha-Minim, and reading John's community as recent refugees from a formal split.</li>
+        <li><em>Adele Reinhartz, Cast Out of the Covenant (2018)</em>The leading pushback. Reads the expulsion language as the gospel's own rhetoric, defining insider and outsider, rather than a report of one datable legislated event.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>John's relationship to Philo</em>Whether the author read Philo, absorbed the idea secondhand, or arrived somewhere similar independently out of Jewish wisdom tradition is unsettled. The chapter's own observation is worth keeping: Philo's Logos recurs throughout his work, while John's appears once, gloriously, and never again.</li>
+          <li><em>The Martyn thesis</em>Now substantially contested &mdash; both on whether the Birkat ha-Minim was in use early enough, and on whether the expulsion language is reportage at all. What survives the dispute is the broader picture: this community understood itself as painfully and recently separated from the Jewish world it grew out of.</li>
+          <li><em>The dating of John</em>c. 90&ndash;110 is standard and not seriously disputed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CH 6 -->
+    <div class="chapter-block" id="ch6">
+      <div class="chapter-heading">
+        <span class="ch-num">06</span><a href="chapter.html?c=6">The Man Who Built the Theology</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>The seven undisputed letters</em>Romans, 1 and 2 Corinthians, Galatians, Philippians, 1 Thessalonians, Philemon. The six disputed: Ephesians, Colossians, 2 Thessalonians, and the pastorals &mdash; 1 and 2 Timothy, Titus.</li>
+        <li><em>Acts of the Apostles</em>The three accounts of the Damascus road &mdash; chapters 9, 22, and 26 &mdash; which differ on who heard the voice, who saw the light, and who fell. Also the sole source for Paul's Roman citizenship, which his own letters never mention.</li>
+        <li><em>The Epistle of James, 2:14&ndash;26</em>The only place in the Bible the phrase "faith alone" appears, and it appears in order to be rejected.</li>
+        <li><em>Luther, Preface to the New Testament (1522)</em>The "epistle of straw" line, which Luther removed from later editions.<span class="note">The blunter "Jimmy into the stove" remark comes from the Table Talk tradition &mdash; after-dinner recollections written down by students, not Luther's own published prose. Reported, not documented.</span></li>
+      </ul>
+
+      <h3 class="group">Modern Scholarship</h3>
+      <ul class="src-list">
+        <li><em>E. P. Sanders, Paul and Palestinian Judaism (1977)</em>The study that broke Luther's reading. Second Temple Judaism operated on what Sanders called covenantal nomism: inside the covenant by grace, keeping the law as response rather than price of admission.</li>
+        <li><em>James D. G. Dunn, "The New Perspective on Paul" (1983)</em>Coined the label for the movement Sanders started. Developed most widely by N. T. Wright.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>The New Perspective itself</em>Not universally accepted. The most serious pushback comes from theologians who argue it understates how seriously Paul does talk about sin and individual reconciliation. But even Sanders's critics now have to argue with him rather than around him.</li>
+          <li><em>1 Corinthians 14:34&ndash;35</em>Three live positions: a later interpolation Paul never wrote &mdash; supported by the verses migrating to a different location in part of the manuscript tradition, a recognized signature of a marginal note absorbed into the text; Paul quoting a Corinthian slogan in order to refute it in the next verse; or authentic and meant as written. No settled resolution.</li>
+          <li><em>Galatians 3:28 as a pre-Pauline baptismal formula</em>Widely held, not certain.</li>
+          <li><em>The disputed letters are not equally disputed</em>The pastorals sit at a meaningfully higher level of scholarly confidence about post-Pauline authorship than Ephesians, Colossians, and 2 Thessalonians, which are more genuinely split.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CH 7 -->
+    <div class="chapter-block" id="ch7">
+      <div class="chapter-heading">
+        <span class="ch-num">07</span><a href="chapter.html?c=7">The Brilliant Heretic</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>Eusebius, Historia Ecclesiastica, Book 6</em>The principal source for Origen's life &mdash; his father Leonides's arrest under Septimius Severus in 202, his mother hiding his clothes, the letter to his father in prison, the catechetical school, the torture under Decius.<span class="note">Eusebius is broadly sympathetic to Origen. That matters for the castration story: this is not a hostile source inventing something damaging, it is an admiring source repeating something he had heard.</span></li>
+        <li><em>Origen, On First Principles</em>The first systematic Christian theology, and the source for apokatastasis. Also the Hexapla &mdash; the six-column parallel Old Testament, surviving only in fragments and later citations.</li>
+        <li><em>Jerome and Epiphanius on Origen's output</em>Jerome's careful tally lands under two thousand titles; Epiphanius claims six thousand. The chapter uses the discrepancy rather than picking the bigger number.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>The self-castration</em>Seriously doubted by scholars since at least the late nineteenth century, on the grounds the chapter gives: the entire intellectual project was a machine for turning literal readings into symbolic ones. The live alternative is that "eunuch" was used by Alexandrian teachers for chosen celibacy, and a metaphor calcified into a reported event.</li>
+          <li><em>The 553 condemnation</em>The standard summary is that the Second Council of Constantinople condemned Origen. Modern scholarship has raised real doubts about whether the fifteen anathemas against Origenism were issued by the full ecumenical council at all, or by a smaller local synod &mdash; generally placed in 543, under Justinian &mdash; whose findings were later folded into the bigger council's reputation.</li>
+          <li><em>Origen's death</em>Generally placed in 253 or 254, from injuries sustained under the Decian persecution.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CH 8 -->
+    <div class="chapter-block" id="ch8">
+      <div class="chapter-heading">
+        <span class="ch-num">08</span><a href="chapter.html?c=8">Closing the Book</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>Athanasius, Thirty-Ninth Festal Letter, 367</em>The earliest surviving document listing exactly the twenty-seven books of the New Testament, in the order still printed today.</li>
+        <li><em>Eusebius, Historia Ecclesiastica, c. 325</em>The four-bin sort of candidates into accepted, disputed, spurious, and outright forgeries. Book 7.25 preserves Dionysius of Alexandria's stylistic argument that the author of Revelation cannot be the author of John's gospel; Book 4.23 preserves Dionysius of Corinth on 1 Clement being read aloud in worship generations after it was written.</li>
+        <li><em>The Shepherd of Hermas and the Epistle of Barnabas</em>Both appended to Codex Sinaiticus (4th century) with no visual signal marking a boundary. 1 and 2 Clement get the same honored placement in Codex Alexandrinus (5th century).</li>
+        <li><em>The Didache</em>Lost for roughly a millennium; a single surviving copy found by Philotheos Bryennios in a Constantinople monastery library in 1873, bound into an eleventh-century manuscript, and published in 1883.</li>
+        <li><em>Councils of Hippo (393) and Carthage (397)</em>Reconfirmed at Carthage in 419.</li>
+      </ul>
+
+      <h3 class="group">Modern Scholarship</h3>
+      <ul class="src-list">
+        <li><em>Bruce M. Metzger, The Canon of the New Testament (1987)</em>As Chapter 1.</li>
+        <li><em>Harry Y. Gamble, Books and Readers in the Early Church (1995)</em>The physical and technological side: scroll to codex, copying, circulation. The chapter's argument that geography and reach decided the canon depends on this material.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>"The first canon list"</em>The chapter refuses this framing, noting that Origen appears to assume a closed twenty-seven-book set in a casual aside more than a century earlier.</li>
+          <li><em>The authority of Hippo and Carthage</em>Regional North African synods, not ecumenical councils. Real influence in the West, no binding authority in the East, where questions about Revelation and the shorter catholic epistles kept circulating for generations. Popular retellings routinely inflate these into "the council that decided the Bible."</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CH 9 -->
+    <div class="chapter-block" id="ch9">
+      <div class="chapter-heading">
+        <span class="ch-num">09</span><a href="chapter.html?c=9">The Emperor's Church</a>
+      </div>
+
+      <h3 class="group">Primary Sources</h3>
+      <ul class="src-list">
+        <li><em>Lactantius, On the Deaths of the Persecutors</em>Written within roughly a decade of the Milvian Bridge, and the earliest and most modest account of the vision: a dream, the night before, instructing Constantine to mark his soldiers' shields. Lactantius also preserves the full Latin text of the Nicomedia letter history calls the Edict of Milan, and the text of Galerius's 311 Edict of Serdica.</li>
+        <li><em>Eusebius, Historia Ecclesiastica</em>Written while Constantine was alive. Mentions divine assistance at the battle without describing any vision at all.</li>
+        <li><em>Eusebius, Life of Constantine</em>Written after Constantine's death &mdash; and now the whole army sees a cross of light above the sun in daylight, with words beside it, followed by a dream that night explaining it. Eusebius says he had it from Constantine directly, under oath.<span class="note">Three tellings, two by the same author decades apart, each larger than the last. The escalation is the point of the section.</span></li>
+        <li><em>Zosimus, Historia Nova, c. 500</em>The hostile pagan source for Fausta being shut in an overheated bathhouse &mdash; written more than a century and a half after the events with an evident grudge, and unsupported by anything closer to them.</li>
+        <li><em>The Council of Arles, 314</em>Convened by Constantine to adjudicate the Donatist schism, with bishops from as far as Gaul and Britain.</li>
+      </ul>
+
+      <h3 class="group">Where This Is Contested</h3>
+      <div class="contested">
+        <ul class="src-list">
+          <li><em>Sincerity versus calculation</em>The oldest argument in Constantine studies. The chapter presents both readings and lands where most serious historians now land &mdash; leaning sympathetic without abandoning the cynical reading &mdash; then makes the better point, which is that belief and utility were probably never fully separable for him.</li>
+          <li><em>"The Edict of Milan"</em>No document by that name has ever been found and none was issued at Milan. What survives is Licinius's letter from Nicomedia two months later. This matters because the popular version is wrong in a way that flatters Constantine.</li>
+          <li><em>The deaths of Crispus and Fausta</em>No official explanation was ever issued and none survives in any contemporary record. Every account of motive is later speculation.</li>
+          <li><em>Firm dates</em>Milvian Bridge, 28 October 312. Milan meeting, 313. Galerius's edict, 311. Arles, 314. Crispus and Fausta's deaths, 326. Foundation of Constantinople, 330. Constantine's baptism and death, 337. None of these is in serious dispute.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- GENERAL -->
+    <div class="chapter-block" id="general">
+      <div class="chapter-heading">
+        <span class="ch-num">&mdash;&mdash;</span><a href="index.html">General Background</a>
+      </div>
+      <ul class="src-list">
+        <li><em>Bart D. Ehrman</em>Lost Christianities (2003); Misquoting Jesus (2005); Jesus, Interrupted (2009). The accessible route into textual criticism and early Christian diversity.</li>
+        <li><em>Bruce M. Metzger, The Canon of the New Testament (1987)</em>The standard reference on canon formation.</li>
+        <li><em>Judith M. Lieu, Marcion and the Making of a Heretic (2015)</em>Essential for Part One, and the corrective to this book's own strongest framing.</li>
+        <li><em>Harry Y. Gamble, Books and Readers in the Early Church (1995)</em>The physical history of Christian texts.</li>
+        <li><em>Tom Holland, Dominion (2019)</em>Christianity taken seriously as a historical force, without either apologetics or polemic.</li>
+        <li><em>Mary Beard, SPQR (2015)</em>For the Roman world these chapters move through, and for making ancient material feel immediate.</li>
+        <li><em>Eusebius, Historia Ecclesiastica</em>The indispensable and thoroughly partisan source for almost everything before 325. Read with the same care this book applies to Tertullian and Epiphanius: he preserves what would otherwise be lost, and he is writing to a purpose.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    Dead Men on Thrones &middot; Appendix E &middot; Sandy B. Patterson
+  </footer>
+
+</body>
+</html>

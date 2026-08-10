@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index — Dead Men on Thrones</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1e1e;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav-brand {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      padding: 5px 14px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover {
+      color: #c9a84c;
+      border-color: #c9a84c44;
+      text-decoration: none;
+    }
+
+    .header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 28px 28px;
+    }
+    .eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f0f0f0;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .jump {
+      max-width: 680px;
+      margin: 0 auto 40px;
+      padding: 0 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .jump a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: #666;
+      padding: 4px 11px;
+      border: 1px solid #1e1e1e;
+      border-radius: 999px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .jump a:hover {
+      color: #c9a84c;
+      border-color: #c9a84c44;
+      text-decoration: none;
+    }
+
+    .index-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 28px 100px;
+    }
+
+    .chapter-block {
+      margin-bottom: 56px;
+      scroll-margin-top: 80px;
+    }
+
+    .chapter-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .chapter-heading .ch-num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #444;
+      flex-shrink: 0;
+    }
+    .chapter-heading a {
+      font-size: 1rem;
+      color: #d0d0d0;
+      transition: color 0.15s;
+    }
+    .chapter-heading a:hover {
+      color: #c9a84c;
+      text-decoration: none;
+    }
+
+    .index-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .index-list li {
+      font-size: 0.92rem;
+      color: #888;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+    }
+    .index-list li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: #3a3a3a;
+    }
+    .index-list li em {
+      color: #c8b89a;
+      font-style: normal;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 28px 24px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .header { padding: 44px 22px 22px; }
+      .header h1 { font-size: 1.6rem; }
+      .jump, .index-wrap { padding-left: 22px; padding-right: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="index.html" style="color:#c9a84c;">Dead Men on Thrones</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+      <a href="index.html">All Chapters</a>
+      <a href="sources.html">Sources</a>
+    </div>
+  </nav>
+
+  <div class="header">
+    <p class="eyebrow">Sandy B. Patterson</p>
+    <h1>Index</h1>
+    <p>Key terms, people, and documents &mdash; in the order they first appear in the book. Covers the nine chapters written so far.</p>
+  </div>
+
+  <div class="jump">
+    <a href="#ch1">1</a>
+    <a href="#ch2">2</a>
+    <a href="#ch3">3</a>
+    <a href="#ch4">4</a>
+    <a href="#ch5">5</a>
+    <a href="#ch6">6</a>
+    <a href="#ch7">7</a>
+    <a href="#ch8">8</a>
+    <a href="#ch9">9</a>
+  </div>
+
+  <div class="index-wrap">
+
+    <!-- CHAPTER 1 -->
+    <div class="chapter-block" id="ch1">
+      <div class="chapter-heading">
+        <span class="ch-num">01</span>
+        <a href="chapter.html?c=1">Before the Book</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>Ignatius of Antioch</em>
+          A bishop marched out of Antioch in chains around 107 and sentenced to die in a Roman arena. He spent the walk writing seven letters, and those letters accidentally document a Christianity that was not yet one institution. He could not point anyone to an agreed set of Christian writings, because none existed.
+        </li>
+        <li>
+          <em>the archives</em>
+          What Ignatius's opponents in Philadelphia demanded &mdash; written proof from the Jewish scriptures before they would accept a claim. His answer is the hinge of the chapter: his archive is Jesus Christ. Not a book. A person, and the memory of what that person did.
+        </li>
+        <li>
+          <em>Polycarp</em>
+          Bishop of Smyrna, taught by people who had known the apostles, and the closest living link the mid-second century had to Christian origins. Ignatius writes to him as an old man worrying about a younger one. Returns in Chapter 2 to curse Marcion to his face.
+        </li>
+        <li>
+          <em>Justin Martyr</em>
+          A Christian philosopher writing in Rome in the mid-150s. His offhand description of an ordinary Sunday &mdash; "the memoirs of the apostles" read aloud alongside the prophets &mdash; is the earliest evidence of certain texts becoming scripture in practice, decades before anyone listed which ones.
+        </li>
+        <li>
+          <em>Muratorian Fragment</em>
+          A battered Latin manuscript, conventionally dated around 180, usually called the first attempt at a canon list. Its date is disputed &mdash; some scholars place it two centuries later &mdash; and either way it shows an argument in progress, not a settled canon.
+        </li>
+        <li>
+          <em>Walter Bauer</em>
+          The German scholar behind the strong claim that in many regions what later got labeled heresy came first, and orthodoxy arrived afterward and rewrote the record of who was original. Most historians think he overstated it. Almost all of them accept the floor underneath it.
+        </li>
+        <li>
+          <em>Tatian and the Diatessaron</em>
+          Around the 170s, Tatian solved the "which gospel" problem in Syria by weaving all four into one continuous narrative. For generations, Syriac-speaking Christians read that composite &mdash; not the four separate books &mdash; in church.
+        </li>
+        <li>
+          <em>Gospel of Thomas</em>
+          A list of sayings attributed to Jesus with almost no narrative at all, circulating in Egypt and Syria with real readers who took it seriously. Recovered complete at Nag Hammadi in 1945. Returns in Chapter 3.
+        </li>
+        <li>
+          <em>Phoebe, Prisca, and Junia</em>
+          Three women Paul names in his own letters &mdash; a deacon, a teacher, and one "outstanding among the apostles." Later centuries spent considerable effort explaining them away. The chapter's evidence that the early plurality was a kind of freedom, not only a problem.
+        </li>
+        <li>
+          <em>the agape feast</em>
+          The shared meal where a stranger arriving in Corinth or Philippi was fed by people who had decided, with no institution instructing them, that the newcomer belonged.
+        </li>
+        <li>
+          <em>canon</em>
+          A closed, fixed, authoritative list. The concept did not exist for Christian use during the period this chapter covers. That absence is the chapter's whole subject.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 2 -->
+    <div class="chapter-block" id="ch2">
+      <div class="chapter-heading">
+        <span class="ch-num">02</span>
+        <a href="chapter.html?c=2">The Man Who Forced the Question</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>Marcion of Sinope</em>
+          A wealthy shipowner from the Black Sea coast who arrived in Rome around 139 or 140, handed the church two hundred thousand sesterces, and was excommunicated in 144 for teaching that the God of the Hebrew scriptures and the God of Jesus were two different beings. The organizing figure of this entire book.
+        </li>
+        <li>
+          <em>the Demiurge</em>
+          Marcion's name for the god who made the material world &mdash; real, powerful, responsible for its law and its cruelty, and emphatically not the highest god. Above him sat a second, purely good God, a stranger to creation, who sent Jesus to liberate humanity from the first one's law.
+        </li>
+        <li>
+          <em>Gospel and Apostle</em>
+          The two halves of Marcion's collection: one edited gospel resembling Luke, and ten edited letters of Paul. The first closed Christian scripture anyone has record of, roughly a century before the wider church produced its own.
+        </li>
+        <li>
+          <em>the Antitheses</em>
+          Marcion's treatise laying the contradictions between the two gods and the two testaments side by side in columns, so a reader couldn't miss the argument. Lost, like everything else he wrote.
+        </li>
+        <li>
+          <em>Tertullian</em>
+          Writing against Marcion around 207, half a century after his death, and the fullest surviving source on what Marcion actually taught. His hostility is why the material survives at all, and why it has to be read carefully.
+        </li>
+        <li>
+          <em>Epiphanius</em>
+          A fourth-century bishop who compiled an enormous catalogue of heresies, and the only source for the story that Marcion was expelled from his father's church for seducing a virgin &mdash; more than two hundred years after the fact, with no earlier writer mentioning it. Returns in Chapter 7.
+        </li>
+        <li>
+          <em>"the firstborn of Satan"</em>
+          What Polycarp said when Marcion asked whether he recognized him. Not an argument &mdash; a curse, from the church's most direct living link to the apostolic generation. The behavior of an institution that knew it was losing ground.
+        </li>
+        <li>
+          <em>Adolf von Harnack</em>
+          The German scholar whose early-twentieth-century study credited Marcion with inventing the idea of a closed New Testament and forcing the wider church to answer in kind. The strong version of this book's own thesis.
+        </li>
+        <li>
+          <em>Judith Lieu</em>
+          Author of the most important modern study of Marcion (2015), and the direct counterweight to Harnack. Her argument: nearly everything known about Marcion comes from hostile writers with every incentive to make him look uniquely dangerous, and canon formation was slower and messier than one shipowner forcing the church's hand.
+        </li>
+        <li>
+          <em>Matthias Klinghardt and Markus Vinzent</em>
+          Two scholars who ask whether the knife went the other direction &mdash; whether Marcion's gospel was an earlier text the canonical gospels drew on, rather than an edited Luke. A minority position, and a live one.
+        </li>
+        <li>
+          <em>Eznik of Kolb</em>
+          An Armenian writer still arguing against Marcionite communities in the fifth century, roughly three hundred years after the excommunication. Evidence that the movement Rome expelled outlasted the western Roman Empire.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 3 -->
+    <div class="chapter-block" id="ch3">
+      <div class="chapter-heading">
+        <span class="ch-num">03</span>
+        <a href="chapter.html?c=3">The Lost Document</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>Papias of Hierapolis</em>
+          A bishop in the first decades of the second century who did something nobody else thought to do: went looking for where the stories about Jesus had actually come from. His five volumes are lost. What survives is a handful of quotations, including the Elder's remark about Matthew compiling sayings "in the Hebrew dialect."
+        </li>
+        <li>
+          <em>the Synoptic Problem</em>
+          The puzzle of why Matthew, Mark, and Luke overlap so closely &mdash; sometimes word for word in Greek &mdash; and why they diverge exactly where they do. "Synoptic" is Greek for "seen together," which is literally what solving it requires.
+        </li>
+        <li>
+          <em>Markan priority</em>
+          The widely accepted conclusion that Mark was written first and that both Matthew and Luke had a copy in front of them. It resolves most of the puzzle. It does not resolve all of it.
+        </li>
+        <li>
+          <em>Q (Quelle)</em>
+          German for "source." The hypothetical document behind the roughly two hundred verses Matthew and Luke share that appear nowhere in Mark. It has never been found, no ancient writer ever mentions it, and it remains the dominant explanation anyway &mdash; an inference, not a discovery.
+        </li>
+        <li>
+          <em>sayings gospel</em>
+          A list of things Jesus reportedly said with almost no story attached. Q, reconstructed, would have been one. So is the Gospel of Thomas. Two communities preserving teaching in the same bare form, before anyone decided a gospel had to be a narrative ending at an empty tomb.
+        </li>
+        <li>
+          <em>the Farrer hypothesis</em>
+          The serious minority solution that needs no lost document: Mark wrote first, Matthew used Mark, and Luke used both. On this view the shared source isn't lost. It's Matthew.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 4 -->
+    <div class="chapter-block" id="ch4">
+      <div class="chapter-heading">
+        <span class="ch-num">04</span>
+        <a href="chapter.html?c=4">Four Accounts, One Story</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>Celsus</em>
+          A Greek philosopher who wrote the first surviving sustained outside attack on Christianity around 177. His treatise is lost; it survives only because Origen quoted it at length in order to answer it. What bothered him most was that the four resurrection accounts don't match.
+        </li>
+        <li>
+          <em>Contra Celsum</em>
+          Origen's point-by-point rebuttal, written roughly seventy years later. His defense was not that the gospels agree. It was that four identical accounts would be the real red flag &mdash; an argument still in use eighteen hundred years later.
+        </li>
+        <li>
+          <em>the census problem</em>
+          Matthew places the birth under Herod the Great, who died in 4 BC. Luke ties it to the census under Quirinius, independently dated by Josephus to 6 AD. Not a stylistic mismatch &mdash; two starting dates for the same event, a decade apart, with no proposed fix reaching consensus.
+        </li>
+        <li>
+          <em>the two genealogies</em>
+          Matthew and Luke both trace Jesus to David through Joseph and list almost entirely different names doing it, through different sons of David, with different generation counts. Presented in both gospels, without qualification, as Joseph's actual paternal ancestry.
+        </li>
+        <li>
+          <em>the raised saints of Matthew 27</em>
+          Dead holy people walking out of opened tombs into Jerusalem and appearing to many. Two verses, one gospel, never referenced again by anyone &mdash; including the three evangelists describing the same afternoon.
+        </li>
+        <li>
+          <em>the Lazarus silence</em>
+          In John, raising a man four days dead is the event that convinces the authorities Jesus has to die. Matthew, Mark, and Luke never mention it. Not the miracle, not the man, not the plot it supposedly triggered.
+        </li>
+        <li>
+          <em>Mark 16:8</em>
+          Where the earliest and best manuscripts of Mark stop. The women find the tomb empty, are told he has risen, and flee. "And they said nothing to anyone, for they were afraid." No resurrected Jesus appears on the page. Someone added an ending later.
+        </li>
+        <li>
+          <em>the seven last words</em>
+          A composite. No single gospel gives Jesus more than three sentences from the cross, and they don't overlap. The cry of abandonment appears only in the two earliest accounts and quietly disappears as the gospels get later and the portrait gets calmer.
+        </li>
+        <li>
+          <em>Simon of Cyrene</em>
+          Pulled from the crowd and forced to carry the cross in Matthew, Mark, and Luke. Absent from John, where Jesus goes out "bearing his own cross" &mdash; a small detail fitting John's larger portrait of a Jesus who is never a passive victim of anything.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 5 -->
+    <div class="chapter-block" id="ch5">
+      <div class="chapter-heading">
+        <span class="ch-num">05</span>
+        <a href="chapter.html?c=5">The Cosmic Gospel</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>"Before Abraham was, I am"</em>
+          The sentence that ends the argument, and the reason the crowd picks up stones. Not "I existed before Abraham" &mdash; the bare present-tense phrase God used to name himself to Moses. Nobody in that temple needed it explained.
+        </li>
+        <li>
+          <em>the Logos</em>
+          The Word: a cosmic principle present with God before creation, through whom all things were made, who at one particular moment became flesh. John's prologue opens where Genesis opens and puts a second figure inside the sentence.
+        </li>
+        <li>
+          <em>Philo of Alexandria</em>
+          A Jewish philosopher writing in Greek in roughly the same decades as Jesus's ministry, who had already fused the Stoic idea of a world-ordering logos with Hebrew scripture's creative "word of the Lord." Whether John read him, absorbed him secondhand, or arrived somewhere similar independently is unsettled.
+        </li>
+        <li>
+          <em>ego eimi</em>
+          "I am." The formula John repeats across the whole gospel &mdash; the bread of life, the light of the world, the good shepherd, the resurrection and the life, the true vine &mdash; training the reader to hear it, until it finally arrives in the temple with no metaphor attached at all.
+        </li>
+        <li>
+          <em>the farewell discourse</em>
+          Four chapters of monologue after the last supper, unlike anything in the other three gospels, in which Jesus prepares his followers for his own absence.
+        </li>
+        <li>
+          <em>the vine and the branches</em>
+          John 15. Real intimacy &mdash; "I have called you friends" &mdash; wired directly to continuous monitored productivity, framed by the threat of being cut off and burned if the fruit doesn't come. The book returns to this passage in Chapter 56 on clinical rather than literary terms.
+        </li>
+        <li>
+          <em>Thomas</em>
+          The one disciple who says out loud that he isn't convinced, and holds out for the same evidence everyone else in the room was already given. He gets it, and then gives the highest confession of Jesus's identity anywhere in the gospel. The book's conclusion returns to him.
+        </li>
+        <li>
+          <em>aposynagogos</em>
+          "Put out of the synagogue." The term behind John's three references to believers being expelled, and the evidence that this community understood itself as painfully and recently separated from the Jewish world it grew out of.
+        </li>
+        <li>
+          <em>J. Louis Martyn and Adele Reinhartz</em>
+          Martyn tied the expulsion language to a specific late-first-century synagogue curse and read John's community as recent refugees from a formal split. Reinhartz leads the pushback, reading it as the gospel's own rhetoric defining insider and outsider. What survives the argument is the rupture itself.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 6 -->
+    <div class="chapter-block" id="ch6">
+      <div class="chapter-heading">
+        <span class="ch-num">06</span>
+        <a href="chapter.html?c=6">The Man Who Built the Theology</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>the Damascus road</em>
+          Told three times in Acts, differently each time &mdash; who heard the voice, who saw the light, who fell. One author, one book, no attempt to reconcile them. Whatever happened, the writer wasn't working from a transcript.
+        </li>
+        <li>
+          <em>Acts versus the letters</em>
+          Most of what people think they know about Paul comes from Acts, written by someone else decades later, shaping him into the hero of its own narrative. What Paul said about himself survives separately, in his own voice. The distinction runs through the whole chapter.
+        </li>
+        <li>
+          <em>the seven undisputed letters</em>
+          Romans, 1 and 2 Corinthians, Galatians, Philippians, 1 Thessalonians, and Philemon. The letters nearly all scholars accept as Paul's own.
+        </li>
+        <li>
+          <em>the pastorals</em>
+          1 and 2 Timothy and Titus. Most critical scholars think they were written after Paul's death by followers using his authority to settle questions he never lived to face. Writing in a revered teacher's name wasn't fraud in the ancient world &mdash; but it means two different Pauls sit inside the same New Testament.
+        </li>
+        <li>
+          <em>E. P. Sanders</em>
+          The scholar whose 1977 study broke a five-hundred-year reading. Working through surviving Jewish literature from Paul's own period, he found that Second Temple Judaism was not a religion of earning salvation by a ledger of deeds at all.
+        </li>
+        <li>
+          <em>covenantal nomism</em>
+          Sanders's term: a Jew was already inside the covenant by grace, born into it, and keeping the law was the response to belonging rather than the price of admission. If that's right, "works of the law" wasn't a swipe at moral effort &mdash; it meant the boundary markers that decided who counted as inside.
+        </li>
+        <li>
+          <em>the New Perspective on Paul</em>
+          The movement Sanders launched, which reframed Paul's argument from individual guilt to Gentile inclusion. Not universally accepted. But its critics now have to argue with Sanders rather than around him.
+        </li>
+        <li>
+          <em>"an epistle of straw"</em>
+          What Luther called the Epistle of James in his 1522 preface, because James says a person is justified by works "and not by faith alone" &mdash; the only place in the Bible that phrase appears, and it is there to be rejected. Luther removed the line from later editions. He left James at the back of his German New Testament anyway.
+        </li>
+        <li>
+          <em>Galatians 3:28</em>
+          "Neither Jew nor Greek... neither slave nor free... no male and female." One of the most radically egalitarian sentences in the ancient world, and quite possibly a baptismal formula already in use before Paul quoted it.
+        </li>
+        <li>
+          <em>1 Corinthians 14:34&ndash;35</em>
+          "The women should keep silent in the churches." The passage wanders to a different location in part of the manuscript tradition &mdash; the signature of a later note absorbed into the text &mdash; and sits three chapters after Paul gives instructions for how women should pray and prophesy aloud in the assembly.
+        </li>
+        <li>
+          <em>the closing clock</em>
+          Paul expected the world to end within his own lifetime, and included himself among those who would still be alive to see it. His instructions were triage for a movement he thought had no next generation. Later centuries treated them as binding forever.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 7 -->
+    <div class="chapter-block" id="ch7">
+      <div class="chapter-heading">
+        <span class="ch-num">07</span>
+        <a href="chapter.html?c=7">The Brilliant Heretic</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>Origen of Alexandria</em>
+          Seventeen when his father was beheaded and the family's property seized, running the city's catechetical school not long after, and for the next forty years the most productive mind the early church produced. Tortured at nearly seventy, condemned three centuries after his death, and indispensable to the tradition that condemned him.
+        </li>
+        <li>
+          <em>Leonides</em>
+          Origen's father, arrested in Alexandria in 202 and executed. Origen wanted to die with him. His mother hid his clothes, and a teenager with nothing to wear stayed home.
+        </li>
+        <li>
+          <em>the Hexapla</em>
+          Origen's monumental parallel Old Testament, laying the Hebrew text and four Greek translations side by side in columns so a reader could see exactly where the versions diverged. No complete copy survived antiquity.
+        </li>
+        <li>
+          <em>On First Principles</em>
+          The first systematic Christian theology &mdash; God, the soul, free will, and the end of all things, worked through with a rigor nobody in the movement had attempted before.
+        </li>
+        <li>
+          <em>the three levels</em>
+          Origen's method: reading scripture literally, morally, and spiritually at once. It is the tool that let Christian intellectuals keep the entire Hebrew Bible &mdash; everything Marcion wanted cut &mdash; without defending every verse as plain fact. Augustine used it. The medieval church built systems on it.
+        </li>
+        <li>
+          <em>apokatastasis</em>
+          The eventual restoration of all rational beings to God. Everyone. Possibly including the devil. A God whose punishments corrected rather than excluded permanently. The most hopeful claim anyone in this book makes, and the one the institution spent three centuries deciding could not be allowed to stand.
+        </li>
+        <li>
+          <em>the castration story</em>
+          Reported by Eusebius, who admired him, and doubted by scholars since the nineteenth century &mdash; because the man's entire life's work was a machine for turning literal readings into symbolic ones. A different kind of source problem from a hostile witness inventing something: an admiring source passing on something he heard rather than saw.
+        </li>
+        <li>
+          <em>the Decian persecution</em>
+          The empire-wide campaign launched in 250 that put Origen, by then nearly seventy, under torture designed to break a prisoner without killing him. He didn't recant. He didn't recover either.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 8 -->
+    <div class="chapter-block" id="ch8">
+      <div class="chapter-heading">
+        <span class="ch-num">08</span>
+        <a href="chapter.html?c=8">Closing the Book</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>Athanasius</em>
+          Bishop of Alexandria, driven out of his own see five separate times by five different emperors, who in 367 buried inside a routine letter about the date of Easter the earliest surviving list of exactly the twenty-seven books of the New Testament, in the order still printed today.
+        </li>
+        <li>
+          <em>the Thirty-Ninth Festal Letter</em>
+          That letter. Not the moment the canon was decided and not the moment the argument started &mdash; the first time anyone wrote the final answer down in one place and made a point of saying so.
+        </li>
+        <li>
+          <em>the Shepherd of Hermas</em>
+          A long, strange, visionary work about repentance that had nothing to do with any apostle, claimed no connection to one, and was read as scripture in real churches for generations. Copied into Codex Sinaiticus right after Revelation with no visual signal that a reader had crossed a boundary.
+        </li>
+        <li>
+          <em>the Didache</em>
+          "The Teaching of the Twelve Apostles" &mdash; a practical manual on baptism, fasting, the Eucharist, and how to spot a traveling apostle angling for a free meal. Not condemned, just no longer copied, and lost for a millennium until a single copy turned up in a Constantinople monastery library in 1873. A text read into obsolescence.
+        </li>
+        <li>
+          <em>Codex Sinaiticus and Codex Alexandrinus</em>
+          Two of the great luxury Bibles of the ancient world, and evidence of what their scribes thought belonged: Sinaiticus carries the Shepherd and Barnabas, Alexandrinus carries 1 and 2 Clement, in both cases bound in without apology.
+        </li>
+        <li>
+          <em>Dionysius of Alexandria</em>
+          A third-century bishop who picked Revelation apart on pure grounds of Greek style and argued its author could not possibly be the author of John's gospel. Modern scholars still find the argument largely persuasive. The book kept its traditional attribution anyway.
+        </li>
+        <li>
+          <em>Hebrews</em>
+          Brilliant, clearly important, unmistakably early, and anonymous &mdash; it never names its author. Asked who wrote it, Origen's surviving answer is the closest thing to an admission of defeat anyone in this book puts in writing: only God knows.
+        </li>
+        <li>
+          <em>2 Peter</em>
+          The book that squeaked in by the narrowest margin &mdash; last among all twenty-seven in early patristic citation, sitting in Eusebius's "disputed" pile, reading nothing like 1 Peter. Jerome noticed the problem and accepted it anyway, and the doubts went quiet. Nobody found new evidence. The most credentialed person in the room decided the argument was over.
+        </li>
+        <li>
+          <em>Hippo (393) and Carthage (397)</em>
+          Regional North African synods, not meetings of the whole church, which ratified what individual bishops and ordinary congregations had already mostly agreed on. Real authority in the West, none in the East. Popular retellings routinely inflate them into the council that decided the Bible.
+        </li>
+        <li>
+          <em>what actually decided it</em>
+          Not a single test applied consistently by a tribunal. A rough convergence of imperfect ones &mdash; a plausible claim to apostolic origin, broad use across many regions rather than passionate use in one, and consistency with a theological consensus that had hardened out of two centuries of argument.
+        </li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 9 -->
+    <div class="chapter-block" id="ch9">
+      <div class="chapter-heading">
+        <span class="ch-num">09</span>
+        <a href="chapter.html?c=9">The Emperor's Church</a>
+      </div>
+      <ul class="index-list">
+        <li>
+          <em>the Milvian Bridge</em>
+          28 October 312. Maxentius put the river at his back, rigged a pontoon crossing as a fallback, and drowned in his own armor when it gave way under his own retreating army. Constantine rode into Rome the next day carrying his brother-in-law's head on a spear.
+        </li>
+        <li>
+          <em>Lactantius</em>
+          A Christian writer with connections at Constantine's court, writing within a decade of the battle, and the earliest and most modest account of the vision: a dream, the night before, instructing Constantine to mark his soldiers' shields.
+        </li>
+        <li>
+          <em>the chi-rho</em>
+          The monogram formed by overlaying the first two Greek letters of "Christ." What the dream told him to put on the shields.
+        </li>
+        <li>
+          <em>Eusebius of Caesarea</em>
+          The church historian, and the reason the vision story can be watched growing. Writing while Constantine lived, he mentions divine assistance and no vision. Writing after Constantine died, he has the entire army seeing a cross of light above the sun in daylight, with words beside it. He says he had it from the emperor himself, under oath.
+        </li>
+        <li>
+          <em>"the Edict of Milan"</em>
+          A document that does not exist. No edict by that name has ever been found and none was issued at Milan. What survives is a letter Licinius sent from Nicomedia two months later &mdash; preserved because Lactantius copied it out &mdash; restoring confiscated property and guaranteeing everyone the right to follow whatever religion they chose.
+        </li>
+        <li>
+          <em>Galerius and the Edict of Serdica</em>
+          The persecutor who ended the persecution first, in 311, dying and trying to be less unpopular than he had lived. Constantine gets the credit history remembers.
+        </li>
+        <li>
+          <em>pontifex maximus</em>
+          Chief priest of Rome's traditional state cults &mdash; a title Constantine held for his entire reign, never renounced, never quietly dropped, while simultaneously funding churches. He left no evidence he saw a contradiction worth resolving.
+        </li>
+        <li>
+          <em>the Donatists</em>
+          A North African faction who refused to accept a bishop because one of the men who ordained him had handed scriptures over to be burned during the persecution. The question underneath &mdash; whether a sacrament performed by an unworthy man is still a real sacrament &mdash; resurfaces under different names for the next thousand years.
+        </li>
+        <li>
+          <em>Arles, 314</em>
+          The council Constantine convened, with bishops from as far as Gaul and Britain, to settle the Donatist dispute. He gained nothing from it and pursued it anyway &mdash; and established the exact template he would use a decade later at Nicaea.
+        </li>
+        <li>
+          <em>Crispus and Fausta</em>
+          Constantine's eldest son and his wife, dead within weeks of each other in 326, on his orders, with no official explanation ever issued and none surviving. Every account of motive is later speculation, and the most lurid one comes from a hostile pagan historian writing more than a century afterward.
+        </li>
+        <li>
+          <em>Constantinople</em>
+          Dedicated in 330 on the site of Byzantium, chosen for hard strategic reasons rather than religious ones. He called it New Rome. Everyone else was already calling it Constantinople within his lifetime. It outlasted the western empire by close to a thousand years.
+        </li>
+        <li>
+          <em>Eusebius of Nicomedia</em>
+          The bishop who baptized Constantine on his deathbed in 337 &mdash; not the historian, a different Eusebius, and specifically a prominent defender of the theological position the church had gathered at Nicaea twelve years earlier to condemn.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    Dead Men on Thrones &middot; Index &middot; Sandy B. Patterson
+  </footer>
+
+</body>
+</html>

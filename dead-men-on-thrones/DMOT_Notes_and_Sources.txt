@@ -1,0 +1,679 @@
+================================================================================
+DEAD MEN ON THRONES
+APPENDIX E — FURTHER READING
+The scholars and sources behind this book, chapter by chapter.
+Sandy B. Patterson
+================================================================================
+
+HOW TO USE THIS DOCUMENT
+
+This book does not carry footnotes in its main text. That is a deliberate
+choice — the argument is made in prose, and a reader should be able to follow
+it without stepping over a numbered marker every third sentence. But every
+specific claim in these chapters rests on something, and this is where that
+something is written down.
+
+Entries are grouped per chapter under three headings:
+
+  PRIMARY SOURCES     — the ancient texts the chapter actually draws on,
+                        including the hostile ones. Where a text survives only
+                        inside a later writer's rebuttal, that is stated.
+  MODERN SCHOLARSHIP  — the named researchers and books behind the chapter's
+                        historical claims.
+  WHERE THIS IS       — the contested points. Every place the chapter takes a
+  CONTESTED             position that serious scholars disagree about, with
+                        who disagrees and on what grounds.
+
+That third heading is the one that matters most. This book's whole argument is
+that institutions flatten messy history into clean stories that serve them.
+An appendix that hid its own uncertainty would be doing the same thing.
+
+A NOTE ON DATES: ancient dates in this material are frequently approximate
+and frequently disputed. Where a date is genuinely argued over, it is marked
+"c." or the dispute is named outright. Where this document gives a firm date,
+that date is firm.
+
+Covers Chapters 1–9 (Part One complete, Part Two begun).
+Entries for Chapters 10–64 will be added as those chapters are drafted.
+
+
+================================================================================
+CHAPTER ONE — BEFORE THE BOOK
+================================================================================
+
+PRIMARY SOURCES
+
+Ignatius of Antioch. The seven letters — Ephesians, Magnesians, Trallians,
+Romans, Philadelphians, Smyrnaeans, and Polycarp — written while under guard
+en route to execution, conventionally c. 107.
+    The "middle recension" of seven letters is the text scholars generally
+    accept as authentic; a longer thirteen-letter recension is a later
+    expansion. The Philadelphians passage about "the archives" — where
+    Ignatius answers a demand for written proof by saying his archive is
+    Jesus Christ — is the anecdote the chapter is built on.
+
+Justin Martyr. First Apology, c. 155–157. Chapter 67 describes an ordinary
+Sunday gathering: "the memoirs of the apostles" read aloud alongside the
+prophets, for as long as time allows.
+    The single most important sentence in this chapter. It shows certain
+    texts acquiring scriptural function in practice, decades before anyone
+    wrote a list.
+
+The Muratorian Fragment. A damaged Latin manuscript naming most of what
+became the New Testament. Discovered by Ludovico Antonio Muratori and
+published in 1740.
+
+Tatian. Diatessaron, c. 170s. The four gospels woven into a single continuous
+harmony, which became the standard gospel text for Syriac-speaking Christians
+for generations.
+
+Gospel of Thomas; Gospel of Peter; Gospel of the Hebrews. The non-canonical
+gospels the chapter names as circulating alongside the four. Thomas survives
+complete in Coptic from the Nag Hammadi find of 1945; Hebrews survives only
+in fragments quoted by later writers.
+
+Paul, Letter to the Romans, chapter 16 — Phoebe named as deacon, Prisca as
+co-worker, Junia as "outstanding among the apostles."
+    The counter-narrative texture in this chapter's closing section comes
+    straight out of Paul's own greeting list.
+
+MODERN SCHOLARSHIP
+
+Bauer, Walter. Rechtgläubigkeit und Ketzerei im ältesten Christentum (1934).
+English translation: Orthodoxy and Heresy in Earliest Christianity (1971).
+    The strong thesis that in many regions what later got labeled heresy was
+    simply the local Christianity, with Roman-flavored orthodoxy arriving
+    afterward and rewriting the record.
+
+Ehrman, Bart D. Lost Christianities: The Battles for Scripture and the Faiths
+We Never Knew (2003).
+    The accessible general treatment of the plural-Christianities picture
+    this chapter describes. Named in the project brief as a tonal model.
+
+Metzger, Bruce M. The Canon of the New Testament: Its Origin, Development,
+and Significance (1987).
+    Still the standard reference work on how the list got made.
+
+WHERE THIS IS CONTESTED
+
+The date of Ignatius's letters. The traditional c. 107 is not settled. A
+substantial body of scholarship places them in the 130s or 140s, and a
+minority argues later still. The chapter says the exact year "is argued over
+by people who have devoted their careers to arguing over it," which is
+accurate and is the right amount of weight to put on it.
+
+The date of the Muratorian Fragment. The conventional c. 180 dating is
+directly challenged by Albert C. Sundberg, "Canon Muratori: A Fourth-Century
+List," Harvard Theological Review 66 (1973), and at book length by Geoffrey
+Mark Hahneman, The Muratorian Fragment and the Development of the Canon
+(1992), both arguing for a fourth-century Eastern origin. If they are right,
+the "first canon list" is roughly two centuries later than the textbooks say.
+The debate has never fully closed. The chapter flags this explicitly and
+should keep doing so.
+
+Bauer's thesis. Most historians today think Bauer overstated his case — the
+picture varied enormously by region, and plenty of communities held something
+recognizably continuous with later orthodoxy from very early. The chapter
+takes the correct position: the strong version is disputed, the underlying
+fact it rests on is not.
+
+
+================================================================================
+CHAPTER TWO — THE MAN WHO FORCED THE QUESTION
+================================================================================
+
+A STANDING WARNING FOR THIS CHAPTER
+
+Almost nothing known about Marcion comes from Marcion. No manuscript of his
+gospel survives. No copy of the Antitheses survives. Every substantive claim
+about what he taught reaches us through writers who were trying to destroy
+his movement, most of them writing decades to centuries after his death. This
+is not a reason to disbelieve everything they say — hostile sources quote
+their opponents at length precisely in order to refute them, which preserves
+material that would otherwise be lost entirely — but it is a reason to hold
+every biographical detail loosely.
+
+PRIMARY SOURCES
+
+Tertullian. Adversus Marcionem (Against Marcion), five books, c. 207–208.
+    The single fullest source on Marcion's theology and his edited gospel,
+    written roughly half a century after his death by someone determined to
+    refute him verse by verse. The "wasps building nests from a wasp" line
+    is Tertullian's.
+
+Irenaeus. Adversus Haereses (Against Heresies), c. 180. Book 3 carries the
+Polycarp encounter — "I recognize the firstborn of Satan."
+    Irenaeus claims to have the story from people who were present. He is
+    also the closest thing to a contemporary witness in the chain, which is
+    why the chapter uses it while flagging what it is.
+
+Epiphanius of Salamis. Panarion, c. 375–378. The catalogue of heresies
+carrying the story that Marcion was expelled from his father's church at
+Sinope for seducing a virgin.
+    More than two hundred years after the fact, with no earlier source
+    mentioning it. The chapter treats it as probably a shame story attached
+    after the fact, and says so.
+
+Eznik of Kolb. Against the Sects (De Deo), 5th century, Armenian.
+    Evidence that Marcionite communities were still active and still worth
+    refuting roughly three hundred years after the excommunication.
+
+MODERN SCHOLARSHIP
+
+Harnack, Adolf von. Marcion: Das Evangelium vom fremden Gott. First edition
+1921; second, expanded edition 1924. English: Marcion: The Gospel of the
+Alien God.
+    The origin of the strong Marcion-as-hinge thesis this book largely tells:
+    that Marcion invented the idea of a closed New Testament and forced the
+    wider church to answer in kind.
+    ⚠ DATE TO CONFIRM: this project's CLAUDE.md refers to "Harnack's admiring
+    1920 Marcion biography." The first edition is generally given as 1921.
+    Pin this down before Chapter 45 leans on the date.
+
+Lieu, Judith M. Marcion and the Making of a Heretic: God and Scripture in the
+Second Century. Cambridge University Press, 2015.
+    The most important modern treatment, and the direct counterweight to
+    Harnack. Argues canon formation was slower and multi-causal, and that the
+    singular-arch-heretic story served the people telling it.
+
+Klinghardt, Matthias. Das älteste Evangelium und die Entstehung der
+kanonischen Evangelien (2015). English edition: The Oldest Gospel and the
+Formation of the Canonical Gospels (2021).
+    Argues Marcion's gospel was not an edit of Luke but an earlier text that
+    Luke — and Matthew, and Mark — drew on. Recurs in Chapter 3.
+
+Vinzent, Markus. Marcion and the Dating of the Synoptic Gospels (2014).
+    Goes further still: the canonical gospels as a set written partly in
+    response to Marcion rather than before him.
+
+WHERE THIS IS CONTESTED
+
+This is the most contested chapter in Part One, and the book handles it
+correctly by refusing to resolve it. Three live positions:
+
+  1. Harnack's — Marcion is the hinge. Most of the chapter's narrative.
+  2. Lieu's — Marcion is the earliest visible symptom of a pressure that was
+     building anyway (Gnostic movements broadly, Montanism, competing
+     apostolic claims, and the technical shift from scroll to codex making
+     large bound collections physically possible).
+  3. Klinghardt / Vinzent — the direction of dependency between Marcion's
+     gospel and Luke may run the other way entirely.
+
+The chapter lands on "both things can be true at once, and probably are,"
+and leaves it unresolved. That is the honest position and should not be
+tidied up in revision.
+
+The 144 excommunication date is firm. The 200,000 sesterces and its return
+come from Tertullian and are plausible but single-sourced.
+
+
+================================================================================
+CHAPTER THREE — THE LOST DOCUMENT
+================================================================================
+
+PRIMARY SOURCES
+
+Papias of Hierapolis. Exposition of the Sayings of the Lord, five volumes,
+first decades of the second century. Lost. Survives only in quotations
+preserved by later writers, principally Eusebius, Historia Ecclesiastica
+3.39, which carries the Elder's remark that "Matthew compiled the sayings in
+the Hebrew dialect, and each one interpreted them as best he could."
+
+Gospel of Thomas. 114 sayings, almost no narrative frame, no passion, no
+resurrection. Recovered complete in Coptic at Nag Hammadi in 1945.
+    The chapter's evidence that the sayings-gospel genre was a real form and
+    not a scholarly invention required to make Q plausible.
+
+MODERN SCHOLARSHIP
+
+Weisse, Christian Hermann. Die evangelische Geschichte kritisch und
+philosophisch bearbeitet (1838).
+    Early formulation of what became the two-source hypothesis.
+
+Streeter, B. H. The Four Gospels: A Study of Origins (1924).
+    The classic English statement of the case for Q.
+
+Farrer, Austin. "On Dispensing with Q," in Studies in the Gospels (1955).
+Developed by Michael Goulder and, most accessibly, by Mark Goodacre, The Case
+Against Q: Studies in Markan Priority and the Synoptic Problem (2002).
+    The serious minority position: Mark first, Matthew used Mark, Luke used
+    both. No lost document required.
+
+Klinghardt, Matthias — as above, Chapter 2. His argument was developed in
+part specifically to solve the Synoptic Problem without Q.
+
+WHERE THIS IS CONTESTED
+
+Q's entire existence. This is worth stating as bluntly as the chapter does:
+no fragment of Q has ever been found, and no ancient writer quotes it by name
+or credits it as a source. It is an inference from the agreements between two
+other documents, not a discovery. The chapter says this plainly and does not
+retreat from it.
+
+The verbal-agreement statistics. The chapter cites twenty-seven of twenty-
+eight Greek words matching in the "serving two masters" passage, and all
+twenty-four matching in the "ask and receive" passage. These are standard
+figures in the Q literature. If a revision ever changes the wording of that
+sentence, re-verify the counts rather than trusting the paraphrase.
+
+Papias's testimony. Whether the Elder was describing anything like Q, or
+something else entirely, or simply garbling the origins of canonical Matthew,
+is genuinely unresolved. The chapter says "nobody can say for certain,"
+which is the right call.
+
+
+================================================================================
+CHAPTER FOUR — FOUR ACCOUNTS, ONE STORY
+================================================================================
+
+PRIMARY SOURCES
+
+Celsus. The True Word (Alethes Logos), c. 177–180. Lost. Survives only as
+quoted inside its own rebuttal.
+
+Origen. Contra Celsum, c. 248.
+    Origen quotes Celsus at such length in order to answer him that the lost
+    attack can be substantially reconstructed. Origen's defense — that four
+    identical accounts would be the real red flag — is the argument the
+    chapter puts on the table and declines to settle.
+
+Josephus. Antiquities of the Jews, Book 18. The census under Quirinius,
+independently dating it to 6 AD.
+
+Codex Sinaiticus and Codex Vaticanus, both 4th century. The earliest and best
+manuscripts of Mark, both ending at 16:8.
+
+Eusebius and Jerome both report that nearly every Greek manuscript known to
+them ended Mark at verse 8.
+
+Irenaeus appears to know some version of the longer ending by the 170s, which
+is why the chapter says it "did circulate reasonably early" rather than
+calling it purely late.
+
+WHERE THIS IS CONTESTED
+
+The census problem. Matthew places the birth under Herod the Great, who died
+in 4 BC. Luke ties it to the Quirinius census of 6 AD. The chapter states
+that no proposed reconciliation has reached anything like consensus, which is
+accurate. Proposals include an earlier unrecorded census, a mistranslation of
+Luke's Greek, and a deliberate literary anachronism. None has carried the field.
+
+The ending of Mark. Textual critics overwhelmingly hold that the original
+ended at 16:8. This is about as close to settled as New Testament textual
+criticism gets, but the longer ending's early circulation is real and the
+chapter is right not to imply it was invented centuries later.
+
+The two genealogies. The "one of them is secretly Mary's" harmonization is
+nowhere stated in either text. The chapter notes this and notes that it would
+still be beside the point in a culture tracing legal descent through the
+father. Both observations are sound.
+
+FOR THE READER WHO WANTS THE FULL CASE
+
+Ehrman, Bart D. Jesus, Interrupted (2009) lays out the gospel discrepancies
+at book length for a general audience. Raymond E. Brown, The Birth of the
+Messiah (1977, rev. 1993) and The Death of the Messiah (1994) are the
+standard scholarly treatments from a committed Catholic scholar — useful
+precisely because they are not written to embarrass the text.
+
+
+================================================================================
+CHAPTER FIVE — THE COSMIC GOSPEL
+================================================================================
+
+PRIMARY SOURCES
+
+The Gospel of John, throughout. The prologue (1:1–14); the ego eimi sayings;
+the temple confrontation at 8:58; the farewell discourse (chapters 14–17),
+with the vine and branches at chapter 15; Thomas at 20:24–29.
+
+Exodus 3:14 — "I Am Who I Am." The Septuagint, the Greek translation in wide
+use in the first century, renders it with the same phrase John repeatedly
+puts in Jesus's mouth.
+
+Philo of Alexandria. The Logos as mediator between an unreachable God and
+the material world, fusing the Stoic rational principle with Hebrew
+scripture's creative "word of the Lord." Writing in Greek in roughly the same
+decades as Jesus's ministry.
+
+MODERN SCHOLARSHIP
+
+Martyn, J. Louis. History and Theology in the Fourth Gospel (1968).
+    The influential reconstruction tying John's aposynagogos passages to the
+    Birkat ha-Minim, a curse against heretics added to synagogue liturgy in
+    the late first century, and reading John's community as recent refugees
+    from a formal split.
+
+Reinhartz, Adele. Cast Out of the Covenant: Jews and Anti-Judaism in the
+Gospel of John (2018).
+    The leading pushback. Reads the expulsion language as the gospel's own
+    rhetoric, defining insider and outsider, rather than a report of one
+    datable legislated event.
+
+WHERE THIS IS CONTESTED
+
+John's relationship to Philo. Whether the author read Philo, absorbed the
+idea secondhand, or arrived at something similar independently out of Jewish
+wisdom tradition is unsettled. The chapter's own observation is a good one
+and worth keeping: Philo's Logos recurs throughout his work, while John's
+appears once, gloriously, and never again.
+
+The Martyn thesis. Now substantially contested — both on whether the
+Birkat ha-Minim was even in use early enough, and on whether the expulsion
+language is reportage at all. What survives the dispute is the broader
+picture: this community understood itself as painfully and recently separated
+from the Jewish world it grew out of. The chapter is careful to say exactly
+that much and no more.
+
+The dating of John, c. 90–110, is standard and not seriously disputed.
+
+A NOTE FOR CHAPTER 56
+
+The John 15 material — conditional intimacy wired to monitored productivity —
+is picked up again in Chapter 56 on clinical rather than literary terms.
+Sources for the psychological claims belong in that chapter's entry, not
+this one. Do not import clinical framing back into Chapter 5; the chapter
+deliberately keeps it literary and defers.
+
+
+================================================================================
+CHAPTER SIX — THE MAN WHO BUILT THE THEOLOGY
+================================================================================
+
+PRIMARY SOURCES
+
+The seven undisputed letters: Romans, 1 and 2 Corinthians, Galatians,
+Philippians, 1 Thessalonians, Philemon.
+
+The six disputed: Ephesians, Colossians, 2 Thessalonians, and the three
+pastorals — 1 and 2 Timothy, Titus.
+
+Acts of the Apostles. The three accounts of the Damascus road — chapters 9,
+22, and 26 — which differ on who heard the voice, who saw the light, and who
+fell. Also the sole source for Paul's Roman citizenship, which his own
+letters never mention.
+
+The Epistle of James, 2:14–26 — the only place in the Bible the phrase "faith
+alone" appears, and it appears in order to be rejected.
+
+Luther, Martin. Preface to the New Testament (1522) — the "epistle of straw"
+line, which Luther removed from later editions.
+    The blunter "Jimmy into the stove" remark comes from the Table Talk
+    tradition, which is a collection of after-dinner recollections written
+    down by students, not Luther's own published prose. Treat it as
+    reported, not documented. The chapter's "by some later, more colorful
+    accounts" wording is doing the right work.
+
+MODERN SCHOLARSHIP
+
+Sanders, E. P. Paul and Palestinian Judaism: A Comparison of Patterns of
+Religion (1977).
+    The study that broke Luther's reading. Second Temple Judaism operated on
+    what Sanders called covenantal nomism: inside the covenant by grace,
+    keeping the law as response rather than price of admission.
+
+Dunn, James D. G. "The New Perspective on Paul" (1983 Manson Memorial
+Lecture). Coined the label for the movement Sanders started.
+
+Wright, N. T. — the most widely read constructive development of the New
+Perspective.
+
+WHERE THIS IS CONTESTED
+
+The New Perspective itself. Not universally accepted. The most serious
+pushback comes from theologians who argue it understates how seriously Paul
+does talk about sin and individual reconciliation. The chapter's formulation
+is exactly right and should be preserved: even Sanders's critics now have to
+argue with him rather than around him.
+
+1 Corinthians 14:34–35. Three live positions: (a) a later interpolation Paul
+never wrote — supported by the fact that the verses migrate to a different
+location in part of the manuscript tradition, a recognized signature of a
+marginal note absorbed into the text; (b) Paul quoting a Corinthian slogan in
+order to refute it in the next verse; (c) authentic and meant as written. The
+chapter presents (a) and (b) and notes there is no settled resolution. Correct.
+
+Galatians 3:28 as a pre-Pauline baptismal formula. Widely held, not certain.
+The chapter says "many scholars think," which is the right hedge.
+
+The pastorals' authorship. A majority of critical scholars regard 1 and 2
+Timothy and Titus as post-Pauline. This is closer to consensus than the
+disputed status of Ephesians, Colossians, and 2 Thessalonians, which are more
+genuinely split. Keep the distinction; the chapter currently groups all six
+together as "disputed," which is defensible shorthand but slightly flattens
+a real difference in scholarly confidence.
+
+SEE ALSO: Appendix C, The Authentic Paul, for the full breakdown.
+
+
+================================================================================
+CHAPTER SEVEN — THE BRILLIANT HERETIC
+================================================================================
+
+PRIMARY SOURCES
+
+Eusebius. Historia Ecclesiastica, Book 6, which is the principal source for
+Origen's life — his father Leonides's arrest under Septimius Severus in 202,
+his mother hiding his clothes, the letter to his father in prison, the
+catechetical school, the torture under Decius.
+    Eusebius is broadly sympathetic to Origen. That matters for the
+    castration story: this is not a hostile source inventing something
+    damaging, it is an admiring source repeating something he had heard.
+
+Origen. On First Principles (De Principiis) — the first systematic Christian
+theology, and the source for apokatastasis. Contra Celsum — see Chapter 4.
+The Hexapla — the six-column parallel Old Testament, surviving only in
+fragments and later citations.
+
+Jerome and Epiphanius both attempted counts of Origen's output. Jerome's
+careful tally lands under two thousand titles; Epiphanius claims six
+thousand. The chapter uses the discrepancy honestly rather than picking the
+bigger number.
+
+WHERE THIS IS CONTESTED
+
+The self-castration. Seriously doubted by scholars since at least the late
+nineteenth century, on the grounds the chapter gives: the entire intellectual
+project was a machine for turning literal readings into symbolic ones. The
+live alternative is that "eunuch" was used by Alexandrian teachers for chosen
+celibacy, and a metaphor calcified into a reported event. The chapter's
+treatment of this — including its observation that this is a different kind
+of source problem from the hostile-witness problem elsewhere in the book — is
+one of the strongest passages in Part One.
+
+The 553 condemnation. The standard summary is that the Second Council of
+Constantinople condemned Origen. Modern scholarship has raised real doubts
+about whether the fifteen anathemas against Origenism were issued by the full
+ecumenical council at all, or by a smaller local synod (generally placed in
+543, under Justinian) whose findings were later folded into the bigger
+council's reputation. The chapter flags this. Keep the flag.
+
+Origen's death. Generally placed in 253 or 254, from injuries sustained under
+the Decian persecution. The chapter gives both years, which is correct.
+
+
+================================================================================
+CHAPTER EIGHT — CLOSING THE BOOK
+================================================================================
+
+PRIMARY SOURCES
+
+Athanasius. Thirty-Ninth Festal Letter, 367. The earliest surviving document
+listing exactly the twenty-seven books of the New Testament, in the order
+still printed today.
+
+Eusebius. Historia Ecclesiastica, c. 325 — the four-bin sort of the
+candidates into accepted, disputed, spurious, and outright forgeries. Also
+Book 7.25, preserving Dionysius of Alexandria's stylistic argument that the
+author of Revelation cannot be the author of the Gospel of John; and Book
+4.23, preserving Dionysius of Corinth on 1 Clement being read aloud in
+worship generations after it was written.
+
+The Shepherd of Hermas and the Epistle of Barnabas, both appended to Codex
+Sinaiticus (4th century) with no visual signal marking a boundary.
+
+1 and 2 Clement, given the same honored placement in Codex Alexandrinus
+(5th century).
+
+The Didache ("The Teaching of the Twelve Apostles"). Lost for roughly a
+millennium; a single surviving copy found by Philotheos Bryennios in a
+monastery library in Constantinople in 1873, bound into an eleventh-century
+manuscript (Codex Hierosolymitanus), and published in 1883.
+
+Jerome, on 2 Peter reading nothing like 1 Peter — and accepting it anyway.
+
+Councils of Hippo (393) and Carthage (397), reconfirmed at Carthage (419).
+
+MODERN SCHOLARSHIP
+
+Metzger, Bruce M. The Canon of the New Testament (1987) — as Chapter 1.
+
+Gamble, Harry Y. Books and Readers in the Early Church: A History of Early
+Christian Texts (1995).
+    For the physical and technological side: scroll to codex, copying,
+    circulation. The chapter's argument that geography and reach decided the
+    canon depends on this material.
+
+WHERE THIS IS CONTESTED
+
+"The first canon list." The chapter explicitly refuses this framing, noting
+that Origen appears to assume a closed twenty-seven-book set in a casual
+aside more than a century earlier. This is the point the project's own
+pre-publish checklist singles out — that what Athanasius's letter was "first"
+to do turned out to have real scholarly pushback that made the chapter better
+once included. It did. Do not let a later revision quietly restore the
+simpler claim.
+
+The authority of Hippo and Carthage. Regional North African synods, not
+ecumenical councils. Real influence in the West, no binding authority in the
+East, where questions about Revelation and the shorter catholic epistles kept
+circulating for generations. Popular retellings routinely inflate these into
+"the council that decided the Bible." The chapter is precise about this and
+the precision is load-bearing.
+
+2 Peter's attestation. The claim that it ranks last among the twenty-seven by
+a wide margin in early patristic citation is standard in the canon
+literature. It is a counting claim, so if the sentence is ever rewritten,
+re-verify rather than paraphrasing from memory.
+
+
+================================================================================
+CHAPTER NINE — THE EMPEROR'S CHURCH
+================================================================================
+
+PRIMARY SOURCES
+
+Lactantius. De Mortibus Persecutorum (On the Deaths of the Persecutors),
+written within roughly a decade of the Milvian Bridge.
+    The earliest account of the vision, and the modest one: a dream, the
+    night before, instructing Constantine to mark his soldiers' shields.
+    Lactantius also preserves the full Latin text of the Nicomedia letter
+    that history calls the Edict of Milan, and the text of Galerius's 311
+    Edict of Serdica.
+
+Eusebius. Historia Ecclesiastica — written while Constantine was alive,
+mentions divine assistance at the battle without describing a vision.
+
+Eusebius. Vita Constantini (Life of Constantine) — written after Constantine's
+death, and now the whole army sees a cross of light above the sun in daylight,
+with words beside it, followed by a dream that night explaining it. Eusebius
+says he had it from Constantine directly, under oath.
+    Three tellings, two by the same author decades apart, each larger than
+    the last. The chapter's handling of this escalation is the point of the
+    section.
+
+Zosimus. Historia Nova, c. 500. The hostile pagan source for Fausta being
+shut in an overheated bathhouse.
+    Written more than a century and a half after the events with an evident
+    grudge against Constantine's memory, and unsupported by anything closer
+    to the events. The chapter treats it with exactly the skepticism it
+    applies to Epiphanius in Chapter 2 — consistent handling, and worth
+    keeping consistent.
+
+Council of Arles, 314 — convened by Constantine to adjudicate the Donatist
+schism, with bishops from as far as Gaul and Britain.
+
+WHERE THIS IS CONTESTED
+
+Sincerity versus calculation. The oldest argument in Constantine studies.
+The chapter presents both readings and lands where most serious historians
+now land — leaning sympathetic without abandoning the cynical reading — and
+then makes the better point, which is that belief and utility were probably
+never fully separable for him.
+
+"The Edict of Milan." No document by that name has ever been found and none
+was issued at Milan. What survives is Licinius's letter from Nicomedia two
+months later. The chapter is precise about this. It matters because the
+popular version of this story is wrong in a way that flatters Constantine.
+
+Firm dates in this chapter: Milvian Bridge, 28 October 312. Milan meeting,
+313. Galerius's edict, 311. Foundation of Constantinople, 330. Crispus and
+Fausta's deaths, 326. Constantine's baptism and death, 337. Arles, 314.
+These are not in serious dispute.
+
+The deaths of Crispus and Fausta. No official explanation was ever issued and
+none survives in any contemporary record. Every account of motive is later
+speculation. The chapter's decision to state only what can be said without
+speculation — two people in his own household dead within weeks, on his
+orders, never explained — is the correct one.
+
+
+================================================================================
+GENERAL BACKGROUND FOR PART ONE AND PART TWO
+================================================================================
+
+These are the books behind the whole stretch rather than any single chapter.
+
+Ehrman, Bart D. Lost Christianities (2003); Misquoting Jesus (2005); Jesus,
+Interrupted (2009). The accessible route into textual criticism and early
+Christian diversity.
+
+Metzger, Bruce M. The Canon of the New Testament (1987). The standard
+reference on canon formation.
+
+Lieu, Judith M. Marcion and the Making of a Heretic (2015). Essential for
+Part One, and the corrective to this book's own strongest framing.
+
+Gamble, Harry Y. Books and Readers in the Early Church (1995). The physical
+history of Christian texts.
+
+Holland, Tom. Dominion: How the Christian Revolution Remade the World (2019).
+Named in the project brief as a tonal model — taking Christianity seriously
+as a historical force without either apologetics or polemic.
+
+Beard, Mary. SPQR: A History of Ancient Rome (2015). For the Roman world the
+first several chapters move through, and as a model for making ancient
+material feel immediate.
+
+Eusebius. Historia Ecclesiastica. The indispensable and thoroughly partisan
+source for almost everything before 325. Read with the same care this book
+applies to Tertullian and Epiphanius: he preserves what would otherwise be
+lost, and he is writing to a purpose.
+
+
+================================================================================
+MAINTENANCE NOTES
+================================================================================
+
+WHEN A NEW CHAPTER GOES LIVE, ADD ITS ENTRY HERE IN THE SAME PASS. The
+pre-publish checklist in CLAUDE.md already requires fact-checking every
+non-trivial claim against outside sources before pushing. The sources
+consulted during that check are exactly what belongs in this file — capture
+them then, while they are in front of you, rather than reconstructing them
+later from the finished prose. Reconstructed citations are how fabricated
+citations happen.
+
+THE "WHERE THIS IS CONTESTED" HEADING IS NOT OPTIONAL. If a chapter has no
+contested points, that is worth a sentence saying so explicitly. A chapter
+that appears to have none has usually just not been checked hard enough.
+
+ITEMS FLAGGED IN THIS DOCUMENT AWAITING RESOLUTION:
+  - Harnack's Marcion biography: 1920 (per CLAUDE.md) or 1921 (first edition
+    as generally given). Resolve before Chapter 45.
+  - Chapter 6 groups all six disputed letters together; the pastorals sit at
+    a meaningfully higher level of scholarly confidence than Ephesians,
+    Colossians, and 2 Thessalonians. Consider splitting.
+
+================================================================================
+Dead Men on Thrones — Appendix E — Sandy B. Patterson
+================================================================================
