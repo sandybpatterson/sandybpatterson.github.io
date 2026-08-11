@@ -79,6 +79,19 @@ co-worker, Junia as "outstanding among the apostles."
 
 MODERN SCHOLARSHIP
 
+Roberts, Colin H., and T. C. Skeat. The Birth of the Codex (1983); Hurtado,
+Larry W. The Earliest Christian Artifacts: Manuscripts and Christian Origins
+(2006).
+    Standard sources for the chapter's scroll-versus-codex material: the
+    roughly five-meter standard/eleven-meter practical-maximum scroll length,
+    the roughly thirty meters a four-gospel collection would require, and the
+    widely cited estimate that early Christian literature survives on
+    codices at a much higher rate (roughly 80%) than contemporary
+    non-Christian Greek literature (roughly 20%). The chapter presents this
+    as a widely cited estimate rather than a precise, universally agreed
+    figure, since papyrological survival statistics of this kind carry real
+    margins of error.
+
 Bauer, Walter. Rechtgläubigkeit und Ketzerei im ältesten Christentum (1934).
 English translation: Orthodoxy and Heresy in Earliest Christianity (1971).
     The strong thesis that in many regions what later got labeled heresy was
@@ -116,6 +129,12 @@ picture varied enormously by region, and plenty of communities held something
 recognizably continuous with later orthodoxy from very early. The chapter
 takes the correct position: the strong version is disputed, the underlying
 fact it rests on is not.
+
+The 80%/20% codex-usage estimate. A widely repeated figure in the
+papyrological literature rather than a single precise, uncontested count —
+it depends on which surviving fragment counts are used and how they're
+dated. The chapter calls it "one widely cited estimate" rather than an
+exact statistic, which is the right level of hedging.
 
 
 ================================================================================

@@ -40,6 +40,15 @@ Polycarp
     Ignatius writes to him as an old man worrying about a younger one.
     Returns in Chapter 2 to curse Marcion to his face.
 
+the codex
+    The bound-book format — sheets folded and stitched down one edge, written
+    on both sides — that eventually made a single-volume Bible physically
+    possible. A standard scroll ran to about five meters and couldn't hold
+    more than a fraction of what four gospels would need; Christians adopted
+    the codex earlier and more heavily than almost anyone else writing Greek
+    in this period, but it was still new and immature in the year 100, and a
+    canon nowhere near settled enough to make binding one worthwhile.
+
 Justin Martyr
     A Christian philosopher writing in Rome in the mid-150s. His offhand
     description of an ordinary Sunday — "the memoirs of the apostles" read
