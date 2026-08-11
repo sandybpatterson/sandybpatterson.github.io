@@ -171,7 +171,11 @@ Papias of Hierapolis
     nobody else thought to do: went looking for where the stories about Jesus
     had actually come from. His five volumes are lost. What survives is a
     handful of quotations, including the Elder's remark about Matthew
-    compiling sayings "in the Hebrew dialect."
+    compiling sayings "in the Hebrew dialect." Eusebius, writing two
+    centuries later, called him a man "of exceedingly small intelligence" —
+    though at least one modern scholar thinks Eusebius may be quoting
+    Papias's own self-deprecating joke rather than delivering the insult
+    himself.
 
 the Synoptic Problem
     The puzzle of why Matthew, Mark, and Luke overlap so closely — sometimes
@@ -188,13 +192,29 @@ Q (Quelle)
     German for "source." The hypothetical document behind the roughly two
     hundred verses Matthew and Luke share that appear nowhere in Mark. It has
     never been found, no ancient writer ever mentions it, and it remains the
-    dominant explanation anyway — an inference, not a discovery.
+    dominant explanation anyway — an inference, not a discovery. First
+    proposed by Christian Hermann Weisse in 1838; went almost nowhere until
+    Heinrich Julius Holtzmann endorsed the same theory in 1863.
+
+the four-document hypothesis
+    B. H. Streeter's 1924 extension of the theory: Matthew and Luke each
+    drew on Mark, Q, and a further body of material unique to each of
+    them — M for Matthew's own, L for Luke's own. Unlike Q, neither M nor L
+    was ever proposed as a single shared document.
 
 sayings gospel
     A list of things Jesus reportedly said with almost no story attached. Q,
     reconstructed, would have been one. So is the Gospel of Thomas. Two
     communities preserving teaching in the same bare form, before anyone
     decided a gospel had to be a narrative ending at an empty tomb.
+
+Kloppenborg's stratified Q
+    John Kloppenborg's 1987 argument that Q itself shows signs of distinct
+    compositional layers — an earliest wisdom stratum, a later apocalyptic
+    stratum, a still-later temptation narrative — meaning Q had its own
+    editorial history rather than arriving whole. Kloppenborg himself has
+    warned against treating the oldest layer as automatically the most
+    historically reliable Jesus material.
 
 the Farrer hypothesis
     The serious minority solution that needs no lost document: Mark wrote

@@ -224,14 +224,40 @@ resurrection. Recovered complete in Coptic at Nag Hammadi in 1945.
     The chapter's evidence that the sayings-gospel genre was a real form and
     not a scholarly invention required to make Q plausible.
 
+Eusebius. Historia Ecclesiastica 3.39.13. Source for Eusebius's own verdict
+on Papias — "of exceedingly small intelligence" — over Papias's apparently
+literal reading of figurative apostolic teaching about an earthly
+millennial kingdom.
+    At least one modern scholar (Carlson) has argued Eusebius may be
+    quoting a self-deprecating remark of Papias's own rather than
+    delivering the insult himself. The chapter presents both readings.
+
 MODERN SCHOLARSHIP
 
 Weisse, Christian Hermann. Die evangelische Geschichte kritisch und
 philosophisch bearbeitet (1838).
-    Early formulation of what became the two-source hypothesis.
+    Early formulation of what became the two-source hypothesis. Gained
+    little traction for a generation — the field was then dominated by the
+    Tübingen school's Hegelian approach to Gospel origins — until Heinrich
+    Julius Holtzmann endorsed the same theory in 1863, after which it
+    became the consensus view.
 
 Streeter, B. H. The Four Gospels: A Study of Origins (1924).
-    The classic English statement of the case for Q.
+    The classic English statement of the case for Q, and the source of the
+    "four-document hypothesis" — Mark, Q, plus M (material unique to
+    Matthew) and L (material unique to Luke), neither of which Streeter
+    proposed as a single shared document the way Q is.
+
+Kloppenborg, John S. The Formation of Q: Trajectories in Ancient Wisdom
+Collections (1987).
+    Argues Q itself shows signs of at least two, arguably three,
+    compositional layers: an earliest sapiential/wisdom stratum, a later
+    apocalyptic/judgment stratum, and a still-later temptation narrative.
+    Kloppenborg himself has explicitly cautioned against the move some
+    later scholars (including members of the Jesus Seminar) made anyway —
+    treating the oldest reconstructed layer as automatically the most
+    historically reliable Jesus material. The chapter reports the
+    stratification and Kloppenborg's own caution against overusing it.
 
 Farrer, Austin. "On Dispensing with Q," in Studies in the Gospels (1955).
 Developed by Michael Goulder and, most accessibly, by Mark Goodacre, The Case
@@ -260,6 +286,15 @@ Papias's testimony. Whether the Elder was describing anything like Q, or
 something else entirely, or simply garbling the origins of canonical Matthew,
 is genuinely unresolved. The chapter says "nobody can say for certain,"
 which is the right call.
+
+Kloppenborg's stratification of Q. Not universally accepted even among
+scholars who accept Q's existence at all — it depends on Q having a
+recoverable compositional history in the first place, which is one
+inference layered on top of another (Q reconstructed from Matthew/Luke
+agreement, then Q's own internal history reconstructed from Q). The
+chapter flags Kloppenborg's own warning against overreading the oldest
+layer as the most historically authentic, which is the responsible
+caveat regardless of where one lands on the stratification itself.
 
 
 ================================================================================
