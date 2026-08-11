@@ -33,8 +33,8 @@ and frequently disputed. Where a date is genuinely argued over, it is marked
 "c." or the dispute is named outright. Where this document gives a firm date,
 that date is firm.
 
-Covers Chapters 1–9 (Part One complete, Part Two begun).
-Entries for Chapters 10–64 will be added as those chapters are drafted.
+Covers Chapters 1–10 (Part One complete, Part Two begun).
+Entries for Chapters 11–64 will be added as those chapters are drafted.
 
 
 ================================================================================
@@ -616,6 +616,83 @@ none survives in any contemporary record. Every account of motive is later
 speculation. The chapter's decision to state only what can be said without
 speculation — two people in his own household dead within weeks, on his
 orders, never explained — is the correct one.
+
+
+================================================================================
+CHAPTER TEN — ONE LETTER'S DIFFERENCE
+================================================================================
+
+PRIMARY SOURCES
+
+Socrates Scholasticus. Historia Ecclesiastica, Book 1, early-to-mid 5th
+century. The source for Paphnutius's mutilation and for Constantine's
+reported habit of kissing the ruined eye socket.
+    Writing roughly a century after Nicaea. The chapter flags the specific
+    detail as possibly more vivid than precisely accurate while treating the
+    underlying scene — an emperor hosting men his predecessors' regime
+    tortured — as not in dispute.
+
+Eusebius of Caesarea and Athanasius. Both attended the council and both gave
+attendance estimates: Eusebius "more than two hundred and fifty," Athanasius
+"three hundred, more or less."
+    Neither eyewitness used the number 318.
+
+Hilary of Poitiers. On the number 318 as a sign of divine design, connecting
+it to Abraham's 318 servants in Genesis 14 and to the Greek numeral spelling
+of the number, which opens with letters that also open the name Jesus.
+    The source for why 318 became the traditional figure despite neither
+    eyewitness using it.
+
+The Nicene Creed, 325. The text itself — one God, one Lord Jesus Christ,
+begotten not made, of one substance with the Father.
+
+Arius. The Thalia ("Banquet"), c. 323. Largely lost; known mainly through
+hostile quotation, principally Athanasius's own citations of it in his
+polemics against Arius.
+    The same epistemic situation as Marcion in Chapter 2: the primary source
+    survives mainly inside the writing of people trying to destroy it.
+
+MODERN SCHOLARSHIP
+
+Gibbon, Edward. The History of the Decline and Fall of the Roman Empire
+(1776–1789). The "single diphthong" line.
+    Quoted for the line, not relied on for the history. Gibbon's own
+    Enlightenment contempt for the whole controversy is itself a data point
+    about how later, more secular readers received this material, and the
+    chapter says so outright rather than letting the quote stand unexamined.
+
+Hanson, R. P. C. The Search for the Christian Doctrine of God: The Arian
+Controversy, 318–381 (1988). The standard academic treatment of the whole
+period this chapter and the next several span.
+
+Ayres, Lewis. Nicaea and Its Legacy: An Approach to Fourth-Century
+Trinitarian Theology (2004). The major modern account arguing there was
+never one settled "Nicene" theology, in 325 or in 381 — consistent with this
+chapter's own point that the settlement did not hold.
+
+WHERE THIS IS CONTESTED
+
+The 318 number. Not a real headcount. The chapter states this plainly:
+symbolic, probably assigned after the fact, and both eyewitnesses who
+bothered to estimate gave smaller, vaguer figures. Modern historians
+generally estimate 200 to 300.
+
+The Paphnutius story. Sourced to a single writer roughly a century after the
+event. Vivid and widely repeated, but not independently corroborated. The
+chapter is honest that it cannot confirm the specific detail while treating
+the general picture — confessors attending in an emperor's company — as
+solid.
+
+Arius's death. The chapter notes the surviving graphic account comes from a
+hostile source and treats it with the same skepticism this book has applied
+to Zosimus on Fausta (Chapter 9) and Epiphanius on Marcion (Chapter 2).
+Consistent handling, worth keeping consistent.
+
+"Three more emperors" in the closing line. Rhetorical shorthand, not a
+precise count. Constantius II and Theodosius certainly belong on that list;
+Julian and Jovian's reigns were brief and largely orthogonal to this specific
+fight. If a revision ever tightens this sentence, do not add false precision
+to a line that is doing scene-setting work, not enumeration.
 
 
 ================================================================================
