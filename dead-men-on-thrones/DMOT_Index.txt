@@ -14,7 +14,7 @@ no weight in the argument stay out. Glosses are one to three sentences, in
 the book's voice, and say what the person or document does in the argument —
 not just what an encyclopedia would say about them.
 
-Covers Chapters 1–11. Extend as chapters go live.
+Covers Chapters 1–12. Extend as chapters go live.
 
 
 ================================================================================
@@ -698,6 +698,43 @@ Ambrose of Milan
     penance. Proof that making Christianity mandatory had handed the church
     real leverage over the throne it depended on — leverage a letter of
     protest from an earlier exile could never have carried.
+
+
+================================================================================
+CHAPTER TWELVE — THE CREED AS WEAPON
+================================================================================
+
+Rufinus of Aquileia
+    A scholar and translator who, writing a creed commentary around 404,
+    gave later generations the legend that each of the twelve apostles
+    contributed one article of the creed in turn. His own broader
+    scholarship is the reason we know the story isn't literally true — the
+    real document traces to Rome roughly fifty years after the last apostle
+    died.
+
+the Old Roman Creed
+    The baptismal formula behind what became the Apostles' Creed, taking
+    shape at Rome over the second century and reaching something close to
+    its classic form around 180 — in the specific decades right after
+    Marcion built a rival church around his own fixed, edited canon.
+
+the Symbolum
+    Latin for "token" — specifically the kind of broken coin or tile two
+    parties would each keep half of to prove their identity later. Applied
+    to the creed: not a devotional poem, a password, matched clause by
+    clause against a candidate standing in the baptismal water.
+
+"maker of heaven and earth"
+    The creed's opening clause, and the whole argument of Chapter 2 undone
+    in five words: one God, both Father and creator, where Marcion had
+    insisted on two.
+
+"descended into hell"
+    The one clause in the creed that isn't as old as the rest — absent from
+    the earliest surviving text (337), first mentioned by Rufinus himself,
+    and not universal until roughly 650. Still built to fight the same
+    original argument once it arrived: a Christ whose death was real enough
+    to reach all the way into death's own territory.
 
 
 ================================================================================

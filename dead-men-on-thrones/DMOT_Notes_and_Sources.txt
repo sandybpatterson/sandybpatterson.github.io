@@ -33,8 +33,8 @@ and frequently disputed. Where a date is genuinely argued over, it is marked
 "c." or the dispute is named outright. Where this document gives a firm date,
 that date is firm.
 
-Covers Chapters 1–11 (Part One complete, Part Two underway).
-Entries for Chapters 12–64 will be added as those chapters are drafted.
+Covers Chapters 1–12 (Part One complete, Part Two underway).
+Entries for Chapters 13–64 will be added as those chapters are drafted.
 
 
 ================================================================================
@@ -759,6 +759,68 @@ this the same way it flagged the Zosimus bathhouse detail in Chapter 9.
 Adrianople's causal weight. Historians disagree on how directly the defeat
 connects to the western empire's collapse a century later. The chapter notes
 the disagreement rather than asserting a straight causal line.
+
+
+================================================================================
+CHAPTER TWELVE — THE CREED AS WEAPON
+================================================================================
+
+PRIMARY SOURCES
+
+Rufinus of Aquileia. Commentary on the Apostles' Creed (Commentarius in
+Symbolum Apostolorum), c. 404. The source for the twelve-apostles legend
+(each apostle contributing one article) and the earliest writer to mention
+the "descended into hell" clause at all — noting himself that it was not in
+Rome's own creed, only in his own church's at Aquileia.
+
+Marcellus of Ancyra, letter to Julius of Rome, c. 337. The oldest surviving
+written text of the Old Roman Creed. Does not contain the descent clause.
+
+Hippolytus (attributed). Apostolic Tradition, early 3rd century. Preserves
+the creed in its interrogatory baptismal form — three questions, three
+answers, three immersions — rather than as a single recited block.
+    Modern scholarship treats the text as likely a composite/edited
+    compilation rather than a single author's unified work; the attribution
+    to Hippolytus himself is not fully settled. The chapter uses "usually
+    attributed to" language for this reason.
+
+Irenaeus, Against Heresies, and Tertullian, Against Marcion — as Chapter 2.
+Both also produced independent prose "rule of faith" summaries in roughly
+the same decades as the Old Roman Creed's formation, aimed at the same
+target, without evidence of coordination between the three centers.
+
+Marcion's edited gospel — as Chapter 2. Reconstructed as beginning at Luke
+3:1 combined with Luke 4:31 ("...descended into Capernaum"), omitting the
+birth and infancy material entirely.
+
+MODERN SCHOLARSHIP
+
+Kelly, J. N. D. Early Christian Creeds (3rd ed., 1972). The standard modern
+study connecting the Old Roman Creed's formation to the anti-Marcionite
+crisis of the 170s–180s.
+
+WHERE THIS IS CONTESTED
+
+The date and cause of the Old Roman Creed. c. 180 and an anti-Marcionite
+purpose is the scholarly mainstream view following Kelly, not a settled
+certainty — search results returned during fact-checking specifically
+flagged "the most recent debate on the origin of the Apostles' Creed" as
+an active scholarly conversation. The chapter attributes the dating to
+Kelly by name rather than presenting it as uncontested consensus.
+
+The "descended into hell" clause. Absent from the earliest text (Marcellus,
+337), first mentioned by Rufinus at Aquileia specifically, and not
+universal until roughly 650. The chapter is precise about this timeline
+rather than treating the clause as original to the creed.
+
+The twelve-apostles legend. Rufinus is the source and, on his own broader
+scholarship's evidence, is not describing something that could be literally
+true — the actual document postdates the apostolic generation by roughly
+half a century. The chapter states this plainly.
+
+Hippolytus's authorship of the Apostolic Tradition. Not fully settled among
+scholars; the text may be a compilation from multiple periods. The chapter
+hedges with "usually attributed to" rather than asserting it flatly.
 
 
 ================================================================================
