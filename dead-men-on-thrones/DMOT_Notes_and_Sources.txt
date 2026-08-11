@@ -824,6 +824,63 @@ hedges with "usually attributed to" rather than asserting it flatly.
 
 
 ================================================================================
+CHAPTER THIRTEEN — THE GHOST IN THE MACHINE
+================================================================================
+
+PRIMARY SOURCES
+
+Victor of Vita. Historia Persecutionis Africanae Provinciae (History of the
+Persecution of the African Province), late 5th century. Contemporary
+eyewitness account of Vandal King Huneric's persecution of Catholic
+Christians in North Africa, including the text of Huneric's 484 edict, which
+explicitly repurposes earlier Roman anti-heretical statutes.
+
+Gregory of Tours. Historia Francorum (History of the Franks), late 6th
+century. The source for the traditional account of Clovis's baptism at
+Reims, including the detail of roughly three thousand of his soldiers being
+baptized alongside him. Written roughly a century after the event it
+describes.
+    Modern scholarship treats Gregory's account as shaped by his own
+    theological and political purposes rather than a neutral transcript;
+    the chapter frames the soldier count as "tradition says" rather than
+    a verified figure.
+
+MODERN SCHOLARSHIP
+
+Heather, Peter. The Goths (1996) and Empires and Barbarians (2009). Standard
+modern treatment of Gothic history and the "Homoian" versus "Arian"
+terminology question — Heather's argument that Arianism functioned partly
+as a marker of Gothic identity once the Goths were settled among
+Nicene-majority Roman populations.
+
+Britannica and the Uppsala University Library's own published history of
+the Codex Argenteus. Consulted for the manuscript's sixth-century Ravenna
+origin, its likely connection to Theodoric's Ostrogothic court, and its
+present location at Uppsala.
+
+WHERE THIS IS CONTESTED
+
+The exact date of Clovis's baptism. The traditional date is Christmas Day,
+496, but historians have never fully settled it; some scholarship places it
+as late as 506–508. The chapter states this range rather than asserting
+496 as certain.
+
+The precise theological label for what Ulfilas taught. "Arian" is the
+familiar shorthand and the one most readers will recognize, but the more
+historically precise term for the Gothic church's actual creed is
+"Homoian" — a related but distinct anti-Nicene position that avoided
+Arius's own more contested formulations. The chapter uses both terms
+deliberately, flagging the distinction rather than treating "Arian" as
+perfectly accurate shorthand.
+
+The degree of intentionality behind Huneric's 484 conference in Carthage.
+Victor of Vita, the only detailed surviving source, was himself a victim
+of the persecution he describes and writing to make the Vandal regime look
+as bad as possible; the chapter relies on his account for facts that are
+independently corroborated (the edict's text, the exiles) while noting he
+is not a neutral narrator.
+
+================================================================================
 GENERAL BACKGROUND FOR PART ONE AND PART TWO
 ================================================================================
 
