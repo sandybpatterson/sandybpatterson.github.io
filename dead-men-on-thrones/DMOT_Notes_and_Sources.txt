@@ -665,8 +665,17 @@ of the number, which opens with letters that also open the name Jesus.
     The source for why 318 became the traditional figure despite neither
     eyewitness using it.
 
+Eusebius of Caesarea. Vita Constantini, Book 3. Source for Constantine's
+staged entrance at Nicaea — arriving last, after the bishops were seated,
+in glittering purple and gold. The same work already flagged in Chapter 9
+for escalating the Milvian Bridge vision story; used here with the same
+caveat rather than presented as neutral reportage.
+
 The Nicene Creed, 325. The text itself — one God, one Lord Jesus Christ,
-begotten not made, of one substance with the Father.
+begotten not made, of one substance with the Father. The council's canons
+also fixed the dating of Easter to a Sunday, independent of the Jewish
+Passover calendar — a separate, non-Christological outcome of the same
+gathering.
 
 Arius. The Thalia ("Banquet"), c. 323. Largely lost; known mainly through
 hostile quotation, principally Athanasius's own citations of it in his
@@ -715,6 +724,13 @@ precise count. Constantius II and Theodosius certainly belong on that list;
 Julian and Jovian's reigns were brief and largely orthogonal to this specific
 fight. If a revision ever tightens this sentence, do not add false precision
 to a line that is doing scene-setting work, not enumeration.
+
+Constantine's staged entrance. Sourced to Eusebius's Vita Constantini alone,
+written after Constantine's death by an author already documented in this
+book elaborating the emperor's own legend over time. The chapter flags the
+description as admiring/embellished while treating the underlying gesture
+(entering after the bishops, as a mark of deference) as not seriously in
+dispute.
 
 
 ================================================================================
