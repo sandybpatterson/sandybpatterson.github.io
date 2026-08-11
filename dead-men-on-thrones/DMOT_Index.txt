@@ -14,7 +14,7 @@ no weight in the argument stay out. Glosses are one to three sentences, in
 the book's voice, and say what the person or document does in the argument —
 not just what an encyclopedia would say about them.
 
-Covers Chapters 1–10. Extend as chapters go live.
+Covers Chapters 1–11. Extend as chapters go live.
 
 
 ================================================================================
@@ -648,6 +648,56 @@ Constantius II
     personally, for reasons that outlasted any specific point of theology.
     Persecuted, within a single generation, the exact Christians his father
     had gaveled into orthodoxy.
+
+
+================================================================================
+CHAPTER ELEVEN — MAKING IT MANDATORY
+================================================================================
+
+the Battle of Adrianople
+    9 August 378. Valens led roughly thirty thousand men against the Goths
+    and lost so completely his body was never recovered. Left the eastern
+    empire without an emperor, without an army, and with a Gothic force
+    loose in the Balkans that nobody was left to stop.
+
+Theodosius I
+    A Spanish general recalled from retirement after his own father was
+    executed two years earlier under murky court politics. Made emperor of
+    the East to clean up a catastrophe he had no part in causing, and went
+    on to make Nicene Christianity the law of the Roman Empire.
+
+the Edict of Thessalonica
+    27 February 380. Not toleration and not mere favor — the first Roman
+    law naming one specific version of Christian belief and ordering every
+    subject to hold it, branding everyone else "foolish madmen." Its actual
+    target was intra-Christian, other Christians who held the wrong creed,
+    not paganism, whatever the popular version of this story says.
+
+the Serapeum
+    Alexandria's great temple of Serapis, desecrated and demolished by
+    Bishop Theophilus's mob in 391 under the cover of Theodosius's later,
+    harder anti-pagan decrees — the ones the 380 edict itself never
+    contained. A soldier struck the cult statue with an axe. The sky did
+    not fall.
+
+the Niceno-Constantinopolitan Creed
+    The expanded creed produced at the First Council of Constantinople in
+    381, adding language on the Holy Spirit that Nicaea's original text had
+    left almost entirely unaddressed. The version still recited in churches
+    today, under a name almost nobody reciting it has ever heard.
+
+foederati
+    The status Theodosius negotiated for the Goths in 382 — settled inside
+    imperial territory, self-governing, obligated to fight for Rome when
+    called on. A pragmatic solution from the same man who, in religious
+    matters, had just decided pragmatism had no place at all.
+
+Ambrose of Milan
+    The bishop who denied Theodosius communion for months after the
+    Massacre of Thessalonica in 390, until the emperor performed public
+    penance. Proof that making Christianity mandatory had handed the church
+    real leverage over the throne it depended on — leverage a letter of
+    protest from an earlier exile could never have carried.
 
 
 ================================================================================

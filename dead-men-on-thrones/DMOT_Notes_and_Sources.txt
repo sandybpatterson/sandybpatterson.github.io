@@ -33,8 +33,8 @@ and frequently disputed. Where a date is genuinely argued over, it is marked
 "c." or the dispute is named outright. Where this document gives a firm date,
 that date is firm.
 
-Covers Chapters 1–10 (Part One complete, Part Two begun).
-Entries for Chapters 11–64 will be added as those chapters are drafted.
+Covers Chapters 1–11 (Part One complete, Part Two underway).
+Entries for Chapters 12–64 will be added as those chapters are drafted.
 
 
 ================================================================================
@@ -693,6 +693,72 @@ precise count. Constantius II and Theodosius certainly belong on that list;
 Julian and Jovian's reigns were brief and largely orthogonal to this specific
 fight. If a revision ever tightens this sentence, do not add false precision
 to a line that is doing scene-setting work, not enumeration.
+
+
+================================================================================
+CHAPTER ELEVEN — MAKING IT MANDATORY
+================================================================================
+
+PRIMARY SOURCES
+
+Ammianus Marcellinus. Res Gestae, Book 31. The major contemporary account of
+the Battle of Adrianople, 9 August 378, by a historian writing within a few
+years of the event. His narrative ends shortly after the battle.
+
+The Edict of Thessalonica ("Cunctos populos"), 27 February 380. Codex
+Theodosianus 16.1.2. The text itself — quoted directly, including the
+"foolish madmen" (dementes vesanosque) line.
+
+Codex Theodosianus 16.10, the 391–392 decrees, including the line "no one is
+to go to the sanctuaries, walk through the temples" — the harder measures
+against pagan worship the 380 edict itself does not contain.
+
+The ancient church historians — Socrates Scholasticus, Sozomen, and Rufinus
+— for the destruction of the Serapeum in 391, each giving slightly different
+detail. The chapter follows the widely repeated core: Bishop Theophilus's
+provocation, the pagan barricade, the demolition, and the soldier who struck
+the cult statue without the sky falling.
+
+Ambrose of Milan. Letter 51, to Theodosius, written to justify his own
+conduct after the Massacre of Thessalonica.
+    The primary source for the whole episode, and worth remembering as such
+    — the later, more cinematic version with Ambrose physically blocking a
+    cathedral doorway comes from the medieval Golden Legend, not this letter.
+
+MODERN SCHOLARSHIP
+
+Williams, Stephen, and Gerard Friell. Theodosius: The Empire at Bay (1995).
+    The standard academic biography for a generation.
+
+Hebblewhite, Mark. Theodosius and the Limits of Empire (2020). The first
+English-language biography in twenty-five years, reflecting more recent
+scholarship.
+
+WHERE THIS IS CONTESTED
+
+What the Edict of Thessalonica actually targeted. Popular retellings
+routinely describe it as the moment paganism became illegal empire-wide.
+Read on its own terms, its target is intra-Christian — Arians and other
+non-Nicene factions — and it does not name paganism at all. The harder
+anti-pagan measures came a decade later, in 391–392. The chapter is precise
+about this distinction and it should not be softened in revision; it is the
+same kind of correction this book has already made about "the first canon
+list" (Ch. 8) and "the Edict of Milan" (Ch. 9).
+
+The Massacre of Thessalonica. How much premeditation to assign Theodosius is
+genuinely unsettled — whether the order was a considered decision or an
+order given in rage and not recalled in time. The chapter states this as an
+open question rather than picking a reading.
+
+The Ambrose penance story. Letter 51 establishes that real, substantial
+penance was extracted. The specific dramatic staging most people picture —
+Ambrose bodily barring the cathedral door — is a later medieval embellishment
+(the Golden Legend) with no support in the primary letter. The chapter flags
+this the same way it flagged the Zosimus bathhouse detail in Chapter 9.
+
+Adrianople's causal weight. Historians disagree on how directly the defeat
+connects to the western empire's collapse a century later. The chapter notes
+the disagreement rather than asserting a straight causal line.
 
 
 ================================================================================
