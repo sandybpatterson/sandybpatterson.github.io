@@ -19,6 +19,16 @@ Skipping this because a chapter "feels" solid is exactly how a factual error end
 
 ---
 
+## BANNED PHRASES — check every chapter before publishing, any book
+
+Phrases the author has explicitly banned from the prose. Scan for these (and close variants) as part of the cold re-read in checklist step 2, not just at the moment they're flagged.
+
+- **"What makes this genuinely interesting..."** (and close variants — "what's genuinely interesting about this," "what makes this so interesting") — banned across all books, not just this one. If a passage needs this kind of framing to earn the reader's attention, that's a sign the material itself isn't doing the work; cut the announcement and let the fact or the scene carry it.
+
+If a new phrase gets banned in conversation, add it to this list immediately rather than relying on memory carrying it into the next chapter or the next session.
+
+---
+
 ## WHAT THIS BOOK IS
 
 Dead Men on Thrones: What Power Does to Religion is a comprehensive popular history of Christianity examining how institutional power has consistently corrupted, distorted, and weaponized religious faith across two thousand years. The central argument is that the Christianity most people practice today has almost nothing to do with what actually happened and almost everything to do with politics, accidents, power struggles, dead men on thrones, shipowners getting thrown out of churches, and councils arguing over single letters of the Greek alphabet.
