@@ -119,6 +119,38 @@ Structure in place, same pattern as The Original Bug / Beyond Ice and Steam:
 
 ---
 
+## Book Likes (Cloudflare Workers + D1)
+
+Each book card on `bookshelf.html` has a like button (heart icon + count)
+below its "Read Now" label. Backend is a Cloudflare Worker + D1 database
+in `/worker/` — one table (`book_likes`: `book_id`, `like_count`), one
+endpoint (`/likes`, `GET` to list counts, `POST` to increment). See
+`worker/README.md` for the full deploy steps.
+
+- `data-book-id` on each `.sbp-like` button in `bookshelf.html` must match
+  the `book_id` values hardcoded in `worker/src/index.js`
+  (`ALLOWED_BOOK_IDS`): `original-bug`, `beyond-ice-and-steam`,
+  `dead-men-on-thrones`, `stories-from-winchester`, `arden-remembers`.
+  Adding a sixth book to the shelf means adding its slug to both places.
+- The frontend script (bottom of `bookshelf.html`) reads/writes a
+  `LIKES_API` constant pointing at the deployed Worker URL — currently a
+  placeholder (`https://bookshelf-likes.sandybpatterson.workers.dev/likes`)
+  since the Worker hasn't been deployed yet. Update it once `wrangler
+  deploy` gives you the real URL.
+- One like per browser: the click handler checks/sets a
+  `localStorage['sbp-liked:<book_id>']` flag and disables the button once
+  liked. No auth, no rate limiting beyond that — deliberately simple.
+- If the Worker is unreachable (not deployed, CORS misconfigured, etc.)
+  the counts just show `—` and the page still works — the like feature
+  degrades gracefully rather than breaking the shelf.
+
+**Not yet done:** the Worker hasn't actually been deployed (no D1
+database created, no `wrangler deploy` run), so `LIKES_API` is still a
+placeholder and every button currently shows `—`. Deploy per
+`worker/README.md`, then swap in the real URL.
+
+---
+
 ## Cover Art
 
 Book cover images live in this repo's `/images/` folder (not in the book's

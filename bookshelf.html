@@ -116,6 +116,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+    .sbp-book-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       cursor: pointer;
       text-decoration: none;
     }
@@ -197,6 +202,27 @@
       border-radius: 999px;
       transition: color 0.15s, border-color 0.15s;
     }
+
+    .sbp-like {
+      margin-top: 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      border: 1px solid #333;
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .sbp-like:hover { color: #c9a84c; border-color: #c9a84c; }
+    .sbp-like.liked { color: #c9a84c; border-color: #c9a84c; background: rgba(201, 168, 76, 0.08); }
+    .sbp-like:disabled { cursor: default; }
+    .sbp-like-icon { font-size: 0.85rem; line-height: 1; }
 
     .sbp-img-cover { background: none !important; padding: 0 !important; overflow: hidden; }
     .sbp-img-cover img {
@@ -307,60 +333,90 @@
 
   <div class="shelf-wrap">
     <div class="sbp-shelf">
-      <a href="https://sandybpatterson.github.io/original-bug-book/" class="sbp-book">
-        <div class="sbp-cover sbp-img-cover">
-          <img src="/images/tobcover.png" alt="The Original Bug" />
-        </div>
-        <div class="sbp-summary">
-          <div class="sbp-summary-title">The Original Bug</div>
-          <p>Ask an AI if you're right about something you're actually wrong about. It'll probably agree anyway — researchers found AI validates users 49% more than humans do. Same flattery reflex as your own brain, just amplified.</p>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
-      <a href="https://sandybpatterson.github.io/beyond-ice-and-steam/" class="sbp-book">
-        <div class="sbp-cover sbp-img-cover">
-          <img src="/images/biascover.png" alt="Beyond Ice and Steam" />
-        </div>
-        <div class="sbp-summary">
-          <div class="sbp-summary-title">Beyond Ice and Steam</div>
-          <p>Why don't your joints squeak, and why does your soda always fizz from the exact same spot in the glass? A confirmed, contested phenomenon in ordinary water — and the wellness industry that turned it into a $2,500 water filter.</p>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
-      <a href="https://sandybpatterson.github.io/dead-men-on-thrones/" class="sbp-book">
-        <div class="sbp-cover sbp-img-cover">
-          <img src="/images/dmotcover.jpeg" alt="Dead Men on Thrones" />
-        </div>
-        <div class="sbp-summary">
-          <div class="sbp-summary-title">Dead Men on Thrones</div>
-          <p>A history of what institutional power does to religious faith — a nine-months-dead pope put on trial by his own successor, councils going to war over a single Greek letter, and two thousand years of politics dressed up as theology.</p>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
-      <a href="https://sandybpatterson.github.io/stories/" class="sbp-book">
-        <div class="sbp-cover">
-          <div class="sbp-cover-title">Stories from Winchester</div>
-          <div class="sbp-cover-ornament">✦</div>
-          <div class="sbp-cover-author">Sandy B. Patterson</div>
-        </div>
-        <div class="sbp-summary">
-          <div class="sbp-summary-title">Stories from Winchester</div>
-          <p>A collection of short stories set in Winchester, Tennessee — Franklin County, told one season and one life at a time.</p>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
-      <a href="https://sandybpatterson.github.io/arden-remembers/" class="sbp-book">
-        <div class="sbp-cover">
-          <div class="sbp-cover-title">Arden Remembers</div>
-          <div class="sbp-cover-ornament">✦</div>
-          <div class="sbp-cover-author">Sandy B. Patterson</div>
-        </div>
-        <div class="sbp-summary">
-          <div class="sbp-summary-title">Arden Remembers</div>
-          <p>A forthcoming novel. Premise coming soon.</p>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
+      <div class="sbp-book">
+        <a href="https://sandybpatterson.github.io/original-bug-book/" class="sbp-book-link">
+          <div class="sbp-cover sbp-img-cover">
+            <img src="/images/tobcover.png" alt="The Original Bug" />
+          </div>
+          <div class="sbp-summary">
+            <div class="sbp-summary-title">The Original Bug</div>
+            <p>Ask an AI if you're right about something you're actually wrong about. It'll probably agree anyway — researchers found AI validates users 49% more than humans do. Same flattery reflex as your own brain, just amplified.</p>
+          </div>
+          <div class="sbp-label">Read Now</div>
+        </a>
+        <button type="button" class="sbp-like" data-book-id="original-bug" aria-label="Like The Original Bug">
+          <span class="sbp-like-icon" aria-hidden="true">♥</span>
+          <span class="sbp-like-count">–</span>
+        </button>
+      </div>
+      <div class="sbp-book">
+        <a href="https://sandybpatterson.github.io/beyond-ice-and-steam/" class="sbp-book-link">
+          <div class="sbp-cover sbp-img-cover">
+            <img src="/images/biascover.png" alt="Beyond Ice and Steam" />
+          </div>
+          <div class="sbp-summary">
+            <div class="sbp-summary-title">Beyond Ice and Steam</div>
+            <p>Why don't your joints squeak, and why does your soda always fizz from the exact same spot in the glass? A confirmed, contested phenomenon in ordinary water — and the wellness industry that turned it into a $2,500 water filter.</p>
+          </div>
+          <div class="sbp-label">Read Now</div>
+        </a>
+        <button type="button" class="sbp-like" data-book-id="beyond-ice-and-steam" aria-label="Like Beyond Ice and Steam">
+          <span class="sbp-like-icon" aria-hidden="true">♥</span>
+          <span class="sbp-like-count">–</span>
+        </button>
+      </div>
+      <div class="sbp-book">
+        <a href="https://sandybpatterson.github.io/dead-men-on-thrones/" class="sbp-book-link">
+          <div class="sbp-cover sbp-img-cover">
+            <img src="/images/dmotcover.jpeg" alt="Dead Men on Thrones" />
+          </div>
+          <div class="sbp-summary">
+            <div class="sbp-summary-title">Dead Men on Thrones</div>
+            <p>A history of what institutional power does to religious faith — a nine-months-dead pope put on trial by his own successor, councils going to war over a single Greek letter, and two thousand years of politics dressed up as theology.</p>
+          </div>
+          <div class="sbp-label">Read Now</div>
+        </a>
+        <button type="button" class="sbp-like" data-book-id="dead-men-on-thrones" aria-label="Like Dead Men on Thrones">
+          <span class="sbp-like-icon" aria-hidden="true">♥</span>
+          <span class="sbp-like-count">–</span>
+        </button>
+      </div>
+      <div class="sbp-book">
+        <a href="https://sandybpatterson.github.io/stories/" class="sbp-book-link">
+          <div class="sbp-cover">
+            <div class="sbp-cover-title">Stories from Winchester</div>
+            <div class="sbp-cover-ornament">✦</div>
+            <div class="sbp-cover-author">Sandy B. Patterson</div>
+          </div>
+          <div class="sbp-summary">
+            <div class="sbp-summary-title">Stories from Winchester</div>
+            <p>A collection of short stories set in Winchester, Tennessee — Franklin County, told one season and one life at a time.</p>
+          </div>
+          <div class="sbp-label">Read Now</div>
+        </a>
+        <button type="button" class="sbp-like" data-book-id="stories-from-winchester" aria-label="Like Stories from Winchester">
+          <span class="sbp-like-icon" aria-hidden="true">♥</span>
+          <span class="sbp-like-count">–</span>
+        </button>
+      </div>
+      <div class="sbp-book">
+        <a href="https://sandybpatterson.github.io/arden-remembers/" class="sbp-book-link">
+          <div class="sbp-cover">
+            <div class="sbp-cover-title">Arden Remembers</div>
+            <div class="sbp-cover-ornament">✦</div>
+            <div class="sbp-cover-author">Sandy B. Patterson</div>
+          </div>
+          <div class="sbp-summary">
+            <div class="sbp-summary-title">Arden Remembers</div>
+            <p>A forthcoming novel. Premise coming soon.</p>
+          </div>
+          <div class="sbp-label">Read Now</div>
+        </a>
+        <button type="button" class="sbp-like" data-book-id="arden-remembers" aria-label="Like Arden Remembers">
+          <span class="sbp-like-icon" aria-hidden="true">♥</span>
+          <span class="sbp-like-count">–</span>
+        </button>
+      </div>
     </div>
     <div class="sbp-shelf-floor"></div>
     <div class="sbp-shelf-shadow"></div>
@@ -384,6 +440,68 @@
         setTimeout(function () { btn.textContent = original; }, 1800);
       });
     }
+  </script>
+
+  <script>
+    (function () {
+      // Set this to the deployed Worker URL + "/likes" — see worker/README.md.
+      var LIKES_API = 'https://bookshelf-likes.sandybpatterson.workers.dev/likes';
+
+      var buttons = Array.prototype.slice.call(document.querySelectorAll('.sbp-like'));
+      if (!buttons.length) return;
+
+      function likedKey(bookId) {
+        return 'sbp-liked:' + bookId;
+      }
+
+      function setButtonState(btn, count, liked) {
+        btn.querySelector('.sbp-like-count').textContent = count;
+        btn.classList.toggle('liked', liked);
+        btn.disabled = liked;
+      }
+
+      fetch(LIKES_API)
+        .then(function (res) { return res.ok ? res.json() : {}; })
+        .then(function (counts) {
+          buttons.forEach(function (btn) {
+            var bookId = btn.dataset.bookId;
+            var count = counts[bookId] || 0;
+            var liked = localStorage.getItem(likedKey(bookId)) === '1';
+            setButtonState(btn, count, liked);
+          });
+        })
+        .catch(function () {
+          buttons.forEach(function (btn) {
+            btn.querySelector('.sbp-like-count').textContent = '—';
+          });
+        });
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var bookId = btn.dataset.bookId;
+          if (localStorage.getItem(likedKey(bookId)) === '1') return;
+
+          var countEl = btn.querySelector('.sbp-like-count');
+          var previousCount = parseInt(countEl.textContent, 10) || 0;
+          setButtonState(btn, previousCount + 1, true);
+          localStorage.setItem(likedKey(bookId), '1');
+
+          fetch(LIKES_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ book_id: bookId }),
+          })
+            .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
+            .then(function (data) {
+              countEl.textContent = data.like_count;
+            })
+            .catch(function () {
+              setButtonState(btn, previousCount, false);
+              localStorage.removeItem(likedKey(bookId));
+            });
+        });
+      });
+    })();
   </script>
 
 </body>

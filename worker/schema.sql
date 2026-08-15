@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS book_likes (
+  book_id TEXT PRIMARY KEY,
+  like_count INTEGER NOT NULL DEFAULT 0
+);
