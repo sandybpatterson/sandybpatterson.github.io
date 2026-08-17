@@ -1,0 +1,97 @@
+{
+  "_comment": [
+    "SODA components manifest. The installer reads this to decide what to fetch.",
+    "",
+    "Versions are PINNED on purpose. SODA redistributes nothing -- every item",
+    "below is downloaded by the user from its own publisher -- but a floating",
+    "'latest' would mean every install got a different combination, and a",
+    "breaking change upstream would break new installs while existing ones",
+    "kept working. That is a bug report nobody can reproduce.",
+    "",
+    "This file is hosted rather than shipped so a moved download URL is a",
+    "one-line edit here instead of a new release everyone has to install.",
+    "",
+    "Moving a pin forward is a deliberate act after testing. Never automatic."
+  ],
+
+  "manifest_version": 1,
+  "updated": "2026-08-17",
+  "minimum_soda_version": "1.0",
+
+  "python": {
+    "version": "3.14.4",
+    "url": "https://www.python.org/ftp/python/3.14.4/python-3.14.4-embed-amd64.zip",
+    "size_bytes": 12034740,
+    "sha256": null,
+    "note": "Embeddable build. Only fetched when no suitable Python is already installed."
+  },
+
+  "packages": {
+    "_comment": "Installed from PyPI. Versions verified working together on 2026-08-17.",
+    "kokoro-onnx": "0.4.7",
+    "onnxruntime": "1.28.0",
+    "numpy": "2.5.0",
+    "soundfile": "0.14.0",
+    "mutagen": "1.48.1",
+    "boto3": "1.43.62",
+    "keyring": "25.7.0",
+    "psutil": "7.2.2",
+    "pillow": "12.2.0",
+    "tkinterdnd2": "0.6.2",
+    "anthropic": "0.121.0"
+  },
+
+  "optional_packages": {
+    "_comment": "Only needed to draft with Claude. Gemini, OpenRouter and Ollama all speak plain HTTP and need nothing installed.",
+    "anthropic": "0.121.0"
+  },
+
+  "model": {
+    "file": "kokoro-v1.0.onnx",
+    "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx",
+    "size_bytes": 325532387,
+    "sha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+    "verified": "2026-08-17, checksum computed from a known-good local copy and the remote size confirmed to match"
+  },
+
+  "voices": {
+    "file": "voices-v1.0.bin",
+    "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin",
+    "size_bytes": 28214398,
+    "sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+    "verified": "2026-08-17, as above"
+  },
+
+  "ffmpeg": {
+    "_comment": [
+      "LGPL rather than GPL, and a dated autobuild tag rather than 'latest',",
+      "because 'latest' is a moving target and this file is supposed to pin.",
+      "SODA only uses loudnorm and an mp3 encoder, so most of this build is",
+      "unused -- there is no smaller official Windows build that can be",
+      "pinned by URL.",
+      "",
+      "Checked first: many people already have ffmpeg on PATH and can skip",
+      "this download entirely."
+    ],
+    "release_tag": "autobuild-2026-08-17-13-05",
+    "file": "ffmpeg-n8.1.2-44-g7c533d0f86-win64-lgpl-8.1.zip",
+    "url": "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-08-17-13-05/ffmpeg-n8.1.2-44-g7c533d0f86-win64-lgpl-8.1.zip",
+    "size_bytes": 146100000,
+    "sha256": null,
+    "note": "Size is approximate and sha256 is not yet computed; the fetcher should verify size and fall back to a clear error rather than assuming a truncated download is fine.",
+    "binaries_needed": ["ffmpeg.exe", "ffprobe.exe"]
+  },
+
+  "totals": {
+    "_comment": "What a user with none of this already installed downloads once.",
+    "approx_bytes": 663900000,
+    "approx_mb": 664
+  },
+
+  "licences": {
+    "_comment": "SODA distributes none of the below. Each is fetched by the user from its own publisher and remains under its own terms. Shown in-app before anything is downloaded.",
+    "python": "https://docs.python.org/3/license.html",
+    "kokoro-onnx": "https://github.com/thewh1teagle/kokoro-onnx",
+    "ffmpeg": "https://www.ffmpeg.org/legal.html"
+  }
+}
