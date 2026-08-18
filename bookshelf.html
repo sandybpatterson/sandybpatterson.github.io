@@ -126,7 +126,7 @@
     }
     .sbp-cover {
       container-type: inline-size;
-      width: clamp(160px, 39vw, 340px);
+      width: clamp(220px, 78vw, 340px);
       aspect-ratio: 3 / 4;
       background: linear-gradient(145deg, #1a1712, #0a0806);
       border-radius: 4px 14px 14px 4px;
@@ -243,6 +243,21 @@
         opacity: 1;
         transform: translateX(0);
         pointer-events: auto;
+      }
+    }
+
+    /* Touch devices have no hover — show the synopsis inline instead
+       of as a hover-triggered side panel, which would be invisible. */
+    @media (hover: none) {
+      .sbp-summary {
+        position: static;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        width: 100%;
+        max-width: 340px;
+        margin: 0.9rem 0 0;
+        text-align: left;
       }
     }
 
