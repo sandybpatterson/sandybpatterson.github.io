@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI News — Sandy B. Patterson</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  /* ── Masthead ── */
+  .masthead {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 56px 28px 0;
+    text-align: center;
+  }
+  .masthead-kicker {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 14px;
+  }
+  .masthead-name {
+    font-weight: 700;
+    font-size: clamp(2.6rem, 9vw, 4.6rem);
+    letter-spacing: 0.02em;
+    color: #f4f0e6;
+    line-height: 1;
+  }
+  .masthead-tagline {
+    margin-top: 14px;
+    font-style: italic;
+    font-size: 1rem;
+    color: #888;
+  }
+  .masthead-rule {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 22px 0 10px;
+  }
+  .masthead-info {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    padding-bottom: 40px;
+  }
+
+  /* ── Issue archive ── */
+  .archive-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 28px 100px;
+  }
+  .archive-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 24px;
+  }
+
+  .issue-row {
+    display: block;
+    padding: 24px 0;
+    border-top: 1px solid #1e1e1e;
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.12s;
+  }
+  .issue-row:last-of-type { border-bottom: 1px solid #1e1e1e; }
+  .issue-row:hover { text-decoration: none; }
+  .issue-row:hover .issue-title { color: #c9a84c; }
+
+  .issue-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 8px;
+  }
+  .issue-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #d0d0d0;
+    margin-bottom: 8px;
+    transition: color 0.15s;
+    line-height: 1.3;
+  }
+  .issue-excerpt {
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: #888;
+  }
+
+  .more-soon {
+    padding: 24px 0 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #444;
+    text-align: center;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/ai-news/" style="color:#c9a84c;">AI News</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="masthead">
+    <p class="masthead-kicker">Est. 2026 &middot; An Experiment</p>
+    <h1 class="masthead-name">AI News</h1>
+    <p class="masthead-tagline">Dispatches on artificial intelligence, printed here instead of emailed to you.</p>
+    <hr class="masthead-rule">
+    <div class="masthead-info">
+      <span>Vol. I</span>
+      <span>Sandy B. Patterson</span>
+    </div>
+  </div>
+
+  <div class="archive-wrap">
+    <p class="archive-label">Issues</p>
+
+    <a href="https://sandybpatterson.github.io/ai-news/issue-01.html" class="issue-row">
+      <div class="issue-meta">Issue 01</div>
+      <div class="issue-title">A New Kind of Newsletter</div>
+      <div class="issue-excerpt">An introduction — why this is starting as a page instead of an inbox, and what to expect from it going forward.</div>
+    </a>
+
+    <p class="more-soon">New issues posted here as they're written</p>
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+</body>
+</html>
