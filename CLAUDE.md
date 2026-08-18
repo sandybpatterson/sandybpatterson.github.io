@@ -3,6 +3,15 @@
 
 ---
 
+## Git Workflow
+
+**Push directly to `main`.** This is a one-person site with no review
+process — Sandy previews changes by looking at the live GitHub Pages site,
+so a change sitting on an unmerged feature branch is invisible to them. Don't
+open a PR or leave work on a branch unless they explicitly ask for one.
+
+---
+
 ## What This Repo Is
 
 Sandy B. Patterson's author website. `bookshelf.html` is the home page (a
