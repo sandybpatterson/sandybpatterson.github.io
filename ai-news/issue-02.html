@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Name Was the Interview — AI News</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  /* ── Small masthead strip ── */
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  /* ── Article header ── */
+  .issue-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  /* ── Article body — newspaper columns on wider screens ── */
+  .article-body {
+    column-count: 1;
+  }
+  @media (min-width: 640px) {
+    .article-body {
+      column-count: 2;
+      column-gap: 2.4rem;
+      column-rule: 1px solid #1a1a1a;
+    }
+  }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  blockquote.pull-quote {
+    border-left: 2px solid #c9a84c;
+    margin: 0.4em 0 1.6em;
+    padding: 0.3em 0 0.3em 1.2em;
+    font-style: italic;
+    font-size: 1.05em;
+    color: #c9a84c;
+    line-height: 1.6;
+    break-inside: avoid;
+  }
+
+  .section-break {
+    text-align: center;
+    margin: 1.6rem 0;
+    color: #444;
+    font-size: 1.1rem;
+    letter-spacing: 0.5em;
+    break-inside: avoid;
+  }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/ai-news/" style="color:#c9a84c;">AI News</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/">All Issues</a>
+      <a href="https://sandybpatterson.github.io/bookshelf.html">Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">AI News</div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <p class="issue-label">Issue 02</p>
+    <h1 class="headline">Your Name Was the Interview</h1>
+    <p class="deck">The algorithm decided before you typed a single word.</p>
+    <p class="byline">Sandy B. Patterson</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="drop-cap">You spent three hours on that resume. Tweaked the margins. Rewrote the summary four times. Made sure every verb was active, every gap explained, every skill listed in the right order.</p>
+
+      <p>Then you submitted it.</p>
+
+      <p>And before a single human being looked at it, a machine read your name. And made a decision.</p>
+
+      <p>Researchers at the University of Washington gave three AI hiring models the same resume. Identical qualifications. Identical experience. Identical formatting. The only variable was the name at the top.</p>
+
+      <p>Resumes with white-associated names were preferred 85% of the time. Resumes with Black-associated names were preferred 9% of the time.</p>
+
+      <p>Same resume. Different name. Completely different outcome.</p>
+
+      <p>Nobody programmed the system to discriminate. Nobody wrote a rule that said certain names should rank lower. The system learned that from us. From decades of hiring decisions made by human beings who had the same bias and expressed it consistently enough that the pattern became undeniable to a machine trained to find patterns.</p>
+
+      <p>The algorithm didn't invent this. It inherited it. And then it ran it at scale across millions of applications, faster and more consistently than any prejudiced hiring manager ever could.</p>
+
+      <p class="section-break">✦ &nbsp; ✦ &nbsp; ✦</p>
+
+      <p>Here is the uncomfortable part. You already knew this bias existed in humans.</p>
+
+      <p>Study after study going back decades has confirmed that identical resumes with white-sounding names get more callbacks than identical resumes with Black-sounding names. This is not new information. It is one of the most replicated findings in discrimination research.</p>
+
+      <p>We knew this. We built AI hiring tools anyway. We fed them historical hiring data anyway. And then we expressed genuine surprise when the machine reproduced exactly what the data contained.</p>
+
+      <blockquote class="pull-quote">The surprise is the tell.</blockquote>
+
+      <p>It reveals something important about how we think about AI. We treat these systems as if they arrived from somewhere neutral. As if training data is just data — clean, objective, unbiased — rather than a compressed record of every decision human beings ever made, including the biased ones.</p>
+
+      <p>Psychologists call the underlying mechanism implicit association. The automatic connection your brain makes between a name, a face, an accent — and a set of assumed characteristics. It fires in under a second. Below the level of conscious thought. Before your reasoning faculty has been consulted at all.</p>
+
+      <p>The machine learned from billions of instances of that hardware operating in the wild. And it reproduced what it saw.</p>
+
+      <p>Your brain runs it. The algorithm runs it faster. At greater scale. With no fatigue, no second thoughts, and no conscience that occasionally catches itself and reconsiders.</p>
+
+      <p class="section-break">✦ &nbsp; ✦ &nbsp; ✦</p>
+
+      <p>Stanford researchers confirmed the scale recently. They analyzed four million job applications processed by a single AI hiring vendor across 150 employers. They found that 26% of Black applicants and 15% of Asian applicants applied to positions where the AI system discriminated against their racial group.</p>
+
+      <p>Here is the part that should stop you cold.</p>
+
+      <p>When researchers looked at the aggregate data — pooling all recommendations together — they found no discrimination. The numbers looked fine. It was only when they examined each individual job position separately that the discrimination became visible.</p>
+
+      <p>The average hid the crime. Fair at a distance. Unfair in every specific instance that mattered to an actual person trying to get an actual job.</p>
+
+      <p>About 90% of U.S. employers now use AI to screen resumes. Most rely on the same small number of third-party vendors. Which means the same inherited bias is running across the majority of hiring decisions in the country simultaneously.</p>
+
+      <p>One algorithm. Millions of people. The same flaw. Industrial scale.</p>
+
+      <p>Your name was always just data.</p>
+
+      <p>This piece began as an issue of a different newsletter, tied to <a href="https://sandybpatterson.github.io/original-bug-book/">The Original Bug</a>, a book about how artificial intelligence inherited its worst tendencies from human cognition. It's being carried over here as the format changes.</p>
+
+    </div>
+
+    <div class="closing">Issue 02 of <em>AI News</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+</body>
+</html>
