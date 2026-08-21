@@ -36,6 +36,26 @@
       text-transform: uppercase;
       color: #c9a84c;
     }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      padding: 5px 14px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover {
+      color: #c9a84c;
+      border-color: #c9a84c44;
+    }
 
     .hero {
       max-width: 680px;
@@ -311,6 +331,10 @@
 
   <nav>
     <span class="nav-brand">Sandy B. Patterson</span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">AI News</a>
+    </div>
   </nav>
 
   <div class="hero">
@@ -382,9 +406,7 @@
   </div>
 
   <div class="link-tree">
-    <a href="https://sandybpatterson.github.io/ai-tools-directory/" class="link-btn">AI Tools</a>
     <button type="button" class="link-btn" id="podcast-copy-btn" onclick="copyPodcastLink()">Copy Podcast RSS Link</button>
-    <a href="https://sandybpatterson.github.io/ai-news/" class="link-btn">AI News</a>
   </div>
 
   <footer>&copy; Sandy B. Patterson</footer>
