@@ -128,6 +128,31 @@ Structure in place, same pattern as The Original Bug / Beyond Ice and Steam:
 
 ---
 
+## News Digest (`/news-digest/`)
+
+Status: live, daily. A long-form daily news digest (biology, misinformation,
+health/science policy, public health data) written in full narrative
+paragraphs, one per notable story, plus a "Biggest Story," "Good News," and
+"Sources" section each day.
+
+Follows the same pattern as `/ai-news/` — a hand-built HTML content stream,
+not a raw-text drop folder:
+- `index.html` — masthead + archive list linking to each day's digest, newest first
+- `YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
+  layout (masthead-strip, headline/deck/byline, `.section-label` dividers
+  instead of a single continuous article, sources as a linked list at the bottom)
+
+Linked from the sitewide nav (`bookshelf.html`, and all `ai-news/` pages) as
+"News Digest," matching the "Unify top nav across bookshelf, AI News, and
+ai-tools-directory" pattern.
+
+A daily scheduled task (CCR Routine, fires 14:00 UTC) generates each day's
+digest via web search, writes `news-digest/YYYY-MM-DD.html`, adds a new row
+to `news-digest/index.html`, and pushes directly to `main` — no merge step
+needed. If a day's digest doesn't appear, check whether that routine ran.
+
+---
+
 ## Cover Art
 
 Book cover images live in this repo's `/images/` folder (not in the book's
