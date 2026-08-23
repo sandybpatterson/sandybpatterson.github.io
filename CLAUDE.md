@@ -166,12 +166,23 @@ data), written in full narrative paragraphs, one per notable story, plus a
 named "Wetworks" — renamed to "Wetwear" by Sandy's request 2026-08-23; both
 the folder and every in-page reference were updated. Represented on the
 `ai-news/index.html` hub by exactly one row — sitting at the top of the
-same Issues list as everything else, no separate section — with an
-`.issue-date` line reading "Updated [Month Day, Year]" showing the most
-recent brief's date. **That date must be updated every time a new brief is
-published** — it's how visitors know the feed is actually live. Never add
-a second Wetwear row to the hub; always update the existing one in place.
-- `wetwear/index.html` — its own masthead + archive list of daily briefs, newest first
+same Issues list as everything else, no separate section.
+- **That row links straight to the latest specific brief**
+  (`wetwear/YYYY-MM-DD.html`), never to `wetwear/index.html`. Sandy
+  explicitly does not want an intermediate archive page in the click path
+  from the hub — one click, straight to the article, like every other
+  entry in the Issues list.
+- Its `.issue-date` line shows the latest brief's date (plain, e.g.
+  "August 22, 2026" — no "Updated" prefix). **Both the href and the date
+  must be updated together every time a new brief is published** — it's
+  how visitors know the feed is actually live. Never add a second Wetwear
+  row to the hub; always update the existing one in place.
+- `wetwear/index.html` still exists as a full archive of every daily brief,
+  newest first — it's just not the hub's link target anymore. It's still
+  reachable from inside any brief page via the "All Briefs" nav link, for
+  anyone who wants to browse older ones. If Sandy ever wants real
+  filtering/browsing on the hub itself, that's a distinct future feature —
+  don't build it unasked.
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
   instead of a single continuous article, sources as a linked list at the bottom)
