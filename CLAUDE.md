@@ -135,15 +135,22 @@ Not a book — a standalone, lightweight newspaper-styled dispatch section,
 separate from the shelf. Replaced an earlier per-book newsletter (retired,
 along with its Substack link) that used to live inside `original-bug-book`.
 
-`index.html` is the hub page. It lists the hand-written "Issues"
-(`issue-01.html`, `issue-02.html` — pieces tied to The Original Bug) under
-one archive-label block.
+`index.html` is the hub page. It lists **one single unified "Issues"
+archive** — no separate "Series" category. Sandy explicitly rejected
+splitting sub-series into their own segregated section (2026-08-23): every
+entry, whatever its source, lives in the same list and is sorted by
+recency, newest first.
 
 Rules for the Issues list:
+- **One list, not split by type.** The hand-written pieces
+  (`issue-01.html`, `issue-02.html` — tied to The Original Bug) and any
+  sub-series (e.g. Wetwear, linked as a single row pointing at its own
+  index — see below) all sit in the same `archive-wrap` block.
+- **Sorted newest-first, always.** New entries — whether a new hand-written
+  issue or a newly-active sub-series — get added **at the top**. Never
+  append to the bottom, and never pull an entry out into a separate section.
 - **No issue numbers anywhere** — Sandy asked for these removed; don't
   reintroduce "Issue 01," "Vol. I," or similar labels.
-- New issues get added to the archive list **at the top** — sorted
-  newest-first, always. Never append to the bottom.
 - Nav links on every AI News page: Read the Book (→ `original-bug-book`),
   AI Tools (→ `ai-tools-directory`), All Issues (self, on issue pages) /
   AI Tools (on the hub), &larr; Bookshelf. `bookshelf.html`,
@@ -152,12 +159,15 @@ Rules for the Issues list:
 - The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
   only — not repeated on every issue page.
 
-**Wetwear Daily News Brief (`/ai-news/wetwear/`)** — a separate long-form
-daily news digest (biology, misinformation, health/science policy, public
-health data), written in full narrative paragraphs, one per notable story,
-plus a "Biggest Story," "Good News," and "Sources" section each day.
-Originally named "Wetworks" — renamed to "Wetwear" by Sandy's request
-2026-08-23; both the folder and every in-page reference were updated.
+**Wetwear Daily News Brief (`/ai-news/wetwear/`)** — a long-form daily news
+digest (biology, misinformation, health/science policy, public health
+data), written in full narrative paragraphs, one per notable story, plus a
+"Biggest Story," "Good News," and "Sources" section each day. Originally
+named "Wetworks" — renamed to "Wetwear" by Sandy's request 2026-08-23; both
+the folder and every in-page reference were updated. Represented on the
+`ai-news/index.html` hub by a single row (title + one-line description)
+linking to `wetwear/`, sitting in the same Issues list as everything else,
+positioned by recency like any other entry.
 - `wetwear/index.html` — its own masthead + archive list of daily briefs, newest first
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
@@ -165,10 +175,6 @@ Originally named "Wetworks" — renamed to "Wetwear" by Sandy's request
 - Nav on every Wetwear page uses `nav-brand` = "AI News" linking to
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
-- **Not linked from `ai-news/index.html`** — Sandy asked for the "Series"
-  card pointing to it to be removed (2026-08-23). The pages still exist and
-  are reachable by direct URL; they're just not advertised from the hub.
-  Don't re-add that link without being asked.
 
 **⚠ Open inconsistency, unresolved as of 2026-08-23 — check before relying
 on this:** a CCR Routine ("Daily Long-Form News Digest," fires 14:00 UTC)
