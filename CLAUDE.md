@@ -164,28 +164,31 @@ digest (biology, misinformation, health/science policy, public health
 data), written in full narrative paragraphs, one per notable story, plus a
 "Biggest Story," "Good News," and "Sources" section each day. Originally
 named "Wetworks" — renamed to "Wetwear" by Sandy's request 2026-08-23; both
-the folder and every in-page reference were updated. Represented on the
-`ai-news/index.html` hub by exactly one row — sitting at the top of the
-same Issues list as everything else, no separate section.
-- **That row links straight to the latest specific brief**
+the folder and every in-page reference were updated.
+
+**Every day's brief gets its own permanent row on the `ai-news/index.html`
+hub — it is never overwritten or removed.** An earlier version of this
+rule said to update a single Wetwear row in place each day; Sandy
+corrected this on 2026-08-23 (the 8/22 brief had disappeared from the hub
+list when 8/23 replaced it, which she did not want) — do not reintroduce
+the single-row behavior.
+- Each day, **add a new row to the top** of the same unified Issues list
+  as everything else, no separate section, exactly like a new hand-written
+  Issue would be added. Older Wetwear rows stay exactly where they are,
+  further down the newest-first list, permanently.
+- That row **links straight to that day's specific brief**
   (`wetwear/YYYY-MM-DD.html`), never to `wetwear/index.html`. Sandy
   explicitly does not want an intermediate archive page in the click path
-  from the hub — one click, straight to the article, like every other
-  entry in the Issues list.
-- The row has **no separate date line** — its `.issue-title` div is one
-  combined string: `Wetwear Daily News Brief — [Month Day, Year]` (e.g.
-  "Wetwear Daily News Brief — August 22, 2026"), the latest brief's date.
-  Its `.issue-excerpt` is that day's real teaser (the biggest-story
-  summary), not a generic evergreen description of the series. **The href,
-  the date in the title, and the excerpt must all be updated together
-  every time a new brief is published.** Never add a second Wetwear row to
-  the hub; always update the existing one in place.
-- `wetwear/index.html` still exists as a full archive of every daily brief,
-  newest first — it's just not the hub's link target anymore. It's still
-  reachable from inside any brief page via the "All Briefs" nav link, for
-  anyone who wants to browse older ones. If Sandy ever wants real
-  filtering/browsing on the hub itself, that's a distinct future feature —
-  don't build it unasked.
+  — one click, straight to the article, like every other entry in the list.
+- Its `.issue-title` is that day's real, specific headline (see below) —
+  not "Wetwear Daily News Brief — [date]." Its `.issue-excerpt` starts
+  with the date (`[Month Day, Year] — `) followed by that day's real
+  teaser. This matches how every other row in the list already works —
+  nothing marks a row as "from Wetwear" versus hand-written; the unified
+  list doesn't distinguish sub-sources, by design.
+- `wetwear/index.html` is a secondary, full archive of every daily brief,
+  newest first, reachable from inside any brief page via "All Briefs." It
+  exists in parallel to the hub rows, not instead of them.
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
   instead of a single continuous article, sources as a linked list at the bottom).
