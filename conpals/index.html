@@ -165,6 +165,29 @@
     color:var(--parchment-dim);letter-spacing:.08em;text-transform:uppercase;
   }
 
+  /* TO JOIN */
+  .join-panel{
+    background:var(--panel);border:1px solid var(--gold-soft);
+  }
+  .join-steps{list-style:none;margin:0;padding:0;counter-reset:step;}
+  .join-steps li{
+    display:flex;align-items:center;gap:18px;
+    padding:18px 24px;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .join-steps li:last-child{border-bottom:none;}
+  .join-steps .num{
+    flex:none;width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+    background:var(--panel-2);border:1px solid var(--gold-soft);color:var(--gold);
+    font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+    clip-path:polygon(6px 0, 100% 0, 100% 100%, 0 100%, 0 6px);
+  }
+  .join-steps .txt strong{color:var(--gold);}
+  .join-steps kbd{
+    font-family:'JetBrains Mono',monospace;background:var(--void);
+    border:1px solid var(--gold-soft);color:var(--gold);
+    padding:2px 10px;font-size:14.5px;letter-spacing:.06em;font-weight:700;
+  }
+
   .banner-frame{
     max-width:720px;margin:8px auto 32px;padding:5px;
     background:var(--panel-2);border:1px solid var(--gold-soft);
@@ -273,9 +296,17 @@
     <p class="footnote">Everything not listed above runs standard vanilla rates.</p>
   </section>
 
-  <div style="text-align:center;margin-top:40px">
-    <div class="password-badge">🔑 Server Password: <strong>8675309</strong></div>
-  </div>
+  <!-- TO JOIN -->
+  <section>
+    <div class="section-head"><h2><span class="icon">🎮</span> To Join</h2><div class="rule"></div></div>
+    <div class="join-panel">
+      <ol class="join-steps">
+        <li><span class="num">1</span><span class="txt">In-game, select <strong>Community Servers</strong></span></li>
+        <li><span class="num">2</span><span class="txt">Search <strong>&ldquo;TheConclave&rdquo;</strong></span></li>
+        <li><span class="num">3</span><span class="txt">Enter the password: <kbd>8675309</kbd></span></li>
+      </ol>
+    </div>
+  </section>
 
   <footer>TheConclave — Palworld Dedicated Server</footer>
 </div>
