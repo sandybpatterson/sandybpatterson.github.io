@@ -64,6 +64,35 @@ every book the moment it's pushed — no per-repo sync needed, ever.
 
 ---
 
+## AI News (`/ai-news/`)
+
+Not a book — a standalone, lightweight newspaper-styled dispatch section,
+separate from the shelf. Replaced an earlier per-book newsletter (retired,
+along with its Substack link) that used to live inside `original-bug-book`.
+
+Structure:
+- `index.html` — masthead + archive list of every issue (title + short
+  excerpt only). **No issue numbers anywhere** — Sandy asked for these
+  removed; don't reintroduce "Issue 01," "Vol. I," or similar labels.
+- `issue-NN.html` — one file per issue, single-column newspaper-style
+  article (small masthead strip, headline, deck, byline, drop-cap opening
+  paragraph, optional pull-quote/section-break).
+
+**When adding a new issue:**
+1. Copy the most recent `issue-NN.html` as a starting template.
+2. Add its entry to `index.html`'s archive list **at the top** — the list
+   is sorted newest-first, always. Never append a new issue to the bottom.
+3. Nav links on every AI News page: Read the Book (→ `original-bug-book`),
+   AI Tools (→ `ai-tools-directory`), All Issues (self), &larr; Bookshelf.
+   These three pages' top navs are meant to visually match — keep any nav
+   changes in sync across `ai-news/`, `ai-tools-directory`, and
+   `bookshelf.html`.
+
+The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
+only — not repeated on every issue page.
+
+---
+
 ## Stories from Winchester (`/stories/`)
 
 Status: 2 stories complete —
