@@ -124,6 +124,11 @@
   }
   .entry-desc{font-size:14px;color:var(--parchment);margin:0 0 10px;}
   .entry-desc .flag{color:var(--amber);}
+  .entry-desc code{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:4px;
+    padding:1px 5px;color:var(--gold);
+  }
   .entry-link{
     font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--teal);
     text-decoration:none;border-bottom:1px solid transparent;margin-right:16px;
@@ -210,6 +215,8 @@
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Pal Defender</span><span class="tag">GitHub · Ultimeit / Zvendson</span></div>
       <p class="entry-desc">Already in use and connected to Discord. Not a pak/UE4SS mod — an external tool via RCON, so it's unaffected by client-install or DLL issues. Server-side anti-cheat that validates player actions before they execute, plus RCON and in-game admin commands. Windows dedicated servers only.</p>
       <a class="entry-link" href="https://github.com/Ultimeit/PalDefender/releases">github.com/Ultimeit/PalDefender/releases →</a>
+      <a class="entry-link" href="https://ultimeit.github.io/PalDefender/Commands/">Commands wiki →</a>
+      <a class="entry-link" href="https://ultimeit.github.io/PalDefender/FAQ/">FAQ →</a>
     </div>
 
     <div class="entry status-good">
@@ -246,6 +253,7 @@
       <div class="entry-head"><span class="badge">!</span><span class="entry-name">PalSchema</span><span class="tag">GitHub · Okaetsu</span></div>
       <p class="entry-desc">Confirmed legit — the standard modding framework for Palworld, lets modders edit game data with JSON instead of full pak files. <span class="flag">Flag:</span> PalSchema and most mods built on it typically need matching versions on both the server AND every client, especially for anything touching gameplay balance or drop tables. Confirm per sub-mod before assuming server-only.</p>
       <a class="entry-link" href="https://github.com/Okaetsu/PalSchema">github.com/Okaetsu/PalSchema →</a>
+      <a class="entry-link" href="https://okaetsu.github.io/PalSchema/docs/gettingstarted">Getting started docs →</a>
     </div>
   </section>
 
@@ -256,18 +264,22 @@
 
     <div class="entry status-good">
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Admin Commands</span><span class="tag">CurseForge</span></div>
-      <p class="entry-desc">Server-side only, confirmed in the mod description. Spawn pals, give items, teleport, spectator mode, admin gun. Supports UE4SS on Linux, Proton/Wine, and Windows.</p>
+      <p class="entry-desc">Server-side only, confirmed in the mod description. Spawn pals, give items, teleport, spectator mode, admin gun. Supports UE4SS on Linux, Proton/Wine, and Windows. Use: <code>/adminpassword</code> to log in, then <code>!help</code> in chat for the full command list.</p>
       <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/admin-commands">curseforge.com/…/admin-commands →</a>
+      <a class="entry-link" href="https://github.com/dkoz/AdminCommands/blob/main/README.md">Command list / README →</a>
     </div>
 
     <div class="entry status-neutral">
       <div class="entry-head"><span class="badge">i</span><span class="entry-name">Admin Commands (fallback)</span><span class="tag">Nexus #2371</span></div>
-      <p class="entry-desc">Separate mod, same name — a fallback in case PalDefender breaks or malfunctions. Not the same file as the CurseForge Admin Commands above.</p>
+      <p class="entry-desc">Description and command set (ban/kick/teleport/spawn, <code>!</code> prefix, <code>config.lua</code>) match the CurseForge Admin Commands above almost exactly — very likely the same dkoz/AdminCommands project mirrored to Nexus, though not confirmed as an identical file build. Kept as a fallback in case PalDefender breaks or malfunctions.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2371">nexusmods.com/palworld/mods/2371 →</a>
+      <a class="entry-link" href="https://github.com/dkoz/AdminCommands/blob/main/README.md">Command list / README →</a>
     </div>
 
     <div class="entry status-good">
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Server Necessities</span><span class="tag">Nexus #2373</span></div>
-      <p class="entry-desc">Confirmed server-side only — the mod page states outright "THIS MOD IS FOR DEDICATED SERVERS ONLY." Admin commands for server management.</p>
+      <p class="entry-desc">Confirmed server-side only — the mod page states outright "THIS MOD IS FOR DEDICATED SERVERS ONLY." Admin commands for server management, including <code>/giveexp &lt;PlayerName&gt; &lt;Amount&gt;</code> as of v1.4.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2373">nexusmods.com/palworld/mods/2373 →</a>
     </div>
 
     <div class="entry status-good">
@@ -286,6 +298,7 @@
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Starter Kit</span><span class="tag">Steam Workshop · also Nexus #2277</span></div>
       <p class="entry-desc">Server-owner configures kits players receive on join/respawn. Standard and VIP kit tiers, fully configurable contents.</p>
       <a class="entry-link" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3570580738">Steam →</a>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2277">nexusmods.com/palworld/mods/2277 →</a>
     </div>
 
     <div class="entry status-good">
@@ -297,36 +310,45 @@
     <div class="entry status-good">
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Daily Login Rewards</span><span class="tag">Nexus #2164</span></div>
       <p class="entry-desc">Confirmed server-side — the mod's own title says "(ServerSide Mod)." 30-day login streak system with scaling rewards.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2164">nexusmods.com/palworld/mods/2164 →</a>
     </div>
 
     <div class="entry status-limited">
       <div class="entry-head"><span class="badge">!</span><span class="entry-name">Player Stats PVE</span><span class="tag">Nexus #2167</span></div>
-      <p class="entry-desc">Confirmed to exist and match the description — tracks captures, kills, deaths, Tower Boss wins for leaderboards. <span class="flag">Flag:</span> the mod page currently shows "This mod is not currently available." Might be pulled down, private, or a temporary Nexus issue — check directly before relying on it.</p>
+      <p class="entry-desc">Confirmed to exist and match the description — tracks captures, kills, deaths, Tower Boss wins for leaderboards, with Discord webhook integration. <span class="flag">Flag:</span> the mod page currently shows "This mod is not currently available." Might be pulled down, private, or a temporary Nexus issue — check directly before relying on it.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2167">nexusmods.com/palworld/mods/2167 →</a>
     </div>
 
     <div class="entry status-good">
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Pals Drop Souls and Training Manuals</span><span class="tag">Nexus #2275</span></div>
-      <p class="entry-desc">Confirmed legit — a PalSchema sub-mod adding Pal Souls / Training Manuals to Pal drop tables. Requires PalSchema installed first (see above).</p>
+      <p class="entry-desc">Confirmed legit — a PalSchema sub-mod adding Pal Souls / Training Manuals to Pals, Alpha Pals, and Predator Pals' drop tables (20% drop chance, quality scales with Pal rarity). Requires PalSchema installed first (see above).</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2275">nexusmods.com/palworld/mods/2275 →</a>
     </div>
 
     <div class="entry status-good">
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Better Night Light</span><span class="tag">Nexus #550</span></div>
       <p class="entry-desc">Confirmed server-side only — multiple users on the mod page confirm only the server needs it installed; players see the effect with nothing on their end.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/550">nexusmods.com/palworld/mods/550 →</a>
     </div>
 
     <div class="entry status-limited">
       <div class="entry-head"><span class="badge">!</span><span class="entry-name">Sphere / PalZones</span><span class="tag">Nexus #1838 · also CurseForge</span></div>
-      <p class="entry-desc">Confirmed legit, matches the description — zone-based PVP/PVE permissions, no-build zones, damage type restrictions. <span class="flag">Caveat:</span> some users report compatibility issues/crashes when paired with certain UE4SS experimental-latest builds. Worth testing before going live.</p>
+      <p class="entry-desc">Confirmed legit, matches the description — permission-based zones controlling damage to/from Players, Player Pals, Wild Pals/NPCs, and structures per area; edited via <code>zones.json</code>, reloads live without a server restart. <span class="flag">Caveat:</span> some users report compatibility issues/crashes when paired with certain UE4SS experimental-latest builds. Worth testing before going live.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/1838">nexusmods.com/palworld/mods/1838 →</a>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/palzones">curseforge.com/…/palzones →</a>
     </div>
 
     <div class="entry status-neutral">
       <div class="entry-head"><span class="badge">i</span><span class="entry-name">Alternative Pal Summon</span><span class="tag">Nexus #1942</span></div>
       <p class="entry-desc">Confirmed legit and matches description — summons Pals where you're looking instead of at your side, configurable max distance. Not confirmed whether it's server-side only or needs client install too — the mod page doesn't say either way.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/1942">nexusmods.com/palworld/mods/1942 →</a>
     </div>
 
     <div class="entry status-good">
       <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Pal Level Lock</span><span class="tag">Nexus #2626</span></div>
-      <p class="entry-desc">Confirmed legit, matches description exactly — locks a Pal's partner skill until the player hits a configured level.</p>
+      <p class="entry-desc">Confirmed legit, matches description exactly — locks a Pal's partner skill until the player hits a configured level (or disable a Pal's skill entirely by setting it to <code>false</code> in config). If a Pal isn't in the default config, the mod page links a tool to look up its ID and add it manually.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2626">nexusmods.com/palworld/mods/2626 →</a>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/pal-level-lock">curseforge.com/…/pal-level-lock →</a>
     </div>
   </section>
 
