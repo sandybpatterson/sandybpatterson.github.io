@@ -165,9 +165,12 @@ data), written in full narrative paragraphs, one per notable story, plus a
 "Biggest Story," "Good News," and "Sources" section each day. Originally
 named "Wetworks" — renamed to "Wetwear" by Sandy's request 2026-08-23; both
 the folder and every in-page reference were updated. Represented on the
-`ai-news/index.html` hub by a single row (title + one-line description)
-linking to `wetwear/`, sitting in the same Issues list as everything else,
-positioned by recency like any other entry.
+`ai-news/index.html` hub by exactly one row — sitting at the top of the
+same Issues list as everything else, no separate section — with an
+`.issue-date` line reading "Updated [Month Day, Year]" showing the most
+recent brief's date. **That date must be updated every time a new brief is
+published** — it's how visitors know the feed is actually live. Never add
+a second Wetwear row to the hub; always update the existing one in place.
 - `wetwear/index.html` — its own masthead + archive list of daily briefs, newest first
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
@@ -176,20 +179,21 @@ positioned by recency like any other entry.
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
 
-**⚠ Open inconsistency, unresolved as of 2026-08-23 — check before relying
-on this:** a CCR Routine ("Daily Long-Form News Digest," fires 14:00 UTC)
-originally generated the Wetwear briefs above, but its prompt was later
-edited to target a different path (`news-digest/YYYY-MM-DD.html` +
-`news-digest/index.html`, with different nav labels) that **does not exist
-in this repo**. Its prompt also assumes a `/news-digest/CLAUDE.md` and an
-existing example page at that path — neither is real. Left unresolved,
-that Routine's next run may invent a third, divergent structure instead of
-continuing Wetwear. A second Routine ("Daily Watch: Biology, Misinformation
-& Public Health," fires 13:00 UTC) covers similar ground but its prompt
-never specifies a file path or repo to publish to at all. Sandy needs to
-decide which Routine (if either, as currently configured) should be
-authoritative, and point it at `ai-news/wetwear/` before trusting either
-one to keep publishing correctly.
+The CCR Routine ("Daily Long-Form News Digest," fires 14:00 UTC) generates
+each day's Wetwear brief via web search, writes `ai-news/wetwear/YYYY-MM-DD.html`,
+adds a row to `ai-news/wetwear/index.html`, updates the date on the
+`ai-news/index.html` hub row, and pushes directly to `main` — no merge
+step needed. (Its prompt briefly drifted to a nonexistent `news-digest/`
+path on 2026-08-22; corrected back to `ai-news/wetwear/` on 2026-08-23.) If
+a day's brief doesn't appear or the hub date goes stale, check whether that
+Routine actually ran.
+
+A second Routine ("Daily Watch: Biology, Misinformation & Public Health,"
+fires 13:00 UTC) covers the same four topic areas as a short bullet-point
+digest, but its prompt never specifies a file path or repo to publish to —
+it doesn't appear to write anything to this site. Redundant with the
+Routine above; still running as of 2026-08-23. Worth asking Sandy whether
+to disable it rather than assuming.
 
 ---
 
