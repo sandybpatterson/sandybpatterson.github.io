@@ -172,11 +172,14 @@ same Issues list as everything else, no separate section.
   explicitly does not want an intermediate archive page in the click path
   from the hub — one click, straight to the article, like every other
   entry in the Issues list.
-- Its `.issue-date` line shows the latest brief's date (plain, e.g.
-  "August 22, 2026" — no "Updated" prefix). **Both the href and the date
-  must be updated together every time a new brief is published** — it's
-  how visitors know the feed is actually live. Never add a second Wetwear
-  row to the hub; always update the existing one in place.
+- The row has **no separate date line** — its `.issue-title` div is one
+  combined string: `Wetwear Daily News Brief — [Month Day, Year]` (e.g.
+  "Wetwear Daily News Brief — August 22, 2026"), the latest brief's date.
+  Its `.issue-excerpt` is that day's real teaser (the biggest-story
+  summary), not a generic evergreen description of the series. **The href,
+  the date in the title, and the excerpt must all be updated together
+  every time a new brief is published.** Never add a second Wetwear row to
+  the hub; always update the existing one in place.
 - `wetwear/index.html` still exists as a full archive of every daily brief,
   newest first — it's just not the hub's link target anymore. It's still
   reachable from inside any brief page via the "All Briefs" nav link, for
@@ -185,7 +188,16 @@ same Issues list as everything else, no separate section.
   don't build it unasked.
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
-  instead of a single continuous article, sources as a linked list at the bottom)
+  instead of a single continuous article, sources as a linked list at the bottom).
+  **The `<h1 class="headline">` must be a real, specific news headline
+  written from that day's biggest story** (e.g. "The Largest Ebola Outbreak
+  in Congo's History Is Still Accelerating") — never the generic "Daily
+  Brief — [date]" pattern used before 2026-08-23. The `.deck` teases the
+  rest of the day's stories in one sentence. The date moves into the
+  byline instead (`Sandy B. Patterson · [Month Day, Year]`), since it's no
+  longer in the headline. `wetwear/index.html`'s archive row for that day
+  uses the same real headline as its `.issue-title`, not the generic
+  pattern either — keep both places in sync.
 - Nav on every Wetwear page uses `nav-brand` = "AI News" linking to
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
