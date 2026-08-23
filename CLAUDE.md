@@ -157,6 +157,44 @@ Structure in place, same pattern as The Original Bug / Beyond Ice and Steam:
 
 ---
 
+## AI News (`/ai-news/`)
+
+Status: live. The umbrella hub for anything AI-generated on this site — not
+just content about AI. `index.html` is the hub page: it lists the original
+AI-analysis "Issues" (`issue-01.html`, `issue-02.html` — hand-written pieces
+tied to The Original Bug) under one archive-label block, and links out to
+each named sub-series as its own card under a "Series" archive-label block
+below that. Sub-series get their own subfolder and their own archive index,
+so they never mix into the Issues list.
+
+**Wetworks Daily News Brief (`/ai-news/wetworks/`)** — the one sub-series
+that exists so far. A long-form daily news digest (biology, misinformation,
+health/science policy, public health data) written in full narrative
+paragraphs, one per notable story, plus a "Biggest Story," "Good News," and
+"Sources" section each day.
+- `wetworks/index.html` — its own masthead + archive list of daily briefs, newest first
+- `wetworks/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
+  layout (masthead-strip, headline/deck/byline, `.section-label` dividers
+  instead of a single continuous article, sources as a linked list at the bottom)
+- Nav on every wetworks page uses `nav-brand` = "AI News" linking to
+  `/ai-news/` (not to the wetworks subfolder) — wayfinding always points up
+  to the umbrella hub, matching how `issue-*.html` pages already do this.
+
+Site nav (`bookshelf.html`, and both `ai-news/issue-*.html` pages) links only
+to "AI News" as a single top-level entry — no separate nav link for
+Wetworks or any other sub-series. Anyone wanting a specific series clicks
+into `/ai-news/` first and picks it from the "Series" section there.
+
+A daily scheduled task (CCR Routine, fires 14:00 UTC) generates each day's
+Wetworks brief via web search, writes `ai-news/wetworks/YYYY-MM-DD.html`,
+adds a new row to `ai-news/wetworks/index.html`, and pushes directly to
+`main` — no merge step needed. If a day's brief doesn't appear, check
+whether that routine ran. A plain `.txt` companion file per day is still
+under discussion (needed by a downstream bot) — not yet implemented as of
+this writing.
+
+---
+
 ## Cover Art
 
 Book cover images live in this repo's `/images/` folder (not in the book's

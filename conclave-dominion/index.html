@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheConclave — Palworld Server</title>
+<meta name="description" content="TheConclave: a boosted, no-PvP co-op Palworld dedicated server. 1.5x EXP, 1.25x rates, 2x Ranch, keep-everything death penalty. Join the Discord to play.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0F1115;
+    --panel:#171A21;
+    --panel-2:#1D212B;
+    --line:#262B36;
+    --parchment:#C9CDD6;
+    --parchment-dim:#8A90A0;
+    --gold:#D4A94F;
+    --gold-soft:#8f7638;
+    --teal:#4FBDBA;
+    --amber:#E0A458;
+    --ember:#D9695F;
+    --discord:#5865F2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--parchment);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px 96px;}
+
+  /* HERO */
+  header{
+    padding:88px 24px 64px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(212,169,79,0.10), transparent 60%),
+      var(--void);
+  }
+  .crest{font-size:44px;margin-bottom:10px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  .eyebrow::before, .eyebrow::after{content:"◆";margin:0 10px;color:var(--gold-soft);font-size:10px;vertical-align:middle;}
+  h1{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:clamp(34px,7vw,56px);
+    margin:0 0 14px;
+    color:#F1EDE2;
+    letter-spacing:.01em;
+  }
+  .tagline{
+    display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--parchment-dim);
+    margin-bottom:36px;
+  }
+  .tagline .chip{
+    border:1px solid var(--line);border-radius:999px;padding:5px 14px;
+    background:var(--panel);
+  }
+  .tagline .chip strong{color:var(--gold);font-weight:600;}
+
+  .cta{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--discord);color:#fff;text-decoration:none;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:16px;
+    padding:15px 30px;border-radius:10px;
+    box-shadow:0 8px 24px rgba(88,101,242,0.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(88,101,242,0.45);}
+  .cta svg{width:22px;height:22px;flex:none;}
+  .cta-note{
+    margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    color:var(--parchment-dim);letter-spacing:.02em;
+  }
+
+  /* SECTIONS */
+  section{margin-top:56px;}
+  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;}
+  .section-head h2{
+    font-family:'Cinzel',serif;font-size:20px;font-weight:600;color:#F1EDE2;margin:0;
+    display:flex;align-items:center;gap:10px;
+  }
+  .section-head .rule{flex:1;height:1px;background:var(--line);}
+
+  .stat-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  }
+  .stat-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:16px 14px;
+  }
+  .stat-card .label{
+    font-size:12.5px;color:var(--parchment-dim);margin-bottom:6px;
+  }
+  .stat-card .value{
+    font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--gold);
+  }
+  .stat-card.teal .value{color:var(--teal);}
+  .stat-card.amber .value{color:var(--amber);}
+  .stat-card.ember .value{color:var(--ember);}
+
+  .footnote{
+    margin-top:20px;color:var(--parchment-dim);font-size:13px;font-style:italic;
+    text-align:center;
+  }
+
+  /* MID-PAGE CTA BAND */
+  .cta-band{
+    margin-top:64px;background:var(--panel);border:1px solid var(--line);
+    border-left:3px solid var(--discord);border-radius:0 8px 8px 0;
+    padding:28px 30px;text-align:center;
+  }
+  .cta-band h3{
+    font-family:'Cinzel',serif;font-size:19px;margin:0 0 8px;color:#F1EDE2;
+  }
+  .cta-band p{margin:0 0 20px;color:var(--parchment-dim);font-size:14.5px;max-width:480px;margin-left:auto;margin-right:auto;}
+
+  footer{
+    margin-top:64px;padding-top:24px;border-top:1px solid var(--line);
+    text-align:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    color:var(--parchment-dim);letter-spacing:.02em;
+  }
+
+  @media (max-width:600px){
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    header{padding:64px 20px 48px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crest">🏰</div>
+  <div class="eyebrow">Palworld Dedicated Server</div>
+  <h1>TheConclave</h1>
+  <div class="tagline">
+    <span class="chip"><strong>1.5x</strong> EXP</span>
+    <span class="chip"><strong>1.25x</strong> Rates</span>
+    <span class="chip"><strong>2x</strong> Ranch</span>
+    <span class="chip">No-PvP Co-op</span>
+  </div>
+
+  <a class="cta" href="http://tiny.cc/ConclavePals" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8v-3.02c-.31.07-.63.12-.96.12-2.13 0-3.86-1.73-3.86-3.86 0-.2.02-.39.05-.58-.5-.13-1-.34-1.44-.65a5.6 5.6 0 0 1-1.6-1.75c-.35-.6-.53-1.29-.53-2.06 0-.68.14-1.28.4-1.8-.16-.5-.24-1.05-.24-1.62 0-.4.06-.79.16-1.13.08-.27.28-.36.53-.24.62.29 1.5.86 2.4 1.7A9.9 9.9 0 0 1 8.3 6.5c.9-.24 1.85-.37 2.83-.37.98 0 1.93.13 2.83.37a10 10 0 0 1 3.4.42c.9-.84 1.78-1.41 2.4-1.7.25-.12.45-.03.53.24.1.34.16.73.16 1.13 0 .57-.08 1.12-.24 1.62.26.52.4 1.12.4 1.8 0 .77-.18 1.46-.53 2.06-.4.68-.94 1.28-1.6 1.75-.44.31-.94.52-1.44.65.03.19.05.38.05.58 0 2.13-1.73 3.86-3.86 3.86-.33 0-.65-.05-.96-.12v3.02c4.56-.93 8-4.96 8-9.8 0-5.52-4.48-10-10-10z"/></svg>
+    Join the Discord
+  </a>
+  <div class="cta-note">Password + connection details are shared inside the Discord</div>
+</header>
+
+<div class="wrap">
+
+  <!-- RATES -->
+  <section>
+    <div class="section-head"><h2>⚡ Rates</h2><div class="rule"></div></div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="label">EXP</div><div class="value">1.5x</div></div>
+      <div class="stat-card"><div class="label">Pal Capture Rate</div><div class="value">1.25x</div></div>
+      <div class="stat-card"><div class="label">Pal Spawn Rate</div><div class="value">1.25x</div></div>
+      <div class="stat-card"><div class="label">Gathering Yield</div><div class="value">1.25x</div></div>
+      <div class="stat-card"><div class="label">Enemy Drop Rate</div><div class="value">1.25x</div></div>
+      <div class="stat-card"><div class="label">Resource Node Respawn</div><div class="value">1.25x</div></div>
+      <div class="stat-card teal"><div class="label">Ranch Production Speed</div><div class="value">2x</div></div>
+      <div class="stat-card teal"><div class="label">Egg Hatching Time</div><div class="value">2x faster</div></div>
+      <div class="stat-card"><div class="label">Item Weight</div><div class="value">90% lighter</div></div>
+    </div>
+  </section>
+
+  <!-- COMBAT -->
+  <section>
+    <div class="section-head"><h2>🛡️ Combat &amp; Survival</h2><div class="rule"></div></div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="label">Player Damage Dealt</div><div class="value">3x</div></div>
+      <div class="stat-card"><div class="label">Damage Taken</div><div class="value">Normal</div></div>
+      <div class="stat-card"><div class="label">Stamina Drain</div><div class="value">90% slower</div></div>
+      <div class="stat-card teal"><div class="label">HP Regen</div><div class="value">1.25x</div></div>
+      <div class="stat-card teal"><div class="label">HP Regen, Sleeping</div><div class="value">2x</div></div>
+      <div class="stat-card"><div class="label">Pal Hunger Drain</div><div class="value">50% slower</div></div>
+      <div class="stat-card"><div class="label">Pal Stamina Drain</div><div class="value">90% slower</div></div>
+      <div class="stat-card amber"><div class="label">Death Penalty</div><div class="value">Keep Everything</div></div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <h3>Boosted, no-PvP, and built for co-op</h3>
+    <p>Die and lose nothing. Fast travel from day one. Join the Discord for the server password and connection info.</p>
+    <a class="cta" href="http://tiny.cc/ConclavePals" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8v-3.02c-.31.07-.63.12-.96.12-2.13 0-3.86-1.73-3.86-3.86 0-.2.02-.39.05-.58-.5-.13-1-.34-1.44-.65a5.6 5.6 0 0 1-1.6-1.75c-.35-.6-.53-1.29-.53-2.06 0-.68.14-1.28.4-1.8-.16-.5-.24-1.05-.24-1.62 0-.4.06-.79.16-1.13.08-.27.28-.36.53-.24.62.29 1.5.86 2.4 1.7A9.9 9.9 0 0 1 8.3 6.5c.9-.24 1.85-.37 2.83-.37.98 0 1.93.13 2.83.37a10 10 0 0 1 3.4.42c.9-.84 1.78-1.41 2.4-1.7.25-.12.45-.03.53.24.1.34.16.73.16 1.13 0 .57-.08 1.12-.24 1.62.26.52.4 1.12.4 1.8 0 .77-.18 1.46-.53 2.06-.4.68-.94 1.28-1.6 1.75-.44.31-.94.52-1.44.65.03.19.05.38.05.58 0 2.13-1.73 3.86-3.86 3.86-.33 0-.65-.05-.96-.12v3.02c4.56-.93 8-4.96 8-9.8 0-5.52-4.48-10-10-10z"/></svg>
+      Join the Discord
+    </a>
+  </div>
+
+  <!-- BASE & GUILD -->
+  <section>
+    <div class="section-head"><h2>🏠 Base &amp; Guild</h2><div class="rule"></div></div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="label">Structure Decay</div><div class="value">Half speed</div></div>
+      <div class="stat-card teal"><div class="label">Max Pals per Base</div><div class="value">30</div></div>
+      <div class="stat-card"><div class="label">Guild Inactivity Grace</div><div class="value">240 min</div></div>
+      <div class="stat-card"><div class="label">Global Palbox Export/Import</div><div class="value">On</div></div>
+      <div class="stat-card"><div class="label">Full Stat Point Allocation</div><div class="value">On</div></div>
+    </div>
+  </section>
+
+  <!-- MODE & ACCESS -->
+  <section>
+    <div class="section-head"><h2>🌐 Mode &amp; Access</h2><div class="rule"></div></div>
+    <div class="stat-grid">
+      <div class="stat-card amber"><div class="label">PvP / Friendly Fire</div><div class="value">Off</div></div>
+      <div class="stat-card"><div class="label">Predator Boss Pals</div><div class="value">On</div></div>
+      <div class="stat-card"><div class="label">Fast Travel + Pick Start</div><div class="value">On</div></div>
+      <div class="stat-card teal"><div class="label">Crossplay</div><div class="value">All platforms</div></div>
+      <div class="stat-card"><div class="label">Chat Limit</div><div class="value">30 msg/min</div></div>
+    </div>
+    <p class="footnote">Everything not listed above runs standard vanilla rates.</p>
+  </section>
+
+  <footer>TheConclave — Palworld Dedicated Server</footer>
+</div>
+</body>
+</html>

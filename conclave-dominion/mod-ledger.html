@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Server Mod Ledger — The Conclave: Dominion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0F1115;
+    --panel:#171A21;
+    --panel-2:#1D212B;
+    --line:#262B36;
+    --parchment:#C9CDD6;
+    --parchment-dim:#8A90A0;
+    --gold:#D4A94F;
+    --gold-soft:#8f7638;
+    --teal:#4FBDBA;
+    --amber:#E0A458;
+    --ember:#D9695F;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--void);
+    color:var(--parchment);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px 96px;}
+
+  header{
+    padding:64px 24px 48px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(212,169,79,0.08), transparent 60%),
+      var(--void);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  .eyebrow::before, .eyebrow::after{content:"◆";margin:0 10px;color:var(--gold-soft);font-size:10px;vertical-align:middle;}
+  h1{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:clamp(28px,5vw,42px);
+    margin:0 0 12px;
+    color:#F1EDE2;
+    letter-spacing:.01em;
+  }
+  .subtitle{color:var(--parchment-dim);font-size:15px;max-width:520px;margin:0 auto;}
+  .meta-row{
+    display:flex;justify-content:center;gap:28px;margin-top:28px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--parchment-dim);
+    flex-wrap:wrap;
+  }
+  .meta-row strong{color:var(--parchment);font-weight:500;}
+
+  .tldr{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    border-radius:0 6px 6px 0;
+    padding:22px 26px;
+    margin-top:40px;
+  }
+  .tldr .label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+    color:var(--gold);text-transform:uppercase;margin-bottom:10px;
+  }
+  .tldr p{margin:0;color:var(--parchment);font-size:15px;}
+
+  .overview{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px;
+  }
+  .stat{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:18px 14px;text-align:center;
+  }
+  .stat .n{font-family:'Cinzel',serif;font-size:28px;font-weight:700;}
+  .stat .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--parchment-dim);margin-top:4px;}
+  .stat.good .n{color:var(--teal);}
+  .stat.limited .n{color:var(--amber);}
+  .stat.action .n{color:var(--gold);}
+  .stat.dropped .n{color:var(--ember);}
+
+  section{margin-top:56px;}
+  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;}
+  .section-head h2{
+    font-family:'Cinzel',serif;font-size:20px;font-weight:600;color:#F1EDE2;margin:0;
+  }
+  .section-head .rule{flex:1;height:1px;background:var(--line);}
+  .section-note{color:var(--parchment-dim);font-size:13.5px;margin:-10px 0 20px;max-width:640px;}
+
+  .entry{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:18px 20px;margin-bottom:10px;
+  }
+  .entry-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{
+    width:20px;height:20px;flex:none;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;
+    clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  }
+  .status-good .badge{background:rgba(79,189,186,0.18);color:var(--teal);}
+  .status-limited .badge{background:rgba(224,164,88,0.18);color:var(--amber);}
+  .status-blocked .badge{background:rgba(217,105,95,0.18);color:var(--ember);}
+  .status-neutral .badge{background:rgba(138,144,160,0.18);color:var(--parchment-dim);}
+
+  .entry-name{font-family:'JetBrains Mono',monospace;font-size:14.5px;font-weight:600;color:#F1EDE2;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.05em;
+    color:var(--parchment-dim);border:1px solid var(--line);border-radius:4px;
+    padding:2px 7px;text-transform:uppercase;
+  }
+  .entry-desc{font-size:14px;color:var(--parchment);margin:0 0 10px;}
+  .entry-desc .flag{color:var(--amber);}
+  .entry-desc code{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:4px;
+    padding:1px 5px;color:var(--gold);
+  }
+  .install-chip{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;
+    border-radius:4px;padding:2px 8px 2px 6px;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:5px;
+  }
+  .install-chip::before{content:"";width:6px;height:6px;border-radius:50%;display:inline-block;flex:none;}
+  .install-yes{background:rgba(79,189,186,0.12);color:var(--teal);border:1px solid rgba(79,189,186,0.3);}
+  .install-yes::before{background:var(--teal);}
+  .install-pending{background:rgba(224,164,88,0.12);color:var(--amber);border:1px solid rgba(224,164,88,0.3);}
+  .install-pending::before{background:var(--amber);}
+  .install-unconfirmed{background:rgba(138,144,160,0.1);color:var(--parchment-dim);border:1px dashed var(--line);}
+  .install-unconfirmed::before{background:var(--parchment-dim);}
+  .install-no{background:rgba(217,105,95,0.1);color:var(--ember);border:1px solid rgba(217,105,95,0.25);}
+  .install-no::before{background:var(--ember);}
+  .install-na{background:transparent;color:var(--parchment-dim);border:1px solid var(--line);}
+  .install-na::before{display:none;}
+  .entry-link{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--teal);
+    text-decoration:none;border-bottom:1px solid transparent;margin-right:16px;
+  }
+  .entry-link:hover{border-bottom-color:var(--teal);}
+
+  .steps{list-style:none;margin:0;padding:0;counter-reset:step;}
+  .steps li{
+    counter-increment:step;position:relative;padding:12px 0 12px 42px;
+    border-bottom:1px solid var(--line);font-size:14.5px;
+  }
+  .steps li:last-child{border-bottom:none;}
+  .steps li::before{
+    content:counter(step);
+    position:absolute;left:0;top:10px;
+    width:26px;height:26px;border-radius:50%;
+    background:var(--panel-2);border:1px solid var(--gold-soft);
+    color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .steps-box{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 20px;}
+  .note-box{
+    margin-top:14px;background:var(--panel-2);border:1px dashed var(--line);
+    border-radius:6px;padding:14px 16px;font-size:13px;color:var(--parchment-dim);
+  }
+
+  .qlist{list-style:none;margin:0;padding:0;}
+  .qlist li{
+    display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .qlist li:last-child{border-bottom:none;}
+  .qmark{
+    flex:none;width:22px;height:22px;border-radius:50%;
+    border:1px solid var(--gold-soft);color:var(--gold);
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  footer{
+    margin-top:64px;padding-top:24px;border-top:1px solid var(--line);
+    text-align:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    color:var(--parchment-dim);letter-spacing:.02em;
+  }
+
+  @media (max-width:600px){
+    .overview{grid-template-columns:repeat(2,1fr);}
+    header{padding:48px 20px 36px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">The Conclave: Dominion</div>
+  <h1>Server Mod Ledger</h1>
+  <p class="subtitle">Palworld dedicated server — mod status, verification, and open items for the admin team.</p>
+  <div class="meta-row">
+    <span>Host: <strong>low.ms</strong></span>
+    <span>OS: <strong>Windows</strong></span>
+    <span>Compiled: <strong>Aug 22, 2026</strong></span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="tldr">
+    <div class="label">TL;DR</div>
+    <p>Server's confirmed Windows. Pal Defender and Simple Building Blueprints work fine for everyone right now — no action needed. Creative Menu, PalAdmin, and PalSchema are installed but need the mod also enabled on the individual player's own client to use — Sandy is on GeForce Now, which can't run arbitrary local mods (see the callout below), so probably can't use most of these personally, but any PC-owning player can follow the client-side steps below. Fourteen more mods have been checked against Nexus, CurseForge, and GitHub and confirmed real and server-side — but "verified" here means vetted-as-legit, not confirmed-as-installed; each now carries an install-status chip, and most read "not confirmed installed" pending a check against the actual server. Still waiting on low.ms to confirm the Surgery Table Unlocker swap and whether file/FTP access is available for future installs.</p>
+  </div>
+
+  <div class="overview">
+    <div class="stat good"><div class="n">2</div><div class="l">Working now</div></div>
+    <div class="stat limited"><div class="n">4</div><div class="l">Client install needed</div></div>
+    <div class="stat action"><div class="n">14</div><div class="l">Server-side, verified</div></div>
+    <div class="stat dropped"><div class="n">2</div><div class="l">Dropped / unverifiable</div></div>
+  </div>
+
+  <!-- WORKING -->
+  <section>
+    <div class="section-head"><h2>Working now, no action needed</h2><div class="rule"></div></div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Pal Defender</span><span class="tag">GitHub · Ultimeit / Zvendson</span><span class="install-chip install-yes">Installed</span></div>
+      <p class="entry-desc">Already in use and connected to Discord. Not a pak/UE4SS mod — an external tool via RCON, so it's unaffected by client-install or DLL issues. Server-side anti-cheat that validates player actions before they execute, plus RCON and in-game admin commands. Windows dedicated servers only.</p>
+      <a class="entry-link" href="https://github.com/Ultimeit/PalDefender/releases">GitHub releases →</a>
+      <a class="entry-link" href="https://ultimeit.github.io/PalDefender/Commands/">Commands wiki →</a>
+      <a class="entry-link" href="https://ultimeit.github.io/PalDefender/FAQ/">FAQ →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Simple Building Blueprints</span><span class="tag">Steam Workshop</span><span class="install-chip install-na">No server install needed</span></div>
+      <p class="entry-desc">Client-side only as of a recent update — the server doesn't need it installed. Works for any player who enables it on their own client.</p>
+      <a class="entry-link" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3768908799">Steam Workshop page →</a>
+    </div>
+  </section>
+
+  <!-- LIMITED -->
+  <section>
+    <div class="section-head"><h2>Installed but limited — need client install too</h2><div class="rule"></div></div>
+    <p class="section-note">These are on the server, but only usable by a player who also has the mod active on their own game.</p>
+
+    <div class="note-box">
+      <strong style="color:var(--parchment)">Why Sandy probably can't use these:</strong> GeForce Now streams Palworld from Nvidia's cloud PCs — there's no local file system to drop UE4SS/pak files into, and Nvidia doesn't allow installing arbitrary third-party software on the cloud instance. Palworld does have official Steam Workshop support (since the 1.0 release, July 2026), so the in-game Mod Management menu will let a GeForce Now session subscribe to and "enable" these — but at least one player reported the mod showing as installed/enabled while doing nothing in-game on GeForce Now. Nvidia's only confirmed working mod integrations are curated partnerships (mod.io in Baldur's Gate 3, CurseForge in World of Warcraft) — Palworld isn't one of them. Bottom line: treat Creative Menu, PalAdmin, and the base Surgery Table Unlocker as unreliable-to-nonfunctional from a GeForce Now session; any admin or player on a real local PC install should be fine.
+      <div style="margin-top:10px">
+        <a class="entry-link" href="https://steamcommunity.com/app/1623730/discussions/0/588433820963885999/">Steam Community: GeForce Now Workshop mods report →</a>
+        <a class="entry-link" href="https://blogs.nvidia.com/blog/geforce-now-thursday-baldurs-gate-3-mods">Nvidia: how supported cloud mod partnerships work →</a>
+      </div>
+    </div>
+
+    <div class="entry status-limited">
+      <div class="entry-head"><span class="badge">!</span><span class="entry-name">Creative Menu</span><span class="tag">Steam Workshop</span><span class="install-chip install-yes">Installed (server)</span></div>
+      <p class="entry-desc">Confirmed to need the mod also enabled on the individual player's own client — multiple users on forums report this exact requirement. Spawn items/pals/npcs, edit stats.</p>
+      <a class="entry-link" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3625287786">Steam Workshop page →</a>
+    </div>
+
+    <div class="entry status-limited">
+      <div class="entry-head"><span class="badge">!</span><span class="entry-name">PalAdmin — Advanced Pal Generator</span><span class="tag">Steam Workshop</span><span class="install-chip install-yes">Installed (server)</span></div>
+      <p class="entry-desc">Likely follows the same pattern as Creative Menu — an in-game F7 admin panel, not a Discord/RCON tool. <span class="flag">Inferred, not confirmed for this specific mod.</span> Supports Windows dedicated servers. Grants items, EXP, Pals, Pal Eggs, or NPCs to one or more selected online players.</p>
+      <a class="entry-link" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3765859802">Steam Workshop page →</a>
+    </div>
+
+    <div class="entry status-limited">
+      <div class="entry-head"><span class="badge">!</span><span class="entry-name">Pal Surgery Table Unlocker</span><span class="tag">base / non-PalSchema · Steam</span><span class="install-chip install-pending">Pending confirmation</span></div>
+      <p class="entry-desc">Requires install on both the server and every client. Toggled via in-game Mod Management; no UE4SS needed on the client side. Install status tied directly to the open question below — the swap to this non-PalSchema version hasn't been confirmed complete yet.</p>
+      <a class="entry-link" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3625364851">Steam Workshop page →</a>
+    </div>
+
+    <div class="entry status-limited">
+      <div class="entry-head"><span class="badge">!</span><span class="entry-name">PalSchema</span><span class="tag">GitHub · Okaetsu</span><span class="install-chip install-yes">Installed (server)</span></div>
+      <p class="entry-desc">Confirmed legit — the standard modding framework for Palworld, lets modders edit game data with JSON instead of full pak files. <span class="flag">Flag:</span> PalSchema and most mods built on it typically need matching versions on both the server AND every client, especially for anything touching gameplay balance or drop tables. Confirm per sub-mod before assuming server-only.</p>
+      <a class="entry-link" href="https://github.com/Okaetsu/PalSchema">GitHub repo →</a>
+      <a class="entry-link" href="https://okaetsu.github.io/PalSchema/docs/gettingstarted">Getting started docs →</a>
+    </div>
+  </section>
+
+  <!-- VERIFIED SERVER-SIDE -->
+  <section>
+    <div class="section-head"><h2>Server-side mods, verified</h2><div class="rule"></div></div>
+    <p class="section-note">Install on the dedicated server only — players need nothing on their own game. Sourced from CurseForge, Steam, Nexus, and the admin team's own Discord list, and cross-checked against each mod's own page. All confirmed compatible with Windows. <strong style="color:var(--parchment)">"Not confirmed installed" below means vetted-as-legit, not verified-as-live</strong> — this pass checked whether each mod is real and safe to install, not whether it's actually on the server right now. Sandy/the admin team should confirm which of these are already running so this can be corrected to "Installed."</p>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Admin Commands</span><span class="tag">CurseForge</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Server-side only, confirmed in the mod description. Spawn pals, give items, teleport, spectator mode, admin gun. Supports UE4SS on Linux, Proton/Wine, and Windows. Use: <code>/adminpassword</code> to log in, then <code>!help</code> in chat for the full command list.</p>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/admin-commands">CurseForge page →</a>
+      <a class="entry-link" href="https://github.com/dkoz/AdminCommands/blob/main/README.md">Command list / README →</a>
+    </div>
+
+    <div class="entry status-neutral">
+      <div class="entry-head"><span class="badge">i</span><span class="entry-name">Admin Commands (fallback)</span><span class="tag">Nexus #2371</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Description and command set (ban/kick/teleport/spawn, <code>!</code> prefix, <code>config.lua</code>) match the CurseForge Admin Commands above almost exactly — very likely the same dkoz/AdminCommands project mirrored to Nexus, though not confirmed as an identical file build. Kept as a fallback in case PalDefender breaks or malfunctions.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2371">Nexus page →</a>
+      <a class="entry-link" href="https://github.com/dkoz/AdminCommands/blob/main/README.md">Command list / README →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Server Necessities</span><span class="tag">Nexus #2373</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed server-side only — the mod page states outright "THIS MOD IS FOR DEDICATED SERVERS ONLY." Admin commands for server management, including <code>/giveexp &lt;PlayerName&gt; &lt;Amount&gt;</code> as of v1.4.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2373">Nexus page →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Server Tools</span><span class="tag">CurseForge · by CosmicDan</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Server-side only, confirmed. Windows servers only — UE4SS isn't ported to Linux for this one. SteamID whitelisting, auto-shutdown timer with warnings, welcome message, chat logging.</p>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/blueprint-code-mods/server-tools">CurseForge page →</a>
+    </div>
+
+    <div class="entry status-limited">
+      <div class="entry-head"><span class="badge">!</span><span class="entry-name">Stuck Pal Rescuer</span><span class="tag">CurseForge · by xteh</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Server-side — host installs, players don't need it. <span class="flag">Caveat:</span> the author states it "should be compatible… but I'm not 100% on that, needs more testing." Auto-teleports stuck Pals back to the Palbox after inactivity.</p>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/stuck-pal-rescuer">CurseForge page →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Starter Kit</span><span class="tag">Steam Workshop · also Nexus #2277</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Server-owner configures kits players receive on join/respawn. Standard and VIP kit tiers, fully configurable contents.</p>
+      <a class="entry-link" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3570580738">Steam Workshop page →</a>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2277">Nexus mirror →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Starter Kit — Advanced Kit System</span><span class="tag">CurseForge · by Kozejin</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Server-side, confirmed. Supports UE4SS on Linux, Proton/Wine, and Windows. Customize via kit.lua, claim limits, !claim command.</p>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/starter-kit-advanced-kit-system">CurseForge page →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Daily Login Rewards</span><span class="tag">Nexus #2164</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed server-side — the mod's own title says "(ServerSide Mod)." 30-day login streak system with scaling rewards.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2164">Nexus page →</a>
+    </div>
+
+    <div class="entry status-limited">
+      <div class="entry-head"><span class="badge">!</span><span class="entry-name">Player Stats PVE</span><span class="tag">Nexus #2167</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed to exist and match the description — tracks captures, kills, deaths, Tower Boss wins for leaderboards, with Discord webhook integration. <span class="flag">Flag:</span> the mod page currently shows "This mod is not currently available." Might be pulled down, private, or a temporary Nexus issue — check directly before relying on it.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2167">Nexus page →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Pals Drop Souls and Training Manuals</span><span class="tag">Nexus #2275</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed legit — a PalSchema sub-mod adding Pal Souls / Training Manuals to Pals, Alpha Pals, and Predator Pals' drop tables (20% drop chance, quality scales with Pal rarity). Requires PalSchema installed first (see above).</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2275">Nexus page →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Better Night Light</span><span class="tag">Nexus #550</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed server-side only — multiple users on the mod page confirm only the server needs it installed; players see the effect with nothing on their end.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/550">Nexus page →</a>
+    </div>
+
+    <div class="entry status-limited">
+      <div class="entry-head"><span class="badge">!</span><span class="entry-name">Sphere / PalZones</span><span class="tag">Nexus #1838 · also CurseForge</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed legit, matches the description — permission-based zones controlling damage to/from Players, Player Pals, Wild Pals/NPCs, and structures per area; edited via <code>zones.json</code>, reloads live without a server restart. <span class="flag">Caveat:</span> some users report compatibility issues/crashes when paired with certain UE4SS experimental-latest builds. Worth testing before going live.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/1838">Nexus page →</a>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/palzones">CurseForge mirror →</a>
+    </div>
+
+    <div class="entry status-neutral">
+      <div class="entry-head"><span class="badge">i</span><span class="entry-name">Alternative Pal Summon</span><span class="tag">Nexus #1942</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed legit and matches description — summons Pals where you're looking instead of at your side, configurable max distance. Not confirmed whether it's server-side only or needs client install too — the mod page doesn't say either way.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/1942">Nexus page →</a>
+    </div>
+
+    <div class="entry status-good">
+      <div class="entry-head"><span class="badge">✓</span><span class="entry-name">Pal Level Lock</span><span class="tag">Nexus #2626</span><span class="install-chip install-unconfirmed">Not confirmed installed</span></div>
+      <p class="entry-desc">Confirmed legit, matches description exactly — locks a Pal's partner skill until the player hits a configured level (or disable a Pal's skill entirely by setting it to <code>false</code> in config). If a Pal isn't in the default config, the mod page links a tool to look up its ID and add it manually.</p>
+      <a class="entry-link" href="https://www.nexusmods.com/palworld/mods/2626">Nexus page →</a>
+      <a class="entry-link" href="https://www.curseforge.com/palworld/lua-code-mods/pal-level-lock">CurseForge mirror →</a>
+    </div>
+  </section>
+
+  <!-- DROPPED -->
+  <section>
+    <div class="section-head"><h2>Dropped — failed verification</h2><div class="rule"></div></div>
+
+    <div class="entry status-blocked">
+      <div class="entry-head"><span class="badge">✕</span><span class="entry-name">Server Optimizer</span><span class="install-chip install-no">Not installed</span></div>
+      <p class="entry-desc">Mod page shows "not currently available" on Nexus, no CurseForge or Steam presence found.</p>
+    </div>
+
+    <div class="entry status-blocked">
+      <div class="entry-head"><span class="badge">✕</span><span class="entry-name">(SERVER) Pals Learn Over Time</span><span class="install-chip install-no">Not installed</span></div>
+      <p class="entry-desc">Nexus-only, no CurseForge or Steam link exists.</p>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section>
+    <div class="section-head"><h2>How to enable a mod client-side</h2><div class="rule"></div></div>
+    <p class="section-note">For the PC-owning player. Applies to Creative Menu, PalAdmin, Simple Building Blueprints, and the base Surgery Table Unlocker.</p>
+
+    <div class="steps-box">
+      <ol class="steps">
+        <li>Open the mod's Steam Workshop page and click <strong>Subscribe</strong>.</li>
+        <li>Launch Palworld.</li>
+        <li>At the title screen, go to <strong>Options → Mod Management</strong>.</li>
+        <li>Toggle "Enable Mod" to ON if it isn't already.</li>
+        <li>Find the mod in the list and check its box.</li>
+        <li>Click <strong>Save</strong>. The game will restart to apply it.</li>
+        <li>Join the server as normal. For Creative Menu, open the menu with F1 (or hold crouch for 3 seconds). For PalAdmin, press F7 after loading into the world.</li>
+        <li>If either menu says it can't connect to host, wait ~30 seconds and try again, or teleport elsewhere and retry — a known quirk, not a broken install.</li>
+      </ol>
+    </div>
+    <div class="note-box">Note: for anything admin-only (PalAdmin, Creative Menu's full features), the player also needs admin rights on the server itself — set via the admin password in the server's settings.</div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section>
+    <div class="section-head"><h2>Open questions for low.ms</h2><div class="rule"></div></div>
+    <ul class="qlist">
+      <li><span class="qmark">?</span>Does the account have real file/FTP access for manual UE4SS/pak installs, or only a restricted control panel?</li>
+      <li><span class="qmark">?</span>Has the Surgery Table Unlocker swap to the non-PalSchema version been completed?</li>
+      <li><span class="qmark">?</span>Which of the 14 "Server-side mods, verified" are actually running on the live server right now, vs. just vetted and ready to install? Each is tagged "Not confirmed installed" until this is checked.</li>
+    </ul>
+  </section>
+
+  <footer>Compiled for The Conclave: Dominion admin team — Aug 22, 2026</footer>
+</div>
+</body>
+</html>
