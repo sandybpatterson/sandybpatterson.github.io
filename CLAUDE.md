@@ -64,34 +64,6 @@ every book the moment it's pushed — no per-repo sync needed, ever.
 
 ---
 
-## AI News (`/ai-news/`)
-
-Not a book — a standalone, lightweight newspaper-styled dispatch section,
-separate from the shelf. Replaced an earlier per-book newsletter (retired,
-along with its Substack link) that used to live inside `original-bug-book`.
-
-Structure:
-- `index.html` — masthead + archive list of every issue (title + short
-  excerpt only). **No issue numbers anywhere** — Sandy asked for these
-  removed; don't reintroduce "Issue 01," "Vol. I," or similar labels.
-- `issue-NN.html` — one file per issue, single-column newspaper-style
-  article (small masthead strip, headline, deck, byline, drop-cap opening
-  paragraph, optional pull-quote/section-break).
-
-**When adding a new issue:**
-1. Copy the most recent `issue-NN.html` as a starting template.
-2. Add its entry to `index.html`'s archive list **at the top** — the list
-   is sorted newest-first, always. Never append a new issue to the bottom.
-3. Nav links on every AI News page: Read the Book (→ `original-bug-book`),
-   AI Tools (→ `ai-tools-directory`), All Issues (self), &larr; Bookshelf.
-   These three pages' top navs are meant to visually match — keep any nav
-   changes in sync across `ai-news/`, `ai-tools-directory`, and
-   `bookshelf.html`.
-
-The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
-only — not repeated on every issue page.
-
----
 
 ## Stories from Winchester (`/stories/`)
 
@@ -159,39 +131,59 @@ Structure in place, same pattern as The Original Bug / Beyond Ice and Steam:
 
 ## AI News (`/ai-news/`)
 
-Status: live. The umbrella hub for anything AI-generated on this site — not
-just content about AI. `index.html` is the hub page: it lists the original
-AI-analysis "Issues" (`issue-01.html`, `issue-02.html` — hand-written pieces
-tied to The Original Bug) under one archive-label block, and links out to
-each named sub-series as its own card under a "Series" archive-label block
-below that. Sub-series get their own subfolder and their own archive index,
-so they never mix into the Issues list.
+Not a book — a standalone, lightweight newspaper-styled dispatch section,
+separate from the shelf. Replaced an earlier per-book newsletter (retired,
+along with its Substack link) that used to live inside `original-bug-book`.
 
-**Wetworks Daily News Brief (`/ai-news/wetworks/`)** — the one sub-series
-that exists so far. A long-form daily news digest (biology, misinformation,
-health/science policy, public health data) written in full narrative
-paragraphs, one per notable story, plus a "Biggest Story," "Good News," and
-"Sources" section each day.
-- `wetworks/index.html` — its own masthead + archive list of daily briefs, newest first
-- `wetworks/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
+`index.html` is the hub page. It lists the hand-written "Issues"
+(`issue-01.html`, `issue-02.html` — pieces tied to The Original Bug) under
+one archive-label block.
+
+Rules for the Issues list:
+- **No issue numbers anywhere** — Sandy asked for these removed; don't
+  reintroduce "Issue 01," "Vol. I," or similar labels.
+- New issues get added to the archive list **at the top** — sorted
+  newest-first, always. Never append to the bottom.
+- Nav links on every AI News page: Read the Book (→ `original-bug-book`),
+  AI Tools (→ `ai-tools-directory`), All Issues (self, on issue pages) /
+  AI Tools (on the hub), &larr; Bookshelf. `bookshelf.html`,
+  `ai-tools-directory`, and `ai-news/` are meant to have visually matching
+  top navs — keep nav changes in sync across all three.
+- The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
+  only — not repeated on every issue page.
+
+**Wetwear Daily News Brief (`/ai-news/wetwear/`)** — a separate long-form
+daily news digest (biology, misinformation, health/science policy, public
+health data), written in full narrative paragraphs, one per notable story,
+plus a "Biggest Story," "Good News," and "Sources" section each day.
+Originally named "Wetworks" — renamed to "Wetwear" by Sandy's request
+2026-08-23; both the folder and every in-page reference were updated.
+- `wetwear/index.html` — its own masthead + archive list of daily briefs, newest first
+- `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
   instead of a single continuous article, sources as a linked list at the bottom)
-- Nav on every wetworks page uses `nav-brand` = "AI News" linking to
-  `/ai-news/` (not to the wetworks subfolder) — wayfinding always points up
-  to the umbrella hub, matching how `issue-*.html` pages already do this.
+- Nav on every Wetwear page uses `nav-brand` = "AI News" linking to
+  `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
+  to the hub, matching how `issue-*.html` pages already do this.
+- **Not linked from `ai-news/index.html`** — Sandy asked for the "Series"
+  card pointing to it to be removed (2026-08-23). The pages still exist and
+  are reachable by direct URL; they're just not advertised from the hub.
+  Don't re-add that link without being asked.
 
-Site nav (`bookshelf.html`, and both `ai-news/issue-*.html` pages) links only
-to "AI News" as a single top-level entry — no separate nav link for
-Wetworks or any other sub-series. Anyone wanting a specific series clicks
-into `/ai-news/` first and picks it from the "Series" section there.
-
-A daily scheduled task (CCR Routine, fires 14:00 UTC) generates each day's
-Wetworks brief via web search, writes `ai-news/wetworks/YYYY-MM-DD.html`,
-adds a new row to `ai-news/wetworks/index.html`, and pushes directly to
-`main` — no merge step needed. If a day's brief doesn't appear, check
-whether that routine ran. A plain `.txt` companion file per day is still
-under discussion (needed by a downstream bot) — not yet implemented as of
-this writing.
+**⚠ Open inconsistency, unresolved as of 2026-08-23 — check before relying
+on this:** a CCR Routine ("Daily Long-Form News Digest," fires 14:00 UTC)
+originally generated the Wetwear briefs above, but its prompt was later
+edited to target a different path (`news-digest/YYYY-MM-DD.html` +
+`news-digest/index.html`, with different nav labels) that **does not exist
+in this repo**. Its prompt also assumes a `/news-digest/CLAUDE.md` and an
+existing example page at that path — neither is real. Left unresolved,
+that Routine's next run may invent a third, divergent structure instead of
+continuing Wetwear. A second Routine ("Daily Watch: Biology, Misinformation
+& Public Health," fires 13:00 UTC) covers similar ground but its prompt
+never specifies a file path or repo to publish to at all. Sandy needs to
+decide which Routine (if either, as currently configured) should be
+authoritative, and point it at `ai-news/wetwear/` before trusting either
+one to keep publishing correctly.
 
 ---
 
