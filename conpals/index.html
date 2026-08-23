@@ -21,6 +21,7 @@
     --amber:#E0A458;
     --ember:#D9695F;
     --discord:#5865F2;
+    --patreon:#FF424D;
   }
   *{box-sizing:border-box;}
   body{
@@ -96,6 +97,7 @@
   .cta:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 6px 0 rgba(0,0,0,0.4), 0 14px 30px rgba(0,0,0,0.55);}
   .cta:active{transform:translateY(0);box-shadow:0 2px 0 rgba(0,0,0,0.4);}
   .cta svg{width:20px;height:20px;flex:none;}
+  .cta.patreon{background:var(--patreon);}
   .cta-note{
     margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;
     color:var(--parchment-dim);letter-spacing:.02em;
@@ -307,6 +309,15 @@
       </ol>
     </div>
   </section>
+
+  <!-- SUPPORT -->
+  <div class="cta-band" style="border-left-color:var(--patreon)">
+    <h3>Help Build The Conclave</h3>
+    <p>Running and growing this server costs real money. If you want to help fund it and open up more player slots, consider backing us on Patreon.</p>
+    <a class="cta patreon" href="https://www.patreon.com/checkout/CONPALS?rid=29112000&amp;vanity=16423184" target="_blank" rel="noopener">
+      Support on Patreon
+    </a>
+  </div>
 
   <footer>TheConclave — Palworld Dedicated Server</footer>
 </div>
