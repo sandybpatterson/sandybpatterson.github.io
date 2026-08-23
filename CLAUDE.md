@@ -179,21 +179,23 @@ a second Wetwear row to the hub; always update the existing one in place.
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
 
-The CCR Routine ("Daily Long-Form News Digest," fires 14:00 UTC) generates
+The CCR Routine ("Daily Long-Form News Digest," fires 10pm Central / 3:00
+UTC — set so it runs after most of the day's news has settled) generates
 each day's Wetwear brief via web search, writes `ai-news/wetwear/YYYY-MM-DD.html`,
 adds a row to `ai-news/wetwear/index.html`, updates the date on the
 `ai-news/index.html` hub row, and pushes directly to `main` — no merge
 step needed. (Its prompt briefly drifted to a nonexistent `news-digest/`
-path on 2026-08-22; corrected back to `ai-news/wetwear/` on 2026-08-23.) If
-a day's brief doesn't appear or the hub date goes stale, check whether that
-Routine actually ran.
+path on 2026-08-22; corrected back to `ai-news/wetwear/` on 2026-08-23.
+Schedule moved from 14:00 UTC to 10pm Central on 2026-08-23 — since that's
+a fixed UTC cron time, it'll drift an hour when US clocks change off DST;
+revisit then.) If a day's brief doesn't appear or the hub date goes stale,
+check whether that Routine actually ran.
 
-A second Routine ("Daily Watch: Biology, Misinformation & Public Health,"
-fires 13:00 UTC) covers the same four topic areas as a short bullet-point
-digest, but its prompt never specifies a file path or repo to publish to —
-it doesn't appear to write anything to this site. Redundant with the
-Routine above; still running as of 2026-08-23. Worth asking Sandy whether
-to disable it rather than assuming.
+A second Routine ("Daily Watch: Biology, Misinformation & Public Health")
+was disabled 2026-08-23 — it covered the same four topic areas as a short
+bullet-point digest, but its prompt never specified a file path or repo to
+publish to, so it didn't appear to write anything to this site. Redundant
+with the Routine above — Sandy confirmed it should be disabled.
 
 ---
 
