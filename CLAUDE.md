@@ -135,15 +135,22 @@ Not a book — a standalone, lightweight newspaper-styled dispatch section,
 separate from the shelf. Replaced an earlier per-book newsletter (retired,
 along with its Substack link) that used to live inside `original-bug-book`.
 
-`index.html` is the hub page. It lists the hand-written "Issues"
-(`issue-01.html`, `issue-02.html` — pieces tied to The Original Bug) under
-one archive-label block.
+`index.html` is the hub page. It lists **one single unified "Issues"
+archive** — no separate "Series" category. Sandy explicitly rejected
+splitting sub-series into their own segregated section (2026-08-23): every
+entry, whatever its source, lives in the same list and is sorted by
+recency, newest first.
 
 Rules for the Issues list:
+- **One list, not split by type.** The hand-written pieces
+  (`issue-01.html`, `issue-02.html` — tied to The Original Bug) and any
+  sub-series (e.g. Wetwear, linked as a single row pointing at its own
+  index — see below) all sit in the same `archive-wrap` block.
+- **Sorted newest-first, always.** New entries — whether a new hand-written
+  issue or a newly-active sub-series — get added **at the top**. Never
+  append to the bottom, and never pull an entry out into a separate section.
 - **No issue numbers anywhere** — Sandy asked for these removed; don't
   reintroduce "Issue 01," "Vol. I," or similar labels.
-- New issues get added to the archive list **at the top** — sorted
-  newest-first, always. Never append to the bottom.
 - Nav links on every AI News page: Read the Book (→ `original-bug-book`),
   AI Tools (→ `ai-tools-directory`), All Issues (self, on issue pages) /
   AI Tools (on the hub), &larr; Bookshelf. `bookshelf.html`,
@@ -152,38 +159,54 @@ Rules for the Issues list:
 - The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
   only — not repeated on every issue page.
 
-**Wetwear Daily News Brief (`/ai-news/wetwear/`)** — a separate long-form
-daily news digest (biology, misinformation, health/science policy, public
-health data), written in full narrative paragraphs, one per notable story,
-plus a "Biggest Story," "Good News," and "Sources" section each day.
-Originally named "Wetworks" — renamed to "Wetwear" by Sandy's request
-2026-08-23; both the folder and every in-page reference were updated.
-- `wetwear/index.html` — its own masthead + archive list of daily briefs, newest first
+**Wetwear Daily News Brief (`/ai-news/wetwear/`)** — a long-form daily news
+digest (biology, misinformation, health/science policy, public health
+data), written in full narrative paragraphs, one per notable story, plus a
+"Biggest Story," "Good News," and "Sources" section each day. Originally
+named "Wetworks" — renamed to "Wetwear" by Sandy's request 2026-08-23; both
+the folder and every in-page reference were updated. Represented on the
+`ai-news/index.html` hub by exactly one row — sitting at the top of the
+same Issues list as everything else, no separate section.
+- **That row links straight to the latest specific brief**
+  (`wetwear/YYYY-MM-DD.html`), never to `wetwear/index.html`. Sandy
+  explicitly does not want an intermediate archive page in the click path
+  from the hub — one click, straight to the article, like every other
+  entry in the Issues list.
+- Its `.issue-date` line shows the latest brief's date (plain, e.g.
+  "August 22, 2026" — no "Updated" prefix). **Both the href and the date
+  must be updated together every time a new brief is published** — it's
+  how visitors know the feed is actually live. Never add a second Wetwear
+  row to the hub; always update the existing one in place.
+- `wetwear/index.html` still exists as a full archive of every daily brief,
+  newest first — it's just not the hub's link target anymore. It's still
+  reachable from inside any brief page via the "All Briefs" nav link, for
+  anyone who wants to browse older ones. If Sandy ever wants real
+  filtering/browsing on the hub itself, that's a distinct future feature —
+  don't build it unasked.
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
   instead of a single continuous article, sources as a linked list at the bottom)
 - Nav on every Wetwear page uses `nav-brand` = "AI News" linking to
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
-- **Not linked from `ai-news/index.html`** — Sandy asked for the "Series"
-  card pointing to it to be removed (2026-08-23). The pages still exist and
-  are reachable by direct URL; they're just not advertised from the hub.
-  Don't re-add that link without being asked.
 
-**⚠ Open inconsistency, unresolved as of 2026-08-23 — check before relying
-on this:** a CCR Routine ("Daily Long-Form News Digest," fires 14:00 UTC)
-originally generated the Wetwear briefs above, but its prompt was later
-edited to target a different path (`news-digest/YYYY-MM-DD.html` +
-`news-digest/index.html`, with different nav labels) that **does not exist
-in this repo**. Its prompt also assumes a `/news-digest/CLAUDE.md` and an
-existing example page at that path — neither is real. Left unresolved,
-that Routine's next run may invent a third, divergent structure instead of
-continuing Wetwear. A second Routine ("Daily Watch: Biology, Misinformation
-& Public Health," fires 13:00 UTC) covers similar ground but its prompt
-never specifies a file path or repo to publish to at all. Sandy needs to
-decide which Routine (if either, as currently configured) should be
-authoritative, and point it at `ai-news/wetwear/` before trusting either
-one to keep publishing correctly.
+The CCR Routine ("Daily Long-Form News Digest," fires 10pm Central / 3:00
+UTC — set so it runs after most of the day's news has settled) generates
+each day's Wetwear brief via web search, writes `ai-news/wetwear/YYYY-MM-DD.html`,
+adds a row to `ai-news/wetwear/index.html`, updates the date on the
+`ai-news/index.html` hub row, and pushes directly to `main` — no merge
+step needed. (Its prompt briefly drifted to a nonexistent `news-digest/`
+path on 2026-08-22; corrected back to `ai-news/wetwear/` on 2026-08-23.
+Schedule moved from 14:00 UTC to 10pm Central on 2026-08-23 — since that's
+a fixed UTC cron time, it'll drift an hour when US clocks change off DST;
+revisit then.) If a day's brief doesn't appear or the hub date goes stale,
+check whether that Routine actually ran.
+
+A second Routine ("Daily Watch: Biology, Misinformation & Public Health")
+was disabled 2026-08-23 — it covered the same four topic areas as a short
+bullet-point digest, but its prompt never specified a file path or repo to
+publish to, so it didn't appear to write anything to this site. Redundant
+with the Routine above — Sandy confirmed it should be disabled.
 
 ---
 
