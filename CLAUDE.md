@@ -204,6 +204,16 @@ the single-row behavior.
 - Nav on every Wetwear page uses `nav-brand` = "AI News" linking to
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
+- `wetwear/YYYY-MM-DD.txt` — a plain-text companion to every HTML brief,
+  same filename, `.txt` instead of `.html`, at the predictable URL
+  `https://sandybpatterson.github.io/ai-news/wetwear/YYYY-MM-DD.txt`. Built
+  2026-08-23 for a downstream consumer (`soda-bot`/SODA — investigated at
+  the time; it has no ready-built way to ingest this yet, but the file
+  exists so the URL convention is settled whenever that's built). Content:
+  headline, deck, byline on their own lines, then each section as an
+  UPPERCASE label (underlined with `-`) followed by its paragraph(s) in
+  reading order, then a `SOURCES` section as `Title -- URL` lines. Generate
+  this alongside the HTML every day — never skip it.
 
 The CCR Routine ("Daily Long-Form News Digest," fires 10pm Central / 3:00
 UTC — set so it runs after most of the day's news has settled) generates

@@ -1,0 +1,69 @@
+U.S. Measles Cases Hit a 35-Year High
+Plus: multilingual brains age slower, RFK Jr.'s Fauci interview, a food-safety double outbreak, and a genuine win against PTSD nightmares.
+Sandy B. Patterson · August 23, 2026
+
+=====================================
+
+BIGGEST STORY
+-------------
+
+The United States has now confirmed 2,777 measles cases so far in 2026, according to CDC data through August 20 — the highest single-year total the country has recorded since the major resurgence of 1989 to 1991, a three-year period that ultimately produced more than 55,000 infections and 123 deaths before it was brought under control. This year's cases span 45 states and the District of Columbia, tied to 35 separate outbreaks, and the CDC reports that 93 percent of infected people were unvaccinated or had unknown vaccination status. The largest single outbreak, in South Carolina, has sickened nearly 1,000 people since it began last October, making it the biggest localized U.S. measles outbreak since the disease was declared eliminated here in 2000. The underlying trend line explains why: national kindergarten vaccination coverage has slipped from 95.2 percent in the 2019-2020 school year to 92.4 percent in 2025-2026, a drop that leaves an estimated 280,000 kindergartners without the immunity that herd protection depends on. None of this is happening in a vacuum — it is unfolding alongside a documented surge in vaccine misinformation reaching from social media into federal health leadership, which is exactly why this brief keeps returning to both threads together: the outbreak and the information environment feeding it are the same story.
+
+BIOLOGY
+-------
+
+A new analysis has found that people who speak four or more languages show measurable signs of slower brain aging — their brains, by certain structural measures, appeared roughly 13 years younger than those of people who speak only one, adding to a growing body of evidence that sustained cognitive complexity may have a real, physical protective effect on the aging brain.
+
+Honeybees appear to be more nutritionally sophisticated than previously credited: new research shows they can detect when the food available to them has an imbalanced ratio of essential nutrients and will adjust how much they eat in response, effectively self-regulating their diet in something closer to real time than scientists expected from an insect.
+
+A materials-science crossover into genetics: researchers have shown that silver nanoparticles can slice DNA with unusual precision, producing longer "sticky ends" on the cut fragments that let genetic pieces join together up to five times more efficiently than with conventional cutting methods — a small tool-level advance that could meaningfully speed up genetic engineering workflows.
+
+And in the Congo Basin, researchers have identified a previously uncatalogued monkey lineage that appears to represent an ancient, distinct branch of the primate family tree — a discovery that, as is increasingly common with newly described species, arrives with an immediate concern attached, since the population may already be endangered before it has been properly studied.
+
+MISINFORMATION
+--------------
+
+Health and Human Services Secretary Robert F. Kennedy Jr. used a CNN interview on August 2 to go after Dr. Anthony Fauci directly, repeating a series of medical misinformation claims in the process — the latest instance of the country's top health official using a national platform to spread claims that run counter to the evidence his own agency is supposed to be built on.
+
+A new global survey on health misinformation adds useful context to why this keeps working: researchers found deep divides in how much people in different countries trust official health guidance at all, and separately, American respondents reported that their confidence in making their own health decisions fell from 61 percent in 2025 to 51 percent in 2026 — a measurable erosion of trust in a single year, in exactly the period this brief has been tracking rising vaccine skepticism and falling vaccination rates.
+
+Not every trend line is bad: a growing cohort of science communicators has built real audiences on TikTok specifically by countering health misinformation where it spreads fastest, meeting the problem on its own platform rather than only in traditional media.
+
+PUBLIC HEALTH DATA
+------------------
+
+Beyond measles, the CDC's respiratory surveillance shows overall acute respiratory illness activity was very low as of August 21, but COVID-19 activity is moving the other direction — infections are estimated to be growing or likely growing in 47 states as of August 19, an early signal worth watching heading into the fall.
+
+Food safety investigators are managing two active fronts at once. An outbreak linked to alfalfa sprouts has sickened people with both E. coli and Salmonella as of August 21, and separately, a cyclosporiasis outbreak tied to recalled iceberg lettuce has a median illness onset date of July 7, with cases stretching from as early as May through mid-August — a reminder that foodborne outbreaks often run much longer, and much quieter, than the headlines suggest.
+
+POLITICS
+--------
+
+The federal government's role in healthcare is being rewritten at an unusually fast pace: more than 100 executive orders and roughly $1 trillion in funding reductions tied to this year's budget reconciliation law are reshaping federal health policy, part of a broader deregulatory push that health-policy analysts describe as a fundamental rethinking of Washington's role in the system.
+
+Healthcare has become a central theme heading into the 2026 midterms, with affordability, coverage stability, and price transparency emerging as the dominant framing on both sides — a contest where Democrats need to flip just three House seats to retake the majority, with healthcare costs shaping up as one of their sharpest lines of attack.
+
+On drug pricing specifically, more than 20 states have now considered upwards of 30 bills this year aimed at imposing government price controls on pharmaceuticals, while the advocacy group Public Citizen is separately pushing Medicare to start negotiating prices on newly approved drugs immediately after launch rather than waiting years, as current rules allow.
+
+GOOD NEWS
+---------
+
+A prescription form of THC has shown real promise against one of the more stubborn symptoms of PTSD: in a clinical trial, more than a third of participants reported that their recurring trauma-related nightmares disappeared completely after ten weeks of treatment — a concrete, measurable result for a symptom that has historically been difficult to treat directly rather than as a downstream effect of PTSD overall.
+
+SOURCES
+-------
+CDC — Measles Cases and Outbreaks -- https://www.cdc.gov/measles/data-research/index.html
+Washington Post — U.S. measles cases hit 35-year record with months left in 2026 -- https://www.washingtonpost.com/health/2026/07/21/us-measles-cases-hit-35-year-record-with-months-left-2026/
+CIDRAP — Measles cases reach 35-year high in US -- https://www.cidrap.umn.edu/measles/measles-cases-reach-35-year-high-us
+CNN — US measles cases reach 35-year high, second record-breaking year in a row -- https://www.cnn.com/2026/07/24/health/us-measles-cases-record
+CDC — Respiratory Illnesses Data Channel -- https://www.cdc.gov/respiratory-viruses/data/index.html
+CDC — Surveillance of Cyclosporiasis -- https://www.cdc.gov/cyclosporiasis/php/surveillance/index.html
+SciTechDaily — Biology News -- https://scitechdaily.com/news/biology/
+ScienceDaily — Biology News -- https://www.sciencedaily.com/news/plants_animals/biology/
+ScienceDaily — Cell Biology News -- https://www.sciencedaily.com/news/plants_animals/cell_biology/
+CNN — RFK Jr. targets Fauci and pushes medical misinformation in fiery interview -- https://www.cnn.com/2026/08/02/politics/rfk-jr-fauci-medical-misinformation
+CIDRAP — New global health misinformation survey reveals deep divides -- https://www.cidrap.umn.edu/public-health/new-global-health-misinformation-survey-reveals-deep-divides
+PwC — US health policy dynamics heading into 2026 midterms -- https://www.pwc.com/us/en/industries/health-industries/health-policy-and-intelligence-institute/us-healthcare-policy-2026-midterms.html
+Affinity Strategies — Health Policy Snapshot, August 2026 -- https://affinity-strategies.com/health-policy-snapshot-august-2026/
+ScienceDaily — Health Policy News -- https://www.sciencedaily.com/news/health_medicine/health_policy/
+Medscape — 10 Medical Breakthroughs Transforming Clinical Care -- https://www.medscape.com/p11/10-medical-breakthroughs-transforming-clinical-care-2026a1000gr9
