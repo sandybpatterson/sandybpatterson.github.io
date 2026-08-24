@@ -209,11 +209,26 @@ the single-row behavior.
   `https://sandybpatterson.github.io/ai-news/wetwear/YYYY-MM-DD.txt`. Built
   2026-08-23 for a downstream consumer (`soda-bot`/SODA — investigated at
   the time; it has no ready-built way to ingest this yet, but the file
-  exists so the URL convention is settled whenever that's built). Content:
-  headline, deck, byline on their own lines, then each section as an
-  UPPERCASE label (underlined with `-`) followed by its paragraph(s) in
-  reading order, then a `SOURCES` section as `Title -- URL` lines. Generate
-  this alongside the HTML every day — never skip it.
+  exists so the URL convention is settled whenever that's built).
+  Reformatted 2026-08-24 to read as a spoken script for narration, not a
+  written article — per Sandy's example. Content, in order:
+  - Fixed tagline line: `Coming up on Wetwear: Biology Corrected.` (said
+    the same way every day, not a daily-changing tease), then a blank line.
+  - The real headline, then the deck, each on their own line.
+  - A spoken byline sentence: `I am Sandy B. Patterson, and today is
+    [Month Day, Year].`
+  - A blank line, then a row of `=` matching the headline's length.
+  - Each section (Biggest Story, Biology, Misinformation, Public Health
+    Data, Politics, Good News) as a spoken transition line — e.g. "Here is
+    the BIGGEST STORY from [source name]," "Here is the latest in
+    BIOLOGY" — naming a real source where that reads naturally, followed
+    by a row of `-` matching the length of the UPPERCASE label itself
+    (not the full sentence), then the section's paragraph(s) in reading
+    order, each separated by a blank line.
+  - **No Sources section** — the spoken script ends after Good News; drop
+    the sources list entirely (it's on the HTML page for anyone who wants
+    it, just not read aloud). Generate this alongside the HTML every
+    day — never skip it.
 
 The CCR Routine ("Daily Long-Form News Digest," fires 10pm Central / 3:00
 UTC — set so it runs after most of the day's news has settled) generates

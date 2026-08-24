@@ -1,15 +1,17 @@
+Coming up on Wetwear: Biology Corrected.
+
 The Largest Ebola Outbreak in Congo's History Is Still Accelerating
 Plus: vaccine misinformation reaches the White House, new measles data, a federal science-funding fight, and two major cancer-trial wins.
-Sandy B. Patterson · August 22, 2026
+I am Sandy B. Patterson, and today is August 22, 2026.
 
 ===================================================================
 
-BIGGEST STORY
+Here is the BIGGEST STORY from the World Health Organization
 -------------
 
 The Bundibugyo Ebola outbreak in the Democratic Republic of the Congo has become the largest Ebola outbreak the country has ever recorded, and it is still accelerating. As of August 20, 2026, the DRC has reported 5,290 confirmed cases and 2,516 deaths, a fatality rate well above 40 percent, with 837 patients currently hospitalized in isolation and 1,152 who have recovered. The outbreak began in May in a single health zone, Mongbwalu in Ituri Province, but has since spread into 54 health zones across six provinces — Ituri, North Kivu, South Kivu, Haut-Uélé, Tshopo, and Bas-Uélé — making it, by WHO's own description, the fastest-expanding Ebola outbreak on record. On May 17, WHO's Director-General declared it a Public Health Emergency of International Concern, its highest level of alarm. Complicating the response, this outbreak is caused by the rarer Bundibugyo strain of the virus, for which no approved vaccine or specific treatment currently exists, unlike the Zaire strain that Ebola vaccines were built around after the 2014-2016 West Africa epidemic. There is a genuine bright spot inside this otherwise grim picture: Uganda, which had cases spill across its border early in the outbreak, formally declared its own outbreak over on July 28 after 42 consecutive days without a new locally transmitted case, showing that containment is possible even against a strain the world's toolkit isn't built for.
 
-BIOLOGY
+Here is the latest in BIOLOGY
 -------
 
 Researchers have identified a specific gut bacterium, Roseburia inulinivorans, that appears linked to stronger muscles in both humans and mice — older adults who carried the bacterium in their gut microbiome showed 29 percent greater handgrip strength than those who didn't, adding to a growing body of evidence that the gut microbiome shapes physical aging in ways far beyond digestion.
@@ -20,7 +22,7 @@ Long-standing assumptions about pesticide safety took a hit this month: glyphosa
 
 On the evolutionary side, paleontologists described an exceptionally well-preserved snake fossil from Brazil, Tametara mirim, whose detailed brain reconstruction shows early snakes were anatomically far more diverse than previously assumed. Separately, researchers also announced a newly identified Congo monkey representing an ancient, previously uncatalogued evolutionary lineage — one that may already be endangered before most people have heard of it.
 
-MISINFORMATION
+Here is the latest on MISINFORMATION
 --------------
 
 Vaccine misinformation reached the White House this month in an unusually direct way. President Trump made a series of false and misleading claims tying vaccines to autism, including the claim that the U.S. was "requiring 72 jabs for our beautiful, healthy, lovely, delicate little children" — a dramatic overstatement of the actual childhood immunization schedule. He went on to sign an executive order recommending that children receive fewer vaccinations spread out over a longer period than current guidance calls for, translating a debunked causal claim directly into federal policy guidance.
@@ -29,14 +31,14 @@ Health and Human Services Secretary Robert F. Kennedy Jr. added to the confusion
 
 These are not abstract claims. Public health officials are directly tying the surge in U.S. vaccine skepticism to real outbreaks: measles, meningitis, and RSV have all surged this year as vaccination rates decline, turning what was once a settled public-health success story back into an active, worsening crisis in real time.
 
-PUBLIC HEALTH DATA
+Here is today's PUBLIC HEALTH DATA
 ------------------
 
 The CDC reports 2,777 confirmed measles cases in the United States so far in 2026 as of August 20 — a striking figure for a disease the U.S. officially eliminated in 2000, and a number that tracks directly with the declining vaccination rates and vaccine misinformation documented above.
 
 On the foodborne illness front, the CDC, FDA, and state health departments are jointly investigating two active multistate outbreaks: a Salmonella Javiana outbreak tied to jalapeños, where 91 percent of 224 interviewed patients reported eating at Mexican-style restaurants (including Chipotle and QDOBA) between June 14 and July 16; and a combined outbreak of three E. coli strains plus one Salmonella strain traced to alfalfa sprouts distributed by a company called Everything Sprouts.
 
-POLITICS
+Here is the latest in POLITICS
 --------
 
 A proposed OMB rule, released in May, would substantially expand political appointees' role in reviewing and terminating federal research grants — a change that could touch more than $1 trillion in annual federal funding across dozens of agencies by weakening the merit-review process research funding has traditionally relied on. The Senate's continuing resolution funding the government through December 11 temporarily blocks the rule from taking effect, but its underlying fight is far from settled.
@@ -49,25 +51,7 @@ In personnel news, the Senate confirmed Dr. Erica Schwartz as CDC director on Au
 
 Not all the policy news was contentious: the FDA approved Moderna's mFLUSIVA on August 5, the first-ever mRNA-based flu vaccine to reach approval, a genuine technological milestone that could reshape how flu vaccines are made and updated each year.
 
-GOOD NEWS
+And finally, some GOOD NEWS
 ---------
 
 Two cancer trials reported results this month that clinicians are calling the most significant progress in their respective diseases in decades. A drug that starves mesothelioma tumors of a key nutrient quadrupled three-year survival rates in the international ATOMIC-meso trial — the first successful new treatment for the disease in twenty years. Separately, a personalized vaccine for glioblastoma, the most aggressive form of brain cancer, more than doubled five-year survival rates in a large international trial, marking the most promising new treatment for the disease in nearly three decades. On the infectious-disease side, researchers reported a striking proof-of-concept: a one-time combination of three therapies successfully eliminated HIV soon after infection in newborn nonhuman primates, an early but genuinely exciting step toward a functional cure administered right at the point of infection.
-
-SOURCES
--------
-WHO — Ebola disease caused by Bundibugyo virus, DRC -- https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON615
-WHO — Ebola outbreak, DRC 2026 -- https://www.who.int/emergencies/situations/ebola-outbreak---drc-2026
-CDC — Ebola Outbreak: Current Situation -- https://www.cdc.gov/ebola/situation-summary/index.html
-ECDC — Ebola outbreak, DRC and Uganda -- https://www.ecdc.europa.eu/en/ebola-outbreak-democratic-republic-congo-and-uganda
-CDC — Measles Cases and Outbreaks -- https://www.cdc.gov/measles/data-research/index.html
-CDC — Salmonella Javiana Outbreak Investigation -- https://www.cdc.gov/salmonella/outbreaks/javiana-08-26/investigation.html
-CDC — E. coli / Salmonella Alfalfa Sprouts Investigation -- https://www.cdc.gov/ecoli/outbreaks/alfalfa-sprouts-08-26/investigation.html
-CNN — Fact check: Trump's vaccine/autism claims -- https://www.cnn.com/2026/08/11/politics/fact-check-trump-false-vaccines-autism
-SciTechDaily — Biology News -- https://scitechdaily.com/news/biology/
-ScienceDaily — Biology News -- https://www.sciencedaily.com/news/plants_animals/biology/
-ScienceDaily — Cell Biology News -- https://www.sciencedaily.com/news/plants_animals/cell_biology/
-SGIM — Health Policy News, Aug 10 2026 -- https://www.sgim.org/news/health-policy-news-august-10-2026/
-Alliance of Safety-Net Hospitals — Federal Health Policy Update, Aug 20 -- https://safetynetalliance.org/federal-health-policy-update-for-august-20/
-AACR — Cancer Policy Monitor, Aug 11 2026 -- https://www.aacr.org/professionals/policy-and-advocacy/aacr-cancer-policy-monitor/cancer-policy-monitor-august-11-2026/
-Medscape — 10 Medical Breakthroughs Transforming Clinical Care -- https://www.medscape.com/p11/10-medical-breakthroughs-transforming-clinical-care-2026a1000gr9
