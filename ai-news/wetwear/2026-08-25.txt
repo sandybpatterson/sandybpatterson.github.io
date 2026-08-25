@@ -1,0 +1,53 @@
+Coming up on Wetwear: Biology Corrected.
+
+Congo's Ebola Outbreak Becomes the Second-Largest on Record
+Plus: violence disrupts frontline burial teams, a sleep sweet spot for slower aging, mRNA cancer vaccines under a misinformation threat, a swine-flu cluster in Michigan, and a promising melanoma vaccine trial.
+I am Sandy B. Patterson, and today is August 25, 2026.
+
+===========================================================
+
+Here is the BIGGEST STORY from the World Health Organization
+-------------
+
+The Ebola outbreak in the Democratic Republic of the Congo has become the second-largest in recorded history, with the World Health Organization confirming 5,514 total cases and 2,642 deaths as of August 22 — a toll surpassed only by the catastrophic 2014-2016 West African epidemic that killed more than 11,000 people across three countries. The outbreak, caused by the Bundibugyo strain of the virus and declared just over 100 days ago, added 55 new confirmed cases in the most recent reporting period, split between Ituri province (35 cases), North Kivu (16), and Haut Uele (4), and has now spread into a sixth province since it began. Ituri remains the epicenter by a wide margin, accounting for roughly 85 percent of all cases and 79 percent of all deaths recorded so far. What makes this outbreak especially hard to contain is not only its speed — health officials say it is spreading substantially faster than any previous Ebola outbreak on record — but the environment responders are working in: strikes, armed-group violence, and supply shortages are actively obstructing the basic containment measures that have ended past outbreaks, including contact tracing, safe burials, and vaccine distribution. Bloomberg reported this week that the affected zone now covers an area larger than France, and the Washington Post documented one of the outbreak's highest weekly death tolls yet in its latest dispatch from the region. In one especially stark episode, burial teams attempting to safely inter a victim's body were chased off by men wielding machetes, one of a growing number of direct attacks on the frontline health workers trying to break the chain of transmission. The United Nations marked the outbreak's 100th day this week by warning that the race to stop the spread is now a race against both the virus and the collapse of the security and infrastructure needed to fight it. With no clear end in sight and the case count still climbing, the outbreak stands as the most severe public health emergency the DRC has faced in the modern Ebola era — and one the rest of the world has, so far, paid comparatively little attention to.
+
+Here is the latest in BIOLOGY
+-------
+
+A large-scale study out of Columbia University, drawing on sleep-duration data and 23 separate biological aging clocks measured across nearly 500,000 people in global biobanks, has identified something close to a sleep sweet spot: people who slept between 6.4 and 7.8 hours a night showed the least biological aging across the brain, heart, lungs, and immune system, while both shorter sleep and longer sleep were tied to measurably faster aging in those same organ systems.
+
+A longitudinal study following more than 500 children from infancy through age ten found that higher screen viewing time during two specific windows — infancy, and the start of formal schooling around age six — was consistently linked to poorer academic performance at age nine and weaker working memory at age ten and a half, with the strongest effect tied to screen exposure during infancy specifically, suggesting that timing may matter as much as total screen time.
+
+Researchers analyzing stool samples and years of prescription records from more than 2,500 participants in the Estonian Microbiome cohort found that nearly half of the 186 commonly prescribed drugs they tested left a lasting mark on the gut microbiome, with antibiotics, beta-blockers, antidepressants, benzodiazepines, and acid-reducing medications all producing microbial changes still detectable years after the last dose — and repeated use producing an even larger, additive effect.
+
+Here is the latest on MISINFORMATION
+--------------
+
+Moderna and Merck's personalized mRNA melanoma vaccine just posted genuinely encouraging Phase 3 results, but CNN reported this week that the same pool of mRNA misinformation that spread during the COVID-19 pandemic — false claims about the technology altering DNA or being fundamentally untested — is already circulating around the new cancer-vaccine class, and public-health communicators worry it could suppress uptake of a treatment with real, trial-proven benefit before it ever reaches most patients.
+
+A widely circulated 2024 study that vaccine skeptics have repeatedly cited to claim that millions of people died as a result of COVID-19 vaccination has been formally retracted, with the journal citing serious methodological flaws and misuse of the underlying data — a correction that matters less for what it changes in the scientific record, which never supported the claim, than for how long the false version had already spread before the retraction caught up with it.
+
+A new national poll highlighted by CIDRAP found that most Americans don't fully believe the most common vaccine myths, but a substantial "malleable middle" remains genuinely uncertain about several of them — a group researchers say represents the real front line in the misinformation fight, since they're still persuadable in either direction depending on which messages reach them first.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+The CDC's measles count has climbed to 2,777 confirmed cases as of August 20, spread across 47 jurisdictions with 94 percent of cases tied to one of 36 active outbreaks; Pennsylvania remains the hardest-hit state with 379 cases, nearly half of them concentrated in Lancaster County, while Ohio has confirmed 142 cases spread across fifteen counties. One modest silver lining buried in the data: the hospitalization rate among this year's patients has fallen to 7 percent, down from 11 percent in 2025, even as the overall case count has kept climbing.
+
+Michigan health officials confirmed the season's third and fourth human infections with a variant swine flu strain, H1N2v, in two children under 18 who attended the same agricultural fair in Kent County in early August; both had contact with ill pigs at the fair, neither required hospitalization, and no further cases tied to the event have been identified — but the cluster is a reminder that variant flu strains continue to make the routine jump from livestock to people at agricultural fairs almost every summer.
+
+New data from the National Center for Health Statistics show that 62.6 percent of American youth now consume caffeine daily, and, in a considerably more concerning trend, that rates of high blood pressure during pregnancy rose 73 percent between 2016 and 2024 — a jump substantial enough that NCHS researchers flagged it as one of the more significant maternal-health shifts in the current data cycle.
+
+Here is the latest in POLITICS
+--------
+
+A deadline set by 29 Senate Democrats for HHS Secretary Robert F. Kennedy Jr. to reverse the cancellation of roughly 150 Agency for Healthcare Research and Quality grants arrives today, August 25. The grants, worth more than $250 million and spread across nearly 30 states, were terminated by form letter on July 15 and had funded close to 200 active research programs on patient safety and care quality. AHRQ itself has lost about 80 percent of its staff over the past year and, according to the senators' letter, has awarded only 5 percent of its available extramural grant funding since October 1 — numbers that read less like a budget adjustment than a functional shutdown of the agency by attrition.
+
+The NIH has begun rejecting grant applications whose primary purpose is informing policymakers, according to Nature, a shift formalized in an August 11 notice that effectively closes off a category of research — studies designed specifically to test what public policies do to health outcomes — that has historically shaped everything from tobacco regulation to vaccine scheduling.
+
+Kennedy's HHS has also floated a new framework for categorizing vaccines, including a tier of shots that would be "recommended but not during infancy," according to reporting from STAT — a structural change that would mark one of the more significant shifts to the childhood immunization schedule in decades. It follows a separate order, signed by President Trump earlier this month, directing that the combined MMR vaccine be split into three individual shots on the unsupported premise that doing so would reduce autism diagnoses; fact-checkers have noted that no U.S. manufacturer has produced the individual measles, mumps, or rubella vaccines separately since Merck discontinued them in 2008.
+
+And finally, some GOOD NEWS
+---------
+
+There's real reason for optimism out of oncology this week: Moderna and Merck announced that their personalized mRNA melanoma vaccine, intismeran autogene, met its goals in a Phase 3 trial when combined with the immunotherapy drug Keytruda, meaningfully slowing both the recurrence of melanoma and its spread to other parts of the body compared with Keytruda alone. It's the first mRNA cancer vaccine to succeed at this scale in a late-stage trial, and researchers say the approach — built to train the immune system against a patient's own specific tumor mutations — could extend well beyond melanoma if the results hold up, with Roche and BioNTech both said to be accelerating competing programs in response.
