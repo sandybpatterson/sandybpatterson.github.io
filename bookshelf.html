@@ -407,6 +407,7 @@
 
   <div class="link-tree">
     <button type="button" class="link-btn" id="podcast-copy-btn" onclick="copyPodcastLink()">Copy Podcast RSS Link</button>
+    <button type="button" class="link-btn" id="wetwear-podcast-copy-btn" onclick="copyWetwearPodcastLink()">Copy Wetwear Podcast RSS Link</button>
   </div>
 
   <footer>&copy; Sandy B. Patterson</footer>
@@ -415,6 +416,16 @@
     function copyPodcastLink() {
       var url = 'https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/feed.xml';
       var btn = document.getElementById('podcast-copy-btn');
+      navigator.clipboard.writeText(url).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = original; }, 1800);
+      });
+    }
+
+    function copyWetwearPodcastLink() {
+      var url = 'https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/wetware-biology-corrected.xml';
+      var btn = document.getElementById('wetwear-podcast-copy-btn');
       navigator.clipboard.writeText(url).then(function () {
         var original = btn.textContent;
         btn.textContent = 'Copied!';
