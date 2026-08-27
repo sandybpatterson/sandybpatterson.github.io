@@ -23,9 +23,18 @@ helps you handle anything unusual that comes up.
 
 ## 0. Figure out the date, and check you're not about to clobber something
 
-Default to today, in the site's own convention — that's US Central time, since the
-whole point of "when should this run" was tuned around Central evenings. If the user
-passed a specific date (e.g. "run the brief for 2026-08-24"), use that instead.
+If the user passed a specific date (e.g. "run the brief for 2026-08-24," "do
+tomorrow's," "do the 29th"), use that — it always wins over any default below.
+
+Otherwise, work out the date the same way a newspaper dates an evening edition: the
+standing routine is to run this skill around 10–11pm US Central the night before,
+producing the brief for the *next* day. So default by the current time in US Central:
+- **Before 9pm Central** → today's date.
+- **At or after 9pm Central** → tomorrow's date.
+
+This means a run at 10:30pm Central on August 27 defaults to `2026-08-28`, not
+`2026-08-27` — matching the date on the checker routine that verifies each morning
+that the file for "today" already exists by 9am.
 
 Check whether `ai-news/wetwear/YYYY-MM-DD.html` already exists for that date. Every
 day's brief is a *permanent* entry on this site — nothing about this workflow expects
