@@ -29,8 +29,8 @@ tomorrow's," "do the 29th"), use that — it always wins over any default below.
 Otherwise, work out the date the same way a newspaper dates an evening edition: the
 standing routine is to run this skill around 10–11pm US Central the night before,
 producing the brief for the *next* day. So default by the current time in US Central:
-- **Before 9pm Central** → today's date.
-- **At or after 9pm Central** → tomorrow's date.
+- **Before 7pm Central** → today's date.
+- **At or after 7pm Central** → tomorrow's date.
 
 This means a run at 10:30pm Central on August 27 defaults to `2026-08-28`, not
 `2026-08-27` — matching the date on the checker routine that verifies each morning
