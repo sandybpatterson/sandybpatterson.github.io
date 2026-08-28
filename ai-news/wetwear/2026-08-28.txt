@@ -1,0 +1,41 @@
+Coming up on Wetwear: Biology Corrected.
+
+HHS Cancels Nearly $500 Million in mRNA Vaccine Research Funding
+Plus: British Columbia blames U.S. vaccine misinformation for measles spreading north, the DRC's Ebola outbreak keeps climbing as Uganda's is declared over, a 324-million-year-old fossil rewrites how insects colonized land, and the pancreatic cancer drug this brief covered yesterday wins FDA approval.
+I am Sandy B. Patterson, and today is August 28, 2026.
+
+================================================================
+
+Here is the BIGGEST STORY from HHS and BARDA
+-------------
+
+Health and Human Services Secretary Robert F. Kennedy Jr. announced this week that BARDA, the department's Biomedical Advanced Research and Development Authority, is canceling 22 mRNA vaccine development projects worth nearly $500 million — one of the most consequential single actions this brief has covered against the mRNA vaccine platform specifically, as opposed to vaccines broadly. The cancellations end federal support for contracts and proposals involving Pfizer, Sanofi Pasteur, Emory University, and other institutions, and shut down an already-underway award to Moderna to develop an mRNA bird flu vaccine — a program public health officials had been watching closely given the ongoing spread of H5N1 in dairy cattle and poultry. Kennedy defended the decision bluntly: "BARDA is terminating 22 mRNA vaccine development investments because the data show these vaccines fail to protect effectively against upper respiratory infections like COVID and flu," he said, adding that HHS is redirecting the funding toward "safer, broader vaccine platforms that remain effective even as viruses mutate." Rick Bright, the immunologist who ran BARDA during the first Trump administration's Operation Warp Speed, called the move "a bad day for science, and [a] huge blow to our national security" in a public post reacting to the news. The cuts land in the middle of a broader pattern this brief has tracked all month: an administration that has simultaneously restored $600 million in Gavi vaccine funding conditioned on Gavi dropping COVID vaccine promotion, signed an executive order narrowing the childhood vaccine schedule, and now pulled federal research money specifically out from under the mRNA platform — even as Moderna and Merck's new mRNA cancer vaccine posts genuinely promising trial results elsewhere in this brief's own coverage this week.
+
+Here is the latest in BIOLOGY
+-------
+
+A newly described 324-million-year-old fossil is reshaping how scientists think insects first colonized land. Researchers led by Chenyang Cai of the Chinese Academy of Sciences and Erik Tihelka at the University of Cambridge identified the fossil, a roughly 3.2-centimeter female they named Chosha praecursor, in Carboniferous-era rock in Texas. Rather than an abrupt jump from water to dry land, the specimen — with its spindle-shaped body, three pairs of walking legs, and insect-like tail and egg-laying structures — suggests early insects spent an extended amphibious phase, retaining and gradually remodeling features inherited from aquatic ancestors as a bridge to full terrestrial life. The findings were published August 26 in Nature.
+
+Researchers at Washington University School of Medicine in St. Louis have identified a specific brain circuit that can act as a built-in brake on chronic pain. In the locus coeruleus, the brain's main alert and stress center, certain surface receptors on nerve cells — previously known mainly for their role in stress — turn out to also restrain pain signaling; mice lacking those receptors became markedly more sensitive to touch and heat after nerve injury, while restoring the receptors reversed that hypersensitivity and effectively switched the pain back off. The team, publishing August 17 in Current Biology, says targeting this system more precisely could eventually offer real pain relief that doesn't rely on opioid receptors throughout the rest of the body.
+
+A "double-punch" nanoparticle platform developed by researchers at the University of Technology Sydney, Harvard, and Henan University tackles one of glioblastoma surgery's oldest problems: cancer cells too small to see get left behind, and often come back. The nanoparticles both light up hidden tumor cells under surgical imaging and, using platinum atoms that generate oxygen from the tumor's own hydrogen peroxide, destroy microscopic cancer that remains after surgery. In mice, the treatment prevented recurrence entirely — every treated mouse was still alive and free of detectable neurological or motor impairment at 60 days, compared with a median survival of just 42 days among mice that had surgery alone. The results, published in Science Translational Medicine, are still animal-stage — human testing hasn't started — but a treatment that prevented 100 percent of glioblastoma recurrence in mice is a meaningfully large effect to build on.
+
+Here is the latest on MISINFORMATION
+--------------
+
+British Columbia's top health officials used a press conference this week to place some of the blame for rising measles activity on American vaccine misinformation crossing the border. "We know that the U.S. administration is also spreading misinformation that helps spread the deadly virus, like measles," B.C. Health Minister Ravi Kahlon said, while provincial health officer Dr. Bonnie Henry reported 52 measles cases in the province so far this year, 30 of them — mostly unvaccinated children — requiring hospitalization, part of 489 cases recorded province-wide since the start of 2025. It's a notable shift in framing: this brief has spent weeks documenting U.S. vaccine misinformation and its domestic consequences, and B.C.'s officials are now describing the same messaging as a cross-border public health problem, not a uniquely American one.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+The Democratic Republic of the Congo's Ebola outbreak keeps accelerating: the country reported 5,713 confirmed cases and 2,744 deaths as of August 26, a jump of 57 new cases and 29 new deaths in a single day, with Ituri province still bearing the overwhelming brunt at 4,750 cases and 2,133 deaths. There is real contrast next door, though — on August 25, the World Health Organization formally declared Uganda's linked Ebola outbreak over, after 42 consecutive days without a new confirmed case, a reminder that containment is achievable even against a strain the world's vaccine toolkit isn't built for.
+
+Here is the latest in POLITICS
+--------
+
+125 Democratic members of the U.S. House sent a formal letter this week opposing the White House Office of Management and Budget's proposal to overhaul how federal science funding gets approved — the same plan, covered in this brief before, that would let political appointees sign off on research grants to ensure they "advance the President's policy priorities." The letter argues that "undoing the peer review process in favor of political grantmaking will delay and disrupt health care research," adding a large, formal congressional objection to a fight that, under the Senate's stopgap funding bill, is currently only blocked through December 11 — meaning the underlying question of who controls federal science funding remains very much unresolved heading into the fall.
+
+And finally, some GOOD NEWS
+---------
+
+The pancreatic cancer drug this brief covered in yesterday's edition just cleared its final hurdle: the FDA approved daraxonrasib, to be sold under the brand name Rasonque, for patients with previously treated metastatic pancreatic cancer. The approval follows the Phase 3 RASolute 302 trial results — a median overall survival of 13.2 months compared with 6.7 months on standard chemotherapy — and marks what oncologists are calling the first major treatment breakthrough against pancreatic cancer, one of the deadliest common cancers, in decades. Going from trial data to an approved, prescribable drug in the same week this brief covered the underlying science is about as fast a turnaround from "promising result" to "available treatment" as oncology gets.
