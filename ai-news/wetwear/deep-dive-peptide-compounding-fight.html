@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The FDA Eased Its Peptide Rules. Its Own Scientists Warned It Not To. — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/ai-news/" style="color:#c9a84c;">AI News</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/">All Briefs</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">All Issues</a>
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">The FDA Eased Its Peptide Rules. Its Own Scientists Warned It Not To.</h1>
+    <p class="deck">BPC-157, TB-500, and four other trendy wellness peptides cleared a key regulatory hurdle this summer, over their own agency's objections. Here's what actually changed, what it doesn't mean yet, and what the physicians caught in the middle are proposing instead of a straight yes or no.</p>
+    <p class="byline">Sandy B. Patterson &middot; August 28, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">What Changed</p>
+
+      <p class="drop-cap">Six months ago, peptides like BPC-157 and TB-500 sat in a category the FDA reserves for substances it considers to carry "significant safety risks" — a bureaucratic label that, in practice, meant licensed compounding pharmacies couldn't legally make them into prescriptions at all, no matter what a doctor wanted to write. That started changing in the least clinical setting imaginable: a February 27 appearance by HHS Secretary Robert F. Kennedy Jr. on The Joe Rogan Experience, where Kennedy said he was "a big fan" of peptides, disclosed he takes them himself, and pledged to restore legal access to roughly 14 of them, arguing that the FDA's prior restrictions had simply "created the gray market" rather than eliminated it.</p>
+
+      <p>The FDA moved fast after that. On April 15, it removed 12 peptides — BPC-157, TB-500, Melanotan II, Epitalon, Semax, MOTS-c, KPV, DSIP, DiHexa, LL-37, PEG-MGF, and injectable GHK-Cu — from that "significant safety risk" category, effective April 22. Then it scheduled the next step: the Pharmacy Compounding Advisory Committee, a panel of outside experts that advises the agency on what belongs on its "503A bulks list" (the actual list of raw ingredients pharmacies are legally allowed to compound into prescriptions), would meet July 23–24 to vote on seven of them by name.</p>
+
+      <p class="section-label">What FDA's Own Scientists Said</p>
+
+      <p>Before the committee voted, FDA staff scientists filed briefing documents recommending against adding all seven peptides to the list — every single one. Their objections were specific, not reflexive. For BPC-157, they wrote there was a "lack of evidence to support the effectiveness" of the compound even for the condition it's most often proposed to treat, ulcerative colitis, and noted the five human studies they could find were short, small, and used doses that looked "exploratory in nature" rather than clinically established. For TB-500, they said they couldn't locate any human studies at all — everything on the drug's safety and effect in people is extrapolated from animal data. On safety, the agency flagged three adverse-event reports tied to compounded injectable BPC-157 products, including a patient who developed shortness of breath and another who developed diffuse skin and gum darkening after using a blended BPC-157/TB-500 product. Epitalon drew a flag for activating telomerase, an enzyme whose long-term manipulation carries "uncertain carcinogenicity." Semax was flagged for anticoagulant and amphetamine-potentiation signals. Two of the seven, MOTS-c and TB-500, are on the World Anti-Doping Agency's prohibited list for competitive athletes — which wasn't part of the safety review directly, but says something about how much of the demand for these compounds is coming from performance and physique communities rather than any diagnosed medical condition.</p>
+
+      <p class="section-label">What The Vote Actually Means — And Doesn't</p>
+
+      <p>The committee voted anyway. Over the two-day meeting, it recommended six of the seven for the 503A bulks list — BPC-157, KPV, and TB-500 each passed 8-6, MOTS-c passed 7-5, Semax passed 8-5, and Epitalon passed 7-5 — while voting down the seventh, a formulation of DSIP called emideltide, 6-7. Every vote was close. None of them came anywhere near the kind of consensus regulators usually look for before loosening a safety restriction.</p>
+
+      <p>It's worth being precise about what that vote did and didn't do, because most of the headlines since have blurred the line. The PCAC is advisory — its recommendations carry real weight, but they aren't binding, and the FDA still has to run a full rulemaking process, likely taking months, before any of these six peptides is actually legal for a compounding pharmacy to make. Nothing has changed in practice yet: BPC-157 is closer to being legal to compound than it was in June, but it is not legal to compound today.</p>
+
+      <p class="section-label">What The Peptides Actually Are</p>
+
+      <p>Stripped of the marketing language that circulates around them in wellness and fitness communities, the six recommended peptides break down roughly like this. BPC-157 and TB-500 are both marketed for tissue repair and injury recovery — "the Wolverine peptide," in gym-forum shorthand — based almost entirely on animal studies and user reports rather than human trials. KPV is an anti-inflammatory fragment derived from a larger hormone, studied mostly in the context of gut inflammation. MOTS-c is a mitochondrial-derived peptide marketed as a metabolic and exercise-performance aid. Semax is a Russian-developed nootropic used off-label in the U.S. for cognitive focus, with essentially no American regulatory history to draw on. Epitalon is sold almost entirely on longevity and anti-aging claims tied to telomerase activation — the same mechanism the FDA flagged as a long-term cancer-risk unknown. None of the six has gone through the large, controlled human trials the FDA normally requires before approving a drug for a specific use; what's actually being debated is narrower than "is this safe and effective" — it's whether a doctor should be legally allowed to have one compounded for a patient at all, leaving the safety-and-effectiveness question to be sorted out prescription by prescription instead of in a clinical trial first.</p>
+
+      <p class="section-label">What More Reasonable People Are Saying</p>
+
+      <p>The loudest voices on this story have been the two furthest apart: wellness and biohacking communities treating the vote as vindication, and consumer-safety advocates treating it as reckless. Shabbir Imber Safdar, executive director of the Partnership for Safe Medicines, took the second position bluntly, calling the outcome "a serious setback for patient safety" and pointing out that the committee "voted to advance substances that FDA's own scientists flagged as lacking adequate evidence of safety, efficacy or quality."</p>
+
+      <p>But the more useful reaction has come from people trying to hold both facts at once: millions of Americans are already using these compounds, sourced through a gray and largely unregulated supply chain, whether the FDA approves of it or not — and the evidence base genuinely is too thin right now to know, with any confidence, which of them work and which are a waste of money or worse. Writing in Forbes, physician and former Kaiser Permanente CEO Robert Pearl argued the FDA is being handed a false choice between blanket prohibition and blanket access, and proposed a real middle path instead: pair any expanded compounding access with mandatory data collection — registries, structured follow-up, real trials — so the years of anecdotal use already happening finally generate the evidence nobody currently has. STAT News's editorial board made essentially the same case back in July, urging the FDA toward "a middle-ground approach" rather than a binary ban-or-allow decision. The throughline in both is that neither "no one should have access" nor "anyone should be able to buy this with no oversight" is a serious policy position on its own — the responsible version of this decision looks like regulated access built specifically to produce the data that's currently missing, not a green light dressed up as one.</p>
+
+      <p class="section-label">What Happens Next</p>
+
+      <p>The FDA has not announced a timeline for finishing the rulemaking that would make July's recommendations binding. Kennedy's public statements suggest the administration wants this to move quickly; the agency's own scientific staff, on the record twice now — in the Category 2 review and again in the PCAC briefing documents — have said the evidence doesn't support moving quickly at all. Whatever the FDA decides, it will be deciding it without the thing everyone actually agrees is missing: real clinical trials on drugs that, right now, millions of people are already taking without them.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.orrick.com/en/Insights/2026/04/FDA-Announces-Removal-of-12-Peptides-from-Category-2-and-Schedules-PCAC-Meetings">Orrick — FDA Announces Removal of 12 Peptides from Category 2 and Schedules PCAC Meetings</a></li>
+        <li><a href="https://www.frierlevitt.com/articles/fda-peptides-do-not-compound-list-update-2026/">Frier Levitt — FDA Peptide Update 2026: Removal from "Do Not Compound" List and What It Means for Pharmacies</a></li>
+        <li><a href="https://www.frierlevitt.com/articles/fda-peptide-regulation-rfk-announcement-compounding-pharmacies/">Frier Levitt — The Peptide Landscape Is Shifting: What Secretary Kennedy's Joe Rogan Interview Could Mean for the Compounding Industry</a></li>
+        <li><a href="https://www.npr.org/2026/06/30/nx-s1-5876301/peptides-fda-panel-compounding-rfk">NPR — FDA scientists flag concerns with peptides, the trendy molecules RFK Jr. supports</a></li>
+        <li><a href="https://www.npr.org/2026/07/23/nx-s1-5903202/fda-peptides-restrictions">NPR — FDA advisers vote to ease peptide restrictions, despite agency concerns</a></li>
+        <li><a href="https://www.bipc.com/fda-pcac-recommends-six-peptides-for-the-503a-bulks-list-what-compounding-pharmacies-need-to-know">Buchanan Ingersoll & Rooney — FDA PCAC Recommends Six Peptides for the 503A Bulks List</a></li>
+        <li><a href="https://www.ajmc.com/view/fda-panel-backs-6-peptides-for-compounding">AJMC — FDA Panel Backs 6 Peptides for Compounding</a></li>
+        <li><a href="https://www.statnews.com/2026/07/24/fda-peptide-compounding-panel-backs-epitalon-rejects-emideltide/">STAT — FDA advisory panel narrowly rejects compounding of one peptide, backs two others</a></li>
+        <li><a href="https://www.techtimes.com/articles/322323/20260730/fda-panel-backs-peptide-bpc-157-compounding-8-6-vote-over-scientists-objections.htm">Tech Times — FDA Panel Backs Peptide BPC-157 for Compounding in 8-6 Vote Over Scientists' Objections</a></li>
+        <li><a href="https://www.forbes.com/sites/joshuacohen/2026/08/02/on-peptides-fda-staff-scientists-at-odds-with-advisory-panel/">Forbes — On Peptides, FDA Staff Scientists At Odds With Advisory Panel</a></li>
+        <li><a href="https://www.forbes.com/sites/robertpearl/2026/08/10/the-best-fda-decision-on-peptide-authorization-isnt-yes-or-no/">Forbes — The Best FDA Decision On Peptide Authorization Isn't Yes Or No</a></li>
+        <li><a href="https://www.statnews.com/2026/07/06/peptides-regulation-fda-middle-ground-ban/">STAT — Regulating peptides: FDA should take a middle-ground approach</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+</body>
+</html>
