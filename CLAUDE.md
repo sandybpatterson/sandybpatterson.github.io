@@ -197,9 +197,17 @@ the single-row behavior.
   teaser. This matches how every other row in the list already works —
   nothing marks a row as "from Wetwear" versus hand-written; the unified
   list doesn't distinguish sub-sources, by design.
-- `wetwear/index.html` is a secondary, full archive of every daily brief,
-  newest first, reachable from inside any brief page via "All Briefs." It
-  exists in parallel to the hub rows, not instead of them.
+- `wetwear/index.html` is a secondary, full archive of every daily brief and
+  Deep Dive, newest first, still reachable by direct link. It exists in
+  parallel to the hub rows, not instead of them. **Renamed its list from
+  "Briefs" to "Issues" on 2026-08-29** for the same reason as the top-level
+  rename — one consistent word for "a list of what's published here,"
+  everywhere on the site. As part of the same change, the "All Briefs" nav
+  link was removed from every individual Wetwear page (daily briefs and
+  Deep Dives alike) — Sandy found having two differently-labeled nav links
+  ("All Issues" vs "All Briefs") pointing to two different lists confusing,
+  so those pages now carry only "All Issues," linking up to the one place
+  everything actually lives. Don't reintroduce an "All Briefs" link.
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
   instead of a single continuous article, sources as a linked list at the bottom).
