@@ -27,7 +27,7 @@ def convert(path, outpath, biggest_story_source):
     # byline is "Sandy B. Patterson · August 22, 2026"
     name, date = [p.strip() for p in byline.split('\xb7')] if '\xb7' in byline else [p.strip() for p in byline.split('&middot;')]
 
-    body_match = re.search(r'<div class="article-body">(.*?)</div>\s*\n\s*</div>', content, re.S)
+    body_match = re.search(r'<div class="article-body">(.*?)<div class="closing">', content, re.S)
     body_html = body_match.group(1)
 
     parts = re.split(r'(<p class="section-label">.*?</p>|<ul class="sources-list">.*?</ul>|<p(?: class="drop-cap")?>.*?</p>)', body_html, flags=re.S)
