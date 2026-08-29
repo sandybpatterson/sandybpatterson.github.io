@@ -131,6 +131,31 @@ label didn't map to a sensible "Here is the latest in ___" line, it's worth fixi
 HTML source and re-running the script rather than patching the `.txt` by hand — that
 keeps the two files honestly in sync.
 
+There are three specific things that read badly out loud but read fine on the page —
+for these, hand-edit the `.txt` after the script runs rather than touching the HTML.
+The article keeps normal written style for people reading it; only the narration
+script gets adjusted, because these are properties of text-to-speech, not of the
+writing itself:
+
+- **Long, dash-heavy sentences.** A sentence over roughly 400 characters — especially
+  one carrying more than one or two em dashes — tends to get mangled by text-to-speech;
+  the pauses land in the wrong places and the sentence loses its shape well before a
+  listener reaches the end of it. Break a sentence like that into two or three shorter
+  ones in the `.txt`, turning the dash-set-off clauses into their own sentences with
+  periods instead. Leave the HTML paragraph exactly as written; only its `.txt`
+  counterpart changes.
+- **Dates without an ordinal suffix.** "August 29" reads oddly aloud; "August 29th"
+  doesn't. Add the correct suffix to every date in the `.txt` — 1st, 2nd, 3rd, 4th,
+  ... 11th/12th/13th stay "th" even though they end in 1/2/3, 21st, 22nd, 23rd, and so
+  on — including the spoken byline line the script generates ("today is August 29th,
+  2026," not "today is August 29, 2026").
+- **Abbreviations, especially name suffixes and titles.** "Jr." tends to get sounded
+  out letter by letter instead of read as "Junior." Spell these out phonetically in
+  the `.txt`: Jr. → Junior, Sr. → Senior, Dr. → Doctor, Sen. → Senator, Rep. →
+  Representative, and similar. Use judgment on the rest — an initialism people
+  already say as individual letters out loud (FDA, CDC, WHO, HHS) is fine left as-is;
+  anything that reads as an actual word once expanded is a candidate for expanding.
+
 ## 5. Add the permanent index rows
 
 Add a new row to the **top** of the archive list in `ai-news/wetwear/index.html`:
