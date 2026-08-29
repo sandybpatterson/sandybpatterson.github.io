@@ -227,6 +227,12 @@
       display: block;
     }
 
+    /* Square variant for non-book covers (podcast art, etc.) — no book
+       spine/page-edge styling, since those only make sense on a tall cover. */
+    .sbp-cover-square { aspect-ratio: 1 / 1; }
+    .sbp-cover-square::before, .sbp-cover-square::after { display: none; }
+    .sbp-cover-square.sbp-img-cover img { border-radius: 10px; }
+
     .sbp-summary {
       position: absolute;
       top: 0;
@@ -347,7 +353,7 @@
   <div class="shelf-wrap">
     <div class="sbp-shelf">
       <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html" class="sbp-book">
-        <div class="sbp-cover sbp-img-cover">
+        <div class="sbp-cover sbp-img-cover sbp-cover-square">
           <img src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/covers/wetware-biology-corrected-20260829094625.jpg" alt="Wetwear: Biology Corrected" />
         </div>
         <div class="sbp-summary">
