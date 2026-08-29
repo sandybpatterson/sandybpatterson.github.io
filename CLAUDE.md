@@ -129,11 +129,22 @@ Structure in place, same pattern as The Original Bug / Beyond Ice and Steam:
 
 ---
 
-## AI News (`/ai-news/`)
+## Sandy's Blog (`/ai-news/`)
 
 Not a book — a standalone, lightweight newspaper-styled dispatch section,
 separate from the shelf. Replaced an earlier per-book newsletter (retired,
 along with its Substack link) that used to live inside `original-bug-book`.
+
+**Renamed from "AI News" to "Sandy's Blog" on 2026-08-29.** The content had
+outgrown the old name — Wetwear alone now covers biology, misinformation,
+public health data, and politics, not just AI — so the brand no longer
+matched what's actually published here. The folder path stays `ai-news/`
+deliberately: every existing URL (including the `soda-bot`-facing `.txt`
+convention documented below) keeps working, only the display name — nav
+pill text, page titles, masthead — changed. Don't rename the folder to
+match; that would break every link already out in the world for no benefit.
+The tagline now reads "with a little help from Claude" rather than
+referencing AI as the subject matter.
 
 `index.html` is the hub page. It lists **one single unified "Issues"
 archive** — no separate "Series" category. Sandy explicitly rejected
@@ -151,7 +162,7 @@ Rules for the Issues list:
   append to the bottom, and never pull an entry out into a separate section.
 - **No issue numbers anywhere** — Sandy asked for these removed; don't
   reintroduce "Issue 01," "Vol. I," or similar labels.
-- Nav links on every AI News page: Read the Book (→ `original-bug-book`),
+- Nav links on every Sandy's Blog page: Read the Book (→ `original-bug-book`),
   AI Tools (→ `ai-tools-directory`), All Issues (self, on issue pages) /
   AI Tools (on the hub), &larr; Bookshelf. `bookshelf.html`,
   `ai-tools-directory`, and `ai-news/` are meant to have visually matching
@@ -201,7 +212,7 @@ the single-row behavior.
   longer in the headline. `wetwear/index.html`'s archive row for that day
   uses the same real headline as its `.issue-title`, not the generic
   pattern either — keep both places in sync.
-- Nav on every Wetwear page uses `nav-brand` = "AI News" linking to
+- Nav on every Wetwear page uses `nav-brand` = "Sandy's Blog" linking to
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
 - `wetwear/YYYY-MM-DD.txt` — a plain-text companion to every HTML brief,

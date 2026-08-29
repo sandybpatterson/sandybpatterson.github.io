@@ -13,7 +13,7 @@ pushed to `main`, with permanent rows added to two index pages. There's no draft
 and no dry run, so move carefully through the steps below rather than rushing to the
 finish.
 
-Before doing anything else, skim the "AI News" section of `/CLAUDE.md` at the repo
+Before doing anything else, skim the "Sandy's Blog" section of `/CLAUDE.md` at the repo
 root if you haven't already this session — it documents the invariants this skill
 depends on (the unified newest-first Issues list, why every day's brief is a
 *permanent* row that never gets edited or removed, why there's no "Series" section,
