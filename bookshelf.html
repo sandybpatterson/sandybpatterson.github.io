@@ -346,6 +346,16 @@
 
   <div class="shelf-wrap">
     <div class="sbp-shelf">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html" class="sbp-book">
+        <div class="sbp-cover sbp-img-cover">
+          <img src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/covers/wetware-biology-corrected-20260829094625.jpg" alt="Wetwear: Biology Corrected" />
+        </div>
+        <div class="sbp-summary">
+          <div class="sbp-summary-title">Wetwear: Biology Corrected</div>
+          <p>The daily written brief, narrated — biology, misinformation, public health data, and politics, read aloud with a little help from Claude.</p>
+        </div>
+        <div class="sbp-label">Listen Now</div>
+      </a>
       <a href="https://sandybpatterson.github.io/original-bug-book/" class="sbp-book">
         <div class="sbp-cover sbp-img-cover">
           <img src="/images/tobcover.png" alt="The Original Bug" />
@@ -376,38 +386,16 @@
         </div>
         <div class="sbp-label">Read Now</div>
       </a>
-      <a href="https://sandybpatterson.github.io/stories/" class="sbp-book">
-        <div class="sbp-cover">
-          <div class="sbp-cover-title">Stories from Winchester</div>
-          <div class="sbp-cover-ornament">✦</div>
-          <div class="sbp-cover-author">Sandy B. Patterson</div>
-        </div>
-        <div class="sbp-summary">
-          <div class="sbp-summary-title">Stories from Winchester</div>
-          <p>A collection of short stories set in Winchester, Tennessee — Franklin County, told one season and one life at a time.</p>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
-      <a href="https://sandybpatterson.github.io/arden-remembers/" class="sbp-book">
-        <div class="sbp-cover">
-          <div class="sbp-cover-title">Arden Remembers</div>
-          <div class="sbp-cover-ornament">✦</div>
-          <div class="sbp-cover-author">Sandy B. Patterson</div>
-        </div>
-        <div class="sbp-summary">
-          <div class="sbp-summary-title">Arden Remembers</div>
-          <p>A forthcoming novel. Premise coming soon.</p>
-        </div>
-        <div class="sbp-label">Read Now</div>
-      </a>
     </div>
     <div class="sbp-shelf-floor"></div>
     <div class="sbp-shelf-shadow"></div>
   </div>
 
   <div class="link-tree">
+    <a href="https://sandybpatterson.github.io/ai-news/" class="link-btn">Sandy's Blog</a>
+    <a href="https://sandybpatterson.github.io/stories/" class="link-btn">Stories from Winchester</a>
+    <a href="https://sandybpatterson.github.io/arden-remembers/" class="link-btn">Arden Remembers</a>
     <button type="button" class="link-btn" id="podcast-copy-btn" onclick="copyPodcastLink()">Copy Podcast RSS Link</button>
-    <button type="button" class="link-btn" id="wetwear-podcast-copy-btn" onclick="copyWetwearPodcastLink()">Copy Wetwear Podcast RSS Link</button>
   </div>
 
   <footer>&copy; Sandy B. Patterson</footer>
@@ -416,16 +404,6 @@
     function copyPodcastLink() {
       var url = 'https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/feed.xml';
       var btn = document.getElementById('podcast-copy-btn');
-      navigator.clipboard.writeText(url).then(function () {
-        var original = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(function () { btn.textContent = original; }, 1800);
-      });
-    }
-
-    function copyWetwearPodcastLink() {
-      var url = 'https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/wetware-biology-corrected.xml';
-      var btn = document.getElementById('wetwear-podcast-copy-btn');
       navigator.clipboard.writeText(url).then(function () {
         var original = btn.textContent;
         btn.textContent = 'Copied!';

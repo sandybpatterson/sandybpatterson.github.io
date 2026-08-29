@@ -18,12 +18,31 @@ Sandy B. Patterson's author website. `bookshelf.html` is the home page (a
 GitHub Pages redirect from `index.html`) and links out to every book. Some
 books live in their own repos; some live as folders inside this repo.
 
-**Books on the shelf, in shelf order:**
-1. **The Original Bug** — separate repo `original-bug-book` (has its own CLAUDE.md)
-2. **Beyond Ice and Steam** — separate repo `beyond-ice-and-steam` (has its own CLAUDE.md)
-3. **Dead Men on Thrones** — lives here, in `/dead-men-on-thrones/` (full 64-chapter outline, no chapters drafted yet — see below)
-4. **Stories from Winchester** — lives here, in `/stories/`
-5. **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
+**On the shelf, in shelf order:**
+1. **Wetwear: Biology Corrected** (the podcast, not a book) — cover links to
+   `/ai-news/wetwear/podcast.html`, a dedicated landing page (RSS link, link
+   to all Wetwear Issues, link to Sandy's Blog). Added to the shelf
+   2026-08-29, deliberately first — see "Shelf vs. link-tree" below.
+2. **The Original Bug** — separate repo `original-bug-book` (has its own CLAUDE.md)
+3. **Beyond Ice and Steam** — separate repo `beyond-ice-and-steam` (has its own CLAUDE.md)
+4. **Dead Men on Thrones** — lives here, in `/dead-men-on-thrones/` (full 64-chapter outline, no chapters drafted yet — see below)
+
+**In the link-tree at the bottom of the shelf, not as book covers:**
+- **Sandy's Blog** — top button, links to `/ai-news/`
+- **Stories from Winchester** — lives here, in `/stories/`
+- **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
+- **Copy Podcast RSS Link** — the main show's feed (`feed.xml`)
+
+**Shelf vs. link-tree, as of 2026-08-29:** Stories from Winchester and Arden
+Remembers were demoted from full book covers to plain buttons in
+`bookshelf.html`'s `.link-tree` — Sandy asked to minimize both rather than
+give them shelf real estate. The Wetwear podcast cover was added to the
+shelf itself, styled and positioned exactly like a book (first, using the
+`.sbp-img-cover` pattern), even though it isn't one — Sandy explicitly
+wanted it treated as the top item on the shelf. Its cover art URL is the
+R2-hosted one already used by the "Copy Wetwear Podcast RSS Link" button
+that used to live in the link-tree; that button was removed since the new
+dedicated podcast page supersedes it — don't re-add it to `bookshelf.html`.
 
 ---
 
@@ -208,6 +227,12 @@ the single-row behavior.
   ("All Issues" vs "All Briefs") pointing to two different lists confusing,
   so those pages now carry only "All Issues," linking up to the one place
   everything actually lives. Don't reintroduce an "All Briefs" link.
+- `wetwear/podcast.html` — added 2026-08-29, a dedicated landing page for
+  the Wetwear podcast itself (distinct from `wetwear/index.html`, which is
+  the written-issues archive, not a podcast page). Cover art, a "Copy
+  Podcast RSS Link" button (same R2-hosted `.xml` feed), a link to all
+  Wetwear Issues, and a link up to Sandy's Blog. Linked from the bookshelf
+  as the top "book" cover — see the shelf section above.
 - `wetwear/YYYY-MM-DD.html` — one page per day, matching `ai-news/issue-*.html`'s
   layout (masthead-strip, headline/deck/byline, `.section-label` dividers
   instead of a single continuous article, sources as a linked list at the bottom).

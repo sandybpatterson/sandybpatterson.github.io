@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wetwear: Biology Corrected — Sandy's Blog</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .hero {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 64px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cover-art {
+    width: clamp(220px, 60vw, 300px);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 10px 14px 30px rgba(0,0,0,0.45), 14px 20px 50px rgba(0,0,0,0.25);
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .hero .subtitle {
+    font-size: 1.05rem;
+    color: #999;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .hero .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 8px;
+  }
+
+  .link-tree {
+    max-width: 420px;
+    margin: 40px auto 0;
+    padding: 0 28px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .link-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    padding: 16px 24px;
+    border: 1px solid #c9a84c;
+    border-radius: 999px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .link-btn:hover {
+    background: #c9a84c;
+    color: #0a0a0a;
+    text-decoration: none;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/ai-news/" style="color:#c9a84c;">Sandy's Blog</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/">All Issues</a>
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <img class="cover-art" src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/covers/wetware-biology-corrected-20260829094625.jpg" alt="Wetwear: Biology Corrected" />
+    <p class="eyebrow">The Podcast</p>
+    <h1>Wetwear: Biology Corrected</h1>
+    <p class="subtitle">The daily written brief, narrated — biology, misinformation, public health data, and politics, read aloud with a little help from Claude.</p>
+    <p class="byline">Sandy B. Patterson</p>
+  </div>
+
+  <div class="link-tree">
+    <button type="button" class="link-btn" id="podcast-copy-btn" onclick="copyPodcastLink()">Copy Podcast RSS Link</button>
+    <a href="https://sandybpatterson.github.io/ai-news/wetwear/" class="link-btn">All Wetwear Issues</a>
+    <a href="https://sandybpatterson.github.io/ai-news/" class="link-btn">All Issues</a>
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script>
+    function copyPodcastLink() {
+      var url = 'https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/wetware-biology-corrected.xml';
+      var btn = document.getElementById('podcast-copy-btn');
+      navigator.clipboard.writeText(url).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = original; }, 1800);
+      });
+    }
+  </script>
+
+</body>
+</html>
