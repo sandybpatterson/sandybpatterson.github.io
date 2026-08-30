@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eight Decisions About SODA — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Eight Decisions About SODA</h1>
+    <p class="byline">Written August 30, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>This is a status report on SODA, written to be listened to rather than skimmed. It covers where the program actually stands today, the eight things I need Sandy to decide, what is working well enough to leave alone, and what I can see coming. The numbers in it were read out of the running system this afternoon rather than recalled, which matters, because two of the more interesting findings are things neither of us knew until I looked.</p>
+
+<p>The short version is that SODA is in good shape and today was a bad day. Two shows, a hundred and fourteen episodes, twenty-five and a half hours of published audio, and a hundred and sixty-one unattended runs at a success rate a little under ninety-six percent. That is not a prototype. But this morning it published the same episode twice, and this afternoon it did it again for a different reason, and in both cases every screen in the system reported success while a subscriber's podcast app quietly lost an episode.</p>
+
+<h2>What went wrong today</h2>
+
+<p>SODA decided what it had already downloaded by remembering filenames. That works perfectly until a name changes. In the morning, a rename inside SODA erased the only record that a file had ever been fetched, so the next scheduled run brought it back as a stranger. In the afternoon, the same fault ran in the opposite direction: a commit in the news repository rewrote filenames to carry episode titles directly, which was a genuinely good change made for good reasons, and the run ten minutes later looked at a folder of familiar articles under unfamiliar names and concluded it had found something new.</p>
+
+<p>The morning's duplicate was the dangerous one. The audio filename it generated collided with the original episode's, so the upload overwrote that episode's audio, and both entries ended up carrying the same identifier in the feed. Podcast applications treat that identifier as identity. They kept one and discarded the other, which is why episode eight disappeared from every subscriber's phone while sitting in the episode list looking perfectly healthy.</p>
+
+<p>A third fault was hiding underneath, and I only found it because I went looking before deleting anything. The routine that permanently removes an episode rebuilt the storage key from the episode's title rather than from the address it actually publishes, so renaming anything broke the link. Deleting the duplicate would have taken episode eight's audio off the internet five days later. It also means every rename before today had been quietly orphaning files in storage. There is exactly one such orphan, an old Wetware episode three, three megabytes, which is both the proof the bug was real and the reassurance that it never ran often.</p>
+
+<p>All three are fixed. Identity now comes from a fingerprint of the text itself, so either end can rename anything and SODA still recognises it. The feed is back to nine items numbered one through nine. The run at two fifty-six this afternoon, unattended and with nobody watching, reported nothing new.</p>
+
+<p>One correction I owe, because it belongs in the record rather than in a footnote. After fixing the morning's fault I said I had scanned the whole library and found nothing else. The scan I wrote looked for two episodes sharing one audio file, which was the exact shape of the damage I had just repaired. The afternoon's duplicate had its own audio file and walked straight through a check that was, without my noticing, looking for a fingerprint of my own reasoning. The question I should have asked was the simple one: are there two episodes in this show with the same words in them?</p>
+
+<h2>The eight decisions</h2>
+
+<p><strong>One. Rotate the storage token.</strong> This has been outstanding a while and it is the only item with a security dimension. The Cloudflare token sat in plain text inside a file in OneDrive, which means it exists in OneDrive's server-side version history no matter what the file says now. Deleting the text did not delete the history. That token can write to the bucket holding every episode ever published. Nothing suggests it has been misused, and the exposure is to a private cloud account rather than the open internet, but a credential you cannot un-publish is one you replace rather than reason about. My recommendation is to do it this week. Generate a new token, paste it into the Accounts tab, delete the old one. It goes into Windows Credential Manager, so it never touches a settings file or a backup again. Ten minutes, and it closes the only genuinely open security item.</p>
+
+<p><strong>Two. Move the working folders out of OneDrive.</strong> Three of the seven failed unattended runs, on the twenty-fifth, twenty-seventh and twenty-ninth, died with an access-denied error on a path inside OneDrive. That is OneDrive locking a file while syncing it, at the exact moment SODA tried to write. It is not something I can fix inside SODA; it is two programs claiming the same file. OneDrive is also how the token in the first decision ended up somewhere I cannot reach to delete. Against moving: OneDrive is currently the backup, and a quarter of a million words of scripts are being versioned off-site for free, which is real protection I do not want to remove. So my recommendation is to split them. Working data, meaning episodes, audio, caches and settings, moves to a local folder outside OneDrive. The scripts folder stays synced, because it holds the writing and the scheduler almost never writes to it. That removes the contention without giving up the backup on the only thing that is irreplaceable.</p>
+
+<p><strong>Three. Get the podcast off the development address.</strong> Every episode is served from a Cloudflare address ending in r2 dot dev. Cloudflare is explicit that these are development URLs: rate-limited, not intended for production traffic, throttled without notice. I had one refused outright today. A plain, legitimate request for the feed came back as forbidden until I sent a browser-shaped user agent. Right now that costs nothing because the audience is small, and that is precisely the trap. The failure mode arrives with success: if an episode gets picked up anywhere, the rate limiting engages exactly when people are trying to listen, and podcast apps that get refused tend to mark a feed as broken and stop retrying. My recommendation is to attach a custom domain to the bucket, something like audio dot the main site. On Cloudflare that is free, it removes the rate limit entirely, and it stops the audio addresses being tied to an account-specific hostname. The real cost is rewriting the existing episode addresses, which I can script and verify. Of everything here, this is the infrastructure item I would put first.</p>
+
+<p><strong>Four. Two schedulers are running, and one should stop.</strong> The automatic check is set to every thirty minutes. The actual gaps between runs today were thirteen, fifteen, thirteen, sixteen, thirteen and thirteen minutes, with two runs landing in the same minute at twenty to three and both failing against a network blip. Windows has one task registered, repeating every thirty minutes, and an older disabled one beside it, so the extra runs are almost certainly SODA's own in-app timer firing as well whenever the app is open. Nothing is corrupted by this, because there is a file lock that stops two runs fighting over the episode list. But it doubles how often the source is polled, and two publishers racing is the precise condition that turns a small logic error into a duplicate, which is what today was spent on. My recommendation is to keep the Windows task and have the in-app timer stand down whenever that task is registered, because the Windows one runs whether or not the app is open, which is the entire point of unattended publishing.</p>
+
+<p><strong>Five. Whether full auto should publish with nobody in the loop.</strong> This was chosen deliberately, against my recommendation at the time, and I have built it as asked. I raise it once more only because today produced new evidence rather than a new opinion. The system published two episodes to a public feed that should not have existed, and no human saw either before subscribers did. The specific fault is fixed; the general shape is not. Anything that publishes without review will eventually publish something wrong, and the window between that happening and anyone noticing is however long it takes to open a podcast app. My recommendation is to keep full auto, because it is genuinely the feature that makes the thing worth having, and to add a cheap safety net rather than a gate: SODA refuses to publish an episode whose text closely matches one already in that feed, and says so instead. That catches the entire class of fault we hit today without putting a human approval step back into the path of the thing that was meant to be automatic.</p>
+
+<p><strong>Six. Cutting the next version.</strong> The installer on the download page still contains the duplicate-publishing bug. Sandy is unaffected, running from source, and as far as I know nobody else has installed SODA yet, so this is tidiness plus insurance against the first stranger who downloads it. My recommendation is yes, and to write the release script at the same time. Cutting a release is currently five manual steps and I have already got four of five right while missing the fifth once. One script that refuses to build when a source file is newer than the last build would have caught exactly that.</p>
+
+<p><strong>Seven. The three-tab merge, commit or drop.</strong> We agreed on the fifteenth of August to combine the Experimental, Review and Images tabs into one. It has been deferred every session since, reasonably, because something more pressing always turned up. SODA now shows ten tabs across the top. I am not going to keep silently carrying it; either it is worth an afternoon or it is not, and a decision either way beats a third week on a list. My recommendation is to do it, but after the second and third decisions above. Ten tabs is too many for someone opening this for the first time, and the shareware plan makes first impressions matter in a way they did not when there was only one user.</p>
+
+<p><strong>Eight. Numbering the hundred-and-five-episode show.</strong> Wetware is now cleanly numbered and both fields are editable in the episode list. The other show, holding the remaining hundred and five episodes, has no numbering at all. That was deliberate on my part: I emptied it rather than guess an ordering for a hundred audiobook chapters spanning several books. Podcast apps handle unnumbered episodes fine, falling back to publication date, but they will not offer to play from the beginning, which matters far more for a serialised book than for a news show. My recommendation is to number them per book, each book a season, chapters in order, with the proposed grouping shown for approval first, so that a list gets corrected rather than a hundred episodes.</p>
+
+<h2>What is working well</h2>
+
+<p>It would be easy for a report like this to read as a list of problems, so it is worth being precise about how much of this is now dependable.</p>
+
+<p>The unattended runs are the headline. A hundred and sixty-one of them, a hundred and fifty-four successful. Of the seven failures, three were OneDrive locking files and four were the network being down, including two this afternoon in the same window that one of my own uploads failed with a name-resolution error. Not one failure was a fault in SODA's own logic, and the recovery behaviour is right: the next run went ahead as though nothing had happened.</p>
+
+<p>The audio cache is keyed on the text, the voice, the speed and the language, which means changing one sentence re-renders one sentence rather than one chapter. It is also why multi-voice scripts cost almost nothing to add. The cache was already voice-aware, so casting a second narrator needed no new caching at all.</p>
+
+<p>The text rules are the part I would defend hardest. Across a hundred and twelve scripts and two hundred and forty-three thousand words they found six hundred and seventy-eight things that would have sounded wrong read aloud, and fixed five hundred and twenty-seven of them automatically. A year written as digits, a number with a comma in it, an abbreviation that should be spelled out letter by letter, a bare date that needs an ordinal ending. That is genuinely hard to buy elsewhere.</p>
+
+<p>Credential handling is sound, and that is not a claim from reading the code. I searched a real backup archive for all five actual key values and none of them were in it. Keys live in Windows Credential Manager, never in a settings file and never in a backup.</p>
+
+<p>Failure isolation deserves a mention out of proportion to its size. One tab that fails to build no longer stops SODA opening; it shows the error in its own tab and everything else works. Given how much of the program is now feature surface, that one change has probably saved more evenings than any single feature.</p>
+
+<p>And the installer works. Proven on a clean Windows account: small download, per-user, no administrator prompt, fetches Python if it is missing, and asks before removing anything at uninstall.</p>
+
+<h2>What is unfinished</h2>
+
+<p>The largest hole, and I want to be plain about it, is that nobody has ever watched the first-run download succeed. SODA installs and opens on a clean profile; that part is proven. The step where it fetches the voice model, the audio tooling and the Python packages, roughly six hundred and sixty megabytes, has only ever been fixed, never observed working. The size mismatch that was reported weeks ago is repaired and the downloader now trusts the server rather than the manifest, but that fix is unproven in reality. Anyone downloading SODA today gets exactly as far as we have tested, and then walks a path neither of us has walked.</p>
+
+<p>Second, the uninstaller has never run. It is written, wired into the installer, asks before removing anything and defaults to keeping the saved keys. It has never once been executed, and I am not willing to test it on the live machine after what happened the last time I demonstrated removal in place.</p>
+
+<p>Beyond those two the remaining work is small. Button rows need a sweep for overflow, because twice now a finished feature has been unreachable simply because its row was wider than the window and Windows declined to draw the last button, which looks exactly like the feature being broken. Ten scripts predate the ordinal-date fix and say April three where they should say April third. And there is that one orphaned audio file to remove.</p>
+
+<h2>What is coming</h2>
+
+<p>Storage is not a problem and will not sneak up on anyone. Twenty-five and a half hours of audio is a little over half a gigabyte against a free allowance of ten, so at the current rate there is well over a year of headroom, and the number is easy to watch.</p>
+
+<p>Code signing is the next real cost. Everyone who downloads SODA sees a warning that Windows protected their PC from an unknown publisher, and has to click through it. The download page explains this honestly, which helps, but it is the single largest drop-off between wanting the program and running it. A certificate is a few hundred pounds a year. Not worth it today, worth revisiting the moment anyone other than Sandy is installing this regularly.</p>
+
+<p>Shareware raises the stakes on all of it. The decision to go shareware means the untested first-run path stops being a private risk and becomes the first thing a paying stranger experiences. If I had to order the remaining work by what protects that moment, it would be: watch the download happen, run the uninstaller once, then merge the tabs.</p>
+
+<p>And the source repository will keep changing underneath us. Today's second duplicate came from a well-intentioned improvement made elsewhere, and there is no reason to think it was the last. Content-based identity removes that whole category, which is worth knowing on both sides: the filenames in the news folder are no longer load-bearing and can be reorganised freely.</p>
+
+<p>The last thing is a pattern I would rather catch in myself than have caught for me. Twice this month a feature has been finished, tested and still broken, because the tests exercised the helper functions rather than the function anybody actually calls. The multi-voice casting bug was exactly that. This morning's too-narrow scan was a softer version of the same instinct. I have started testing at the real entry point, running the actual scheduled fetch rather than checking the helper it calls, and both of today's fixes were verified that way. It is slower, and it is the only thing that has reliably caught these.</p>
+
+<p>If only three things happen from all of this, they should be the first decision, because a credential you cannot un-publish should be replaced rather than reasoned about; the third, because it is the one item whose failure mode arrives precisely when the show starts working; and the first-run download test, because it is the only part of a new user's path that neither of us has ever seen complete. Everything else here can wait a week without getting worse.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
