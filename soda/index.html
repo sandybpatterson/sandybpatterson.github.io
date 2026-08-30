@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SODA — Sandy B. Patterson</title>
+  <meta name="description" content="SODA turns written chapters into a narrated podcast. Free for Windows." />
+  <style>
+    /* Site styles, taken from bookshelf.html so this page belongs to the site
+       rather than sitting beside it. */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .nav-brand {
+      font-family: 'Courier New', monospace; font-size: 0.75rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: #c9a84c;
+    }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-links a {
+      font-family: 'Courier New', monospace; font-size: 0.72rem;
+      letter-spacing: 0.08em; text-transform: uppercase; color: #888;
+      padding: 5px 14px; border: 1px solid transparent; border-radius: 999px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 28px 100px; }
+
+    .hero { padding: 76px 0 8px; text-align: center; }
+    .eyebrow {
+      font-family: 'Courier New', monospace; font-size: 0.7rem;
+      letter-spacing: 0.22em; text-transform: uppercase; color: #c9a84c;
+      margin-bottom: 18px;
+    }
+    h1 { font-size: 3rem; line-height: 1.05; letter-spacing: 0.02em; margin-bottom: 10px; }
+    .tagline {
+      font-family: 'Courier New', monospace; font-size: 0.74rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #8a8177;
+      margin-bottom: 26px;
+    }
+    .lede { font-size: 1.15rem; line-height: 1.6; color: #c8c4bd; max-width: 34em; margin: 0 auto; }
+
+    /* download */
+    .get { text-align: center; padding: 40px 0 8px; }
+    .download {
+      display: inline-block;
+      font-family: 'Courier New', monospace; font-size: 0.86rem;
+      letter-spacing: 0.16em; text-transform: uppercase; font-weight: bold;
+      color: #14120c; background: #c9a84c;
+      padding: 16px 38px; border: 1px solid #c9a84c;
+      transition: background 0.15s;
+    }
+    .download:hover { background: #dcb954; text-decoration: none; }
+    .download:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .meta {
+      font-family: 'Courier New', monospace; font-size: 0.68rem;
+      letter-spacing: 0.1em; color: #6b655b; margin-top: 14px;
+    }
+
+    section { padding: 46px 0 0; border-top: 1px solid #1e1e1e; margin-top: 46px; }
+    h2 {
+      font-family: 'Courier New', monospace; font-size: 0.74rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #8a8177;
+      margin-bottom: 18px;
+    }
+    p { line-height: 1.7; color: #c8c4bd; margin-bottom: 15px; }
+    strong { color: #e8e8e8; }
+
+    .warn {
+      border-left: 3px solid #c9a84c; background: #130f09;
+      padding: 18px 22px; margin: 4px 0 20px;
+    }
+    .warn p:last-child { margin-bottom: 0; }
+    .warn .label {
+      font-family: 'Courier New', monospace; font-size: 0.66rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #c9a84c;
+      display: block; margin-bottom: 8px;
+    }
+
+    ul { margin: 0 0 15px 20px; }
+    li { line-height: 1.7; color: #c8c4bd; margin-bottom: 9px; }
+
+    .facts { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+    .facts td { padding: 9px 14px 9px 0; border-bottom: 1px solid #1a1a1a; vertical-align: top; color: #c8c4bd; }
+    .facts td:first-child {
+      font-family: 'Courier New', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #6b655b;
+      white-space: nowrap; width: 34%;
+    }
+
+    footer {
+      margin-top: 60px; padding-top: 24px; border-top: 1px solid #1e1e1e;
+      font-family: 'Courier New', monospace; font-size: 0.68rem;
+      letter-spacing: 0.1em; color: #6b655b; text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand">Sandy B. Patterson</span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/bookshelf.html">Bookshelf</a>
+      <a href="https://sandybpatterson.github.io/original-bug-book/">Read the Book</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <div class="hero">
+      <div class="eyebrow">Free for Windows</div>
+      <h1>SODA</h1>
+      <div class="tagline">Synthesize · Organize · Distribute · Audio</div>
+      <p class="lede">
+        Write a chapter. SODA reads it aloud, puts the audio in your own storage,
+        and keeps your podcast feed up to date.
+      </p>
+    </div>
+
+    <div class="get">
+      <a class="download" href="SODA-setup.exe" download>Download SODA</a>
+      <div class="meta">Version 1.0.10 · 2.2 MB · Windows 10 or later</div>
+    </div>
+
+    <section>
+      <h2>Before you click</h2>
+      <div class="warn">
+        <span class="label">Windows will warn you</span>
+        <p>
+          SODA is not code-signed, so Windows shows
+          <strong>“Windows protected your PC — Unknown publisher.”</strong>
+          Click <strong>More info</strong>, then <strong>Run anyway</strong>.
+          Your browser may say something similar about keeping the file.
+        </p>
+        <p>
+          This happens to every program without a signing certificate, which
+          costs a few hundred pounds a year. It is not a judgement about the
+          software — Windows simply has no way to know who wrote it.
+        </p>
+      </div>
+      <p>
+        The installer is small because it contains only SODA. The first time you
+        run the program it offers to fetch what it needs to make audio — the
+        voice model, ffmpeg, and a few Python packages, about <strong>660 MB</strong>,
+        downloaded from the projects that publish them. Nothing is bundled and
+        nothing is redistributed.
+      </p>
+    </section>
+
+    <section>
+      <h2>What it does</h2>
+      <p>
+        Put a text file in the queue and press publish. SODA narrates it in one
+        of fifty-four voices, joins the sentences with sensible pauses, evens out
+        the loudness, uploads the file, and rebuilds your RSS feed. Podcast apps
+        pick the episode up on their own.
+      </p>
+      <ul>
+        <li><strong>It reads your writing back and flags what will sound wrong.</strong>
+            A year written as 1945 is spoken “one thousand nine hundred forty-five”;
+            5,000 comes out as “five zero zero zero”. SODA finds those and fixes
+            the unambiguous ones.</li>
+        <li><strong>It remembers what it has already narrated.</strong> Change one
+            sentence and it re-renders one sentence.</li>
+        <li><strong>It can run on its own.</strong> Point it at a folder and it
+            publishes what appears there, on a schedule.</li>
+        <li><strong>It can use more than one voice</strong>, so a script can be a
+            conversation rather than a reading.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What you need</h2>
+      <table class="facts">
+        <tr>
+          <td>Windows</td>
+          <td>10 or later, 64-bit</td>
+        </tr>
+        <tr>
+          <td>Python 3</td>
+          <td>The installer offers to fetch it if you do not have it</td>
+        </tr>
+        <tr>
+          <td>Somewhere to host audio</td>
+          <td>A Cloudflare R2 bucket of your own. The free tier is enough for a
+              normal podcast, and SODA walks you through connecting it.</td>
+        </tr>
+        <tr>
+          <td>An AI key</td>
+          <td>Optional. Every AI feature has a free tier, and SODA records and
+              publishes perfectly well without touching any of them.</td>
+        </tr>
+        <tr>
+          <td>Time</td>
+          <td>Narration happens on your own machine. A thirty-minute episode
+              takes a little over twenty minutes to render. Nothing is sent
+              anywhere to make the audio.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Your work stays yours</h2>
+      <p>
+        Scripts, episodes and settings are kept apart from the program, so
+        updating or reinstalling never touches them. Storage keys and API keys go
+        into Windows Credential Manager rather than a settings file, and they are
+        not included in backups — which is why a backup is safe to copy about,
+        and why restoring one asks for your keys again.
+      </p>
+      <p>
+        Free to use. Not open source: you may use it for anything, personal or
+        commercial, but not redistribute it or publish your own version. It comes
+        with no warranty, which is worth stating plainly for a program that
+        spends credit on keys you supply and publishes to the open internet on
+        your instruction.
+      </p>
+    </section>
+
+    <footer>
+      SODA 1.0.10 · Sandy B. Patterson
+    </footer>
+
+  </div>
+</body>
+</html>
