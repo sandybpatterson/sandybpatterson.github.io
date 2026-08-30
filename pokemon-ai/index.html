@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teaching an AI to Play Pokémon Red — Sandy B. Patterson</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .article-body ul, .article-body ol {
+    margin: 0 0 1.2rem 1.4rem;
+  }
+  .article-body li { margin-bottom: 0.5rem; }
+
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.92em;
+    background: #161616;
+    border: 1px solid #262626;
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    color: #d8c98a;
+  }
+  pre {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    background: #111;
+    border: 1px solid #262626;
+    border-left: 3px solid #c9a84c;
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin: 0 0 1.4rem;
+    overflow-x: auto;
+    color: #d0d0d0;
+    text-align: left;
+  }
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+  }
+
+  .callout {
+    border: 1px solid #2a2a2a;
+    border-left: 3px solid #c9a84c;
+    background: #131311;
+    padding: 16px 20px;
+    margin: 0 0 1.4rem;
+    font-size: 0.96rem;
+    color: #cfcfcf;
+  }
+  .callout strong { color: #e8d99a; }
+
+  table.reward-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 1.6rem;
+    font-size: 0.92rem;
+  }
+  table.reward-table th, table.reward-table td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid #222;
+  }
+  table.reward-table th {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  table.reward-table td.num { color: #d8c98a; font-family: 'Courier New', monospace; white-space: nowrap; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">Sandy B. Patterson</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/">Sandy's Blog</a>
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Lab Notes</div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Teaching an AI to Play Pokémon Red</h1>
+    <p class="deck">No walkthrough, no scripted moves — just a neural network, a Game Boy emulator, and a few thousand rounds of trial and error. Here's how the whole thing actually works, from the emulator up to the reward function.</p>
+    <p class="byline">Sandy B. Patterson &middot; August 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">Why Teach It Instead of Programming It</p>
+
+      <p class="drop-cap">There's a well-known corner of YouTube where someone straps a reinforcement-learning agent into a Game Boy emulator and lets it figure out Pokémon from scratch — no walkthrough, no pathfinding code, nothing hand-coded about which button to press when. Peter Whidden's Pokémon Red project is the most-watched example, but the technique behind it isn't a trick unique to his channel — it's the same general approach DeepMind used to master Atari games and, eventually, Go: give an agent a screen, a set of buttons, and a reason to care about the outcome, then let it play millions of attempts until something that looks like skill falls out the other end. This project is our own version of that experiment, built from scratch and still very much in progress. This piece is the write-up of how it works, from the emulator on up.</p>
+
+      <p class="section-label">The Toolkit</p>
+
+      <p>Three pieces of software do all the actual work:</p>
+
+      <ul>
+        <li><strong>PyBoy</strong> — a Game Boy emulator written in Python, with a programmatic API that lets code press buttons, read the current screen as pixel data, and reach directly into the console's working memory. It can also run "headless," with no visible window at all, which matters a lot once you're running several emulators at once.</li>
+        <li><strong>Gymnasium</strong> — the standard interface the reinforcement-learning world uses to describe "an environment an agent can act in." Wrapping PyBoy in a Gymnasium environment means any general-purpose RL algorithm can plug straight into Pokémon Red without knowing anything about Game Boys.</li>
+        <li><strong>Stable-Baselines3</strong> — a library of ready-built RL algorithms. We're using PPO (Proximal Policy Optimization), the same family of algorithm behind a lot of modern game-playing and robotics agents, because it's stable, well-documented, and doesn't require a cluster to get started.</li>
+      </ul>
+
+      <p class="section-label">Setting It Up</p>
+
+      <p>Getting from zero to a running experiment took a handful of real steps, roughly in this order:</p>
+
+      <ol>
+        <li><strong>Source a ROM legally.</strong> You need a Pokémon Red ROM dumped from a cartridge you actually own — we're not going to link one, and neither should anyone else. Everything downstream just reads whatever file you provide.</li>
+        <li><strong>Install the Python stack.</strong> <code>pip install pyboy gymnasium stable-baselines3</code> covers the core of it, plus <code>numpy</code> and <code>opencv-python</code> for handling frames.</li>
+        <li><strong>Create a starting save state.</strong> Left alone, every training episode would start from the Game Freak logo and have to sit through the title screen, the professor's introduction, and the naming screens before anything interesting happens. Instead, we played through that intro by hand once — using PyBoy's own keyboard controls (arrow keys to move, <code>A</code> to confirm, <code>S</code> to cancel, <code>Enter</code> for Start) — picked a starter, and saved a PyBoy save state right there. Every training run loads that same state, so the agent's very first action is already standing in the world with a Pokémon in its party.</li>
+        <li><strong>Point PPO at the environment and let it run.</strong> The training script spins up several emulator instances in parallel, all headless, all feeding experience back to one shared policy network.</li>
+      </ol>
+
+      <p class="section-label">What the AI Actually Sees and Does</p>
+
+      <p>The agent doesn't get anything like a game state summary — no "you have 3 Pokémon, 12 HP, standing at map tile (4, 7)." What it gets, every step, is a downsampled, grayscale copy of the Game Boy screen — a small enough image that a convolutional neural network can process thousands of them a second, but detailed enough to make out sprites, menus, and text boxes. What it can do is limited to seven buttons: the four directions, A, B, and Start. Each decision the network makes holds a button down for a short burst of emulated frames, then releases it and looks at the resulting screen again. That loop — see a frame, choose a button, hold it, see the next frame — runs continuously, thousands of times per training episode, across every parallel emulator at once.</p>
+
+      <p class="section-label">Reinforcement Learning, in Plain Terms</p>
+
+      <p>Strip away the math and reinforcement learning is a fairly blunt idea: let an agent try things, tell it a number after each attempt saying how good that was, and nudge its decision-making very slightly toward whatever produced higher numbers. Do that enough times, across enough attempts, and behavior that reliably produces good outcomes gets reinforced, while behavior that doesn't gets quietly phased out — no one ever tells it "the goal is to become Pokémon Champion," it only ever sees a running scorecard.</p>
+
+      <p>PPO — the specific algorithm doing the learning here — adds one important piece of discipline to that idea: it caps how much the agent's behavior is allowed to change after any single batch of experience. Without that constraint, an agent can way overreact to a lucky or unlucky run and destabilize everything it had already learned; PPO's "proximal" clipping keeps every update to a fairly conservative nudge, which is a big part of why it's become a default choice for this kind of training. Running six emulators in parallel doesn't change any of that math — it just means six times as much experience arrives between each nudge, which in practice means the policy improves several times faster per hour of wall-clock time.</p>
+
+      <p class="section-label">The Hard Part: Deciding What "Good" Means</p>
+
+      <p>Here's the actual problem with training an agent on Pokémon Red: the game never tells you your score. There's no on-screen number going up when you're doing well, the way there is in Breakout or Pong — progress in Pokémon looks like "walked toward the right building," "won a battle," "caught something new," all of which are meaningful to a human and completely invisible to code unless someone defines them. Designing the reward function — the number the agent actually optimizes for — turned out to be most of the real engineering work in this project, and it's still evolving.</p>
+
+      <p>What made this possible at all is that decades of fans have reverse-engineered exactly what every byte of Pokémon Red's memory means, through a project called <code>pret/pokered</code> — a full, public disassembly of the game. Nothing about this touches or modifies the ROM; it only reads values already sitting in the Game Boy's memory while the game runs, the same way a manual score display would if the game had one. That documentation is what makes it possible to know, at every single frame, exactly how many badges the player has, how many Pokémon they've caught, how much HP either side of a battle has left, and whether a battle is even happening at all.</p>
+
+      <p>The reward signal, as it currently stands, combines several of these into one number every step:</p>
+
+      <table class="reward-table">
+        <tr><th>Signal</th><th>Reward</th><th>Why</th></tr>
+        <tr><td>Visiting a new tile</td><td class="num">+0.02</td><td>a small nudge to keep exploring instead of standing still</td></tr>
+        <tr><td>Earning a gym badge</td><td class="num">+10.0</td><td>the clearest marker of real progress in the game</td></tr>
+        <tr><td>Leveling up the party</td><td class="num">+1.0 / level</td><td>rewards training Pokémon up, not just winning any one fight</td></tr>
+        <tr><td>Taking damage</td><td class="num">&minus;0.5 &times; HP lost</td><td>discourages reckless fights</td></tr>
+        <tr><td>Catching a new species</td><td class="num">+5.0</td><td>only fires once per species, so it rewards variety, not repeats</td></tr>
+        <tr><td>Damaging the opponent (every turn)</td><td class="num">+0.3 &times; HP taken</td><td>a dense, turn-by-turn signal, so the agent can learn "attacking works" long before it can win a whole fight</td></tr>
+        <tr><td>Winning a wild battle</td><td class="num">+0.5</td><td>&nbsp;</td></tr>
+        <tr><td>Winning a trainer battle</td><td class="num">+2.0</td><td>trainer fights are harder and can't be fled from, so they're worth more</td></tr>
+        <tr><td>Losing a battle (blacking out)</td><td class="num">&minus;1.0</td><td>&nbsp;</td></tr>
+        <tr><td>Running from a wild battle</td><td class="num">&minus;0.5</td><td>discourages fleeing instead of finishing a fight it could win</td></tr>
+      </table>
+
+      <p>That last pair — telling a real win apart from simply running away — sounds simple but has a small wrinkle worth mentioning: the game's own "are we in a battle" flag changes the exact same way whether the wild Pokémon fainted or the player just pressed Run. The way around it is to also check the opposing Pokémon's remaining HP at the exact instant the battle ends: if it's still standing, that wasn't a win.</p>
+
+      <div class="callout"><strong>A live example of why this matters:</strong> the very first battle after picking a starter is a mandatory fight against your rival, right there in the lab — you cannot flee it, and it requires navigating a multi-step battle menu (Fight, then choose a move, then confirm) to do anything at all. Early in training, before any of the per-turn damage reward existed, the agent could get stuck cycling through that menu indefinitely, with every training episode ending the exact same way it started. Adding the turn-by-turn "damage dealt" signal gave it a reason to learn the menu sequence well before it could ever win the fight outright — a good reminder that in this kind of project, a stuck agent is usually a sign the reward function has a gap, not that the model is broken.</div>
+
+      <p class="section-label">What Training Actually Looks Like</p>
+
+      <p>In practice, a training run means several emulator windows running invisibly in the background — no graphics being drawn, since rendering to a screen is one of the slower parts of emulation and nobody's watching them anyway — while the policy network absorbs a steady stream of frames, actions, and rewards. Every so often, the current state of the network gets saved to disk as a checkpoint, so progress survives a restart and can be loaded back up to actually watch play out, with a visible window, whenever there's something worth seeing. Two million training steps is a reasonable early target for a project like this, and even at a healthy pace that's several hours of continuous training — Whidden's own public runs stretch into days. There's no shortcut here; the process is inherently slow, because every single one of those steps is one emulator frame at a time.</p>
+
+      <p class="section-label">Try It Yourself</p>
+
+      <p>The whole thing is a fairly small amount of code once the pieces are in place — a custom Gymnasium environment wrapping PyBoy, a training script, and a script for watching a saved checkpoint play. If you wanted to reproduce it:</p>
+
+      <pre><code>pip install pyboy gymnasium stable-baselines3 numpy opencv-python
+
+# play through the intro by hand once, then save a state right
+# after picking your starter
+python play.py --rom your_rom.gb --manual --save-state init.state
+
+# train for real (headless, several emulators in parallel)
+python train.py --rom your_rom.gb --init-state init.state \
+    --num-envs 6 --timesteps 2000000
+
+# watch a checkpoint play, in a visible window
+python play.py --rom your_rom.gb --init-state init.state \
+    --model sessions/run/ppo_red_100000_steps.zip</code></pre>
+
+      <p class="section-label">Where This Goes Next</p>
+
+      <p>The reward function above is a snapshot, not a finished design — the next obvious additions are rewarding item pickups and rewarding progress through specific story milestones rather than only badges, and there's an open question about how to reward strategic move choice rather than just "any damage is good damage." None of that changes the core idea, though: an agent that has never been told a single rule of Pokémon, slowly working out for itself that fighting well, exploring, and catching things all lead to a better outcome, one clipped policy update at a time.</p>
+
+    </div>
+
+    <div class="closing"><em>Lab Notes</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+</body>
+</html>
