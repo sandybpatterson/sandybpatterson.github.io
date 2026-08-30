@@ -88,6 +88,6 @@
     "kokoro-onnx": "https://github.com/thewh1teagle/kokoro-onnx",
     "ffmpeg": "https://www.ffmpeg.org/legal.html"
   },
-  "latest_version": "1.0.10",
+  "latest_version": "1.0.11",
   "download_url": "https://sandybpatterson.github.io/soda/SODA-setup.exe"
 }
