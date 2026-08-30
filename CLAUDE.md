@@ -248,14 +248,23 @@ the single-row behavior.
 - Nav on every Wetwear page uses `nav-brand` = "Sandy's Blog" linking to
   `/ai-news/` (not to the Wetwear subfolder) — wayfinding always points up
   to the hub, matching how `issue-*.html` pages already do this.
-- `wetwear/YYYY-MM-DD.txt` — a plain-text companion to every HTML brief,
-  same filename, `.txt` instead of `.html`, at the predictable URL
-  `https://sandybpatterson.github.io/ai-news/wetwear/YYYY-MM-DD.txt`. Built
-  2026-08-23 for a downstream consumer (`soda-bot`/SODA — investigated at
-  the time; it has no ready-built way to ingest this yet, but the file
-  exists so the URL convention is settled whenever that's built).
-  Reformatted 2026-08-24 to read as a spoken script for narration, not a
-  written article — per Sandy's example. Content, in order:
+- `wetwear/{MM-DD} {Daily Brief|Deep Dive} - {Headline}.txt` — a plain-text
+  companion to every HTML brief, reformatted 2026-08-24 to read as a spoken
+  script for narration, not a written article — per Sandy's example.
+  **Renamed 2026-08-30** from the earlier `wetwear/YYYY-MM-DD.txt`
+  predictable-URL scheme (built 2026-08-23 for a downstream consumer,
+  `soda-bot`/SODA, before anyone had confirmed how SODA actually ingests
+  files). It turns out SODA takes an episode's title directly from
+  whatever filename its `.txt` is saved under when Sandy drops it into
+  SODA's local `new_chapters` folder — there's no other title field — so
+  the filename published here needs to already be the intended episode
+  title, not a predictable date-only URL. `MM-DD` drops the year; the type
+  label sits right after the date, before the headline — e.g.
+  `08-30 Daily Brief - Kennedy Opens a Public Comment Period on Delaying
+  Childhood Vaccines Past Infancy.txt`. Files published before 2026-08-30
+  keep their old `YYYY-MM-DD.txt` names — this only applies going forward,
+  nothing was retroactively renamed except that day's own file. Content,
+  in order:
   - Fixed tagline line: `Coming up on Wetwear: Biology Corrected.` (said
     the same way every day, not a daily-changing tease), then a blank line.
   - The real headline, then the deck, each on their own line.

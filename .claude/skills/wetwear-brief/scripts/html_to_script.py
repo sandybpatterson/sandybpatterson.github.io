@@ -41,7 +41,7 @@ def convert(path, outpath, biggest_story_source):
             current_label = strip_tags(part).upper()
             if current_label == 'SOURCES':
                 break  # forget the sources section entirely
-            intro = SECTION_INTROS.get(current_label, lambda src: f'Here is {current_label}')(biggest_story_source)
+            intro = SECTION_INTROS.get(current_label, lambda src: f"Here's {current_label.lower()}")(biggest_story_source)
             lines.append('')
             lines.append(intro)
             lines.append('-' * len(current_label))

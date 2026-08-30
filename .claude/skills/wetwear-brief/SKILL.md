@@ -105,14 +105,34 @@ Save the finished file as `ai-news/wetwear/YYYY-MM-DD.html`.
 ## 4. Generate the `.txt` companion
 
 Don't hand-write this — run the bundled converter, which turns your finished HTML
-into the spoken-script format automatically:
+into the spoken-script format automatically. **Name the output file itself as the
+podcast episode title, right from this command** — see the naming note below for why:
 
 ```
 python3 .claude/skills/wetwear-brief/scripts/html_to_script.py \
   ai-news/wetwear/YYYY-MM-DD.html \
-  ai-news/wetwear/YYYY-MM-DD.txt \
+  "ai-news/wetwear/MM-DD Daily Brief - {{HEADLINE}}.txt" \
   "a real named source for the Biggest Story, e.g. the CDC"
 ```
+
+`MM-DD` is the brief's date with the year cut (e.g. `08-30`, not `2026-08-30`), and
+`{{HEADLINE}}` is the same real headline used in the HTML — e.g., for the 2026-08-30
+brief headlined "Kennedy Opens a Public Comment Period on Delaying Childhood Vaccines
+Past Infancy," the output filename is:
+
+```
+ai-news/wetwear/08-30 Daily Brief - Kennedy Opens a Public Comment Period on Delaying Childhood Vaccines Past Infancy.txt
+```
+
+**Why the filename carries the headline:** Sandy narrates each brief through a
+separate local app, SODA, that takes an episode's title directly from whatever
+filename the `.txt` is saved under when she drops it into SODA's `new_chapters`
+folder — there's no other title field SODA reads. She grabs the file this skill
+publishes and drops it in as-is, so the filename this skill chooses *is* the podcast
+episode title. Get it right here and she never has to rename anything. (This
+replaced an earlier, simpler `YYYY-MM-DD.txt` naming scheme — changed 2026-08-30
+specifically so the published file doubles as the SODA-ready copy. Files published
+before that date keep their old names; this only applies going forward.)
 
 The third argument fills in "Here is the BIGGEST STORY from ___" — pick whichever
 organization or outlet you actually leaned on most for that section (CDC, WHO, a named
@@ -191,7 +211,7 @@ git log --oneline -3 origin/main   # compare against local; merge/pull if it's a
 Then commit and push:
 
 ```
-git add ai-news/wetwear/YYYY-MM-DD.html ai-news/wetwear/YYYY-MM-DD.txt ai-news/index.html ai-news/wetwear/index.html
+git add "ai-news/wetwear/YYYY-MM-DD.html" "ai-news/wetwear/MM-DD Daily Brief - {{HEADLINE}}.txt" ai-news/index.html ai-news/wetwear/index.html
 git commit -m "Add Wetwear brief for YYYY-MM-DD"
 git push origin main
 ```
@@ -211,3 +231,6 @@ the headline, what the Biggest Story was, and a quick list of what else got cove
 They may want to sanity-check a stat or ask for a different lead story before it's
 considered final — a push is easy to follow up with another commit, so don't treat
 this as unfixable once it's live.
+
+Mention that the `.txt` is already saved under its SODA-ready name — she can grab it
+and drop it straight into `new_chapters` with no renaming.
