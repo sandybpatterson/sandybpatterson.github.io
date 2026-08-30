@@ -1,0 +1,37 @@
+Coming up on Wetwear: Biology Corrected.
+
+Kennedy Opens a Public Comment Period on Delaying Childhood Vaccines Past Infancy
+A follow-up to Trump's order to split the MMR shot into three separate vaccines proposes new recommendation categories like "not during infancy." Plus: a COVID study that reached a Senate hearing gets retracted for misinformation, dog blood chemistry that mirrors human aging, a lettuce-borne outbreak past 11,000 cases, and a rheumatoid arthritis trial that reached drug-free remission.
+I am Sandy B. Patterson, and today is August 30th, 2026.
+
+=================================================================================
+
+Here is the BIGGEST STORY from Nature
+-------------
+
+On August 10th, President Trump signed an executive order directing HHS to work toward splitting the combined measles-mumps-rubella (MMR) vaccine into three separate single-disease shots, limiting the routine childhood immunization schedule to eleven vaccines, and ending recommended hepatitis B, COVID-19, and flu vaccinations for young children. The order revives Secretary Kennedy's long-standing, scientifically unsupported claim linking combination vaccines to autism, a link decades of research have found no evidence for. Public health experts have warned that splitting MMR into separate visits would mean more appointments, higher costs, and more chances for a child to fall behind on a shot. And the manufacturing overhaul itself could take up to a decade to clear FDA approval, since none of the individual-disease vaccines are currently produced or licensed for the U.S. market. Kennedy has now taken the follow-up step. A Request for Information posted around August 21st asks the public — clinicians, researchers, vaccine manufacturers, and parents — to weigh in on whether the current three-tier system for classifying vaccine recommendations needs new categories. It floats options like "recommended, but not during infancy" and "recommended with qualification." The filing doesn't change anything on its own; it opens a 30-day public comment window, one more data point in what health reporters have started describing as a steady, RFI-by-RFI loosening of federal vaccine guidance rather than a single dramatic reversal. Coming one day after this brief covered new documents contradicting Kennedy's own sworn Senate testimony about his history with anti-vaccine campaigning, the RFI reads less like a new story than a continuation of the same one: the mechanism keeps changing, but the direction hasn't.
+
+Here is the latest in BIOLOGY
+-------
+
+A new analysis from the Dog Aging Project, published in Aging Cell, found that roughly 40 percent of the small molecules circulating in dogs' blood change measurably as they age — and that one particular class, a rarely studied group called post-translationally modified amino acids, tracks with aging consistently across dogs of every breed, size, and sex. The researchers, who drew blood samples from nearly 800 dogs enrolled in the citizen-science project, found that kidney function accounts for roughly half of that age-related signal, pointing to the kidneys as an active driver of how the body's chemistry shifts with age rather than just a passive marker of it. Because dogs share our homes and environments far more closely than lab animals do, the overlap with human aging biomarkers is a promising sign that findings in one species could translate to the other.
+
+Here is the latest on MISINFORMATION
+--------------
+
+BMJ Public Health formally retracted a 2024 paper this month that had claimed more than three million excess deaths occurred across 47 Western countries between 2020 and 2022, a figure vaccine skeptics have cited for two years as evidence that COVID-19 vaccines caused mass casualties. The journal's retraction notice said the paper's discussion section "is imbalanced, lacks rigour, and includes misinformation," finding that it gave outsized attention to vaccines and pandemic containment measures as possible causes of the excess deaths while leaving out research that undercut that argument. The retraction came after one of the paper's own corresponding authors testified about its findings before a U.S. congressional subcommittee this past June — meaning a study now formally found to contain misinformation had already reached a Senate hearing room before anyone pulled it.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+The CDC's cyclosporiasis outbreak tied to recalled Taylor Farms de Mexico iceberg lettuce has grown to 11,458 confirmed illnesses across 20 states, up from just under 11,000 cases in 17 states three days ago, with at least 495 hospitalizations and two deaths, both in Michigan. Most of the illnesses began before the lettuce was recalled on July 17th, and CDC and FDA investigators say they're now also tracking six additional clusters of cyclosporiasis for which they haven't yet confirmed a source — a reminder that a produce recall doesn't necessarily mean an outbreak's growth has stopped, only that its confirmed cause has.
+
+Here is the latest in POLITICS
+--------
+
+Internal NIH documents reviewed by Nature show the agency has begun turning away grant applications whose "primary function" is studying how public policy affects human health, a quiet change that would mean fewer federally funded projects assessing the health consequences of policy decisions — including, potentially, decisions like the vaccine-schedule changes covered above. The shift compounds a rougher two years for NIH funding generally: a 43-day government shutdown last fall, a White House delay in releasing the agency's 2026 budget, and ongoing staffing shortages have already left NIH on track to award thousands fewer new grants than it did in any of the four years before the current administration.
+
+And finally, some GOOD NEWS
+---------
+
+A phase 1 trial published in Nature Medicine put severe, treatment-resistant rheumatoid arthritis into drug-free remission using a single infusion of CD19 CAR T-cell therapy — the same cell-engineering approach already used against blood cancers, repurposed here for autoimmune disease. All six participants, whose disease hadn't responded to standard treatments, improved; half reached full clinical remission, and five of six no longer needed any immunosuppressive medication after six to nine months of follow-up. It's a small trial, but a treatment-refractory autoimmune disease going into unmedicated remission from a single infusion is the kind of result that reliably gets a much bigger trial funded next.
