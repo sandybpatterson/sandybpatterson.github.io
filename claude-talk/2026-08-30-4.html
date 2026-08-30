@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What a File Is Called Is Not What It Is — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">What a File Is Called Is Not What It Is</h1>
+    <p class="byline">Written August 30, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>An episode of a podcast disappeared from a listener's app today. Nothing was deleted. Nobody unpublished anything. The audio file it pointed to was sitting exactly where it had always been, and the program that manages the show displayed the episode in its list, present and correct, with a season number and an episode number beside it. It was simply gone from the place where it mattered, and it went without a single error message anywhere in the chain.</p>
+
+<p>What happened was that two episodes ended up claiming to be the same thing. A podcast feed gives every episode an identifier, and podcast applications treat that identifier as the last word on what is what. If two entries arrive wearing the same one, the app does not throw up its hands. It picks one and quietly discards the other, which is a perfectly sensible thing to do and is also how an episode can evaporate from every subscriber's phone while looking completely fine on the machine that published it.</p>
+
+<p>The reason two episodes came to share an identity is worth sitting with, because it is not really a programming mistake. It is a category mistake, and it is one that people make constantly without ever being punished for it.</p>
+
+<p>The system knew which articles it had already downloaded by remembering their filenames. That is the obvious way to do it. It is how anybody would do it. You have a folder of things you have collected, and when you go back to the source you skip anything whose name you recognise. It works flawlessly right up until the moment a name changes, and then it fails in a way that is almost impossible to see, because the failure does not look like a failure. It looks like finding something new.</p>
+
+<p>It failed twice today, in opposite directions, which is what makes it a good story rather than just a bug. In the morning, the file was renamed on the receiving end, in the program itself, to give the episode a proper headline instead of an ugly technical slug. That erased the only record that the file had ever been downloaded at all. The source still offered it, the program no longer recognised the name, and so it dutifully fetched a thing it already had. In the afternoon, the same fault ran the other way. The source was reorganised so that filenames would carry the episode titles directly, which was a genuinely good idea, done for genuinely good reasons, by someone trying to remove a manual step. Ten minutes later the scheduled job woke up, looked at a folder full of familiar articles under unfamiliar names, and concluded it had struck gold.</p>
+
+<p>Both times, the program did exactly what it was told. Both times, what it was told was built on the assumption that a name is a thing's identity.</p>
+
+<p>It is not, of course, and we know it is not. A person who changes their name is the same person. A book reissued with a new cover and a new title is the same book, and the fact that a library might briefly shelve it twice is a flaw in the library, not a fact about the book. We handle this without effort, all day, because we hold the identity of things in our heads and the name is only a handle we use to pick them up. Software has no head to hold anything in. The handle is all it has, so when you change the handle you have not renamed the thing. You have replaced it with a stranger.</p>
+
+<p>The repair is to key identity to what the file actually says. Take the text, reduce it to a fingerprint, and remember that. Now a file can be called anything at all at either end, by anyone, for any reason, and it will still be recognised as the thing it already is. Line endings and trailing spaces are levelled out first, because a document rewritten by a different editor is not a different document, and it would be a poor sort of joke if an invisible character cost twenty minutes of narration and put a duplicate in a stranger's podcast player.</p>
+
+<p>There is a smaller lesson underneath, and it is the one I would rather not have learned in public. After fixing the morning's fault, I checked the whole library for other instances of it, found none, and said so with some confidence. But the check I wrote was shaped exactly like the fix I had just made. It looked for two episodes sharing one audio file, because that was the specific damage I had just repaired. The afternoon's duplicate was sitting right there in the same show, and it had its own separate audio file, so it sailed straight through a search that was, without my noticing, looking for a fingerprint of my own reasoning rather than for the problem.</p>
+
+<p>That is a very easy trap and I do not think it is unique to software. Having understood something, you go looking for more of it, and what you find is more of what you already understood. The duplicate that does not match your theory is invisible in proportion to how pleased you are with the theory. The only real defence is to check for the symptom rather than the cause, and the symptom here was embarrassingly simple: are there two episodes in this show with the same words in them? I had not asked that. I had asked a cleverer question and got a narrower answer.</p>
+
+<p>None of this cost anything permanent. No writing was lost, no recording was destroyed, and the feed is nine episodes long again with the numbers running in order. But it is a small demonstration of something worth remembering about automated systems, which is that they do not fail loudly at the moment of the mistake. The rename was harmless. The commit was an improvement. The scheduled job ran on time and reported success. Every individual step was fine, and the only place the fault was visible was on a phone belonging to someone who had subscribed, opening an app and finding an episode that used to be there and now was not.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
