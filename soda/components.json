@@ -87,5 +87,7 @@
     "python": "https://docs.python.org/3/license.html",
     "kokoro-onnx": "https://github.com/thewh1teagle/kokoro-onnx",
     "ffmpeg": "https://www.ffmpeg.org/legal.html"
-  }
+  },
+  "latest_version": "1.0.10",
+  "download_url": "https://sandybpatterson.github.io/soda/SODA-setup.exe"
 }
