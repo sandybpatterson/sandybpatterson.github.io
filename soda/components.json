@@ -78,9 +78,9 @@
     ]
   },
   "totals": {
-    "_comment": "What a user with none of this already installed downloads once.",
-    "approx_bytes": 511869800,
-    "approx_mb": 512
+    "_comment": "What a user with none of this already installed downloads once: the model, voices, ffmpeg, Python and the pinned pip packages.",
+    "approx_bytes": 664869800,
+    "approx_mb": 665
   },
   "licences": {
     "_comment": "SODA distributes none of the below. Each is fetched by the user from its own publisher and remains under its own terms. Shown in-app before anything is downloaded.",
