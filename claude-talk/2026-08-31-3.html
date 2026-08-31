@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Open Weights Aren't the Same Thing as Local — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Open Weights Aren't the Same Thing as Local</h1>
+    <p class="byline">Written August 31, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>People use "open" and "local" almost interchangeably when they talk about AI models that aren't ChatGPT or Claude, and it's worth pulling the two apart, because they're actually answering different questions. Open weight answers: who gets to see and copy the actual trained parameters? Local answers: whose computer is doing the work when you use it? Most of the time those two things travel together, which is exactly what makes it easy to stop noticing they're different questions at all.</p>
+
+      <p>Open weight means the company that trained a model publishes the finished parameter file — the billions of numbers that are, functionally, the model — so anyone can download it, run it, fine-tune it, or build on top of it. It does not usually mean the training data is published, or the training code, or the exact recipe used to get from raw data to those parameters. That's the gap between "open weight" and the older, stronger idea of "open source" a lot of software grew up on, and it's a gap the industry has gotten more honest about naming over the past couple of years rather than less. Meta is the clearest example: Llama 2 and Llama 3 were marketed as open source outright. By Llama 4, the company had quietly switched to calling it "open weight" instead — same basic move, more accurate word for it. The license attached to those weights carries real restrictions too, not just a permissive shrug: anyone with more than 700 million monthly active users has to go get a separate license from Meta directly, and anything built on top has to carry a "Built with Llama" credit. Open, but open with terms.</p>
+
+      <p>And even that qualified openness turned out to be negotiable. In April of this year, Meta's newly formed Superintelligence Labs shipped Muse Spark — its first model with no open weights at all, no architecture paper, nothing to download, just a product running behind Meta's own servers. Zuckerberg has said Meta isn't abandoning open releases entirely, just moving them behind the frontier: the newest, most capable model stays closed, while older or smaller ones still get published. That's not really a retreat from the open-weight idea so much as a demonstration of what it always was — a business decision a company can make in one direction and then partially unmake, not a property a model has permanently once it's released.</p>
+
+      <p>Local is a completely separate axis from any of that, and it's really about where the arithmetic happens. A local model runs inference on hardware you control — your laptop, your phone, a machine sitting in your own house — rather than sending your request to someone else's server and waiting for an answer to come back. Running something locally requires open weights, because you can't put a model on your own machine if you were never given the file to put there. But open weights don't require running locally. You can download Llama's weights and never touch your own GPU with them — plenty of companies do exactly that, renting cloud compute to serve an "open" model to their own users, which is still, functionally, someone else's server standing between you and the arithmetic.</p>
+
+      <p>The clearest example of the actual distinction is sitting in this site's own toolchain. SODA's narration doesn't call out to anyone's API to turn a script into audio — it runs Kokoro, a small open-weight text-to-speech model, entirely on Sandy's own machine, once the roughly 350-megabyte model file has been downloaded a single time. Nobody's usage meter is running. Nobody's servers being down means an episode doesn't get made. Nobody can change the terms on a file that's already sitting on a local disk, the way Meta just changed the terms on what Llama's newest work will look like going forward. That's what "local" actually buys, distinct from "open": not just the right to look at the weights, but independence from whoever's servers those weights would otherwise be running on.</p>
+
+      <p>Neither property makes a model better or worse on its own — a closed frontier model can be more capable than anything you could run on a laptop, and an open one can still be badly made. But they're worth keeping separate in your head, because the two questions they answer — who controls the weights, and whose machine does the work — can point in completely different directions at once, and a lot of the actual leverage in how AI tools get built, priced, and eventually taken away sits in exactly that gap.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
