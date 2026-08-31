@@ -446,6 +446,11 @@
             }
           }
           updateStatus('Finished');
+        } else if (isPlaying) {
+          // Speak the next paragraph only now, instead of relying on the
+          // engine to keep working through a queue handed to it all at once —
+          // see the note above playFrom() for why.
+          synth.speak(utterances[i + 1]);
         }
       };
       u.onerror = (e) => {
@@ -459,8 +464,19 @@
     });
   }
 
-  // Queues utterances starting from 'index' and begins speaking.
-  // synth.cancel() is called first to flush any previously queued speech.
+  // Starts speaking from 'index'. synth.cancel() is called first to flush any
+  // previously queued speech.
+  //
+  // Deliberately speaks ONE utterance rather than queueing the rest of the
+  // book in a loop — onend (above) chains to the next paragraph only once the
+  // current one actually finishes. Queuing many utterances at once used to be
+  // the pattern here, and it's the textbook trigger for a second, separate
+  // Chrome bug from the single-long-utterance cutoff the keepalive below
+  // handles: handed a large queue up front, Chrome can silently stop
+  // advancing through it partway — usually on longer pieces with many
+  // paragraphs — with no error event and no visible sign beyond the audio
+  // just not continuing. Speaking one at a time as each ends sidesteps it,
+  // since the engine is never holding more than a single item.
   function playFrom(index) {
     synth.cancel();
     isPlaying = true;
@@ -474,9 +490,7 @@
       setMediaSessionState('playing');
     });
 
-    for (let i = index; i < utterances.length; i++) {
-      synth.speak(utterances[i]);
-    }
+    if (utterances[index]) synth.speak(utterances[index]);
 
     startKeepAlive();
     acquireWakeLock();
