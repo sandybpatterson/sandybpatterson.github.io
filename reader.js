@@ -455,9 +455,20 @@
       };
       u.onerror = (e) => {
         // 'interrupted' and 'canceled' fire when synth.cancel() is called intentionally
-        // (e.g. user hits stop, or changes voice). Suppress those — only log real errors.
+        // (e.g. user hits stop, or changes voice) — those already get a fresh
+        // speak() call from wherever triggered the cancel, so do nothing here.
+        // A real error (e.g. 'synthesis-failed') means the browser terminates
+        // this utterance without ever firing onend, so nothing else advances
+        // the queue unless this handler does it — one bad paragraph would
+        // otherwise silently stall every paragraph after it.
         if (e.error !== 'interrupted' && e.error !== 'canceled') {
           console.warn('TTS error:', e.error);
+          if (isPlaying && i < utterances.length - 1) {
+            synth.speak(utterances[i + 1]);
+          } else if (isPlaying) {
+            stopPlayback();
+            updateStatus('Finished');
+          }
         }
       };
       return u;
