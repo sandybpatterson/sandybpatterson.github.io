@@ -1,0 +1,37 @@
+Coming up on Wetwear: Biology Corrected.
+
+COVID-19 Wastewater Levels Reach Their Highest Point Since January 2024
+National surveillance shows the sharpest COVID uptick in over two and a half years, growing in nearly every state as fall approaches. Plus: animals that have quietly been eating bioplastic for millions of years, the business model behind health misinformation, a measles outbreak in three Maryland counties, DEA scheduling action on synthetic kratom, and a twice-rejected melanoma therapy that finally won approval.
+I am Sandy B. Patterson, and today is August 31st, 2026.
+
+=======================================================================
+
+Here is the BIGGEST STORY from the CDC
+-------------
+
+National wastewater surveillance now shows SARS-CoV-2 at its highest level since January 2024, with the CDC reporting COVID-19 activity growing or likely growing in 48 states as of August 26th and declining in none. The uptick is concentrated for now in the West and Midwest, with wastewater data showing "very high" levels in Texas and "high" levels in Mississippi, the two states currently driving the national trend. CDC forecasting models project roughly 2,800 new confirmed COVID-19 hospital admissions for the week ending August 29th, up from about 2,200 two weeks earlier, alongside a rise in emergency department visits for COVID-19 from 0.37 percent to a projected 0.48 percent of all ED visits over the same span. Both numbers are modest in absolute terms, but they're moving in the same direction at the same time, which is exactly what wastewater surveillance is designed to catch early. The dominant variant remains KP.3.1.1, an Omicron descendant accounting for roughly a third of sampled sequences, with no sign yet of a variant significant enough to explain the surge on its own; officials are treating it as a familiar late-summer-into-fall seasonal pattern rather than something new. The timing lands awkwardly against this month's other vaccine-policy news: this brief has spent the past two weeks tracking a steady loosening of federal vaccine guidance and a Kennedy-led push toward new "not during infancy"-style exemption categories, all while the virus those debates are ultimately about is doing the most visible thing it's done in over two years.
+
+Here is the latest in BIOLOGY
+-------
+
+A new synthesis of research across marine worms, starfish, earthworms, and several other invertebrate groups shows that far more animals than previously known carry enzymes capable of breaking down polyhydroxyalkanoates, or PHAs — a family of biodegradable plastics that bacteria have been producing naturally for hundreds of millions of years, long before humans engineered anything similar. Until recently, PHA degradation was thought to be almost exclusively the work of microorganisms; the newly compiled evidence suggests animals across the tree of life evolved the ability to digest these natural bioplastics as a food source, treating bacterial plastic production the way other animals treat any other microbial byproduct in their environment. Researchers say the finding reframes how widely plastic-degrading ability is actually distributed in the animal kingdom, and adds a much larger and more diverse set of organisms to study for enzymes that might eventually help break down human-made plastic waste.
+
+Here is the latest on MISINFORMATION
+--------------
+
+A STAT News investigation lays out, in mechanical detail, how health misinformation has become an actual business model rather than just an ideological byproduct. First, build an online following by stoking distrust of mainstream medicine. Then position yourself as a sympathetic underdog fighting "the establishment," and build parasocial trust by seeming more human and vulnerable than a credentialed clinician ever will. Finally, monetize that trust by referring followers to a store selling supplements, "cleanses," or paid coaching. A Pew Research poll cited in the piece found that four in ten adults now get health information from social media influencers and podcasts, and that half of them say they struggle to tell what's actually accurate. The article's broader point is structural: outbreaks themselves have become monetizable content, meaning the financial incentives driving this kind of misinformation get stronger, not weaker, exactly when accurate public health information matters most.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+Maryland's Department of Health has declared a measles outbreak across St. Mary's, Carroll, and Cecil counties, bringing the state to 31 confirmed cases in 2026 — 27 of them since July 15th, all involving unvaccinated residents, with a fourth county, Charles, also reporting a case tied to the same cluster. State health officials say there's no evidence yet of broader community transmission; nearly all of the cases have spread through household contact rather than public exposure. In response, more than 106,000 MMR vaccine doses have been administered statewide so far this year, over 24,000 of them since July 1st alone, as Maryland's health secretary, Doctor Meena Seshamani, described the state's vaccination protections as "teetering" even while stressing that fully vaccinated residents face low risk.
+
+Here is the latest in POLITICS
+--------
+
+The DEA issued a temporary order on August 25th placing three synthetic kratom-related compounds — mitragynine pseudoindoxyl and two related substances known as MGM-15 and MGM-16 — into Schedule I of the Controlled Substances Act, the agency's most restrictive category. The action targets concentrated, lab-modified versions of 7-hydroxymitragynine, the kratom-derived compound blamed for a wave of opioid-like overdoses, while explicitly leaving natural kratom leaf products, which contain only trace amounts of the compound, untouched. The American Kratom Association, an industry group that has fought broader kratom bans for years, publicly applauded the move — a notable alignment between a federal enforcement action and the industry it regulates, built on the DEA drawing its line narrowly enough that the group's own natural-leaf members aren't caught in it.
+
+And finally, some GOOD NEWS
+---------
+
+The FDA granted accelerated approval on August 6th to Tudriqev (vusolimogene oderparepvec), an oncolytic virus therapy, in combination with the immunotherapy drug nivolumab, for adults with advanced melanoma that has already progressed on standard PD-1-blocking treatment — patients who had largely run out of options. In the pivotal IGNYTE trial, the combination produced an objective response in 24.2 percent of evaluable patients, with responses lasting a median of 14.1 months, and was generally well tolerated with no grade 4 or 5 side effects tied to treatment. The approval came after two prior rejections from the FDA, making it as much a story about a drug developer's persistence through repeated setbacks as about the therapy itself — and it adds an entirely new treatment class, engineered viruses that infect and kill cancer cells while triggering an immune response, to what's available for a population of patients who badly needed another option.
