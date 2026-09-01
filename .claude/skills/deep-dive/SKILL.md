@@ -63,6 +63,18 @@ Sandy's existing Deep Dive doesn't both-sides a question where the evidence isn'
 actually balanced; it says so, plainly, while still fairly representing the
 strongest version of every side.
 
+**Prefer one tight narrative thread over a broad survey, whenever the story
+supports it.** Sandy's preference, confirmed 2026-09-01: the peptide-compounding
+Deep Dive (trigger → agency action → what the agency's own scientists said →
+what a vote actually did and didn't do → what happens next) reads stronger than a
+piece that surveys a whole topic area from several angles (geography, official
+guidance, politics, myths, safety data, history, each as its own section). When
+the underlying story is genuinely one process — one decision, one committee, one
+vote, one reversal — follow that single thread start to finish rather than
+building a general explainer around it. A topic that's genuinely diffuse (no
+single process ties it together) can still get the survey treatment; but check
+first whether a tighter thread is actually available before defaulting to broad.
+
 Write a real, specific headline — same standard as the Daily Brief, never generic.
 Write a one-sentence deck teasing what the piece actually covers.
 

@@ -1,0 +1,39 @@
+Coming up on Wetwear: Biology Corrected.
+
+Trump Ordered MMR Split Into Three Shots Over His Own Health Agency's Objection
+An August executive order gives Kennedy's HHS 90 days to break up the combined measles shot, resting on a study that doesn't appear to exist, over the CDC's own published guidance, the physician-senator whose vote confirmed him, and a pharmaceutical industry with no reason to ever build what he's asking for.
+I am Sandy B. Patterson, and today is September 1st, 2026.
+
+===============================================================================
+
+Here's what changed
+------------
+
+On August 10th, President Trump signed an executive order, "Delivering Gold Standard Childhood Vaccine Recommendations for Americans," directing federal health officials to pursue splitting the combined measles-mumps-rubella shot into three separate, single-disease vaccines, administered at separate visits "once such products are domestically available." The order frames this as giving parents more control over the timing and pace of their children's vaccinations, and it leans on the same unsubstantiated vaccine-autism link Secretary Robert F. Kennedy Junior has pushed since long before he held the job. It gives HHS 90 days — into early November — to deliver an implementation plan "starting with MMR." One detail the order doesn't resolve: no single-antigen measles, mumps, or rubella vaccine has been manufactured or sold in the United States in nearly two decades. The combined shot has been the American standard since the 1970s, and nothing about that changed on August 10th except the paperwork ordering it to.
+
+Here's what kennedy claimed — and what doesn't seem to exist
+-----------------------------------------------------
+
+Asked about the order in a CNN interview that aired August 15th, Kennedy defended it by citing new science. He said a "recent study that just came out" — "essentially a meta review... of all the existing science" — "very strongly" supported splitting the vaccine, and dismissed the CDC's own published position as probably just out of date. FactCheck.org's Jessica McDonald went looking for that study. She didn't find one. There is no published research — meta-analysis, cohort study, or otherwise — showing that splitting the MMR vaccine into separate shots would be safer, more effective, or reduce autism risk, for a combination vaccine that has been in continuous use for more than 40 years. Kennedy has made versions of this same claim before; FactCheck.org has now tracked a running timeline of his shifting, and consistently unsupported, statements about the measles vaccine specifically.
+
+Here's what the government's own page still says
+-----------------------------------------
+
+The CDC website Kennedy waved off as outdated says this, in plain language, as of this writing: "No published scientific evidence shows any benefit in separating the combination MMR vaccine into three individual shots." Merck, which manufactures two of the three MMR vaccines currently licensed in the U.S., says nearly the same thing in its own public statements, and adds a concrete number to the request the executive order makes: building, testing, and winning FDA approval for standalone versions could take as long as ten years. The gap between the government's own published guidance and the government's own executive order isn't hypothetical or secondhand — it's the same agency, contradicting itself, in the same window of time. And the contradiction runs deeper than one CNN answer. Acting CDC director Jim O'Neill, who also serves as HHS deputy secretary, first called publicly for manufacturers to "break up the MMR shot into three totally separate shots" back in October 2025 — months before Trump's order existed — citing the president's directive rather than any change in the evidence. The agency's own director has been on record against his own agency's own web page for the better part of a year.
+
+Here's what doctors — and rfk's own confirming vote — are saying
+---------------------------------------------------------
+
+The American Academy of Pediatrics didn't hedge. Its president, Doctor Andrew Racine, said plainly that "there is no new evidence to justify significant changes to childhood immunization guidance," that "dozens of studies involving millions of people show there is no link between vaccines and autism," and that with measles already at a 35-year high and cold and flu season approaching, "today's executive order on vaccines is not only disheartening but dangerous." The AAP separately estimates it could take roughly a decade to develop and license a standalone vaccine for each component — Merck's number, arrived at independently.
+
+The more politically striking pushback came from Senator Bill Cassidy of Louisiana — a physician, and the Republican whose vote on the Senate health committee broke a tie and helped confirm Kennedy as HHS secretary in the first place. Cassidy posted that "Vaccines DO NOT cause autism," and that breaking up the combined shot "will mean children have to get more shots to get the same protection, not fewer shots. It will increase hesitancy and make children less safe." He separately warned the change would likely raise insurance costs for families. This isn't a lawmaker with a standing grudge against the administration. It's the senator who put Kennedy in the building, on the record that this specific decision will make the exact problem it claims to solve worse.
+
+Here's what splitting the vaccine would actually require
+-------------------------------------------------
+
+Set the politics aside and look at what the order is actually asking industry to build. Completing a fully separated schedule would mean roughly six clinic visits instead of the two the combined shot requires now — more copays, more scheduling friction, and, virtually every pediatric group involved has said, lower real-world compliance, concentrated among the families already least able to make every visit. No monovalent MMR-component vaccine is currently manufactured or FDA-approved for the U.S. market. Nothing in the executive order, or in the law, can compel a drugmaker to build one. The same three companies that already profit from selling the combined shot have essentially no commercial reason to spend years and tens of millions of dollars developing single-antigen replacements that their own regulator's website says offer no demonstrated benefit — which is exactly why, as of this writing, drug manufacturers have shown little interest in actually doing it. Merck's own ten-year estimate for approval means that whatever plan HHS delivers this fall will describe vaccines that, as a practical matter, do not yet exist and may not for most of the next decade, if they get built at all.
+
+Here's what happens next
+-----------------
+
+The MMR order isn't the only vaccine-policy process moving through HHS right now. On August 24th, the department separately opened a formal Federal Register request for information asking whether the categories used in federal vaccine recommendations need to change. That includes whether a new category, something like "recommended, but not during infancy," should exist, and whether recommendations should shift toward what the notice calls a "presumption" favoring individual autonomy over the current evidence-based framework. Public comments are open through September 20th. The executive order's own 90-day implementation deadline lands within days of that same window, in early November — the same stretch in which the U.S. is on track to lose the measles elimination status it has held for 25 years. Whatever plan Kennedy's HHS delivers, it will land in a country already living with the disease the order's entire premise says the current vaccine doesn't need to protect against.

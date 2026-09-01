@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Deep Dive">
+<title>Trump Ordered MMR Split Into Three Shots Over His Own Health Agency's Objection — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/ai-news/" style="color:#c9a84c;">Sandy's Blog</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/original-bug-book/">Read the Book</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">All Issues</a>
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <article class="page">
+
+    <h1 class="headline">Trump Ordered MMR Split Into Three Shots Over His Own Health Agency's Objection</h1>
+    <p class="deck">An August executive order gives Kennedy's HHS 90 days to break up the combined measles shot, resting on a study that doesn't appear to exist, over the CDC's own published guidance, the physician-senator whose vote confirmed him, and a pharmaceutical industry with no reason to ever build what he's asking for.</p>
+    <p class="byline">Sandy B. Patterson &middot; September 1, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">What Changed</p>
+
+      <p class="drop-cap">On August 10, President Trump signed an executive order, "Delivering Gold Standard Childhood Vaccine Recommendations for Americans," directing federal health officials to pursue splitting the combined measles-mumps-rubella shot into three separate, single-disease vaccines, administered at separate visits "once such products are domestically available." The order frames this as giving parents more control over the timing and pace of their children's vaccinations, and it leans on the same unsubstantiated vaccine-autism link Secretary Robert F. Kennedy Jr. has pushed since long before he held the job. It gives HHS 90 days — into early November — to deliver an implementation plan "starting with MMR." One detail the order doesn't resolve: no single-antigen measles, mumps, or rubella vaccine has been manufactured or sold in the United States in nearly two decades. The combined shot has been the American standard since the 1970s, and nothing about that changed on August 10 except the paperwork ordering it to.</p>
+
+      <p class="section-label">What Kennedy Claimed — And What Doesn't Seem to Exist</p>
+
+      <p>Asked about the order in a CNN interview that aired August 15, Kennedy defended it by citing new science. He said a "recent study that just came out" — "essentially a meta review... of all the existing science" — "very strongly" supported splitting the vaccine, and dismissed the CDC's own published position as probably just out of date. FactCheck.org's Jessica McDonald went looking for that study. She didn't find one. There is no published research — meta-analysis, cohort study, or otherwise — showing that splitting the MMR vaccine into separate shots would be safer, more effective, or reduce autism risk, for a combination vaccine that has been in continuous use for more than 40 years. Kennedy has made versions of this same claim before; FactCheck.org has now tracked a running timeline of his shifting, and consistently unsupported, statements about the measles vaccine specifically.</p>
+
+      <p class="section-label">What the Government's Own Page Still Says</p>
+
+      <p>The CDC website Kennedy waved off as outdated says this, in plain language, as of this writing: "No published scientific evidence shows any benefit in separating the combination MMR vaccine into three individual shots." Merck, which manufactures two of the three MMR vaccines currently licensed in the U.S., says nearly the same thing in its own public statements, and adds a concrete number to the request the executive order makes: building, testing, and winning FDA approval for standalone versions could take as long as ten years. The gap between the government's own published guidance and the government's own executive order isn't hypothetical or secondhand — it's the same agency, contradicting itself, in the same window of time. And the contradiction runs deeper than one CNN answer. Acting CDC director Jim O'Neill, who also serves as HHS deputy secretary, first called publicly for manufacturers to "break up the MMR shot into three totally separate shots" back in October 2025 — months before Trump's order existed — citing the president's directive rather than any change in the evidence. The agency's own director has been on record against his own agency's own web page for the better part of a year.</p>
+
+      <p class="section-label">What Doctors — and RFK's Own Confirming Vote — Are Saying</p>
+
+      <p>The American Academy of Pediatrics didn't hedge. Its president, Dr. Andrew Racine, said plainly that "there is no new evidence to justify significant changes to childhood immunization guidance," that "dozens of studies involving millions of people show there is no link between vaccines and autism," and that with measles already at a 35-year high and cold and flu season approaching, "today's executive order on vaccines is not only disheartening but dangerous." The AAP separately estimates it could take roughly a decade to develop and license a standalone vaccine for each component — Merck's number, arrived at independently.</p>
+
+      <p>The more politically striking pushback came from Senator Bill Cassidy of Louisiana — a physician, and the Republican whose vote on the Senate health committee broke a tie and helped confirm Kennedy as HHS secretary in the first place. Cassidy posted that "Vaccines DO NOT cause autism," and that breaking up the combined shot "will mean children have to get more shots to get the same protection, not fewer shots. It will increase hesitancy and make children less safe." He separately warned the change would likely raise insurance costs for families. This isn't a lawmaker with a standing grudge against the administration. It's the senator who put Kennedy in the building, on the record that this specific decision will make the exact problem it claims to solve worse.</p>
+
+      <p class="section-label">What Splitting the Vaccine Would Actually Require</p>
+
+      <p>Set the politics aside and look at what the order is actually asking industry to build. Completing a fully separated schedule would mean roughly six clinic visits instead of the two the combined shot requires now — more copays, more scheduling friction, and, virtually every pediatric group involved has said, lower real-world compliance, concentrated among the families already least able to make every visit. No monovalent MMR-component vaccine is currently manufactured or FDA-approved for the U.S. market. Nothing in the executive order, or in the law, can compel a drugmaker to build one. The same three companies that already profit from selling the combined shot have essentially no commercial reason to spend years and tens of millions of dollars developing single-antigen replacements that their own regulator's website says offer no demonstrated benefit — which is exactly why, as of this writing, drug manufacturers have shown little interest in actually doing it. Merck's own ten-year estimate for approval means that whatever plan HHS delivers this fall will describe vaccines that, as a practical matter, do not yet exist and may not for most of the next decade, if they get built at all.</p>
+
+      <p class="section-label">What Happens Next</p>
+
+      <p>The MMR order isn't the only vaccine-policy process moving through HHS right now. On August 24, the department separately opened a formal Federal Register request for information asking whether the categories used in federal vaccine recommendations need to change — including whether a new category, something like "recommended, but not during infancy," should exist, and whether recommendations should shift toward what the notice calls a "presumption" favoring individual autonomy over the current evidence-based framework. Public comments are open through September 20. The executive order's own 90-day implementation deadline lands within days of that same window, in early November — the same stretch in which the U.S. is on track to lose the measles elimination status it has held for 25 years. Whatever plan Kennedy's HHS delivers, it will land in a country already living with the disease the order's entire premise says the current vaccine doesn't need to protect against.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.whitehouse.gov/presidential-actions/2026/08/delivering-gold-standard-childhood-vaccine-recommendations-for-americans/">The White House — Delivering Gold Standard Childhood Vaccine Recommendations for Americans</a></li>
+        <li><a href="https://www.axios.com/2026/08/10/trump-order-split-up-mmr-vaccine">Axios — Trump executive order would split measles MMR vaccine</a></li>
+        <li><a href="https://www.factcheck.org/2026/08/rfk-jr-falsely-claims-new-evidence-supports-splitting-mmr-vaccine/">FactCheck.org — RFK Jr. Falsely Claims New Evidence Supports Splitting MMR Vaccine</a></li>
+        <li><a href="https://www.cnn.com/2026/08/14/health/mmr-vaccine-separate">CNN — Trump wants to split the MMR vaccine into separate shots. Experts say it's a bad idea</a></li>
+        <li><a href="https://www.statnews.com/2025/10/06/trump-official-jim-oneill-break-up-mmr-vaccine/">STAT News — Acting CDC director calls for MMR vaccine to be broken up into three shots</a></li>
+        <li><a href="https://thehill.com/policy/healthcare/6032232-cassidy-slams-trump-vaccine-order/">The Hill — Sen. Bill Cassidy slams President Trump's vaccine order</a></li>
+        <li><a href="https://newrepublic.com/post/214183/gop-senator-confirmed-rfk-lambasts-mmr-vaccine-decision">The New Republic — GOP Senator Who Confirmed RFK Lambasts MMR Vaccine Decision</a></li>
+        <li><a href="https://thehill.com/homenews/senate/6032064-cassidy-criticizes-trump-vaccine-order/">The Hill — Cassidy predicts Trump's vaccine order will increase insurance costs</a></li>
+        <li><a href="https://thehill.com/policy/healthcare/6030750-trump-mmr-vaccine-executive-order/">The Hill — Drugmakers uninterested in Donald Trump's order to split up MMR vaccine</a></li>
+        <li><a href="https://thehill.com/policy/healthcare/6021511-aap-blasts-trump-vaccine-directive/">The Hill — American Academy of Pediatrics warns President Trump's vaccine directive is "dangerous"</a></li>
+        <li><a href="https://www.federalregister.gov/documents/2026/08/24/2026-17250/request-for-information-categories-used-in-federal-vaccine-recommendations-and-the-role-of-shared">Federal Register — Request for Information: Categories Used in Federal Vaccine Recommendations</a></li>
+        <li><a href="https://www.statnews.com/2026/01/05/childhood-vaccine-schedule-new-cdc-recommendation-11-shots/">STAT News — Childhood vaccine schedule slashed, "unknown risks" of vaccination cited by new CDC recommendation</a></li>
+        <li><a href="https://abcnews.com/Politics/trump-executive-order-childhood-vaccine-schedule/story?id=135524851">ABC News — Doctors push back on Trump executive order to change childhood vaccine schedule</a></li>
+        <li><a href="https://kffhealthnews.org/morning-breakout/vaccines-081426/">KFF Health News — "There Is No Good Justification" To Split MMR Vaccines, Experts Say</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </article>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
