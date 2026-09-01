@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Deep Dive">
+<title>The Measles Vaccine Has Never Been the Problem — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/ai-news/" style="color:#c9a84c;">Sandy's Blog</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/original-bug-book/">Read the Book</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">All Issues</a>
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <article class="page">
+
+    <h1 class="headline">The Measles Vaccine Has Never Been the Problem</h1>
+    <p class="deck">Cases are climbing toward a 35-year high, public health officials and the man running federal vaccine policy are telling two different stories about why, and a fresh set of myths is filling the gap between them. Here's what's actually driving the outbreak, what six decades of real-world data say about the vaccine itself, and the strange, human story of how it was built.</p>
+    <p class="byline">Sandy B. Patterson &middot; September 1, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">Where It's Actually Spreading</p>
+
+      <p class="drop-cap">By August 27th, the United States had confirmed 2,903 measles cases in 2026 — already more than all of 2025, and the most in a single year since the disease was declared eliminated here in 2000. Ninety-four percent of those cases trace back to one of 37 active outbreaks, and 93 percent of patients were unvaccinated or had unknown vaccination status. The year's largest single outbreak has already come and gone: a cluster centered on Spartanburg County, South Carolina, grew to nearly 1,000 cases before it finally burned out in April, the biggest the country had seen in decades. The outbreak that's driven most of the ongoing national attention started in West Texas in early 2025, seeded in a close-knit Mennonite community with historically low vaccination rates, and spread outward from there. Since then, new clusters have opened and closed across the map — Wisconsin's Grant, Lafayette, and Iowa counties reached roughly 100 cases by late August; a daycare-linked outbreak spread through unvaccinated children in metro Atlanta; Steuben County, New York, and three counties in Maryland each declared their own outbreaks within the same few weeks; Pennsylvania recorded the country's first two measles deaths of the year in Lancaster County, both unvaccinated residents. What almost all of these clusters share isn't geography. It's the same underlying condition: a pocket of people, usually connected by community, school, or religious affiliation, where vaccination rates have slipped below the level measles needs to keep spreading on its own.</p>
+
+      <p class="section-label">What Public Health Officials Say Has to Happen</p>
+
+      <p>The response to an active measles outbreak isn't mysterious, and it hasn't changed much in decades — it's just labor-intensive, and it depends on acting fast once a case is confirmed. The CDC and the Pan American Health Organization both call for the same core playbook: accelerated and catch-up vaccination for anyone in or near an outbreak area, active surveillance to catch new cases early, and rapid contact tracing to isolate exposures before they turn into their own transmission chains. For infants as young as six months, that means an early dose of MMR ahead of the normal twelve-to-fifteen-month schedule, with the routine doses still following on time. For anyone older who's never been vaccinated, or who only got one of the standard two doses, it means catching up — two doses spaced at least 28 days apart offer durable protection at any age. None of this is complicated, and none of it is new. What it actually requires is that local health departments have the staff, funding, and public trust to run vaccination clinics and follow up on exposures — all three of which have gotten harder to come by this year, for reasons that have very little to do with epidemiology.</p>
+
+      <p class="section-label">What Washington Is Doing Instead</p>
+
+      <p>That gap between what the science calls for and what federal health policy is actually doing has become one of the defining tensions of this outbreak. HHS Secretary Robert F. Kennedy Jr. has spent 2026 pushing in something close to the opposite direction from his own agency's career scientists — proposing new vaccine-recommendation categories like "not during infancy," backing an executive order to split the combined MMR shot into three separate injections, and, this past week, facing newly surfaced documents that appear to contradict his own sworn Senate testimony about a 2019 trip to Samoa, where he met with anti-vaccine campaigners months before a measles outbreak there that killed 83 people. Lawmakers haven't stayed quiet about the connection to what's happening at home. After Pennsylvania's deaths, Maryland Senator Angela Alsobrooks wrote that "RFK Jr.'s lies and conspiracy theories are making Marylanders sick," called on him to resign or be fired, and told constituents plainly to trust their pediatricians. Other senators have made the same point more clinically in the same week: vaccination is the most effective tool available for stopping measles transmission, and the secretary has spent the year undermining the public case for it. Kennedy has also presided over real staffing losses at HHS and the CDC over the past year, at the exact moment the agency's on-the-ground expertise matters most. None of this is a disagreement about what the data shows. It's a disagreement about whether the person setting federal vaccine policy is willing to act on it.</p>
+
+      <p class="section-label">The Pseudoscience Circulating Around It — and Why It's Wrong</p>
+
+      <p>Three separate false claims have attached themselves to this outbreak, and none of them survive contact with the actual evidence.</p>
+
+      <p>The oldest is that the MMR vaccine causes autism — a claim that traces back to a single 1998 paper in The Lancet by Andrew Wakefield, based on twelve children, that has since been established as one of the more thoroughly documented frauds in the history of medical publishing. Investigative reporting by journalist Brian Deer found that Wakefield had an undisclosed financial conflict of interest — a patent application for a rival, single-disease measles vaccine — and had altered patient case histories to manufacture the appearance of a link that wasn't there. Ten of his twelve co-authors retracted their own interpretation of the data in 2004; The Lancet fully retracted the paper in 2010, with its editor calling it "utterly false"; and the UK's General Medical Council struck Wakefield from the medical register that same year for serious professional misconduct, including mistreating developmentally delayed children during the study itself. In the decades since, researchers have tested the actual claim at a scale Wakefield's twelve-child study never approached — most decisively in a 2019 Danish study that tracked 657,461 children born over more than a decade, comparing vaccinated and unvaccinated kids directly, including those with other known autism risk factors. The result: no increased autism risk associated with MMR vaccination, full stop.</p>
+
+      <p>The newest is a "bioweapon" claim specific to this year's Texas outbreak — the suggestion that the outbreak was somehow caused by the vaccine itself, deliberately seeded. Texas health officials tested the actual virus samples from the outbreak and found ordinary, naturally circulating wild-type measles, not a vaccine-derived strain; genomically, the claim doesn't hold up at all. Some of the people pushing it, with documented ties to Kennedy's own circle, were simultaneously selling a roughly $400 "measles treatment and prevention protocol," including supplements marketed as AI-formulated — a detail that turns a supposedly scientific claim into a fairly ordinary commercial one.</p>
+
+      <p>The third circulated at the political level rather than online: a claim, repeated by at least one member of Congress, that illegal immigration was driving the outbreak. Politifact checked it directly at the end of August and found no evidence connecting the two — this year's outbreaks trace to specific undervaccinated domestic communities, not to border crossings, and the case data itself doesn't support the claim.</p>
+
+      <p>What connects all three is the same pattern: a real, frightening trend — measles cases climbing toward a 35-year high — recruited to support a claim that has nothing to do with why it's actually happening.</p>
+
+      <p class="section-label">What the Safety Data Actually Shows</p>
+
+      <p>Set the myths aside and look at what large, real-world studies actually find, and the comparison between the disease and the vaccine isn't close. Measles itself causes encephalitis, brain inflammation, in roughly 1 of every 1,000 cases, and kills 1 to 3 of every 1,000 people who get it — numbers that predate any vaccine skepticism and haven't changed because the disease hasn't changed. Before the vaccine existed, measles killed an estimated 400 to 500 Americans a year out of roughly half a million annual cases; globally, before vaccination campaigns scaled up, it killed millions of people a year. The vaccine's own risk profile, by contrast, is well-characterized and small: the most notable serious side effect tracked in large studies is a temporary immune-related low-platelet condition, occurring in roughly 1 of every 40,000 doses, almost always resolving without lasting harm. Two doses of MMR are about 97 percent effective at preventing infection; even a single dose gets you to roughly 93 percent. And because measles is one of the most contagious pathogens known to spread among humans — a single case can infect 12 to 18 other susceptible people in a fully unprotected population — stopping it at the community level takes unusually high coverage, on the order of 95 percent, before transmission chains reliably die out on their own. That threshold is exactly what's slipping in the communities driving this year's outbreaks.</p>
+
+      <p class="section-label">How This Vaccine Actually Got Built</p>
+
+      <p>The vaccine at the center of all of this didn't arrive quickly or casually. John Enders, who'd already shared a Nobel Prize for growing poliovirus in the lab, isolated the measles virus itself in 1954, and the first licensed measles vaccine followed in 1963 — a live, weakened version of the virus that initially had to be paired with a shot of gamma globulin just to keep the fever and rash it caused tolerable. It was Maurice Hilleman, working at Merck, who spent the rest of the decade improving it: by 1968 he'd developed a further-weakened strain, built on Enders' original isolate, that no longer needed the gamma globulin at all and became the standard measles vaccine still used in essentially the same form today.</p>
+
+      <p>The mumps component has, by a wide margin, the best story behind it. In March 1963, Hilleman's own five-year-old daughter, Jeryl Lynn, came down with mumps in the middle of the night. He drove to his lab, got sterile swabs and culture broth, drove home, gently woke her, swabbed the inside of her cheek, and drove straight back to culture it. Over the next four years he weakened that exact viral sample, generation by generation, until it was safe to use as a vaccine rather than an infection — the strain, still called "Jeryl Lynn" today, that Merck licensed in 1967 and that remains the mumps component of the MMR shot more than half a century later. Hilleman added a rubella component and combined all three into a single injection in 1971, creating the MMR vaccine essentially as it still exists now — one of at least eight vaccines still in routine use that trace back to his own work, more than any other scientist in the field's history.</p>
+
+      <p class="section-label">What Actually Moves the Number</p>
+
+      <p>None of the history or the safety data changes anyone's mind by itself — belief in a myth this durable rarely gives way to a single study or a single paragraph. What the evidence does support is a fairly specific, unglamorous plan: close the vaccination gap in the specific communities where it's actually opened, not with blanket messaging aimed at the whole country but with the kind of targeted catch-up campaigns the CDC and PAHO are already recommending, delivered by people those communities already trust. A recent national poll found that most people don't fall cleanly into "believes the myths" or "doesn't" — a large middle remains genuinely uncertain, which means they're also genuinely reachable, unlike the small core who won't be moved by more information at all. The vaccine itself isn't the open question here. It's been studied at a scale few interventions in medicine ever are, across more than sixty years and hundreds of millions of doses, and it keeps producing the same answer. What's actually unresolved is whether the country closes the gap in trust before this fall's elimination-status review makes the outbreak's cost official.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://publichealth.jhu.edu/ivac/2026/2026-us-measles-cases-surpass-2025-level">Johns Hopkins IVAC — 2026 U.S. Measles Cases Surpass 2025 Level, Highest Since Declared Eliminated</a></li>
+        <li><a href="https://www.cbsnews.com/news/measles-outbreak-us-map-2026/">CBS News — As measles outbreaks grow in the U.S., maps and charts show a record year</a></li>
+        <li><a href="https://www.healthline.com/health-news/us-measles-outbreak-2026-cases-hit-35-year-high">Healthline — U.S. Measles Cases Hit Record-Breaking 35-Year High in 2026</a></li>
+        <li><a href="https://www.axios.com/2026/08/25/measles-outbreak-deaths-pennsylvania-mmr-vaccine">Axios — Deadly measles surge: U.S. reports first 2 deaths of 2026</a></li>
+        <li><a href="https://www.naccho.org/blog/articles/2025-2026-measles-resources-updates-for-local-health-departments">NACCHO — 2025-2026 Measles Outbreaks: Where Are We Now? Resources and Updates</a></li>
+        <li><a href="https://www.cdc.gov/measles/hcp/vaccine-considerations/index.html">CDC — Measles Vaccine Recommendations</a></li>
+        <li><a href="https://www.scientificamerican.com/article/congress-grills-rfk-jr-about-vaccines-and-cuts-to-health-budget/">Scientific American — Congress grills RFK Jr. about vaccines and cuts to health budget</a></li>
+        <li><a href="https://www.statnews.com/2026/08/26/kennedy-vaccine-comments-reaction-josh-shapiro-jerome-adams/">STAT News — RFK Jr.'s vaccine comments draw criticism during measles outbreak</a></li>
+        <li><a href="https://www.cnn.com/2026/08/27/health/rfk-vaccines-samoa-letters">CNN — RFK Jr. said a Samoa trip had nothing to do with vaccines. New documents refute that</a></li>
+        <li><a href="https://www.washingtonexaminer.com/news/senate/3407719/alsobrooks-calls-for-rfk-jr-resign-hhs-secretary/">Washington Examiner — Alsobrooks calls for RFK Jr. to resign as HHS secretary</a></li>
+        <li><a href="https://www.newsweek.com/measles-linked-deaths-since-rfk-jr-took-office-surpass-previous-20-years-12376290">Newsweek — Measles-Linked Deaths Since RFK Jr. Took Office Surpass Previous 20 Years</a></li>
+        <li><a href="https://www.pbs.org/newshour/health/journal-study-that-linked-vaccines-and-autism-was-fraudulent">PBS NewsHour — Journal: Study That Linked Vaccine and Autism Was "Fraudulent"</a></li>
+        <li><a href="https://sciencebasedmedicine.org/lancet-retracts-wakefield-article/">Science-Based Medicine — The Lancet retracts Andrew Wakefield's article</a></li>
+        <li><a href="https://www.healio.com/news/pediatrics/20120325/wakefield-study-linking-mmr-vaccine-autism-uncovered-as-complete-fraud">Healio — Wakefield study linking MMR vaccine, autism uncovered as complete fraud</a></li>
+        <li><a href="https://www.acpjournals.org/doi/10.7326/M18-2101">Annals of Internal Medicine — Measles, Mumps, Rubella Vaccination and Autism: A Nationwide Cohort Study</a></li>
+        <li><a href="https://www.skepticalraptor.com/skepticalraptorblog.php/anti-vaxxers-claim-that-a-bioweapon-caused-the-measles-outbreak/">Skeptical Raptor — Anti-vaxxers claim that a bioweapon caused the measles outbreak</a></li>
+        <li><a href="https://www.unmc.edu/healthsecurity/transmission/2025/04/23/anti-vaxxers-are-grifting-off-the-measles-outbreak-and-claim-a-bioweapon-caused-it/">UNMC Health Security — Anti-Vaxxers Are Grifting Off the Measles Outbreak—and Claim a Bioweapon Caused It</a></li>
+        <li><a href="https://publichealthcollaborative.org/alerts/myth-circulates-that-vaccines-caused-the-texas-measles-outbreak/">Public Health Collaborative — Myth circulates that vaccines caused the Texas measles outbreak</a></li>
+        <li><a href="https://www.politifact.com/factchecks/2026/aug/27/byron-donalds/us-measles-illegal-immigration-mmr-vaccine-fl/">Politifact — No evidence illegal immigration caused US measles outbreaks</a></li>
+        <li><a href="https://www.cdc.gov/pinkbook/hcp/table-of-contents/chapter-13-measles.html">CDC — Epidemiology and Prevention of Vaccine-Preventable Diseases, Chapter 13: Measles</a></li>
+        <li><a href="https://www.cdc.gov/vaccine-safety/vaccines/mmr.html">CDC — Measles, Mumps, Rubella (MMR) Vaccine Safety</a></li>
+        <li><a href="https://historyofvaccines.org/history/maurice-hilleman-phd/overview/">History of Vaccines — Maurice Hilleman, PhD</a></li>
+        <li><a href="https://www.nfid.org/celebrating-50-years-of-the-mumps-vaccine/">NFID — Celebrating 50 Years of the Mumps Vaccine</a></li>
+        <li><a href="https://www.cidrap.umn.edu/childhood-vaccines/new-us-poll-identifies-large-malleable-middle-vaccine-misinformation">CIDRAP — New US poll identifies large "malleable middle" on vaccine misinformation</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </article>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
