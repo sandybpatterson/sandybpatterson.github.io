@@ -321,6 +321,41 @@
       text-decoration: none;
     }
 
+    /* The blog's own cover, standing in for what was a text button. It keeps
+       the gold edge the other links have so it still reads as one of them,
+       and carries a label underneath: the cover says what it is, but nothing
+       about a picture says it can be clicked. */
+    .link-cover {
+      display: block;
+      border: 1px solid #c9a84c;
+      background: #0e0e0e;
+      overflow: hidden;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .link-cover img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .link-cover-label {
+      display: block;
+      padding: 13px 24px;
+      border-top: 1px solid #1f1c14;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .link-cover:hover { border-color: #e0c266; text-decoration: none; }
+    .link-cover:hover .link-cover-label { background: #c9a84c; color: #0a0a0a; }
+    .link-cover:focus-visible { outline: 2px solid #e0c266; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .link-cover { transition: none; }
+    }
+
     footer {
       border-top: 1px solid #1a1a1a;
       padding: 28px 24px;
@@ -398,7 +433,11 @@
   </div>
 
   <div class="link-tree">
-    <a href="https://sandybpatterson.github.io/ai-news/" class="link-btn">Sandy's Blog</a>
+    <a href="https://sandybpatterson.github.io/ai-news/" class="link-cover">
+      <img src="images/blogcover.jpeg" width="1200" height="896"
+           alt="Sandy's Blog — a collection of thoughts, adventures, and everyday musings" />
+      <span class="link-cover-label">Read every article</span>
+    </a>
     <a href="https://sandybpatterson.github.io/soda/" class="link-btn">SODA &mdash; free podcast tool</a>
     <a href="https://sandybpatterson.github.io/stories/" class="link-btn">Stories from Winchester</a>
     <a href="https://sandybpatterson.github.io/arden-remembers/" class="link-btn">Arden Remembers</a>
