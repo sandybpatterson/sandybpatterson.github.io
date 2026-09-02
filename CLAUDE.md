@@ -182,10 +182,20 @@ Rules for the Issues list:
 - **No issue numbers anywhere** — Sandy asked for these removed; don't
   reintroduce "Issue 01," "Vol. I," or similar labels.
 - Nav links on every Sandy's Blog page: Read the Book (→ `original-bug-book`),
-  AI Tools (→ `ai-tools-directory`), All Issues (self, on issue pages) /
-  AI Tools (on the hub), &larr; Bookshelf. `bookshelf.html`,
+  AI Tools (→ `ai-tools-directory`), &larr; Bookshelf. `bookshelf.html`,
   `ai-tools-directory`, and `ai-news/` are meant to have visually matching
   top navs — keep nav changes in sync across all three.
+- **&larr; Bookshelf is always the last link in the nav, so it sits top
+  right, and it always carries the back arrow.** It is the way back out of
+  every section, and a way out belongs in the same corner on every page
+  rather than wherever it happened to be added. Applied site-wide on
+  2026-09-02.
+- **No "All Issues" link on a Sandy's Blog page.** Renamed to "Sandy's Blog"
+  on 2026-09-02 at Sandy's request — at which point it read identically to
+  the masthead beside it and pointed at the same place, so it was dropped
+  from those navs rather than printed twice. Pages outside the blog (SODA,
+  Pokémon) still carry a "Sandy's Blog" nav link, because for them it is a
+  link somewhere else rather than a link to the page they are already on.
 - The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
   only — not repeated on every issue page.
 
@@ -227,6 +237,11 @@ the single-row behavior.
   ("All Issues" vs "All Briefs") pointing to two different lists confusing,
   so those pages now carry only "All Issues," linking up to the one place
   everything actually lives. Don't reintroduce an "All Briefs" link.
+  **Superseded 2026-09-02:** "All Issues" was renamed to "Sandy's Blog" and
+  then dropped from these navs entirely, since the masthead on the same page
+  already says "Sandy's Blog" and links to the same list. The way back to
+  everything is now the masthead on the left and &larr; Bookshelf on the
+  right. Don't reintroduce an "All Issues" link either.
 - `wetwear/podcast.html` — added 2026-08-29, a dedicated landing page for
   the Wetwear podcast itself (distinct from `wetwear/index.html`, which is
   the written-issues archive, not a podcast page). Cover art, a "Copy
