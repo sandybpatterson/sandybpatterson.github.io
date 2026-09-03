@@ -151,7 +151,7 @@ label didn't map to a sensible "Here is the latest in ___" line, it's worth fixi
 HTML source and re-running the script rather than patching the `.txt` by hand — that
 keeps the two files honestly in sync.
 
-There are three specific things that read badly out loud but read fine on the page —
+There are four specific things that read badly out loud but read fine on the page —
 for these, hand-edit the `.txt` after the script runs rather than touching the HTML.
 The article keeps normal written style for people reading it; only the narration
 script gets adjusted, because these are properties of text-to-speech, not of the
@@ -175,6 +175,13 @@ writing itself:
   Representative, and similar. Use judgment on the rest — an initialism people
   already say as individual letters out loud (FDA, CDC, WHO, HHS) is fine left as-is;
   anything that reads as an actual word once expanded is a candidate for expanding.
+- **Multi-item decks strung together on commas.** The deck sentence often lists five
+  or six of the day's stories chained with "plus... , ... , and..." and no full stop
+  anywhere. Even under the ~400-character threshold above, a comma chain with no
+  period reads as one continuous run in TTS instead of a series of distinct beats —
+  clause count matters here, not just length. In the `.txt`, split it into one short
+  sentence per item: `"...plus X, Y, and Z."` becomes `"...X. Y. And Z."` Leave the
+  HTML `.deck` exactly as written; only its `.txt` counterpart changes.
 
 ## 5. Add the permanent index rows
 
