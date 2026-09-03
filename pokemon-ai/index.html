@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Teaching an AI to Play Pokémon Red — Sandy B. Patterson</title>
+<title>How to Train an AI to Play Pokémon Red — Sandy B. Patterson</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -100,30 +100,36 @@
 
   hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
 
-  .section-label {
+  .step-label {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     font-family: 'Courier New', monospace;
     font-size: 0.7rem;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #c9a84c;
     border-top: 1px solid #1e1e1e;
     padding-top: 1.8rem;
-    margin: 2.4rem 0 1.1rem;
+    margin: 2.6rem 0 1.1rem;
   }
-  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .step-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6em;
+    height: 1.6em;
+    border: 1px solid #c9a84c;
+    border-radius: 50%;
+    font-size: 0.9em;
+  }
+  .step-title {
+    font-size: 1.05em;
+    color: #f0e9d2;
+  }
 
   .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
-  .article-body p.drop-cap { text-indent: 0; }
-  .article-body p.drop-cap::first-letter {
-    font-family: Georgia, serif;
-    font-size: 3.2rem;
-    font-weight: 700;
-    float: left;
-    line-height: 0.8;
-    margin-right: 0.08em;
-    margin-top: 0.1em;
-    color: #c9a84c;
-  }
 
   .article-body ul, .article-body ol {
     margin: 0 0 1.2rem 1.4rem;
@@ -171,6 +177,25 @@
   }
   .callout strong { color: #e8d99a; }
 
+  .prompt-box {
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    background: #111;
+    padding: 14px 18px;
+    margin: 0 0 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.86rem;
+    color: #d8c98a;
+  }
+  .prompt-box::before {
+    content: "PROMPT";
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: #777;
+    margin-bottom: 8px;
+  }
+
   table.reward-table {
     width: 100%;
     border-collapse: collapse;
@@ -190,6 +215,43 @@
     color: #c9a84c;
   }
   table.reward-table td.num { color: #d8c98a; font-family: 'Courier New', monospace; white-space: nowrap; }
+
+  .updates-section {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 3px double #c9a84c;
+  }
+  .updates-heading {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f0e9d2;
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+  .updates-sub {
+    font-style: italic;
+    font-size: 0.92rem;
+    color: #888;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .update-entry {
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .update-entry:last-child { border-bottom: none; }
+  .update-date {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 0.5rem;
+  }
+  .update-entry p { text-align: left; }
 
   .closing {
     margin-top: 3rem;
@@ -239,100 +301,101 @@
 
   <div class="page">
 
-    <h1 class="headline">Teaching an AI to Play Pokémon Red</h1>
-    <p class="deck">No walkthrough, no scripted moves — just a neural network, a Game Boy emulator, and a few thousand rounds of trial and error. Here's how the whole thing actually works, from the emulator up to the reward function.</p>
-    <p class="byline">Sandy B. Patterson &middot; August 2026</p>
+    <h1 class="headline">How to Train an AI to Play Pokémon Red</h1>
+    <p class="deck">A step-by-step guide to building a reinforcement-learning agent with PyBoy, Gymnasium, and PPO — including how to have an AI coding assistant do the actual setup and editing for you, if you'd rather not write it all by hand.</p>
+    <p class="byline">Sandy B. Patterson &middot; Started August 2026 &middot; Updated September 2026</p>
 
     <hr class="divider">
 
     <div class="article-body">
 
-      <p class="section-label">Why Teach It Instead of Programming It</p>
+      <p>This is a working guide, not a finished writeup — it gets updated as the project itself progresses. The "Progress Updates" log at the bottom is where new developments get posted as they happen.</p>
 
-      <p class="drop-cap">There's a well-known corner of YouTube where someone straps a reinforcement-learning agent into a Game Boy emulator and lets it figure out Pokémon from scratch — no walkthrough, no pathfinding code, nothing hand-coded about which button to press when. Peter Whidden's Pokémon Red project is the most-watched example, but the technique behind it isn't a trick unique to his channel — it's the same general approach DeepMind used to master Atari games and, eventually, Go: give an agent a screen, a set of buttons, and a reason to care about the outcome, then let it play millions of attempts until something that looks like skill falls out the other end. This project is our own version of that experiment, built from scratch and still very much in progress. This piece is the write-up of how it works, from the emulator on up.</p>
+      <div class="step-label"><span class="step-num">1</span><span class="step-title">Get a ROM, Legally</span></div>
 
-      <p class="section-label">The Toolkit</p>
+      <p>You need a Pokémon Red ROM file dumped from a cartridge you actually own. Don't download one from a random site — that's the one step in this whole guide that can't be automated or shortcut. Everything else just reads whatever <code>.gb</code> file you point it at.</p>
 
-      <p>Three pieces of software do all the actual work:</p>
+      <div class="step-label"><span class="step-num">2</span><span class="step-title">Install the Toolkit</span></div>
 
-      <ul>
-        <li><strong>PyBoy</strong> — a Game Boy emulator written in Python, with a programmatic API that lets code press buttons, read the current screen as pixel data, and reach directly into the console's working memory. It can also run "headless," with no visible window at all, which matters a lot once you're running several emulators at once.</li>
-        <li><strong>Gymnasium</strong> — the standard interface the reinforcement-learning world uses to describe "an environment an agent can act in." Wrapping PyBoy in a Gymnasium environment means any general-purpose RL algorithm can plug straight into Pokémon Red without knowing anything about Game Boys.</li>
-        <li><strong>Stable-Baselines3</strong> — a library of ready-built RL algorithms. We're using PPO (Proximal Policy Optimization), the same family of algorithm behind a lot of modern game-playing and robotics agents, because it's stable, well-documented, and doesn't require a cluster to get started.</li>
-      </ul>
+      <p>Three libraries do all the real work: <strong>PyBoy</strong> (a Game Boy emulator with a Python API — it can press buttons, read the screen, and read the console's memory directly), <strong>Gymnasium</strong> (the standard interface reinforcement-learning code expects an "environment" to have), and <strong>Stable-Baselines3</strong> (a ready-built implementation of PPO, the training algorithm).</p>
 
-      <p class="section-label">Setting It Up</p>
+      <pre><code>pip install pyboy gymnasium stable-baselines3 numpy opencv-python</code></pre>
 
-      <p>Getting from zero to a running experiment took a handful of real steps, roughly in this order:</p>
+      <div class="step-label"><span class="step-num">3</span><span class="step-title">Create a Starting Save State</span></div>
 
-      <ol>
-        <li><strong>Source a ROM legally.</strong> You need a Pokémon Red ROM dumped from a cartridge you actually own — we're not going to link one, and neither should anyone else. Everything downstream just reads whatever file you provide.</li>
-        <li><strong>Install the Python stack.</strong> <code>pip install pyboy gymnasium stable-baselines3</code> covers the core of it, plus <code>numpy</code> and <code>opencv-python</code> for handling frames.</li>
-        <li><strong>Create a starting save state.</strong> Left alone, every training episode would start from the Game Freak logo and have to sit through the title screen, the professor's introduction, and the naming screens before anything interesting happens. Instead, we played through that intro by hand once — using PyBoy's own keyboard controls (arrow keys to move, <code>A</code> to confirm, <code>S</code> to cancel, <code>Enter</code> for Start) — picked a starter, and saved a PyBoy save state right there. Every training run loads that same state, so the agent's very first action is already standing in the world with a Pokémon in its party.</li>
-        <li><strong>Point PPO at the environment and let it run.</strong> The training script spins up several emulator instances in parallel, all headless, all feeding experience back to one shared policy network.</li>
-      </ol>
+      <p>Left alone, every training attempt would have to sit through the title screen and the naming intro before anything useful happens. Instead, play through that part once by hand — arrow keys to move, <code>A</code> to confirm, <code>S</code> to cancel, <code>Enter</code> for Start — pick a starter, and save a PyBoy save state right there. Every future training run loads that same state, so the agent's very first action is already standing in the world with a Pokémon in its party.</p>
 
-      <p class="section-label">What the AI Actually Sees and Does</p>
+      <div class="step-label"><span class="step-num">4</span><span class="step-title">Decide What the Agent Sees and Can Do</span></div>
 
-      <p>The agent doesn't get anything like a game state summary — no "you have 3 Pokémon, 12 HP, standing at map tile (4, 7)." What it gets, every step, is a downsampled, grayscale copy of the Game Boy screen — a small enough image that a convolutional neural network can process thousands of them a second, but detailed enough to make out sprites, menus, and text boxes. What it can do is limited to seven buttons: the four directions, A, B, and Start. Each decision the network makes holds a button down for a short burst of emulated frames, then releases it and looks at the resulting screen again. That loop — see a frame, choose a button, hold it, see the next frame — runs continuously, thousands of times per training episode, across every parallel emulator at once.</p>
+      <p>The agent's "eyes" are a small downsampled, grayscale copy of the current Game Boy screen — nothing else, no game-state summary. Its "hands" are seven buttons: the four directions, A, B, and Start. One decision cycle looks like: see a frame, choose a button, hold it for a short burst of emulated frames, look again. That's the entire loop, repeated thousands of times per run.</p>
 
-      <p class="section-label">Reinforcement Learning, in Plain Terms</p>
+      <div class="step-label"><span class="step-num">5</span><span class="step-title">Design the Reward Function</span></div>
 
-      <p>Strip away the math and reinforcement learning is a fairly blunt idea: let an agent try things, tell it a number after each attempt saying how good that was, and nudge its decision-making very slightly toward whatever produced higher numbers. Do that enough times, across enough attempts, and behavior that reliably produces good outcomes gets reinforced, while behavior that doesn't gets quietly phased out — no one ever tells it "the goal is to become Pokémon Champion," it only ever sees a running scorecard.</p>
+      <p>This is the actual hard part. Pokémon never displays a score, so "doing well" has to be defined by hand — and it has to be read out of the game's memory, since nothing about it appears on screen as a number. That's possible because a fan project called <code>pret/pokered</code> has fully reverse-engineered what every byte of the game's memory means, so it's possible to know, every single frame, exactly how many badges the player has, how much HP either side of a battle has left, and whether a battle is even happening.</p>
 
-      <p>PPO — the specific algorithm doing the learning here — adds one important piece of discipline to that idea: it caps how much the agent's behavior is allowed to change after any single batch of experience. Without that constraint, an agent can way overreact to a lucky or unlucky run and destabilize everything it had already learned; PPO's "proximal" clipping keeps every update to a fairly conservative nudge, which is a big part of why it's become a default choice for this kind of training. Running six emulators in parallel doesn't change any of that math — it just means six times as much experience arrives between each nudge, which in practice means the policy improves several times faster per hour of wall-clock time.</p>
-
-      <p class="section-label">The Hard Part: Deciding What "Good" Means</p>
-
-      <p>Here's the actual problem with training an agent on Pokémon Red: the game never tells you your score. There's no on-screen number going up when you're doing well, the way there is in Breakout or Pong — progress in Pokémon looks like "walked toward the right building," "won a battle," "caught something new," all of which are meaningful to a human and completely invisible to code unless someone defines them. Designing the reward function — the number the agent actually optimizes for — turned out to be most of the real engineering work in this project, and it's still evolving.</p>
-
-      <p>What made this possible at all is that decades of fans have reverse-engineered exactly what every byte of Pokémon Red's memory means, through a project called <code>pret/pokered</code> — a full, public disassembly of the game. Nothing about this touches or modifies the ROM; it only reads values already sitting in the Game Boy's memory while the game runs, the same way a manual score display would if the game had one. That documentation is what makes it possible to know, at every single frame, exactly how many badges the player has, how many Pokémon they've caught, how much HP either side of a battle has left, and whether a battle is even happening at all.</p>
-
-      <p>The reward signal, as it currently stands, combines several of these into one number every step:</p>
+      <p>Here's the reward function as it currently stands:</p>
 
       <table class="reward-table">
-        <tr><th>Signal</th><th>Reward</th><th>Why</th></tr>
-        <tr><td>Visiting a new tile</td><td class="num">+0.02</td><td>a small nudge to keep exploring instead of standing still</td></tr>
-        <tr><td>Earning a gym badge</td><td class="num">+10.0</td><td>the clearest marker of real progress in the game</td></tr>
-        <tr><td>Leveling up the party</td><td class="num">+1.0 / level</td><td>rewards training Pokémon up, not just winning any one fight</td></tr>
-        <tr><td>Taking damage</td><td class="num">&minus;0.5 &times; HP lost</td><td>discourages reckless fights</td></tr>
-        <tr><td>Catching a new species</td><td class="num">+5.0</td><td>only fires once per species, so it rewards variety, not repeats</td></tr>
-        <tr><td>Damaging the opponent (every turn)</td><td class="num">+0.3 &times; HP taken</td><td>a dense, turn-by-turn signal, so the agent can learn "attacking works" long before it can win a whole fight</td></tr>
-        <tr><td>Winning a wild battle</td><td class="num">+0.5</td><td>&nbsp;</td></tr>
-        <tr><td>Winning a trainer battle</td><td class="num">+2.0</td><td>trainer fights are harder and can't be fled from, so they're worth more</td></tr>
-        <tr><td>Losing a battle (blacking out)</td><td class="num">&minus;1.0</td><td>&nbsp;</td></tr>
-        <tr><td>Running from a wild battle</td><td class="num">&minus;0.5</td><td>discourages fleeing instead of finishing a fight it could win</td></tr>
+        <tr><th>Signal</th><th>Reward</th></tr>
+        <tr><td>Visiting a new tile</td><td class="num">+0.5</td></tr>
+        <tr><td>Earning a gym badge</td><td class="num">+10.0</td></tr>
+        <tr><td>Leveling up the party</td><td class="num">+1.0 / level</td></tr>
+        <tr><td>Taking damage</td><td class="num">&minus;0.5 &times; HP lost</td></tr>
+        <tr><td>Catching a new species (first time)</td><td class="num">+5.0</td></tr>
+        <tr><td>Catching any wild Pokémon</td><td class="num">+0.3 &times; its level</td></tr>
+        <tr><td>Damaging the opponent (every turn)</td><td class="num">+0.3 &times; HP taken</td></tr>
+        <tr><td>Winning a wild battle</td><td class="num">+0.5</td></tr>
+        <tr><td>Winning a trainer battle</td><td class="num">+2.0</td></tr>
+        <tr><td>Losing a battle</td><td class="num">&minus;1.0</td></tr>
+        <tr><td>Running from a wild battle</td><td class="num">&minus;0.5</td></tr>
       </table>
 
-      <p>That last pair — telling a real win apart from simply running away — sounds simple but has a small wrinkle worth mentioning: the game's own "are we in a battle" flag changes the exact same way whether the wild Pokémon fainted or the player just pressed Run. The way around it is to also check the opposing Pokémon's remaining HP at the exact instant the battle ends: if it's still standing, that wasn't a win.</p>
+      <div class="callout"><strong>A real snag worth knowing about:</strong> the game's own "are we in a battle" flag changes the exact same way whether a wild Pokémon fainted or the player just pressed Run — so telling a real win apart from a flee means also checking whether the opponent still has HP left the instant the battle ends. And the very first battle in the game — a mandatory, unfleeable fight against your rival, right after picking a starter — turned out to be a real early wall: without a reward for damage dealt turn-by-turn, the agent could get stuck cycling through the battle menu indefinitely, since the only reward it could reason about was a full win, and it never landed one. A stuck agent is usually a sign the reward function has a gap, not that the model is broken.</div>
 
-      <div class="callout"><strong>A live example of why this matters:</strong> the very first battle after picking a starter is a mandatory fight against your rival, right there in the lab — you cannot flee it, and it requires navigating a multi-step battle menu (Fight, then choose a move, then confirm) to do anything at all. Early in training, before any of the per-turn damage reward existed, the agent could get stuck cycling through that menu indefinitely, with every training episode ending the exact same way it started. Adding the turn-by-turn "damage dealt" signal gave it a reason to learn the menu sequence well before it could ever win the fight outright — a good reminder that in this kind of project, a stuck agent is usually a sign the reward function has a gap, not that the model is broken.</div>
+      <div class="step-label"><span class="step-num">6</span><span class="step-title">Train It</span></div>
 
-      <p class="section-label">What Training Actually Looks Like</p>
+      <p>Training means running several emulator instances in parallel, invisibly (no window, since drawing to a screen is one of the slower parts of emulation and nobody's watching them), while a neural network absorbs a stream of frames, actions, and rewards and gradually adjusts itself toward whatever tends to produce higher reward. Progress gets checkpointed to disk periodically, so it can survive a restart or be resumed later without losing anything.</p>
 
-      <p>In practice, a training run means several emulator windows running invisibly in the background — no graphics being drawn, since rendering to a screen is one of the slower parts of emulation and nobody's watching them anyway — while the policy network absorbs a steady stream of frames, actions, and rewards. Every so often, the current state of the network gets saved to disk as a checkpoint, so progress survives a restart and can be loaded back up to actually watch play out, with a visible window, whenever there's something worth seeing. Two million training steps is a reasonable early target for a project like this, and even at a healthy pace that's several hours of continuous training — Whidden's own public runs stretch into days. There's no shortcut here; the process is inherently slow, because every single one of those steps is one emulator frame at a time.</p>
+      <pre><code>python train.py --rom your_rom.gb --init-state init.state \
+    --num-envs 7 --timesteps 1000000</code></pre>
 
-      <p class="section-label">Try It Yourself</p>
+      <p>There's no shortcut on time here — this is inherently slow, since every step is one emulator frame at a time. Hours, realistically, before there's much worth watching.</p>
 
-      <p>The whole thing is a fairly small amount of code once the pieces are in place — a custom Gymnasium environment wrapping PyBoy, a training script, and a script for watching a saved checkpoint play. If you wanted to reproduce it:</p>
+      <div class="step-label"><span class="step-num">7</span><span class="step-title">Watch a Checkpoint Play</span></div>
 
-      <pre><code>pip install pyboy gymnasium stable-baselines3 numpy opencv-python
+      <pre><code>python play.py --rom your_rom.gb --init-state init.state \
+    --model sessions/run/ppo_red_100000_steps.zip --speed 3</code></pre>
 
-# play through the intro by hand once, then save a state right
-# after picking your starter
-python play.py --rom your_rom.gb --manual --save-state init.state
+      <p>The <code>--speed</code> flag runs the emulator faster than real-time for a visible window (uncapped at <code>0</code>) — useful once you're past the "is this even doing anything" stage and want to fast-forward to see how far a checkpoint has actually gotten.</p>
 
-# train for real (headless, several emulators in parallel)
-python train.py --rom your_rom.gb --init-state init.state \
-    --num-envs 6 --timesteps 2000000
+      <div class="step-label"><span class="step-num">8</span><span class="step-title">Or — Skip the Manual Coding Entirely</span></div>
 
-# watch a checkpoint play, in a visible window
-python play.py --rom your_rom.gb --init-state init.state \
-    --model sessions/run/ppo_red_100000_steps.zip</code></pre>
+      <p>Everything in steps 2 through 7 can be done by describing what you want to an AI coding assistant instead of writing it by hand. This project actually was built that way — through a running conversation, not by hand-authoring every file up front. That includes not just the initial setup, but the ongoing back-and-forth of watching it play, noticing something's wrong, and fixing it.</p>
 
-      <p class="section-label">Where This Goes Next</p>
+      <p>Some real examples of what that conversation looked like in practice:</p>
 
-      <p>The reward function above is a snapshot, not a finished design — the next obvious additions are rewarding item pickups and rewarding progress through specific story milestones rather than only badges, and there's an open question about how to reward strategic move choice rather than just "any damage is good damage." None of that changes the core idea, though: an agent that has never been told a single rule of Pokémon, slowly working out for itself that fighting well, exploring, and catching things all lead to a better outcome, one clipped policy update at a time.</p>
+      <div class="prompt-box">Set up a Python project that trains an AI to play Pokémon Red using PyBoy, Gymnasium, and Stable-Baselines3. I have a ROM at roms/PokemonRed.gb. Walk me through creating a starting save state too.</div>
+
+      <div class="prompt-box">Add rewards for winning battles and catching Pokémon, using real RAM addresses — look up the pret/pokered disassembly for the exact memory locations.</div>
+
+      <div class="prompt-box">The agent seems stuck at the first battle and never progresses past it. Can you check the reward function for gaps?</div>
+
+      <div class="prompt-box">Can we tell a real win apart from the agent just running away? Also add a penalty for fleeing.</div>
+
+      <div class="prompt-box">Let's watch the current checkpoint play in a window, and speed it up so it's not real-time.</div>
+
+      <p>None of that requires knowing Python going in, or understanding PPO's math, or already knowing which memory address holds a Pokémon's HP — that's exactly the kind of thing worth asking about instead of looking up. The useful skill isn't writing the code yourself, it's noticing when something looks wrong (stuck behavior, a reward that doesn't match what you intended) and being able to describe it clearly enough to get it fixed.</p>
+
+    </div>
+
+    <div class="updates-section">
+      <div class="updates-heading">Progress Updates</div>
+      <div class="updates-sub">Posted as the project moves — newest first.</div>
+
+      <div class="update-entry">
+        <div class="update-date">September 2026</div>
+        <p>Past 3.6 million training steps. The agent reliably beats the mandatory rival battle now — that early wall came down once a per-turn "damage dealt" reward was added, giving it feedback throughout a fight instead of only at the very end. Current behavior of note: it's found Viridian Forest and taken up grinding levels there, since easy repeatable wild-battle wins against low-level Bug Pokémon are currently the highest-reliability reward available to it. Also added: a bonus for catching wild Pokémon that scales with their level, and bumped the "visit a new tile" reward up substantially to push back against how attractive forest-grinding has become. Next real milestone to watch for: the first gym badge, in Pewter City, just past the forest.</p>
+      </div>
 
     </div>
 
