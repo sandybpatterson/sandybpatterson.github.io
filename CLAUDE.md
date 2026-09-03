@@ -190,6 +190,21 @@ Rules for the Issues list:
   every section, and a way out belongs in the same corner on every page
   rather than wherever it happened to be added. Applied site-wide on
   2026-09-02.
+- **Superseded 2026-09-03, article pages only:** on individual *article*
+  pages — `issue-01.html`, `issue-02.html`, every `wetwear/YYYY-MM-DD.html`
+  daily brief, and every `wetwear/deep-dive-*.html` — the nav-brand slot
+  (far left) is `&larr; Bookshelf` (→ `bookshelf.html`) instead of "Sandy's
+  Blog," and the last `nav-links` entry (far right) is `&larr; Sandy's Blog`
+  (→ `ai-news/`) instead of Bookshelf. Read the Book and AI Tools stay put
+  in the middle, unchanged. The idea: far left is always the way back to the
+  whole site (Bookshelf), far right is always the way back one level (to
+  whichever hub you're actually inside — here, Sandy's Blog). Hub/list pages
+  — `ai-news/index.html`, `wetwear/index.html`, `wetwear/podcast.html` — are
+  **not** articles and keep the standard site-wide pattern above (nav-brand
+  = "Sandy's Blog," Bookshelf last on the right), since there's no "one
+  level up" to link to when you're already at the top of the section. Both
+  skill templates (`wetwear-brief`, `deep-dive`) generate the article
+  version by default now.
 - **No "All Issues" link on a Sandy's Blog page.** Renamed to "Sandy's Blog"
   on 2026-09-02 at Sandy's request — at which point it read identically to
   the masthead beside it and pointed at the same place, so it was dropped
