@@ -1,0 +1,37 @@
+Coming up on Wetwear: Biology Corrected.
+
+Medical Groups Issue Their Own Fall Vaccine Guidance in an 'Unprecedented' Federal Vacuum
+The AAP, ACOG, family physicians, and infectious disease specialists fill the gap left by a stalled federal vaccine-advisory process, plus tea is linked to stronger bones and heavy coffee to weaker ones, a second fact-check debunks a Florida congressman's measles-immigration claim, Cyclospora cases pass 18,000, NIH races to spend its budget before a September 30th deadline, and CAR T-cell therapy sends severe rheumatoid arthritis into remission.
+I am Sandy B. Patterson, and today is September 3rd, 2026.
+
+=========================================================================================
+
+Here is the BIGGEST STORY from the AAP
+-------------
+
+With the CDC's own vaccine advisory process stalled under Secretary Robert F. Kennedy Junior and no updated federal recommendations issued ahead of fall respiratory season, four major medical organizations released their own joint guidance this week for who should get the COVID-19, flu, and RSV vaccines. The American Academy of Pediatrics, the American College of Obstetricians and Gynecologists, the American College of Family Physicians, and the Infectious Diseases Society of America issued the recommendations together, with the American Medical Association endorsing the effort. All the groups agree on flu: everyone six months and older should get vaccinated, unchanged from what federal guidance said in prior years. On COVID, several of the specialty groups go further than the CDC currently does, recommending the vaccine for children six months to 23 months old rather than leaving it to a case-by-case conversation, and continuing to recommend it broadly for healthy younger adults and pregnant people. RSV guidance stays consistent across every group: newborns, pregnant women, and adults 75 and older. The organizations were explicit that none of this is new policy — it's the same guidance the CDC's own Advisory Committee on Immunization Practices has issued every year for decades, published independently this time because the federal process didn't produce it. Independent safety and efficacy analyses released alongside the guidance affirm that this season's vaccines remain safe and highly effective at preventing severe illness. It's a genuinely unusual moment: pediatricians, family doctors, OB-GYNs, and infectious disease specialists stepping outside the normal chain of federal vaccine policy because, for the first time in memory, that chain didn't produce an answer.
+
+Here is the latest in BIOLOGY
+-------
+
+A 10-year study tracking nearly 10,000 women 65 and older found a small but real link between beverage habits and bone health. Regular tea drinkers had slightly higher hip bone density than non-tea-drinkers, while women who drank more than five cups of coffee a day showed measurably weaker bones than moderate or non-coffee-drinkers; a cup or two of coffee a day showed no meaningful effect either way. Researchers, from Flinders University and publishing in the journal Nutrients, suggest tea's benefit may come from catechins that support bone-forming cells, while heavy coffee intake is thought to interfere with calcium absorption. The bone-density differences were modest in any individual, but researchers say they could matter at a population level for fracture prevention.
+
+Here is the latest on MISINFORMATION
+--------------
+
+A claim about this year's measles outbreak has now been checked twice in two weeks, and failed both times. Representative Byron Donalds of Florida, currently running for governor, has blamed the surge on "rampant illegal immigration" under the Biden administration. Politifact checked the claim in late August and found nothing connecting the two; FactCheck.org's SciCheck project published its own, more detailed look this week and reached the identical conclusion, tracing this year's largest outbreaks to specific under-vaccinated domestic communities rather than the border, with infectious disease experts telling the outlet plainly that the real, well-documented driver is falling childhood vaccination rates within the U.S. itself. Two independent fact-checks reaching the same answer on the same claim, in the same month, hasn't stopped it from recurring — which is its own kind of data point about how a real, frightening number attracts an explanation that has nothing to do with why it's actually happening.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+The CDC's running Cyclospora count climbed again, reaching 18,445 laboratory-confirmed U.S. cases since May 1st, as infections tied to the Taylor Farms iceberg lettuce recall continue to be diagnosed and reported. The agency is separately tracking 24 active multistate Salmonella investigations, 7 each for E. coli and Listeria, and 2 for Campylobacter — a reminder that this year's headline-grabbing lettuce outbreak is happening alongside, not instead of, the usual background rate of foodborne illness the CDC investigates year-round.
+
+Here is the latest in POLITICS
+--------
+
+With less than a month left in the federal fiscal year, the National Institutes of Health is racing to spend its full $47.2 billion FY2026 budget before the September 30th deadline — but even if it succeeds, it will have awarded thousands fewer new grants than in any of the four years before the current administration took office. The shortfall traces to a White House budget office policy requiring NIH to pay out many multiyear grants as a single lump sum up front rather than in the usual year-by-year installments, which stretches the same pool of money across far fewer total awards. Researchers who've watched their odds of winning a new NIH grant plummet this year say the agency's overall budget held roughly steady — it's the mechanics of how that money gets distributed that changed, quietly, without ever showing up as a headline funding cut.
+
+And finally, some GOOD NEWS
+---------
+
+CAR T-cell therapy — best known for treating blood cancers — produced a genuinely striking result in the first clinical trial of its kind for severe, treatment-resistant rheumatoid arthritis. Researchers at Charité - Universitätsmedizin Berlin gave a single infusion of engineered cells to six patients, three women and three men between 31 and 69, who had already tried up to eight different targeted or biologic therapies over the previous decade without sufficient relief. Disease activity fell substantially in every one of them, and three reached medication-free remission — meaning their disease stayed quiet with no ongoing drugs at all. It's a small trial, and it will need to be replicated at scale before it changes standard care, but for a therapy already proven safe enough for cancer patients to produce this kind of result in an autoimmune disease, it's a real reason for cautious optimism.
