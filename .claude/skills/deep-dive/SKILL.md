@@ -78,6 +78,21 @@ first whether a tighter thread is actually available before defaulting to broad.
 Write a real, specific headline — same standard as the Daily Brief, never generic.
 Write a one-sentence deck teasing what the piece actually covers.
 
+**Two hard style rules, non-negotiable, added 2026-09-04: apply these while
+writing, not as a later fixup.** They apply to every Wetwear piece, Deep
+Dives included:
+- **No em dashes, anywhere:** not in the headline, the deck, or any
+  paragraph. Rework with a comma, a colon, a semicolon, or a new sentence
+  instead. Sandy banned them outright; find and replace every one as you
+  write, don't leave any for later.
+- **No sentence over 400 characters**, in the headline, the deck, or any
+  paragraph. Split it into two or three shorter sentences as you write it.
+
+The converter script in step 4 enforces both of these as hard gates: it will
+refuse to generate the `.txt` and print the offending sentence if either
+rule is broken, which means going back to fix the HTML and re-running, not
+patching the `.txt`. Catching both while writing avoids that round-trip.
+
 ## 3. Build the HTML page
 
 Copy `references/deep-dive-template.html` in this skill folder and fill in every
@@ -123,15 +138,29 @@ The third argument only fills in the intro line for a section literally labeled
 the script requires an argument, so pass a real named source relevant to the story
 anyway; it's harmless if it goes unused.
 
-Skim the output before moving on — same three TTS-only fixes as the Daily Brief,
-applied to the `.txt` only, never to the HTML:
-- **Long, dash-heavy sentences** (roughly 400+ characters, especially carrying more
-  than one or two em dashes) — split into two or three shorter sentences.
-- **Dates without an ordinal suffix** — "August 28" → "August 28th," including the
-  spoken byline line.
-- **Abbreviations, especially name suffixes and titles** — Jr. → Junior, Sr. →
-  Senior, Dr. → Doctor, Sen. → Senator, Rep. → Representative. Initialisms already
-  said as individual letters (FDA, CDC, WHO, HHS) are fine left as-is.
+**The script now applies TTS formatting automatically** (added 2026-09-04),
+directly on the `.txt` it generates. You don't need to hand-edit these:
+- Ordinal date suffixes ("August 28" becomes "August 28th," including the
+  spoken byline line).
+- Name-suffix and title abbreviations: Jr. becomes Junior, Sr. becomes
+  Senior, Dr. becomes Doctor, Sen. becomes Senator, Rep. becomes
+  Representative. Initialisms already said as individual letters (FDA, CDC,
+  WHO, HHS) are untouched, since those are fine as-is. Use judgment on any
+  abbreviation outside this fixed list; the script only handles these five.
+- Dollar amounts, spelled out fully in words with "dollars" at the end
+  ($3.5 billion becomes "three point five billion dollars").
+- Decimal numbers and percentages, read digit-by-digit after the point
+  (2.5 becomes "two point five"; 44.5% becomes "forty-four point five
+  percent").
+- Bare calendar years (2026 becomes "twenty twenty-six"), including the
+  byline year. This only catches plain 4-digit years without a comma or a
+  `$` in front, so a comma-grouped figure like "2,903 cases" is correctly
+  left as digits, since it isn't a year.
+- Domains meant to be read aloud (cdc.gov becomes "cdc dot gov").
+
+Skim the output anyway. The automation is deterministic, not infallible, and
+a year-shaped quantity that isn't actually a year is the main thing worth
+double-checking.
 
 ## 5. Add the permanent index rows
 

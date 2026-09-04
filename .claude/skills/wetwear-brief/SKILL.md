@@ -84,6 +84,20 @@ Write a real, specific headline drawn from the Biggest Story — never a generic
 "Daily Brief — [date]" pattern. Sandy has explicitly rejected that pattern before.
 Write a one-sentence deck teasing the rest of the day's stories.
 
+**Two hard style rules, non-negotiable, added 2026-09-04: apply these while
+writing, not as a later fixup:**
+- **No em dashes, anywhere:** not in the headline, the deck, or any paragraph.
+  Rework with a comma, a colon, a semicolon, or a new sentence instead. Sandy
+  banned them outright; find and replace every one as you write, don't leave
+  any for later.
+- **No sentence over 400 characters**, in the headline, the deck, or any
+  paragraph. Split it into two or three shorter sentences as you write it.
+
+The converter script in step 4 enforces both of these as hard gates: it will
+refuse to generate the `.txt` and print the offending sentence if either rule
+is broken, which means going back to fix the HTML and re-running, not patching
+the `.txt`. Catching both while writing avoids that round-trip.
+
 ## 3. Build the HTML page
 
 Copy `references/brief-template.html` in this skill folder and fill in every
@@ -151,34 +165,37 @@ label didn't map to a sensible "Here is the latest in ___" line, it's worth fixi
 HTML source and re-running the script rather than patching the `.txt` by hand — that
 keeps the two files honestly in sync.
 
-There are four specific things that read badly out loud but read fine on the page —
-for these, hand-edit the `.txt` after the script runs rather than touching the HTML.
-The article keeps normal written style for people reading it; only the narration
-script gets adjusted, because these are properties of text-to-speech, not of the
-writing itself:
+**The script now applies most TTS formatting automatically** (added 2026-09-04),
+directly on the `.txt` it generates. You don't need to hand-edit these:
+- Ordinal date suffixes ("August 29" becomes "August 29th," including the
+  spoken byline line).
+- Name-suffix and title abbreviations: Jr. becomes Junior, Sr. becomes
+  Senior, Dr. becomes Doctor, Sen. becomes Senator, Rep. becomes
+  Representative. Initialisms already said as individual letters (FDA, CDC,
+  WHO, HHS) are untouched, since those are fine as-is. Use judgment on any
+  abbreviation outside this fixed list; the script only handles these five.
+- Dollar amounts, spelled out fully in words with "dollars" at the end
+  ($3.5 billion becomes "three point five billion dollars").
+- Decimal numbers and percentages, read digit-by-digit after the point
+  (2.5 becomes "two point five"; 44.5% becomes "forty-four point five
+  percent").
+- Bare calendar years (2026 becomes "twenty twenty-six"), including the
+  byline year. This only catches plain 4-digit years without a comma or a
+  `$` in front, so a comma-grouped figure like "2,903 cases" is correctly
+  left as digits, since it isn't a year.
+- Domains meant to be read aloud (cdc.gov becomes "cdc dot gov").
 
-- **Long, dash-heavy sentences.** A sentence over roughly 400 characters — especially
-  one carrying more than one or two em dashes — tends to get mangled by text-to-speech;
-  the pauses land in the wrong places and the sentence loses its shape well before a
-  listener reaches the end of it. Break a sentence like that into two or three shorter
-  ones in the `.txt`, turning the dash-set-off clauses into their own sentences with
-  periods instead. Leave the HTML paragraph exactly as written; only its `.txt`
-  counterpart changes.
-- **Dates without an ordinal suffix.** "August 29" reads oddly aloud; "August 29th"
-  doesn't. Add the correct suffix to every date in the `.txt` — 1st, 2nd, 3rd, 4th,
-  ... 11th/12th/13th stay "th" even though they end in 1/2/3, 21st, 22nd, 23rd, and so
-  on — including the spoken byline line the script generates ("today is August 29th,
-  2026," not "today is August 29, 2026").
-- **Abbreviations, especially name suffixes and titles.** "Jr." tends to get sounded
-  out letter by letter instead of read as "Junior." Spell these out phonetically in
-  the `.txt`: Jr. → Junior, Sr. → Senior, Dr. → Doctor, Sen. → Senator, Rep. →
-  Representative, and similar. Use judgment on the rest — an initialism people
-  already say as individual letters out loud (FDA, CDC, WHO, HHS) is fine left as-is;
-  anything that reads as an actual word once expanded is a candidate for expanding.
+Skim the output anyway. The automation is deterministic, not infallible, and
+a year-shaped quantity that isn't actually a year is the main thing worth
+double-checking.
+
+One thing still needs a hand-edit, because it requires judgment the script
+doesn't have:
+
 - **Multi-item decks strung together on commas.** The deck sentence often lists five
   or six of the day's stories chained with "plus... , ... , and..." and no full stop
-  anywhere. Even under the ~400-character threshold above, a comma chain with no
-  period reads as one continuous run in TTS instead of a series of distinct beats —
+  anywhere. Even under the 400-character hard limit above, a comma chain with no
+  period reads as one continuous run in TTS instead of a series of distinct beats;
   clause count matters here, not just length. In the `.txt`, split it into one short
   sentence per item: `"...plus X, Y, and Z."` becomes `"...X. Y. And Z."` Leave the
   HTML `.deck` exactly as written; only its `.txt` counterpart changes.

@@ -312,6 +312,24 @@ the single-row behavior.
     the sources list entirely (it's on the HTML page for anyone who wants
     it, just not read aloud). Generate this alongside the HTML every
     day — never skip it.
+  - **Two hard writing rules, added 2026-09-04, covering every Wetwear
+    piece (Daily Brief and Deep Dive alike):** no em dashes anywhere, in
+    the HTML or the `.txt` (rework with a comma, colon, semicolon, or a
+    new sentence instead), and no sentence over 400 characters, in the
+    HTML or the `.txt` (split it into two or three shorter sentences).
+    Both are enforced as hard gates in `html_to_script.py`, which refuses
+    to generate the `.txt` and prints the offending sentence if either is
+    violated, so these need to be right in the source HTML before the
+    script will run at all.
+  - **The `.txt` converter also auto-formats numbers for speech**, added
+    the same day: ordinal date suffixes, the five common name-suffix and
+    title abbreviations (Jr./Sr./Dr./Sen./Rep.), dollar amounts spelled
+    out fully in words, decimal numbers and percentages read digit by
+    digit after the point, bare calendar years spelled out (a
+    comma-grouped figure like "2,903 cases" is correctly left as digits,
+    since it isn't a year), and domains meant to be read aloud (`cdc.gov`
+    becomes "cdc dot gov"). This replaced what used to be a manual
+    hand-edit pass after every publish.
 
 The CCR Routine ("Daily Long-Form News Digest," fires 7pm Central / 0:00
 UTC — set so it runs after most of the day's news has settled) generates
