@@ -67,8 +67,21 @@ def main():
     print()
 
     print("--- Stray non-ASCII character scan ---")
-    # Allow the standard set of typographic characters this book actually uses.
+    # Allow the standard set of typographic characters this book actually uses,
+    # plus common Latin-alphabet accented letters — this book's outline spans
+    # French, Spanish, Italian, German, and Czech names and places (e.g.
+    # Béziers, Rhône, Montségur in Ch. 24; more to come in Parts Four/Five/Seven),
+    # so real diacritics are expected content, not encoding glitches.
     allowed = set("’‘“”—…·–")
+    accented_latin = (
+        "áàâäãåÁÀÂÄÃÅ"
+        "éèêëÉÈÊË"
+        "íìîïÍÌÎÏ"
+        "óòôöõÓÒÔÖÕ"
+        "úùûüÚÙÛÜ"
+        "çÇñÑßØøÅå"
+    )
+    allowed |= set(accented_latin)
     stray_lines = {}
     for i, line in enumerate(text.splitlines(), start=1):
         for ch in line:
