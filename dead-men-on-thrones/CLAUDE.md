@@ -11,6 +11,24 @@ This book makes specific, checkable claims (dates, quotes, numbers, attributions
 
 1. **Fact-check every non-trivial claim** — any date, quote, number, named source, or "first/only/most" superlative — against outside sources (web search) before treating it as final. Don't rely on training-data memory alone for anything specific enough to be wrong. This includes claims that feel safe because they're well-known; several "common knowledge" claims in earlier chapters (e.g. what Athanasius's letter actually was "first" to do) turned out to have real scholarly pushback that made the chapter better once included.
 2. **Re-read the full draft once cold** after writing it, checking it against the "REVISION TODO" craft notes elsewhere in this file — closing-line variety, caveat paragraphs folded into the narrative rather than signposted, prose rhythm matched to subject, a genuinely dramatized opening scene, varied phrasing for recurring moves ("sources are compromised," etc.), real humor where the material supports it. **When cutting a flagged tic, cut only the tic** — a sentence can do two jobs at once (e.g. "Here is where the honest version of this chapter has to slow down, because X" is both a self-referential announcement, the actual tic, *and* a genuine reader-facing pacing cue telling them to pay closer attention here). Deleting the whole sentence loses the second job along with the first. Identify exactly which words are the repeated pattern and remove only those, preserving whatever real work the rest of the sentence was doing.
+
+   **Chapter length is earned, not targeted — added 2026-09-05.** There is no
+   word-count number to hit, and none should be invented. An earlier informal
+   habit of treating "~2000 words" as a floor quietly turned it into a ceiling
+   too: word counts across Chapters 8–23 cluster tightly in a 1930–2360 band,
+   which is the fingerprint of a target being hit rather than material
+   dictating its own length. Chapters 21–23 specifically had paragraphs added
+   mid-session for the sole purpose of crossing a threshold, not because the
+   content needed the space. Going forward, `wc -w` on a finished draft is
+   informational only, never a pass/fail gate — the actual question is
+   whether every beat in the chapter's outline entry got exactly the space it
+   earns, no filler added to reach a round number and nothing real compressed
+   out to stay under one. A chapter compressing two centuries of material
+   (like 23) can legitimately run long; a chapter built around one tight
+   scene can legitimately run short. Chapters 5 (1820 words) and 7 (1526
+   words) remain flagged separately, for a different reason — genuinely
+   thin, underdeveloped content, not merely a low number — and should be
+   fixed by adding real material where it's missing, not by padding.
 3. **Scan for stray characters and typos** — `grep -nP '[^\x00-\x7F]' <file> | grep -vP "[’‘“”—…·]"` catches encoding glitches; read the opening paragraph aloud (or have it read aloud) to catch duplicated-word typos spellcheck won't flag.
 4. **Confirm the wiring** — chapter added to the `chapters` map in `chapter.html`, its `index.html` row flipped to "Read" with the `ready` class, the `.toc-label` count incremented, before any of it is pushed live.
 5. **Extend the sources and index appendices in the same pass** — a matching Chapter N entry (Primary Sources / Modern Scholarship / Where This Is Contested) in `DMOT_Notes_and_Sources.txt` and `sources.html`, and matching key-term entries in `DMOT_Index.txt` and `book-index.html`. This is not an optional add-on requested separately — it's part of what "write the next chapter" means by default, every time, along with steps 1–4 and the git push/merge-to-main workflow.
