@@ -124,7 +124,7 @@ _YEAR_RE = re.compile(r'(?<![\d.,$])\b(19|20)\d{2}\b(?!,\d{3})(?!\.\d)')
 # Domains meant to be read as "word dot word", e.g. cdc.gov -> cdc dot gov,
 # www.factcheck.org -> www dot factcheck dot org
 _DOMAIN_RE = re.compile(
-    r'\b(?:[a-zA-Z0-9-]+\.)+(?:com|org|gov|net|edu|io|co)\b'
+    r'\b(?:[a-zA-Z0-9-]+\.)+(?:com|org|gov|net|edu|io|co|ai)\b'
 )
 
 # Common abbreviations that get sounded out letter-by-letter by TTS instead

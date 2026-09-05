@@ -1,0 +1,27 @@
+Coming up on Wetwear: Biology Corrected.
+
+CDC's Parasite Surveillance Team Shrank From 11 to 3 People as This Year's Outbreak Grew
+A gutted food-safety system helps explain why this year's Cyclospora outbreak spiraled the way it did, plus MIT builds working transistors out of living bacteria, Congress quietly averts a government shutdown through December, and an AI tool spots hidden heart disease in under two seconds.
+I am Sandy B. Patterson, and today is September 5th, twenty twenty-six.
+
+========================================================================================
+
+Here is the BIGGEST STORY from Stateline and NPR
+-------------
+
+This year's record Cyclospora outbreak, which has now infected more than 17,000 people confirmed nationwide with another roughly 12,000 cases still under investigation, is turning into a case study in what happens when the agencies meant to catch foodborne illness early lose the staff and money to do it. The CDC's own parasite surveillance team, the group responsible for tracking pathogens like cyclospora, has shrunk from 11 people to 3 since Trump administration cuts began, according to reporting from Stateline and NPR. CDC's overall workforce is down 28 percent since December twenty twenty-four, and FDA staffing has fallen 23 percent over the same period. The FDA's FoodNet system, which tracks foodborne illness nationally, stopped requiring mandatory reporting for six of the eight pathogens it used to monitor, including cyclospora itself, because there wasn't enough funding to keep the program running at full scope. Inspections of foreign food facilities, which is where much of the country's fresh produce originates, have fallen to historic lows. State health departments are absorbing the gap unevenly: Kentucky's food safety staff is down 30 to 50 percent and is now triaging, working only its biggest cases, while Michigan has spent its own state money to bolster the local response to this outbreak specifically. None of this created the parasite that's sickening people. What it did was slow down how fast anyone could see the outbreak coming, trace where it started, and stop it from spreading, which is exactly the job these programs existed to do.
+
+Here is the latest in BIOLOGY
+-------
+
+MIT engineers have built working transistors out of living bacteria, wiring them into circuits that can perform basic calculations using chemical signals instead of electricity. The team engineered two versions of a plant-associated bacterium called Pantoea agglomerans: one switches on when it receives a chemical signal, and the other does the opposite, together working the same way switching transistors do in an ordinary circuit board. Printed as colonies on agar in petri dishes, the bacterial colonies pass chemical signals to each other and process information collectively, and the largest working circuit demonstrated so far links 24 colonies together and takes about eight hours to complete one calculation. That is far too slow for a computer chip, but the researchers are not trying to replace computer chips. The eventual goal is coating plant roots with these circuits so a plant could detect a specific kind of stress, like a fungal infection, and trigger its own defense response automatically.
+
+Here is the latest in POLITICS
+--------
+
+The government funding fight that had been building all week resolved with less drama than expected. The House passed a continuing resolution on September 1st by a wide 370 to 48 margin, the Senate had already passed its own version 90 to 6 in August, and President Trump signed the combined bill into law on September 2nd. The deal funds federal agencies through December 11th, avoiding a shutdown just ahead of the November midterms. It does not resolve the separate, structural funding problems detailed above. Keeping the government's lights on for the next three months is a different question from whether the CDC and FDA have the staff and budget to actually do the food safety and disease surveillance work Congress is nominally still paying them to do.
+
+And finally, some GOOD NEWS
+---------
+
+Researchers at Imperial College London have built an AI tool that can spot signs of heart failure and valve disease in a routine ECG in under two seconds, catching patterns that are genuinely invisible to a human cardiologist reading the same tracing. The team trained the system on ECGs from millions of patients, then tested it on more than 65,000 real hospital patients in the United States. It correctly identified up to 81 percent of heart failure cases and up to 90 percent of valve disease cases. Both conditions often go undiagnosed for months while a patient waits for a full heart ultrasound after their doctor first refers them for one. Catching either from a test that already takes a few minutes and costs very little could mean treatment starts months earlier than it does today. Imperial has already spun the technology out into a company, Cardiovolt dot ai, to move it from research into actual clinics.
