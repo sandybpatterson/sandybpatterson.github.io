@@ -56,6 +56,19 @@ def main():
         print("  clean")
     print()
 
+    print("--- Em dash scan (banned across all books, effective 2026-09-05) ---")
+    em_dash_lines = [i for i, line in enumerate(text.splitlines(), start=1) if "—" in line]
+    if em_dash_lines:
+        for line_no in em_dash_lines:
+            line = text.splitlines()[line_no - 1].strip()
+            print(f"  line {line_no}: contains an em dash")
+            print(f"    > {line}")
+        print(f"  Rework each with a comma, colon, semicolon, or new sentence. "
+              f"Not applicable to already-published Chapters 1-24 — see CLAUDE.md.")
+    else:
+        print("  clean")
+    print()
+
     print("--- Duplicate consecutive word scan ---")
     dup_matches = list(re.finditer(r"\b(\w+)\s+\1\b", text, re.IGNORECASE))
     if dup_matches:

@@ -47,6 +47,24 @@ If a new phrase gets banned in conversation, add it to this list immediately rat
 
 ---
 
+## NO EM DASHES — banned across all books, effective 2026-09-05, going forward only
+
+The em dash (—, U+2014) is banned from all new prose, in every book, starting
+now. Rework with a comma, a colon, a semicolon, or a new sentence instead —
+the same rule already in force for Sandy's Blog content, extended here.
+Regular hyphens and en dashes for numeric ranges (e.g. "1209–1229") are
+unaffected; this is specifically about the em dash as a sentence-joining
+device.
+
+**Not retroactive.** Chapters 1–24 of this book alone contain 588 em dashes
+and are not being touched by this rule — fixing them is real, dedicated
+cleanup work for a future skill built specifically for that purpose, not
+something to absorb into ordinary chapter-writing. Draft Chapter 25 onward
+without them; leave 1–24 exactly as published until that cleanup work
+happens.
+
+---
+
 ## WHAT THIS BOOK IS
 
 Dead Men on Thrones: What Power Does to Religion is a comprehensive popular history of Christianity examining how institutional power has consistently corrupted, distorted, and weaponized religious faith across two thousand years. The central argument is that the Christianity most people practice today has almost nothing to do with what actually happened and almost everything to do with politics, accidents, power struggles, dead men on thrones, shipowners getting thrown out of churches, and councils arguing over single letters of the Greek alphabet.

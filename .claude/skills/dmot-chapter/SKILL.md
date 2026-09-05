@@ -98,7 +98,7 @@ plain markdown, following the established shape:
 ### [Chapter Title]
 
 [Body paragraphs, ~150–400 words each, dramatized cold open, no meta-commentary
-about "this book" or "the honest version of this chapter" — fold caveats into the
+about "this book" or "the honest version of this chapter"; fold caveats into the
 narrative instead of announcing them]
 
 ---
@@ -112,8 +112,15 @@ Match this book's established voice (see `TONE AND VOICE` in `CLAUDE.md`): speci
 people and decisions rather than abstractions, real numbers hedged honestly where
 contested, dry dark humor where the material earns it, no closing-line pattern
 repeated from the immediately preceding chapters (vary between a withheld-detail
-sting, a reflective capstone, and an open question — don't default to a "here's
-what comes next" hand-off every time).
+sting, a reflective capstone, and an open question, rather than defaulting to a
+"here's what comes next" hand-off every time).
+
+**No em dashes, effective 2026-09-05 — see the `NO EM DASHES` section in
+`CLAUDE.md`.** This applies to every chapter drafted from now on; do not carry the
+habit forward from Chapters 1–24, which used them freely and are not being
+retrofitted as part of ordinary chapter-writing. Rework with a comma, colon,
+semicolon, or a new sentence while drafting, rather than fixing it at the
+pre-publish-check stage.
 
 ## 5. Automated pre-publish check
 
@@ -123,12 +130,19 @@ Run the bundled mechanical scan:
 python3 .claude/skills/dmot-chapter/scripts/prepublish_check.py dead-men-on-thrones/chapters/chNN.md
 ```
 
-This reports word count (informational only — never treat it as pass/fail),
-scans for known recurring tics and banned phrases, duplicate consecutive words,
-stray non-ASCII characters, section-break count, and the closing attribution
-line. Fix anything it flags, then re-run until clean. This script's tic list is a
-convenience, not exhaustive — also re-check the live `BANNED PHRASES` section in
+This reports word count (informational only, never treat it as pass/fail),
+scans for known recurring tics and banned phrases, em dashes (banned outright,
+not just informational — see below), duplicate consecutive words, stray
+non-ASCII characters, section-break count, and the closing attribution line.
+Fix anything it flags, then re-run until clean. This script's tic list is a
+convenience, not exhaustive; also re-check the live `BANNED PHRASES` section in
 `CLAUDE.md` by eye, since new entries get added there over time.
+
+An em dash flagged here on a **new** chapter (25 onward) is a real problem to
+fix before publishing. An em dash flagged on any of Chapters 1–24, if this
+script is ever run against them, is expected and not a bug to chase down; that
+cleanup is separate, dedicated work for later, not something this pipeline
+does incidentally.
 
 ## 6. Wire into the site
 
