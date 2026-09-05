@@ -84,7 +84,7 @@ decisions, and a summary of what step 2 confirmed or corrected. **Do not draft,
 touch any file, or run any script past this point without an explicit go-ahead** —
 "draft it," "go ahead," "push it," or equivalent. If the user's original request
 already included that instruction up front (e.g. "write and publish chapter 25"),
-you may treat that as the go-ahead and continue straight through steps 4–11 without
+you may treat that as the go-ahead and continue straight through steps 4–12 without
 stopping here.
 
 ## 4. Draft
@@ -144,14 +144,43 @@ script is ever run against them, is expected and not a bug to chase down; that
 cleanup is separate, dedicated work for later, not something this pipeline
 does incidentally.
 
-## 6. Wire into the site
+## 6. Generate the audio script
+
+**Chapter 25 onward only** — Chapters 1–24 don't get this retroactively; that's
+separate cleanup-skill work for later, not something this step reaches back for.
+
+```
+python3 .claude/skills/dmot-chapter/scripts/chapter_to_script.py \
+  dead-men-on-thrones/chapters/chNN.md \
+  "dead-men-on-thrones/audio/ChNN - [Chapter Title].txt"
+```
+
+This produces a TTS-ready narration script in the flat `dead-men-on-thrones/audio/`
+folder (created automatically if it doesn't exist yet). It strips markdown
+formatting, drops the `# Chapter N` line and the closing attribution footer (only
+`Dead Men on Thrones.` / `Chapter [N]: [Title].` opens the script; no repeated
+"by Sandy B. Patterson" byline the way Wetwear's daily episodes have one — this
+reads as a book chapter, not a recurring show), spells out numbers, years, dollar
+amounts, and percentages for speech the same way `wetwear-brief`'s converter does,
+and enforces the 400-character sentence limit **for this .txt file only** — the
+web page's own text is untouched and may legitimately run longer. It has a
+best-effort splitter for any sentence over that limit (semicolons first, then a
+comma before a conjunction nearest the midpoint, then the nearest comma); anything
+it truly can't split gets printed as a warning to review by hand, not silently left
+broken.
+
+This script hard-fails on any em dash, the same way `prepublish_check.py` does — if
+step 5 passed clean, this should never actually trigger. If it does, fix the source
+chapter, not this script's output.
+
+## 7. Wire into the site
 
 - Add the chapter to the `chapters` map in `dead-men-on-thrones/chapter.html`.
 - In `dead-men-on-thrones/index.html`: flip that chapter's row from
   `Coming Soon` to `Read` (add the `ready` class), and increment the
   `.toc-label` count.
 
-## 7. Verify the render
+## 8. Verify the render
 
 Run the bundled render check from the repo root:
 
@@ -167,9 +196,9 @@ not showing. It cleans up its own temp files and server process on exit — do n
 leave a `_verify_test_chapter.html` or similar file sitting in `dead-men-on-thrones/`
 after this step; if the script errors out, check for and remove any of its `_verify_*`
 temp files by hand before continuing. A PASS here is required before moving on; a
-FAIL means something in step 6 is wrong, not a false alarm.
+FAIL means something in step 7 is wrong, not a false alarm.
 
-## 8. Extend the sources and index appendices
+## 9. Extend the sources and index appendices
 
 Add a matching entry to all four files, following the exact format of the most
 recent chapter's entries (read a nearby example before writing a new one rather
@@ -189,24 +218,24 @@ than reconstructing the format from memory):
 This is not optional or separately requested — it's part of what publishing a
 chapter means, every time.
 
-## 9. Update progress status
+## 10. Update progress status
 
 Edit the `PROGRESS STATUS` section in `dead-men-on-thrones/CLAUDE.md`: bump the
 chapter count, add the new chapter to the appropriate Part's list, update which
 chapters/files are live, and update the "Next up" line to whatever chapter
 logically follows (checking the outline for whether the next Part begins).
 
-## 10. Publish
+## 11. Publish
 
 ```
 git fetch origin main
 git log --oneline -3 origin/main   # compare against local; merge cleanly if it's ahead
 ```
 
-Then stage exactly the files this chapter touched (the new chapter file, the two
-site pages, the four appendix files, and `CLAUDE.md`) and commit — do not use `git
-add -A`, since other sessions may be working this same repo concurrently and could
-have unrelated in-progress changes on disk. This repo's root `CLAUDE.md` says to
+Then stage exactly the files this chapter touched (the new chapter file, its audio
+script in `audio/`, the two site pages, the four appendix files, and `CLAUDE.md`)
+and commit — do not use `git add -A`, since other sessions may be working this same
+repo concurrently and could have unrelated in-progress changes on disk. This repo's root `CLAUDE.md` says to
 push straight to `main`: no PR, no feature branch, per Sandy's standing instruction.
 Never force-push; if `origin/main` has moved since your last fetch, merge cleanly
 first (watch for unrelated concurrent changes to the same files — e.g. site-wide
@@ -221,11 +250,12 @@ git ls-remote origin refs/heads/main
 
 Both hashes should match before telling the user it's done.
 
-## 11. Report
+## 12. Report
 
 Summarize for the user: chapter title and number, word count (as information, not
 a verdict), the key beats covered, what got deliberately deferred or called back to
-another chapter instead of repeated, and what the outline says comes next.
+another chapter instead of repeated, whether the audio script needed any long
+sentences split (or flagged any it couldn't), and what the outline says comes next.
 
 ---
 
@@ -239,3 +269,10 @@ another chapter instead of repeated, and what the outline says comes next.
 - The vendored `marked.js` copy in `references/` is pinned at v9.1.6 — bump it
   deliberately if the production site's CDN-loaded version ever changes, so the
   render check keeps testing against something reasonably close to production.
+- The audio-script step (6) starts at Chapter 25 and doesn't reach back for 1–24;
+  a separate cleanup skill is expected to handle both the em-dash removal and any
+  audio-script backfill for those chapters, later.
+- `chapter_to_script.py` duplicates (rather than imports) the number-formatting
+  helpers from `wetwear-brief/scripts/html_to_script.py`, per this project's
+  convention of each skill's scripts being self-contained. If the shared logic
+  ever needs a real fix, it currently has to be made in both places.
