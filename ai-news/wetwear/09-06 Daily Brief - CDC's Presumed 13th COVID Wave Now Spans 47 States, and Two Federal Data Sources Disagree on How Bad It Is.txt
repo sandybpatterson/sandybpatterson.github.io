@@ -1,0 +1,27 @@
+Coming up on Wetwear: Biology Corrected.
+
+CDC's Presumed 13th COVID Wave Now Spans 47 States, and Two Federal Data Sources Disagree on How Bad It Is
+CDC says national wastewater levels are still very low while a Stanford-run monitoring system calls the same period high and rising sharply. Scientists get a natural enzyme to read an eight-letter genetic alphabet. The Pentagon and NIH sign a disputed deal over billions in biodefense research money. And an injectable scaffold helps stroke-damaged mouse brains rebuild themselves.
+I am Sandy B. Patterson, and today is September 6th, twenty twenty-six.
+
+==========================================================================================================
+
+Here is the BIGGEST STORY from the CDC
+-------------
+
+The presumed 13th COVID wave that showed up in 29 states two weeks ago has now grown to 47 states, according to CDC estimates released September 2nd, with zero states declining and only 3 holding steady. That number sits oddly next to another CDC finding released the same week: the agency's own wastewater data still classifies national COVID activity as very low for the week ending August 29th. A separate, Stanford-run monitoring program called WastewaterSCAN reads the same period completely differently, showing SARS-CoV-2 activity at a high nationwide level with a sharp upward trend over the past 21 days. The two systems use different methods and different reporting timelines, so their labels are not directly comparable, but that is exactly the problem: right now there is no single, trusted answer to a question as basic as how much COVID is actually circulating in the country. Texas continues to post the highest wastewater readings of any state, and California's levels kept climbing into September as well. Whatever the true national picture turns out to be, the spread to nearly every state is not in dispute between the two systems, only its severity.
+
+Here is the latest in BIOLOGY
+-------
+
+Researchers at UC San Diego have shown that RNA polymerase, the natural enzyme every cell uses to read DNA and start building proteins from it, can accurately read a synthetic eight-letter genetic alphabet instead of the four letters every known living thing actually uses. Using cryo-electron microscopy precise enough to resolve details smaller than a single atom, the team captured images of the enzyme handling two synthetic base pairs it had never evolved to recognize, and found it processes them in ways strikingly similar to how it handles ordinary DNA. The study, published in Nature Communications, does not create a new organism or a new genetic code in use anywhere. What it shows is that the basic machinery of life is more flexible than the four-letter alphabet it has always worked with, which brings scientists closer to building expanded genetic systems capable of functions no natural organism performs today.
+
+Here is the latest in POLITICS
+--------
+
+The Department of Defense and the National Institutes of Health have signed an agreement that could redirect as much as two billion dollars from the National Institute of Allergy and Infectious Diseases toward Pentagon-directed biodefense research, close to a third of that single institute's entire budget. The stated purpose is developing countermeasures against pandemic flu and chemical, biological, radiological, and nuclear threats. Representative Rosa DeLauro of Connecticut, the senior Democrat on House Appropriations, called it outrageous and accused the Pentagon of trying to redirect money Congress had already appropriated for biomedical research without going back to Congress for approval. NIH Director Jay Bhattacharya defended the arrangement as fully aligned with the agency's public health mission, and a White House spokesperson insisted no money is actually being transferred to the Pentagon, describing it instead as a project-by-project research partnership. Whichever framing holds up, the fight over who controls NIAID's budget is unfolding at the exact moment NIH is already racing to obligate its current year's funding before the fiscal year closes on September 30th.
+
+And finally, some GOOD NEWS
+---------
+
+Duke researchers have built an injectable biomaterial that helped stroke-damaged mouse brains repair themselves, turning the empty cavity a stroke leaves behind into something closer to a construction site than a dead zone. Injected directly into the injury, the scaffold recruits the body's own immune cells, including neutrophils that appear to switch from damaging to helpful once inside it, and that recruitment drives the growth of new blood vessels and nerve fibers through the damaged tissue. Mice that received the material showed more of these repair structures both in and around the injury site, and on a grid-walking test that measures how often an animal misplaces an injured limb, treated mice performed indistinguishably from healthy mice by eight weeks. The work is still early and preclinical, tested only in mice with the material injected directly into the brain, and there is real work left before anyone knows whether it translates to larger animals or people. But a treatment that gets an injured brain to rebuild its own blood supply and wiring, rather than just limiting further damage, is a genuinely different approach to stroke recovery than anything currently used in a hospital.
