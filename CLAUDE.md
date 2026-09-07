@@ -29,9 +29,18 @@ books live in their own repos; some live as folders inside this repo.
 
 **In the link-tree at the bottom of the shelf, not as book covers:**
 - **Sandy's Blog** — top button, links to `/ai-news/`
+- **SODA — free podcast tool** — links to `/soda/`
 - **Stories from Winchester** — lives here, in `/stories/`
 - **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
-- **Copy Podcast RSS Link** — the main show's feed (`feed.xml`)
+
+The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
+linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
+as a link-tree RSS button (the old "Copy Podcast RSS Link" button was
+removed). The show's **canonical RSS feed** is
+`https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/wetware-biology-corrected.xml`
+— **NOT `feed.xml`; that URL is wrong, don't use it.** The podcast page's
+one-tap subscribe deep links (Apple Podcasts `podcast://`, Pocket Casts
+`pktc://`) and its Copy-RSS button all point at this canonical feed.
 
 **Shelf vs. link-tree, as of 2026-08-29:** Stories from Winchester and Arden
 Remembers were demoted from full book covers to plain buttons in
