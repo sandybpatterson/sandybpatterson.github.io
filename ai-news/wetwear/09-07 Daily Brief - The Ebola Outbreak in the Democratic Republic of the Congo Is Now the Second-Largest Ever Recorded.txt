@@ -1,0 +1,39 @@
+Coming up on Wetwear: Biology Corrected.
+
+The Ebola Outbreak in the Democratic Republic of the Congo Is Now the Second-Largest Ever Recorded
+WHO says the DRC's Ebola outbreak grew by 82 cases and 41 deaths in a single day, becoming the second-largest ever recorded. Ohio State finds a molecular weak spot in glioblastoma. Anti-vaccine myths resurface after Trump's vaccine schedule order. Florida moves to drop four school vaccine requirements. And psilocybin fully prevents chemo nerve damage in mice.
+I am Sandy B. Patterson, and today is September 7th, twenty twenty-six.
+
+==================================================================================================
+
+Here is the BIGGEST STORY from the World Health Organization
+-------------
+
+The Ebola outbreak spreading across the Democratic Republic of the Congo has become the second-largest ever recorded, trailing only the twenty fourteen to twenty sixteen West African epidemic. The World Health Organization's situation report published September 6th, covering data through September 5th, put the total at 6,604 confirmed cases and 3,175 deaths, a jump of 82 new cases and 41 new deaths in a single day. Ituri province remains the epicenter, accounting for 5,326 cases and 2,398 deaths across 28 of its 36 health zones, and the outbreak has now spread to 60 health zones in total, up from 54 when WHO first published its outbreak notice on August 14th. Only 1,548 patients have recovered so far. The strain driving this outbreak, Bundibugyo ebolavirus, has no approved vaccine and no antibody treatment built specifically for it, unlike the more familiar Zaire strain behind the twenty fourteen to twenty sixteen epidemic, which does have effective vaccines and monoclonal antibody therapies. Health workers in the DRC are instead relying on general supportive care, isolation, and contact tracing, the same basic tools available a decade ago, even as case counts keep climbing.
+
+Here is the latest in BIOLOGY
+-------
+
+Researchers at Ohio State University's Comprehensive Cancer Center may have found a genuine weak spot in glioblastoma, the brain cancer with one of the worst survival rates of any tumor type. Glioblastoma cells appear to suppress an enzyme called PP2A using three separate proteins, ANP32A, CIP2A, and SET, which keeps growth signals turned on inside the tumor. In preclinical models, blocking SET alone was enough to prevent tumor formation, and blocking the other two proteins made tumors significantly more sensitive to radiation. The findings, published in Cancer Letters, don't yet involve any human trials, and there's real work ahead before this becomes a treatment, but identifying a specific molecular lever that a notoriously treatment-resistant cancer depends on is a meaningful step for a disease that has seen very little progress in decades.
+
+Here is the latest on MISINFORMATION
+--------------
+
+A wave of long-debunked anti-vaccine claims has resurfaced online in the weeks since President Trump's August executive order directed federal agencies to revisit the childhood immunization schedule. Global Biodefense's debunking roundup, published September 4th, flags two claims making the rounds again: that giving children multiple vaccines at once overwhelms their immune systems and causes autism, and a revived version of the old vaccine shedding myth, this time attached to the newly approved mRNA flu vaccine. Neither claim holds up. Johns Hopkins vaccine safety researcher Daniel Salmon points to sixteen large, population-based studies across multiple countries that have found no link between vaccines and autism. And vaccine shedding, meaning transmitting a vaccine strain to someone else after immunization, is not physically possible with an mRNA vaccine, since it contains no live virus at all. The claims aren't new, but the timing is no accident: they tend to resurface whenever federal vaccine policy itself becomes contested.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+CDC's measles count keeps climbing too: as of its September 3rd update, the agency has confirmed 3,134 cases across 47 jurisdictions this year, with 38 separate outbreaks and 95 percent of cases tied to one of those outbreaks. Eight percent of patients have been hospitalized, and 94 percent were unvaccinated or had unknown vaccination status. CDC has not officially attributed any twenty twenty-six deaths to measles, though NBC News reports a six-week-old infant in Pennsylvania is among two Pennsylvania measles deaths CDC has not yet formally confirmed.
+
+There's also a real update to the COVID wastewater story this brief covered on September 6th: CDC's own tracker has moved on from calling national activity very low, and as of its September 4th data now rates it moderate, with nine states and Washington, D.C. at very high and eleven more at high. That's a meaningfully different picture from a week ago, and it closes most of the gap between CDC's numbers and the Stanford-run WastewaterSCAN system that had already been showing a sharp rise.
+
+Here is the latest in POLITICS
+--------
+
+Florida's Department of Health is moving to drop four vaccines, hepatitis B, chickenpox, Hib, and pneumococcal, from the list required for school and daycare attendance, under a rule Surgeon General Joseph Ladapo approved on August 20th. The proposal would also broaden vaccine exemptions to cover moral or ethical beliefs, not just religious ones, and let parents and college students opt out of the state's vaccine registry entirely. A 21-day public comment period is open through September 14th, and clinician groups have already pushed back: Florida Academy of Family Physicians president Danielle Carter and the Florida Chapter of the American Academy of Pediatrics have both filed formal objections. Vaccines required by Florida state law, including MMR, polio, diphtheria, and tetanus, aren't affected by this specific rule change. The move follows a broader federal push: HHS opened its own comment period, running through September 20th, on how federal vaccine recommendations get categorized in the first place.
+
+And finally, some GOOD NEWS
+---------
+
+Two doses of psilocybin, given before chemotherapy, completely prevented peripheral neuropathy in mice, according to a study published in Science and led by researchers at MD Anderson Cancer Center. The compound works by activating a receptor on sensory nerves that keeps mitochondria moving properly along the nerve fiber, which chemotherapy normally disrupts and which is what causes the numbness, tingling, and pain that often follows treatment. A non-hallucinogenic version of the compound, tabernanthalog, gave mice the same protection without any psychedelic effect, meaning a version that never gets anyone high could plausibly reach patients. Chemotherapy-induced peripheral neuropathy affects a large share of cancer patients and currently has no good preventive treatment, so researchers Moran Amit and Patrick Dougherty are already planning a Phase 2 human trial.
