@@ -153,6 +153,24 @@
     text-transform: uppercase;
   }
 
+  .lead-figure { margin: 4px 0 0; }
+  .lead-figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  }
+  .lead-figure figcaption {
+    font-family: 'Courier New', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+  }
+
   footer {
     border-top: 1px solid #1a1a1a;
     padding: 28px 24px;
@@ -188,6 +206,11 @@
     <p class="byline">Sandy B. Patterson &middot; September 8, 2026</p>
 
     <div id="sbp-audio-player" data-audio-src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/You're-Afraid-of-the-Wrong-Robot.mp3"></div>
+
+    <figure class="lead-figure">
+      <img src="/images/wrong-robot.png" alt="Onlookers in a rainy Times Square beneath giant billboards reading AI TAKES OVER, ROBOT OVERLORDS, and JOBLESS FUTURE; a person holds a cardboard sign reading THE END IS NEAR (BY ALGORITHM)." />
+      <figcaption>The panic, staged in Times Square.</figcaption>
+    </figure>
 
     <hr class="divider">
 
