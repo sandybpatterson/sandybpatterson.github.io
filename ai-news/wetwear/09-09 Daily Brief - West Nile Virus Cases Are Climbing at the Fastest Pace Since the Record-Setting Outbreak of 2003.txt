@@ -1,0 +1,32 @@
+Coming up on Wetwear: Biology Corrected.
+
+West Nile Virus Cases Are Climbing at the Fastest Pace Since the Record-Setting Outbreak of two thousand three
+The largest genetic study of personality ever conducted just published. The DRC's Ebola outbreak becomes the deadliest in the country's history. Florida's biggest doctors' group demands a hearing on the state's vaccine rule rollback. And a caffeine study points to a 500 million year old anti-aging pathway.
+I am Sandy B. Patterson, and today is September 9th, twenty twenty-six.
+
+================================================================================================
+
+Here is the BIGGEST STORY from the CDC
+-------------
+
+This year's West Nile virus season in the United States is unfolding at its fastest pace since two thousand three, the worst year ever recorded for the virus in this country. As of CDC's mid-August count, 181 human cases had been confirmed across 29 states, with 11 deaths, a pace researchers say is running at roughly five times the historical average for that point in the season. California's own numbers, updated through September 4th, show the trend accelerating: 86 cases across 21 counties and 6 deaths, up from 64 cases just a week earlier. West Nile has no vaccine and no specific antiviral treatment for humans. Most infected people never develop symptoms, but roughly 1 in 150 develop a severe neuroinvasive form, encephalitis or meningitis, that can cause permanent neurological damage or death, and that risk climbs sharply with age. The virus spreads through mosquito bites, not person to person, which means the surge tracks mosquito populations and weather patterns rather than any single outbreak source, and it will keep climbing until the first hard frost ends mosquito season in most of the country. In two thousand three, the worst year on record, the virus eventually sickened 9,862 people nationally and killed 264. Nobody is predicting this year will reach that scale, but the early pace is the closest the country has come to it in over two decades.
+
+Here is the latest in BIOLOGY
+-------
+
+The largest genetic study of personality ever conducted has identified 1,260 DNA variants linked to the five major personality traits scientists use to describe human temperament: extraversion, agreeableness, conscientiousness, neuroticism, and openness. The international study, published in Nature, analyzed genetic data from more than 1 million people across 46 separate studies in 13 countries, and found 824 of those variants had never been linked to personality before. Even added together, though, all of these variants explain only 5 to 13 percent of the actual variation in personality between people, confirming that personality is highly polygenic, shaped by thousands of small genetic effects rather than a handful of major genes. The researchers also found meaningful genetic overlap between personality traits and other life outcomes, including physical health, longevity, income, and career path. None of this means personality is fixed at birth or reducible to genetics, environment, upbringing, and life experience still do most of the work. What it does show is that the genetic contribution to personality, long assumed to exist but hard to pin down, is now measurable at a level of detail that wasn't possible even a few years ago.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+The Ebola outbreak in the Democratic Republic of the Congo keeps getting worse. The latest WHO figures, current through September 6th, put the total at 6,686 confirmed cases and 3,226 deaths, a jump of 82 cases and 51 deaths in about two days. The case fatality rate now stands at roughly 48 percent. That death toll has now surpassed the country's twenty eighteen to twenty twenty outbreak, making this the deadliest Ebola outbreak in the Democratic Republic of the Congo's history, though it remains well short of the twenty fourteen to twenty sixteen West African epidemic, which killed more than 11,000 people. Ituri province remains the hardest hit, with 5,365 cases and 2,426 deaths, while North Kivu has grown to 1,039 cases and 681 deaths. The strain driving this outbreak, Bundibugyo ebolavirus, still has no approved vaccine or treatment.
+
+Here is the latest in POLITICS
+--------
+
+Florida's fight over dropping four school vaccine requirements escalated today. The Florida chapter of the American College of Physicians, which represents 10,000 doctors in the state, formally requested a public hearing on the proposed rule. In a letter from attorney Christopher Nuland, the group argued the change ignores numerous scientifically vetted studies on vaccine safety and effectiveness, and warned that expanded non-medical exemptions pose a risk both to unvaccinated individuals and to public health more broadly. The underlying proposal, which would remove hepatitis B, chickenpox, Hib, and pneumococcal vaccines from the state's school and daycare requirements, remains open for public comment through September 14th. The state's biggest physician group asking for a hearing is a meaningful escalation from written comments alone, and it puts more pressure on the Department of Health to justify the rule change in a public forum rather than through the paperwork process alone.
+
+And finally, some GOOD NEWS
+---------
+
+Your coffee habit might be doing more than waking you up. Researchers at Queen Mary University of London found that caffeine activates AMPK, a cellular energy sensor so old it's shared across nearly all forms of life, and one that plays a central role in how cells repair DNA, manage stress, and regulate their own growth. The study, published in Microbial Cell, used fission yeast, a simple organism scientists rely on because its core cellular machinery is remarkably similar to ours, to show that caffeine engages this same ancient pathway that's already linked to slower aging and better stress resistance in other research. It's not a reason to start drinking more coffee based on this study alone. The work was done in yeast, not people, and translating a cellular mechanism into a real anti-aging effect in humans is a much bigger leap. But it's a genuinely interesting mechanistic clue about why something as common as caffeine keeps showing up in aging research, and it's a nice reminder that some of biology's oldest tricks are hiding in the most ordinary habits.
