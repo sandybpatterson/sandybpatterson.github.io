@@ -1,0 +1,66 @@
+Coming up on Sandy's Blog.
+
+The Real Fight Isn't With AI
+Losing a job to a machine isn't dangerous because of the machine. It's dangerous because losing a job in America means losing your healthcare, your housing, and your ability to eat.
+I am Sandy B. Patterson, and today is September 9th, twenty twenty-six.
+
+============================
+
+Here's the misdirected anger
+---------------------
+
+Watch how people actually talk about AI right now and you'll notice something odd. The anger isn't really about the technology. It's aimed at the technology, but it isn't about the technology. Someone posts an AI-generated image and gets dogpiled. A company announces layoffs alongside an AI rollout and the internet declares war on the tool, not the company that made the decision. People boycott AI products, swear off "AI slop," treat anyone using the tools as morally suspect. All of that reads as fear of a machine. It isn't. It's fear of what happens to you in this country when you don't have an income, aimed at the nearest visible cause because the actual cause is harder to see and much harder to fight.
+
+That distinction matters more than it sounds like it should. A society where losing your job means losing your healthcare, your housing, and your ability to feed yourself is a society where any threat to your job reads as a threat to your life, because it is one. Automation doesn't have to touch you personally to be terrifying under those conditions. It just has to be plausible that it could. And once you understand what the fear is actually about, misdirecting it at the technology itself starts to look less like an overreaction and more like a very old mistake, one we've made before, with a very similar setup.
+
+Here's what the luddites actually wanted
+---------------------------------
+
+That old mistake has a name, and the name gets used almost exactly backward today. Call something "Luddite" now and you mean anti-technology, a reflexive fear of progress. The actual Luddites, textile workers across the English Midlands and North between eighteen eleven and eighteen sixteen, weren't fighting progress. They were fighting a specific arrangement in which manufacturers used new machines, wide stocking frames in Nottinghamshire, power looms in Lancashire, gig mills in Yorkshire, to replace skilled, apprenticed workers with cheaper, unskilled labor and cut wages in the process. The machines themselves weren't the target. The decision to use them specifically to gut wages and dodge years of training was.
+
+Parliament's response tells you how seriously the country took the threat to profit, and how little it cared about the threat to the workers. The Frame Breaking Act of eighteen twelve made destroying a machine a capital offense. At a special commission in York the following January, more than a dozen men were hanged for it. In Lancashire that same year, a twelve year old boy named Abraham Charlston was hanged outside Lancaster Castle for his part in burning a mill, reportedly crying for his mother on the scaffold. That's the actual history behind the word people now use to mean "afraid of technology." It wasn't fear of machines. It was a fight over who a machine's benefits belong to, and the state chose the side with the machines.
+
+The parallel to right now isn't subtle. Today's version of the Luddites isn't smashing servers. It's calling AI itself the enemy, when the actual grievance, same as it was in eighteen twelve, is about who gets to keep their footing when the technology changes and who gets thrown off the ledge. Misnaming the fight doesn't just misdirect anger. It makes the fight easier to lose, because you end up arguing against something that was never really the problem.
+
+Here's the actual problem
+------------------
+
+So name it properly. Automation, on its own, is not dangerous. A tool that can do a task faster or cheaper than a person is, by itself, morally neutral, the same as a spinning frame or a power loom was. What makes it dangerous is a specific fact about how survival is currently organized in the United States: you need a job, specifically, to reliably access healthcare, housing, and enough income to eat. Not because that's some law of economics. Because that's a policy choice, one that's been made and remade for decades, and one that could be made differently.
+
+Roughly 60 percent of Americans under 65, more than 165 million people, get their health insurance through an employer. Lose the job and you don't just lose income. You lose coverage, usually within a month, right at the moment you can least afford a gap. Housing works the same way: miss enough paychecks and eviction or foreclosure follows fast, with almost no cushion built into the system to absorb the shock. None of that is a fact about robots or software. It's a fact about how thoroughly survival itself has been tied to continuous employment in this country, more tightly than in almost any peer nation.
+
+This is the actual pivot the whole argument turns on. The fight was never really with the tool. It's with the arrangement that makes losing your job to a tool catastrophic instead of merely inconvenient. Fix that arrangement and automation stops being an existential threat and starts being what it should have been all along: a technology that does some tasks faster, freeing people up to do something else, the thing automation was supposed to deliver in the first place and almost never has, because nobody built the floor underneath it.
+
+Here's what decommodification looks like
+---------------------------------
+
+Sociologists have a word for a livelihood you can maintain without depending on market participation to survive: decommodification, in Gosta Esping-Andersen's phrase. It's not an abstraction. It's healthcare that isn't tied to your employer, so losing a job doesn't mean losing your doctor. It's a real income floor, so a gap between jobs doesn't mean a gap in your ability to eat or pay rent. It's housing security robust enough that a few missed paychecks doesn't put your family on the street. Put those three things in place and a job loss, even one caused entirely by AI, becomes a transition to manage instead of a catastrophe to survive.
+
+This isn't a hypothetical. Germany has roughly four and a half times the industrial robot density the United States does, and German manufacturing workers displaced by automation were largely absorbed into other work with no net loss of jobs, a result researchers trace to Germany's stronger labor market institutions, not to fewer robots. Compare that to research on American workers displaced by robots, which finds real, lasting local job and wage losses with much less institutional cushion to catch them. A separate seven country study of displaced workers found that five years after losing a job, only about 5 percent remained unemployed in Denmark and Sweden, compared with roughly 20 percent in Spain, Portugal, and Italy, countries with thinner safety nets. Denmark's whole labor model, called flexicurity, makes it easy to lay workers off precisely because it also makes sure losing a job doesn't mean losing everything. That's not a coincidence. It's the design.
+
+None of this requires stopping automation, banning AI, or pretending the technology isn't going to keep displacing work. It requires building the floor first. Once survival isn't commodified, the fight over automation gets to be what it should have been the whole time: a fight over how to share the benefits of a more productive economy, not a fight over whether you get to keep eating.
+
+Here's on copyright, carefully
+-----------------------
+
+There's a second, smaller fight tangled up in all of this: whether AI companies should be allowed to train on copyrighted work without paying for it. Here the instinct on all sides tends to run toward slogans, either "AI training is theft, shut it down" or "copyright is already obsolete, let it go." Both miss the more useful question, which is what creators actually have right now, and what happens if you take it away before anything replaces it.
+
+What creators have right now is copyright itself, imperfect and unevenly enforced, but real leverage. It's the reason Anthropic agreed to a one point five billion dollar settlement, roughly 3,000 dollars per work across about half a million books, after being sued for training on pirated copies. It's the reason OpenAI has signed licensing deals worth hundreds of millions of dollars with publishers rather than simply taking the material for free. A bipartisan bill in Congress, the TRAIN Act, would make it easier for creators to even find out whether their work was used in training in the first place, which is currently closer to impossible than it should be. Researchers have published serious, peer reviewed work on collective licensing schemes, modeled on how music royalties already work, that could compensate creators at scale instead of one lawsuit at a time.
+
+That's the case for reform and redirection, not abolition. Strip copyright's protection before something like collective licensing or a compulsory scheme actually exists to replace it, and creators lose their only real point of leverage in exchange for a promise. Sequence it the other way, protect the leverage, then use it to force a better system into existence, and reform becomes possible without anyone having to take it on faith that a fairer deal will show up on its own. The goal isn't to protect copyright forever. It's to not disarm before the replacement is built.
+
+Here's not off the hook
+----------------
+
+To be fair to the AI companies on one specific point: they didn't build the system that makes job loss catastrophic. The weak American safety net, the employer tether on healthcare, the thin unemployment cushion, all of that predates generative AI by decades and was built by choices that have nothing to do with any AI lab. Blaming OpenAI for the absence of universal healthcare is aiming at the wrong target twice in a row.
+
+But not building the weak safety net isn't the same as having no responsibility for what happens next. When California tried to pass one of the more serious pieces of frontier AI regulation in the country, SB 1047, OpenAI, Google, and Meta all opposed it. When a proposal surfaced in twenty twenty-five to block every state from regulating AI at all for the next decade, the industry pushed for it hard enough that it nearly passed before collapsing in the Senate on a 99 to 1 vote. Meta didn't take that loss quietly. Weeks later it launched a new super PAC committing tens of millions of dollars specifically to elect state candidates friendly to AI industry interests. When California required companies to disclose what's actually in their AI training data, industry groups fought the law, and xAI sued to overturn it. And on the copyright question specifically, the major labs have spent real lobbying money pushing to have AI training classified as fair use outright, which would make paying creators anything at all a matter of choice rather than law.
+
+That's the second hook. Not responsible for the broken system they inherited. Actively lobbying against the fixes that would make that system less broken, while profiting from the fact that it stays exactly as broken as it is. Both things are true at once, and pretending otherwise, in either direction, gets the argument wrong.
+
+Here's the choice
+----------
+
+Go back to the Luddites one more time, because the ending of that story is usually told wrong too. History didn't vindicate the Luddites by putting the machines back in storage. The stocking frames stayed. The power looms stayed. What eventually changed was the arrangement around them: labor organizing, factory safety law, child labor law, the eight hour day, none of it handed down out of mercy, all of it forced into existence decades later by people who kept fighting after the frame breakers were hanged and transported and the immediate uprising was crushed.
+
+That's the actual choice sitting in front of us right now, not AI versus no AI, because that was never really the question. The choice is whether the policy fight, universal healthcare, a real income floor, housing security, a fair system for compensating the people whose work trained these systems, happens before the disruption lands at scale, or only after enough people have been hurt badly enough that smashing something starts to feel like the only option left. History remembers the second path as a footnote about broken machines. It was never really about the machines. It won't be this time either.
