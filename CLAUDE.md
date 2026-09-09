@@ -214,6 +214,16 @@ Rules for the Issues list:
   level up" to link to when you're already at the top of the section. Both
   skill templates (`wetwear-brief`, `deep-dive`) generate the article
   version by default now.
+- **Superseded 2026-09-09, Wetwear article pages only:** the middle
+  `nav-links` entry, "Read the Book" (→ `original-bug-book/`), was swapped
+  to "Podcast" (→ `wetwear/podcast.html`) on every `wetwear/YYYY-MM-DD.html`
+  daily brief and every `wetwear/deep-dive-*.html` page — Sandy wanted a
+  direct link to the Wetwear show itself there instead of a link to an
+  unrelated book. AI Tools stays put on the right of it, unchanged. This
+  applies to Wetwear article pages specifically; the hand-written Sandy's
+  Blog issues (`issue-01.html` through `issue-04.html` and any future ones)
+  still keep "Read the Book," since it's still relevant there. Both skill
+  templates (`wetwear-brief`, `deep-dive`) generate this by default now.
 - **No "All Issues" link on a Sandy's Blog page.** Renamed to "Sandy's Blog"
   on 2026-09-02 at Sandy's request — at which point it read identically to
   the masthead beside it and pointed at the same place, so it was dropped
