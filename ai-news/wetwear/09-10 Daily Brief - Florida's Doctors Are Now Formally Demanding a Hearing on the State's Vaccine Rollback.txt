@@ -1,0 +1,27 @@
+Coming up on Wetwear: Biology Corrected.
+
+Florida's Doctors Are Now Formally Demanding a Hearing on the State's Vaccine Rollback
+California's real West Nile death toll is likely higher than the state's own published count. A viral claim falsely says The Simpsons predicted this year's hantavirus cases. And bat genomes reveal a shared genetic trick behind cancer resistance and slow aging.
+I am Sandy B. Patterson, and today is September 10th, twenty twenty-six.
+
+======================================================================================
+
+Here is the BIGGEST STORY from the Florida chapter of the American College of Physicians
+-------------
+
+Florida's fight over dropping four school vaccine requirements intensified this week as the state's own doctors formally demanded a say in how the decision gets made. On September 9th, the Florida chapter of the American College of Physicians, representing 10,000 doctors statewide, sent the Department of Health a written request for a public hearing on the proposed rule, joining the Florida Academy of Family Physicians, which had already requested one, with more medical groups reportedly following suit. The underlying proposal, approved by Surgeon General Joseph Ladapo on August 20th, would drop hepatitis B, chickenpox, Hib, and pneumococcal vaccines from the list required for school and daycare attendance, while also broadening exemptions to cover moral or ethical beliefs rather than just religious ones. Public comment on the rule closes September 14th, just five days away, which is part of why the hearing requests are landing now rather than later. Vaccines required directly by Florida state law, including MMR, polio, diphtheria, and tetanus, are not affected by this specific rule change, since those exist outside the Department of Health's rulemaking authority. A request for a public hearing does not guarantee one happens, but it does force the state to justify the rule change out loud, in front of the doctors and parents it affects, rather than letting it pass through the administrative process on paperwork alone.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+California's West Nile virus count keeps climbing faster than the state's own published numbers show. Yolo County confirmed its first West Nile death of the season this week, after the state's most recent official tally, six deaths across 86 cases as of September 4th, had already been published, meaning California's real death toll is almost certainly higher than the number currently listed. The virus has no vaccine and no specific treatment, and most human cases nationally this year have been the severe neuroinvasive form, encephalitis or meningitis, rather than the mild version most infected people never notice. Other states are seeing their own firsts this month: Chicago confirmed its first human cases and first death of the season on September 1st, and Nebraska and Texas both logged their first cases in the past two weeks. None of this changes the bigger picture from earlier this week, that this year's national pace is running roughly five times the historical average and tracking closer to two thousand three, the worst West Nile season on record, than any year since.
+
+Here is the latest on MISINFORMATION
+--------------
+
+A viral claim spreading this week says The Simpsons predicted the hantavirus cases tied to a cruise ship that departed Argentina earlier this year, specifically pointing to a twenty twelve episode as proof. It's false. That episode, about a fictional illness called Pandoravirus, never mentions hantavirus at all, and the show's executive producer Matt Selman has publicly said so. The real story underneath the myth is genuinely concerning without any invented prophecy attached to it: hantavirus cases did occur among passengers connected to the MV Hondius, a ship that left Ushuaia, Argentina on April 1st, and hantavirus is a real, sometimes fatal illness people can catch from exposure to rodent droppings and urine, not from a cartoon. Claims like this one tend to spread faster than the actual outbreak information does, in part because a fictional prediction is a much more shareable story than an epidemiological explanation, which is exactly the problem.
+
+And finally, some GOOD NEWS
+---------
+
+Researchers who sequenced the genomes of eight Myotis bat species found something that could matter well beyond bats: the same genetic traits that let these animals live for decades despite their tiny size also seem to make them unusually resistant to cancer and skilled at clearing out damaged, aging cells before they cause problems. Bats are already famous among biologists for punching far above their weight on lifespan, some species live 30 to 40 years despite weighing only a few grams, and this research, published in Nature, starts to explain why at the genetic level. The same cellular cleanup processes that protect bats from cancer and slow their aging are processes human cells also have, just apparently tuned differently, which is what makes this more than a curiosity about bats specifically. Nobody is about to turn this into a treatment. But a real, published genetic roadmap for how a mammal manages to resist cancer and age slowly at the same time is exactly the kind of lead cancer and aging researchers look for.
