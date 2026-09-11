@@ -1,0 +1,32 @@
+Coming up on Wetwear: Biology Corrected.
+
+Scientists Found How Aging 'Zombie' Cells Hide From the Immune System
+Vesper bats turn out to carry a never before seen dual antibody system. California's real West Nile death toll is likely already higher than the state's published count. Florida's vaccine rule comment period closes in three days with no hearing yet scheduled. And CDC data shows a real double digit drop in overdose deaths.
+I am Sandy B. Patterson, and today is September 11th, twenty twenty-six.
+
+=====================================================================
+
+Here is the BIGGEST STORY from Cedars-Sinai
+-------------
+
+Scientists may have found one reason the body loses its ability to clear out old, damaged cells as it ages: those cells appear to be actively hiding from the immune system. Researchers led by Cedars-Sinai identified a protein called PD-L2 that lets senescent cells, sometimes nicknamed zombie cells because they stop dividing but refuse to die, evade detection by the immune system that would normally clear them out. Senescent cells accumulate throughout the body with age and are already linked to inflammation, tissue dysfunction, and a range of age-related diseases, but why the immune system fails to clean them up as efficiently over time has been unclear. In the study, published in Cell Metabolism and led by Selim Chaib, blocking PD-L2 prevented senescent cells from building up and reduced the tissue dysfunction that normally follows. That doesn't mean there is a treatment ready for people. This is early, preclinical work, and PD-L2 blockade would need to clear years of safety testing before it could be tried in humans. But it gives aging researchers something concrete to target: not just the existence of zombie cells, but the specific mechanism that lets them hide.
+
+Here is the latest in BIOLOGY
+-------
+
+Vesper bats, a group of more than 500 species and the largest family of bats on Earth, appear to carry an antibody system never before documented in any mammal. Researchers from Tulane, Stanford, and the CDC found these bats have two separate, fully functional sets of genes for building antibody heavy chains, essentially two parallel antibody systems running at once, where every other mammal studied so far has only one. The finding, published in Science Advances, may help explain a question that has puzzled virologists for years: why bats can carry viruses that are lethal to humans, including relatives of Ebola and several coronaviruses, without getting sick themselves. Having a doubled antibody toolkit could give bats a broader, faster immune response to novel viruses than other mammals manage, though the researchers still need to confirm exactly how the two systems work together. Understanding that mechanism matters well beyond bat biology, since it could eventually inform how scientists think about immune resilience in general, including in humans.
+
+Here is today's PUBLIC HEALTH DATA
+------------------
+
+California's official West Nile virus count is about to be out of date, if it isn't already. Yolo County confirmed its first West Nile death of the season this week, along with additional neuroinvasive cases, but the county isn't among the five that made up the state's most recent published tally, six deaths across 86 cases in 21 counties as of September 4th. That means California's real statewide death toll is very likely seven, not six, even though no updated state dashboard reflecting that has been published yet. West Nile still has no vaccine and no antiviral treatment, and the virus keeps spreading through mosquito populations rather than from person to person, which is why individual county numbers can move faster than any statewide summary can keep up with.
+
+Here is the latest in POLITICS
+--------
+
+Florida's vaccine mandate rollback is heading toward its public comment deadline with an unusual amount of unresolved pressure behind it. The Florida chapter of the American College of Physicians formally requested a public hearing on the proposed rule on September 9th, joining the Florida Academy of Family Physicians, but as of this writing, the Department of Health has not scheduled or held one. Public comment on the rule, which would drop hepatitis B, chickenpox, Hib, and pneumococcal vaccines from school and daycare requirements, closes September 14th, just three days from now. Whether the state grants a hearing before that window closes, or simply lets the comment period lapse without one, will say a lot about how seriously Florida intends to engage with the pushback from its own medical community.
+
+And finally, some GOOD NEWS
+---------
+
+The CDC's newest overdose data channel, launched earlier this month, shows a real and sustained decline in a crisis that has defined American public health for a decade. Provisional data through March twenty twenty-six project 67,798 overdose deaths over the trailing 12 months, down twelve point three percent from the same period a year earlier. Emergency room visits for suspected overdoses fell too, down two point six percent over the same window. A double digit percentage drop in overdose deaths nationally is a genuinely large shift, not statistical noise, and it follows several years of gradual improvement after overdose deaths peaked earlier in the decade. Nobody thinks the crisis is over, but a real, sustained decline of this size is worth sitting with for a moment before moving on to the next thing that's going wrong.
