@@ -64,7 +64,42 @@ back to `index.html`, the `reader.js` script tag — untouched.
 Save it as `claude-talk/YYYY-MM-DD-N.html` using the date and number from
 step 1.
 
-## 4. Add the entry to the hub
+## 4. Generate the audio script
+
+Every entry gets a TTS-ready narration `.txt` alongside its HTML, the same
+idea as the Wetwear brief's spoken-script companion and Dead Men on
+Thrones' per-chapter narration files, just simpler, since a Claude Talk
+piece has no fixed section taxonomy to narrate around:
+
+```
+python3 .claude/skills/claudetalk/scripts/entry_to_script.py \
+  claude-talk/YYYY-MM-DD-N.html \
+  "claude-talk/audio/MM-DD - {{TITLE}}.txt"
+```
+
+This lives in the dedicated `claude-talk/audio/` folder (created
+automatically if it doesn't exist yet), named the same way Wetwear and Dead
+Men on Thrones name theirs, `MM-DD - {{TITLE}}.txt`, since the site's
+established convention is that a narration file's name doubles as the
+episode title if it's ever dropped into SODA's `new_chapters` folder.
+
+The script strips the HTML, spells out numbers, years, dollar amounts, and
+percentages for speech the same way the other two converters do, and
+enforces the 400-character sentence limit **for this .txt file only** —
+the web page's own text is untouched and may legitimately run longer. It
+has the same best-effort splitter for an over-limit sentence (semicolons
+first, then a comma before a conjunction nearest the midpoint, then the
+nearest comma); anything it truly can't split gets printed as a warning to
+review by hand, not silently left broken.
+
+Unlike the Wetwear and Dead Men on Thrones converters, this one does not
+hard-fail on an em dash — Claude Talk was never put under the site's
+"no em dashes" rule, so one is left alone rather than treated as an error.
+
+Skim the output before moving on, the same as the other two converters;
+the automation is deterministic, not infallible.
+
+## 5. Add the entry to the hub
 
 Add a new row to the **top** of the entries list in `claude-talk/index.html`,
 between the `<!-- CLAUDE-TALK-ENTRIES-START -->` and
@@ -81,7 +116,7 @@ Never edit, move, or remove any earlier entry's row — same rule as the
 Wetwear brief's index, and for the same reason: an archive that quietly
 loses earlier entries isn't an archive.
 
-## 5. Publish
+## 6. Publish
 
 Same pattern as every other page on this site — push straight to `main`, no
 branch, no PR (`CLAUDE.md`'s standing instruction). Sync first, since other
@@ -90,7 +125,7 @@ sessions sometimes work this repo concurrently:
 ```
 git fetch origin main
 git log --oneline -2 origin/main
-git add claude-talk/YYYY-MM-DD-N.html claude-talk/index.html
+git add claude-talk/YYYY-MM-DD-N.html "claude-talk/audio/MM-DD - {{TITLE}}.txt" claude-talk/index.html
 git commit -m "Add Claude Talk entry: {{TITLE}}"
 git push origin main
 git fetch origin main && git log --oneline -1 origin/main
@@ -103,4 +138,6 @@ Confirm the push actually landed before telling the user it's done.
 Give the user the direct link to the new entry
 (`https://sandybpatterson.github.io/claude-talk/YYYY-MM-DD-N.html`), and
 mention the hub link if it's their first time seeing this run
-(`https://sandybpatterson.github.io/claude-talk/`).
+(`https://sandybpatterson.github.io/claude-talk/`). Mention that the
+narration `.txt` is already saved under its SODA-ready name in
+`claude-talk/audio/` if it's their first time seeing that too.

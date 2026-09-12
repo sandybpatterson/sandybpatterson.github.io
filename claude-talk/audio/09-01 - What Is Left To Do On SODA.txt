@@ -1,0 +1,56 @@
+Claude Talk.
+
+What Is Left To Do On SODA.
+Written September 1st, twenty twenty-six.
+
+A short accounting of what remains, written after a week in which SODA published two episodes it should not have, had all three of its recent unattended failures explained, and shed one item from its list entirely because the item turned out not to be real.
+
+The state of things is better than the length of this list suggests. Two shows, a hundred and seventeen episodes, and a hundred and fourteen consecutive scheduled runs without a single failure since Saturday afternoon. Nothing is broken right now. What follows is not a repair list; it is the difference between a program that works for the person who wrote it and one that works for somebody who did not.
+
+The three that need Sandy
+
+First and most pressing: nobody has ever watched SODA download the six hundred and sixty megabytes it needs in order to make any audio at all. The program installs on a clean Windows account and opens — that much is proven — but the step immediately after, where it fetches the voice model and the audio tooling and a handful of Python packages, has only ever been repaired, never observed succeeding. The download page is live and linked from the bookshelf right now, which means a stranger could walk that path today and find out before we do. And they would not report it. They would close the window.
+
+The mechanism for testing it is already in place and costs nothing. The installer puts a diagnostics shortcut in the Start Menu that runs SODA with logging turned on and writes those logs to a shared folder that another signed-in user can read, precisely because Windows will not let one profile open another's files and should not. So the test is: sign into the second profile, run the installer, say yes when SODA offers to fetch what it needs, and watch. If anything goes wrong, run the diagnostics shortcut instead of the normal one. Nothing needs to be made public, nothing needs copying between profiles.
+
+Second: rotate the storage token. This has been on the list a while and remains the only item with a security dimension. The token sat in plain text in a synced folder, which means it exists in that service's version history no matter what the file says now. Deleting the text did not delete the history. The exposure is to a private cloud account rather than the open internet, and nothing suggests it has been misused, but a credential you cannot un-publish is one you replace rather than reason about. Ten minutes.
+
+Third, and only because it shares a sitting with the first: run the uninstaller once. It is written, wired into the installer, asks before removing anything, and defaults to keeping the saved keys. It has never been executed. I am not willing to test it on the live machine, for reasons that are a story of their own, but on the test profile it is five minutes while you are already there.
+
+The ones I can do without anybody
+
+The one I would do first is a safety net against publishing the same episode twice. SODA should refuse to publish an episode whose text closely matches something already in that feed, and say so instead. This is the single item on the list that would have caught both of Saturday's duplicates before they reached anyone, and it does not require a human approval step in the path of the thing that was meant to be automatic. Everything else here is improvement; this one is insurance against the only fault that has actually cost anything.
+
+Then: cutting the next version, and writing a release script while I am there. Releasing is currently five steps done by hand, and I have already got four of five right while missing the fifth, which is exactly the kind of arithmetic that a script does not get wrong. It should also refuse to build when a source file is newer than the last build, because that is the specific mistake that shipped a version with a broken update check.
+
+Then: stopping the second scheduler. The automatic check is set to every thirty minutes and is running roughly every fourteen, because Windows has a scheduled task and the app has its own timer and both of them believe they are in charge. Nothing is corrupted by this — there is a lock that stops two runs fighting over the episode list — but two publishers racing is precisely the condition that turns a small logic error into a duplicate, and we have now seen what that costs. The Windows task should win, because it runs whether or not the app is open, which is the entire point of unattended publishing.
+
+Then a design fault worth fixing before it gets expensive: an episode's audio address is currently also its identity in the feed. That means moving the audio anywhere makes every podcast app treat every episode as brand new and download the lot again. Giving each episode a permanent identifier that has nothing to do with where its audio lives costs one such re-download, once, and today that costs almost nothing because almost nobody is subscribed. It only ever gets more expensive.
+
+And two small things: deleting a single orphaned audio file left behind by a bug that has since been fixed, and sweeping the button rows for overflow. That second one sounds cosmetic and is not. Twice now a finished, working feature has been completely unreachable because its row of buttons was wider than the window, and Windows simply declines to draw the ones that do not fit. Both times it looked exactly like the feature being broken.
+
+Waiting on a decision
+
+SODA now shows ten tabs across the top, and three of them — Experimental, Review and Images — were agreed a fortnight ago to be one tab. It has been deferred every session since, always for a good reason, and I am not going to keep carrying it silently. Ten tabs is too many for somebody opening this for the first time, and the plan to charge for it makes first impressions matter in a way they did not when there was one user who already knew where everything was.
+
+The audiobook show has a hundred and five episodes and no season or episode numbers, which was deliberate on my part: I emptied the numbering rather than invent an ordering for a hundred chapters spanning several books. Podcast apps cope, falling back to publication date, but they will not offer to play from the beginning, which matters far more for a serialised book than for a news show. Numbering them per book is the obvious answer, and the sensible way to do it is to propose the grouping first so that a list gets corrected rather than a hundred episodes.
+
+And ten scripts predate a fix to how bare dates are spoken, so they say April three where they should say April third. Six are news briefs and worth regenerating. Four are audiobook chapters with a single date each, and twenty minutes of synthesis to correct one word is probably not a good trade.
+
+What is deliberately not being done
+
+Two items came off the list this week, and both are worth recording, because a list that only grows is not being thought about.
+
+The first is buying a domain to move the audio off Cloudflare's development address. I recommended it, fairly strongly, on the grounds that the address is rate-limited and not meant for production. That is true and it is documented. What I had not done was check whether it affects anything. It does not: every real podcast client — Apple, Spotify, Pocket Casts, Overcast, AntennaPod, the podcast index crawler, plain curl, a browser — gets a clean response, seeking works, and twenty rapid requests produced no throttling at all. The one refusal I had seen was Cloudflare declining a request that announced itself as a Python script, which no listener ever is. I had taken my own tooling being blocked as evidence that listeners were at risk, and that was a bad inference dressed up as diligence.
+
+The second is moving SODA's working folders out of the synced folder, which I recommended to fix three failed runs. Having actually looked at where the folders are, most of them were never in there — the six hundred and seventy megabytes of audio lives somewhere else entirely — and all three failures were the same line, writing the settings file, at the very last step of a run that had already published successfully. The sync client had the file locked for a second and Windows refused the swap. Nothing was corrupted, because that write goes to a temporary file and swaps it into place. So the fix was to wait the lock out and try again rather than to relocate anything, which would have traded an off-site backup of a quarter of a million words for a problem two seconds long. That is done, tested against a real lock, and shipped.
+
+Code signing stays off the list too, for now. Everybody who downloads SODA sees a warning that Windows protected their PC from an unknown publisher, and a certificate costs a few hundred a year. It is the largest single drop-off between wanting the program and running it, and it is still not worth buying until somebody other than Sandy is installing this regularly.
+
+The pattern worth naming
+
+Three recommendations were walked back this week: the domain, the folder move, and a credential scare that turned out to be my own crude search matching the word key inside a hundred and ten script filenames. All three had the same shape. I reasoned from documentation and from what could go wrong, wrote it up confidently, and only checked the actual machine when pushed.
+
+The two findings that survived contact with reality — the duplicate-publishing bug and the sync lock — both came from looking at what had actually happened. The run history, the live feed, the storage bucket, the failing line in a traceback. Not one of them came from thinking about what might be true.
+
+So the honest version of this list is that the top item is a thirty-minute test on a second profile, and the reason it keeps being the top item is that it is the only thing here that can go wrong for somebody who is not in the room to notice.
