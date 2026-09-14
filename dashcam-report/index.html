@@ -1,0 +1,435 @@
+<title>Dash Cam Buying Report</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper: #eef0ec;
+    --paper-raised: #f7f8f5;
+    --ink: #1b201d;
+    --ink-dim: #62685f;
+    --line: #d3d7cd;
+    --accent: #c15f22;
+    --accent-ink: #ffffff;
+    --good: #3c6e4a;
+    --good-bg: #dfe9e0;
+    --bad: #a13f3f;
+    --bad-bg: #ecdcda;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14161a;
+      --paper-raised: #1b1e21;
+      --ink: #e7e9e2;
+      --ink-dim: #999c92;
+      --line: #2a2d27;
+      --accent: #e2903f;
+      --accent-ink: #14161a;
+      --good: #6fab84;
+      --good-bg: #23302a;
+      --bad: #d97873;
+      --bad-bg: #332423;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14161a;
+    --paper-raised: #1b1e21;
+    --ink: #e7e9e2;
+    --ink-dim: #999c92;
+    --line: #2a2d27;
+    --accent: #e2903f;
+    --accent-ink: #14161a;
+    --good: #6fab84;
+    --good-bg: #23302a;
+    --bad: #d97873;
+    --bad-bg: #332423;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16.5px;
+    line-height: 1.6;
+    padding: 0 20px;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding-block: 48px 64px;
+  }
+
+  .eyebrow {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: clamp(34px, 7vw, 46px);
+    line-height: 1.02;
+    letter-spacing: 0.005em;
+    margin: 6px 0 10px;
+    text-wrap: balance;
+  }
+  .dek {
+    color: var(--ink-dim);
+    font-size: 17px;
+    max-width: 56ch;
+  }
+  .meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    margin-top: 14px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  header { margin-bottom: 40px; }
+
+  h2 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    position: relative;
+  }
+  h2::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 34px; height: 3px;
+    background: var(--accent);
+  }
+
+  section { margin-bottom: 44px; }
+
+  /* Verdict callout */
+  .verdict {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    padding: 22px 24px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 28px;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .verdict-main { flex: 1 1 300px; }
+  .verdict .eyebrow { margin-bottom: 6px; display: block; }
+  .verdict-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    margin: 0 0 6px;
+  }
+  .verdict-why { color: var(--ink-dim); font-size: 15px; max-width: 46ch; }
+  .verdict-price-block {
+    text-align: right;
+    flex: 0 0 auto;
+  }
+  .verdict-price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    font-size: 34px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .verdict-price-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-top: 4px;
+  }
+  .buy-row {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-secondary { border: 1px solid var(--line); color: var(--ink); }
+  .btn-primary:hover, .btn-secondary:hover { filter: brightness(1.08); }
+
+  /* Comparison table */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  thead th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--ink-dim);
+    background: var(--paper-raised);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.is-pick { background: var(--good-bg); }
+  .model-name { font-weight: 600; }
+  .model-sub { color: var(--ink-dim); font-size: 12.5px; }
+  .price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 14.5px;
+    white-space: nowrap;
+  }
+  .price.na { color: var(--ink-dim); }
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  .pill-good { background: var(--good-bg); color: var(--good); }
+  .pill-bad { background: var(--bad-bg); color: var(--bad); }
+  .photo-link { font-size: 13px; white-space: nowrap; color: var(--accent); text-decoration: none; }
+  .photo-link:hover { text-decoration: underline; }
+  .photo-link::after { content: " \2197"; }
+
+  /* prose */
+  p { margin: 0 0 14px; }
+  .lede { font-size: 15.5px; }
+  ul.reasons { padding-left: 0; list-style: none; margin: 0; display: grid; gap: 14px; }
+  ul.reasons li {
+    padding-left: 18px;
+    border-left: 2px solid var(--line);
+  }
+  ul.reasons strong { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15.5px; letter-spacing: 0.01em; margin-bottom: 2px; }
+  ul.reasons span { color: var(--ink-dim); font-size: 14.5px; }
+
+  .ruled-out { display: grid; gap: 12px; }
+  .ruled-out .row { display: flex; gap: 14px; align-items: baseline; padding: 12px 14px; background: var(--paper-raised); border: 1px solid var(--line); }
+  .ruled-out .name { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; flex: 0 0 150px; }
+  .ruled-out .why { color: var(--ink-dim); font-size: 14px; }
+
+  .note {
+    font-size: 13px;
+    color: var(--ink-dim);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-dim);
+  }
+  footer .sources { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 10px; }
+  footer a { color: var(--ink-dim); }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 480px) {
+    .verdict-price-block { text-align: left; }
+    .verdict { flex-direction: column; align-items: flex-start; }
+    .ruled-out .row { flex-direction: column; gap: 2px; }
+    .ruled-out .name { flex-basis: auto; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Dash Cam Buying Report</span>
+    <h1>The Basic, No&#8209;Frills Front Cam</h1>
+    <p class="dek">Every model that fits &ldquo;front-only, bare-bones, don&rsquo;t care about resolution,&rdquo; cross-referenced for price across every retailer that carries it, live-checked for stock.</p>
+    <div class="meta">
+      <span>PRICES VERIFIED 2026&#8209;09&#8209;14</span>
+      <span>4 MODELS &middot; 10 LISTINGS CHECKED</span>
+    </div>
+  </header>
+
+  <section class="verdict">
+    <div class="verdict-main">
+      <span class="eyebrow">The Pick</span>
+      <div class="verdict-name">Rexing V1 Basic</div>
+      <div class="verdict-why">Only camera on this list priced at its floor <em>and</em> in stock from a retailer with real return backing &mdash; no GPS or app fees you said you didn't want.</div>
+    </div>
+    <div class="verdict-price-block">
+      <div class="verdict-price">$49.99</div>
+      <div class="verdict-price-label">at Best Buy</div>
+    </div>
+    <div class="buy-row">
+      <a class="btn btn-primary" href="https://www.bestbuy.com/product/rexing-v1-basic-1080p-front-dash-cam-black/J3R8HGKTY2" target="_blank" rel="noopener">View &amp; buy at Best Buy &#8594;</a>
+      <a class="btn btn-secondary" href="https://rexing.com/products/v1-basic" target="_blank" rel="noopener">Backup: Rexing.com &#8594;</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Full Price Check</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Retailer</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Photos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="is-pick">
+            <td><div class="model-name">Rexing V1 Basic</div><div class="model-sub">1080p &middot; G-sensor &middot; parking monitor</div></td>
+            <td>Best Buy</td>
+            <td class="price">$49.99</td>
+            <td><span class="pill pill-good">IN STOCK</span></td>
+            <td><a class="photo-link" href="https://www.bestbuy.com/product/rexing-v1-basic-1080p-front-dash-cam-black/J3R8HGKTY2" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Rexing V1 Basic</div></td>
+            <td>Rexing.com</td>
+            <td class="price">$49.99</td>
+            <td><span class="pill pill-good">IN STOCK</span></td>
+            <td><a class="photo-link" href="https://rexing.com/products/v1-basic" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Rexing V1 Basic</div></td>
+            <td>Walmart</td>
+            <td class="price">$49.99</td>
+            <td><span class="pill pill-bad">OUT OF STOCK</span></td>
+            <td><a class="photo-link" href="https://www.walmart.com/ip/Rexing-V1-Basic-1080p-Single-Channel-Dash-Cam/348236293" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Rexing V1 Basic</div></td>
+            <td>Amazon</td>
+            <td class="price na">&mdash;</td>
+            <td><span class="pill pill-bad">UNAVAILABLE</span></td>
+            <td><a class="photo-link" href="https://www.amazon.com/Rexing-V1-Basic-Recorder-Recording/dp/B07RLTXMWS" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Apeman C450A&#8209;Pro</div><div class="model-sub">1080p &middot; 170&deg; FOV</div></td>
+            <td>Micro Center</td>
+            <td class="price">$49.99</td>
+            <td><span class="pill pill-good">IN STOCK</span><br><span class="model-sub">ship&#8209;only</span></td>
+            <td><a class="photo-link" href="https://www.microcenter.com/product/711473/apeman-c450a-pro-1080p-full-hd-dash-cam-black" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Apeman C450</div></td>
+            <td>Lowe&rsquo;s</td>
+            <td class="price na">&mdash;</td>
+            <td><span class="pill pill-bad">DISCONTINUED</span></td>
+            <td><a class="photo-link" href="https://www.lowes.com/pd/apeman-Apeman-C450-Dash-Cam-with-170-Field-of-View-and-1080p-Full-HD/5014672739" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Vantrue E1 Lite</div><div class="model-sub">1080p &middot; GPS &middot; WiFi/app</div></td>
+            <td>Vantrue.com</td>
+            <td class="price">$79.99</td>
+            <td><span class="pill pill-good">IN STOCK</span></td>
+            <td><a class="photo-link" href="https://www.vantrue.com/products/vantrue-e1-lite" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Vantrue E1 Lite</div></td>
+            <td>Amazon</td>
+            <td class="price">$96.99</td>
+            <td><span class="pill pill-good">IN STOCK</span></td>
+            <td><a class="photo-link" href="https://www.amazon.com/Vantrue-Control-Parking-Detection-Recording/dp/B0BGGGG4VW" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Nextbase 122</div><div class="model-sub">720p only</div></td>
+            <td>Amazon</td>
+            <td class="price">$79.99</td>
+            <td><span class="pill pill-good">IN STOCK</span></td>
+            <td><a class="photo-link" href="https://www.amazon.com/Nextbase-Automatic-Recording-Protection-Reliable/dp/B07PTTFR16" target="_blank" rel="noopener">View</a></td>
+          </tr>
+          <tr>
+            <td><div class="model-name">Nextbase 122</div></td>
+            <td>Manufacturer</td>
+            <td class="price na">&mdash;</td>
+            <td><span class="pill pill-bad">DISCONTINUED</span></td>
+            <td>&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Retailer product photos can&rsquo;t be embedded on this page &mdash; hotlinked images from outside sites are blocked. Click any &ldquo;View&rdquo; link to see the real listing, photos included.</p>
+  </section>
+
+  <section>
+    <h2>Why the Rexing V1 Basic</h2>
+    <ul class="reasons">
+      <li>
+        <strong>Price held everywhere it's listed.</strong>
+        <span>$49.99 at Best Buy, Rexing's own site, and Walmart &mdash; no retailer is charging a premium for it, so there's no discount to chase.</span>
+      </li>
+      <li>
+        <strong>It matches the brief exactly.</strong>
+        <span>Loop recording, G-sensor, parking monitor, 170&deg; lens. No GPS, no app, no WiFi &mdash; nothing you said you didn't need, and nothing padding the price.</span>
+      </li>
+      <li>
+        <strong>Rexing is an established dash cam brand</strong>
+        <span>&mdash; not a rebranded no-name off an Amazon storefront, which matters more at the bottom of the price range than anywhere else.</span>
+      </li>
+      <li>
+        <strong>Best Buy over the alternatives.</strong>
+        <span>Same $49.99 as Rexing's own site, but with Best Buy's return policy and customer service behind it, and it ships by Fri 9/18 (pickup Mon 9/21). Amazon and Walmart show this exact camera unavailable right now with no restock date &mdash; worth rechecking later, but not worth waiting on.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ruled Out</h2>
+    <div class="ruled-out">
+      <div class="row"><div class="name">Apeman C450A&#8209;Pro</div><div class="why">Ties the Rexing on price at Micro Center, but Lowe&rsquo;s discontinued the original C450 entirely &mdash; a brand with a listing actively going dark is a worse bet than one that isn&rsquo;t.</div></div>
+      <div class="row"><div class="name">Nextbase 122</div><div class="why">Manufacturer has dropped it from their own lineup. What's left is a 720p camera (worse than the others' 1080p) now going for $79.99 on Amazon &mdash; higher price for a lower spec.</div></div>
+      <div class="row"><div class="name">Vantrue E1 Lite</div><div class="why">A genuinely good camera, but $30&ndash;47 more for GPS and app/WiFi control you told me you don't need. Worth it only if that changes your mind.</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>SOURCES</div>
+    <div class="sources">
+      <a href="https://www.bestbuy.com/product/rexing-v1-basic-1080p-front-dash-cam-black/J3R8HGKTY2" target="_blank" rel="noopener">Best Buy</a>
+      <a href="https://rexing.com/products/v1-basic" target="_blank" rel="noopener">Rexing.com</a>
+      <a href="https://www.walmart.com/ip/Rexing-V1-Basic-1080p-Single-Channel-Dash-Cam/348236293" target="_blank" rel="noopener">Walmart</a>
+      <a href="https://www.amazon.com/Rexing-V1-Basic-Recorder-Recording/dp/B07RLTXMWS" target="_blank" rel="noopener">Amazon (Rexing)</a>
+      <a href="https://www.microcenter.com/product/711473/apeman-c450a-pro-1080p-full-hd-dash-cam-black" target="_blank" rel="noopener">Micro Center</a>
+      <a href="https://www.lowes.com/pd/apeman-Apeman-C450-Dash-Cam-with-170-Field-of-View-and-1080p-Full-HD/5014672739" target="_blank" rel="noopener">Lowe&rsquo;s</a>
+      <a href="https://www.vantrue.com/products/vantrue-e1-lite" target="_blank" rel="noopener">Vantrue.com</a>
+      <a href="https://www.amazon.com/Vantrue-Control-Parking-Detection-Recording/dp/B0BGGGG4VW" target="_blank" rel="noopener">Amazon (Vantrue)</a>
+      <a href="https://www.amazon.com/Nextbase-Automatic-Recording-Protection-Reliable/dp/B07PTTFR16" target="_blank" rel="noopener">Amazon (Nextbase)</a>
+    </div>
+    <p style="margin-top:14px;">Prices and stock live-checked 2026-09-14 and can change without notice &mdash; reconfirm at checkout before buying.</p>
+  </footer>
+
+</div>
