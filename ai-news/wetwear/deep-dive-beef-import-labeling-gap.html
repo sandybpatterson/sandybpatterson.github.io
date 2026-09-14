@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Deep Dive">
+<title>What's Actually in the Beef, and Who Doesn't Have to Say — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .article-body blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 0 0 1.4rem;
+    padding: 0.2rem 0 0.2rem 22px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .article-body blockquote p { margin: 0; }
+  .article-body .attribution {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin: -0.8rem 0 1.4rem;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html">Podcast</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <article class="page">
+
+    <h1 class="headline">What's Actually in the Beef, and Who Doesn't Have to Say</h1>
+    <p class="deck">Six hundred and sixty one million pounds of tariff free foreign beef are entering the American food supply this fall, blended invisibly into ground beef with no label required, while the president who approved it met privately with a Brazilian meatpacking billionaire the day before he announced it.</p>
+    <p class="byline">Sandy B. Patterson &middot; September 14, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">The Blend</p>
+
+      <p class="drop-cap">Pick up a one pound package of ground beef labeled eighty twenty and you are holding a blend, not a cut. Eighty percent lean, twenty percent fat, mixed to hit that ratio because no single trimming from a single animal reliably lands there on its own. American cattle are mostly grain finished, which produces trim on the fattier side, so packers need leaner trim to blend against it and bring the ratio down to what shoppers expect. For decades, a meaningful share of that lean trim has come from grass fed cattle raised abroad, in places where pasture based systems naturally produce leaner meat than a feedlot does. This is not new, and it is not a scandal by itself. It is how ground beef has been made at industrial scale for a long time. What changed this fall is the scale, the source, and the fact that almost nothing on the package will tell you any of it happened.</p>
+
+      <p class="section-label">The Number</p>
+
+      <p>On September 4th and 5th, President Trump signed a package of executive orders addressing beef prices, which had climbed more than 12 percent over the previous year despite two earlier rounds of import expansion. The headline piece paused tariffs and expanded the import quota to allow 300,000 metric tons, roughly 661 million pounds, of tariff free ground beef and lean beef trimmings into the country from Brazil and Argentina over 90 days, capped at 100,000 tons a month, starting September 1st. Trump personally promised the imported beef would sell at close to 25 percent below prevailing market prices. Six hundred and sixty one million pounds is not a rounding error on the country's beef supply. It is a genuinely large, single season addition to what ends up in American ground beef, arriving all at once rather than gradually.</p>
+
+      <p class="section-label">The Label That Isn't There</p>
+
+      <p>Here is the part that should surprise more people than it does. There is currently no mandatory country of origin labeling on beef in the United States, for whole cuts or for trimmings blended into ground beef. The "Product of USA" claim exists, but it is entirely voluntary. A packer who blends imported Brazilian or Argentine trim into a package of ground beef simply does not use that claim, and nothing in federal law requires them to say where the beef actually came from instead. So the honest description of what is happening this fall is this: a historically large volume of imported lean trim is entering the ground beef supply, and a shopper standing at the meat case has no reliable way to know whether the package in front of them contains any of it. That is not a hypothetical gap in the rules. It is the rule, working exactly as currently written.</p>
+
+      <p class="section-label">The 2012 Echo</p>
+
+      <p>This is where the pink slime comparison that got this piece started actually holds up, though not in the way the phrase usually gets used. Lean finely textured beef, the product nicknamed pink slime during the 2012 controversy, is not the product being imported here. But the underlying complaint that drove that controversy, an unlabeled component of ground beef that consumers did not know was there and would have wanted disclosed, is structurally identical to what is happening now, just with a different product and a foreign origin instead of a domestic processor. The 2012 fight was ultimately about the public's right to know what was in their ground beef. This fall's story is the same fight, at a much larger scale, with the disclosure gap now built into federal policy rather than into one company's processing method.</p>
+
+      <p class="section-label">Why Now</p>
+
+      <p>None of this happens without a genuine crisis underneath it. The U.S. cattle herd entered 2026 at 86.2 million head, the smallest national inventory in 75 years. Beef cow inventory specifically, the animals that produce the next generation of calves, sat at 28.5 million head as of July 1st, the lowest level since USDA began that series in 1971. Years of drought across the West and the Plains depleted grassland faster than ranchers could adapt, forcing many to sell breeding cows early just to survive, which is exactly the wrong inventory to be liquidating if the goal is eventual recovery. A beef cow takes roughly two years from breeding decision to a calf reaching slaughter weight, and most agricultural economists put meaningful herd rebuilding, and real price relief that comes from more supply rather than a policy patch, somewhere in 2028 or 2029. A 90 day tariff pause is being used to answer a multi year structural problem, and that mismatch in timescale is worth keeping in view for everything that follows.</p>
+
+      <p class="section-label">The Meeting Before the Announcement</p>
+
+      <p>The Wall Street Journal reported that the day before Trump announced the tariff pause, he met privately in the Oval Office with Joesley Batista, co-owner of JBS, the Brazilian meatpacking conglomerate and the single largest beneficiary of any policy that makes it cheaper to move Brazilian beef into the United States. According to that reporting, the two discussed lowering the roughly 26 percent import tax that had applied to Brazilian beef. The next day, Trump's public announcement proposed selling the newly tariff free beef at close to a 25 percent discount to market price, a number close enough to the tariff figure reportedly discussed the day before to be worth noting on its own. Layered on top of the meeting: JBS is currently one of four major U.S. meatpackers under Justice Department investigation for possible anticompetitive conduct. Pilgrim's Pride, the poultry company JBS controls, contributed five million dollars to the Trump-Vance inaugural committee in January 2025, the largest single reported inaugural donation from any one source. And Joesley Batista and his brother Wesley were fined by the Justice Department in 2020 for violating the Foreign Corrupt Practices Act, over a bribery scheme tied to expanding their U.S. operations. None of these facts alone proves the policy was bought. People meet with presidents about policies that affect their businesses all the time. But the sequence, a private meeting about a specific tariff figure followed within roughly a day by a public policy announcement landing near that same figure, involving a company already under federal antitrust scrutiny with a documented history of using money to move U.S. policy, is the kind of pattern that deserves to be stated plainly rather than buried.</p>
+
+      <p class="section-label">What Ranchers Are Actually Saying</p>
+
+      <p>What is striking about the reaction is how little daylight there is between cattle industry groups that do not normally agree with each other. The National Cattlemen's Beef Association, generally the more establishment leaning of the major groups, condemned the move outright.</p>
+
+      <blockquote><p>No cow-calf producer in America is asking for increased imports.</p></blockquote>
+      <p class="attribution">National Cattlemen's Beef Association</p>
+
+      <p>The group went further, arguing that undercutting American farmers and ranchers with foreign product does nothing to build market confidence or encourage rebuilding the herd, and noted that cattle markets turned sharply lower the morning the announcement landed, to the direct financial detriment of the same producers the administration says it is trying to help. R-CALF USA, which represents independent ranchers and has historically been the more populist, anti consolidation voice in the industry, was just as blunt. Its chief executive, Bill Bullard, said the move doubles down on a failed strategy, and the group used the moment to press its long standing demand for mandatory origin labeling on the beef now entering the country. The most quotable reaction came from Justin Tupper, president of the U.S. Cattlemen's Association, who framed the decision in explicitly nationalist terms that echo exactly why this reads to producers as un-American rather than merely bad policy.</p>
+
+      <blockquote><p>You don't put America first by putting U.S. cattle producers last. This move will weaken our markets and gamble with food safety in the process.</p></blockquote>
+      <p class="attribution">Justin Tupper, President, U.S. Cattlemen's Association</p>
+
+      <p>Several Republican senators from cattle states broke publicly with the administration as well, which matters as its own data point, since intra party criticism this direct on a signature economic policy usually signals real constituent anger rather than performance. Agricultural economists interviewed across several outlets made a related point worth taking seriously: the promised consumer savings are unlikely to fully reach shoppers even if the imports work exactly as designed. Large packers and retailers sit between the imported beef and the register, and margin capture at that level is the more likely outcome, based on how similar import expansions have played out before. If that holds, the policy would manage to depress prices for domestic ranchers without meaningfully lowering prices for consumers, which would be close to the worst plausible outcome for everyone except the packers positioned to capture the spread.</p>
+
+      <p class="section-label">The Safety Question, Carefully Stated</p>
+
+      <p>Running in parallel, and relevant to whether the imported beef is what Trump described when he called it very clean and very good, the European Union suspended imports of Brazilian beef, poultry, and other animal products starting September 3rd, two days before the American tariff pause took effect. The EU's stated reason is specific and worth getting right rather than exaggerating: Brazil could not provide sufficient guarantees under EU antimicrobial use rules, specifically that producers do not use antibiotics as growth promoters or rely on antibiotics reserved for human medicine. The regulation does not cite test results showing unsafe drug residue in Brazilian meat. This is a documentation and verification failure, not a confirmed contamination finding, and that distinction matters. Separately, recent research on antimicrobial resistance has flagged imported retail beef and chicken generally as a documented pathway for introducing antibiotic resistant E. coli into new regions, since different countries use antibiotics in livestock differently and importing meat can mean importing whatever resistant bacteria traveled with it. And in March 2026, Chinese customs rejected a 22 ton container of Argentine beef after lab tests found chloramphenicol, an antibiotic banned from food producing animals across most of the world due to documented human health risks. One rejected container from months ago does not tell you anything about the safety of this specific 661 million pound program. It does establish that residue testing on South American beef exports has caught real problems before, which is useful context for calibrating how worried to be rather than a reason for alarm on its own.</p>
+
+      <p class="section-label">What the Recall Rumor Actually Shows</p>
+
+      <p>One claim already circulating deserves a direct correction, both because it is false and because it is exactly the kind of thing likely to keep circulating as a talking point. A 29,628 pound recall of Argentine beef, distributed in Texas and Florida by a Miami based importer, happened on August 7th, roughly three weeks before the tariff free program even began on September 1st. Online commentary has linked the two, implying that beef imported under the new program has already turned up unsafe. Fact checkers who traced the timeline found no connection. The recall predates the program by weeks and was issued over a routine reinspection failure, not a contamination finding. The correct timeline does real work here, not because the underlying safety questions above are not worth asking, but because conflating an unrelated recall with this specific program muddies a genuine debate with a fabricated one.</p>
+
+      <p class="section-label">A Label That Already Died Once</p>
+
+      <p>Facing this backlash, the administration signed a second order the same week directing Agriculture Secretary Brooke Rollins to spend 90 days reviewing what legal authority exists to bring back mandatory country of origin labeling. Anyone evaluating how seriously to take that promise should know its history, because this is not the first attempt. Mandatory origin labeling for beef existed once before. Canada and Mexico challenged it at the World Trade Organization starting in 2009. The WTO ruled against the U.S. program in 2011, the U.S. lost its appeal in 2012, a revised version was struck down again in 2014, and the WTO's final appellate ruling in May 2015 found the label violated U.S. trade obligations by discriminating against foreign livestock. Canada and Mexico won authorization for retaliatory tariffs, with Canada explicitly threatening a 100 percent tariff on U.S. beef specifically. The WTO authorized just over one billion dollars in actual retaliatory tariffs in December 2015. Congress repealed mandatory origin labeling eleven days later, primarily to make that authorized retaliation go away before it started. Nothing about the WTO's underlying reasoning, or Canada and Mexico's underlying incentive to challenge a new version again, has changed since 2015. A new mandatory law would face the same legal vulnerability unless designed very differently, and the executive order's own language, directing a review of existing authorities rather than committing to new legislation, reads like language written by people who already know how this story tends to end.</p>
+
+      <p class="section-label">What Happens Next</p>
+
+      <p>A few things worth watching, offered as informed speculation rather than settled fact. The 90 day tariff pause runs out in early December, close enough to the holidays that reimposing tariffs into a beef market still this tight seems like the harder political choice, not the easier one, which suggests an extension is more likely than a clean expiration. The MCOOL review will probably produce something, since total silence after this much rancher anger would be its own political liability, but the most likely landing spot is a narrower, more legally defensible version than the 2015 law, or a voluntary program with financial incentives rather than a true mandate that risks the same WTO fate. The JBS relationship is the thread with the most room to grow. Congressional Democrats, and possibly some of the Republican senators already on record criticizing the tariff pause, have an obvious incentive to request documents about the Batista meeting. If the Justice Department's existing antitrust investigation into JBS turns up anything that intersects with this decision, even tangentially, this becomes a story that moves well beyond agricultural trade press. And if Brazil's EU suspension expands, or if any documented safety incident ever does tie back to this specific program rather than to an unrelated recall from weeks earlier, the politics could flip fast, from an administration accused of favoring a foreign billionaire over American ranchers to one accused of importing unsafe meat. Either framing is damaging. Right now the safety concerns are real but circumstantial. A single bad test result could change that, and if it does, this stops being a trade and labeling story and becomes a food safety story instead.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.whitehouse.gov/fact-sheets/2026/09/fact-sheet-president-donald-j-trump-promotes-fair-competition-in-livestock-markets-and-expands-market-access-for-american-meat-producers/">The White House &mdash; Fact Sheet: President Trump Promotes Fair Competition in Livestock Markets and Expands Market Access for American Meat Producers</a></li>
+        <li><a href="https://thehill.com/homenews/administration/6072163-trump-tariffs-beef-imports-brazil-argentina/">The Hill &mdash; Trump signs orders on beef imports and labeling with eye on Argentina and Brazil</a></li>
+        <li><a href="https://www.forbes.com/sites/maryroeloffs/2026/09/05/trump-confirms-tariff-free-beef-is-coming-from-brazil-and-argentina-amid-quality-controversies/">Forbes &mdash; Trump Confirms Tariff-Free Beef Is Coming From Brazil And Argentina Amid Quality Controversies</a></li>
+        <li><a href="https://www.rfdtv.com/lean-beef-imports-help-fill-ground-beef-supply-gap">RFD-TV &mdash; Lean Beef Imports Help Fill Ground-Beef Supply Gap</a></li>
+        <li><a href="https://www.npr.org/2026/05/29/nx-s1-5719511/beef-cattle-herd-food-prices">NPR &mdash; Why the U.S. cattle herd is at a 75-year low, and what it means for beef prices</a></li>
+        <li><a href="https://www.drovers.com/news/ag-policy/jbs-ties-trumps-beef-import-decision-draw-sharper-scrutiny-after-oval-office-meeti">Drovers &mdash; JBS Ties to Trump's Beef Import Decision Draw Sharper Scrutiny After Oval Office Meeting Revealed</a></li>
+        <li><a href="https://www.beefmagazine.com/market-news/cattle-group-reacts-to-trump-s-beef-import-post">Beef Magazine &mdash; Cattle groups react to Trump's beef import post</a></li>
+        <li><a href="https://thehill.com/business/agriculture/6052290-ranchers-protest-foreign-imported-beef/">The Hill &mdash; U.S. Cattlemen's Association president criticizes Trump's foreign beef import plan</a></li>
+        <li><a href="https://www.feedbusinessmea.com/2026/09/03/eu-suspends-brazilian-animal-product-imports-over-antibiotic-concerns/">Feed Business Middle East & Africa &mdash; EU suspends Brazilian animal product imports over antibiotic concerns</a></li>
+        <li><a href="https://theconversation.com/brazilian-meat-antibiotics-and-superbugs-what-you-need-to-know-290958">The Conversation &mdash; Brazilian meat, antibiotics and superbugs: what you need to know</a></li>
+        <li><a href="https://www.snopes.com/fact-check/trump-argentina-beef-recall/">Snopes &mdash; USDA recalled 30K pounds of beef from Argentina. Trump's import plan wasn't to blame</a></li>
+        <li><a href="https://www.ckom.com/2026/09/08/trump-signs-order-directing-usda-to-look-at-mandatory-country-of-origin-labeling-options/">650 CKOM &mdash; Trump signs order directing USDA to look at mandatory country of origin labeling options</a></li>
+        <li><a href="https://nationalaglawcenter.org/congress-repeals-cool-wto-rulings/">National Agricultural Law Center &mdash; Congress repeals COOL after WTO rulings</a></li>
+        <li><a href="https://www.foodsafetynews.com/2015/12/wto-authorizes-1-billion-in-retaliatory-tariffs-against-cool/">Food Safety News &mdash; WTO Authorizes $1 Billion in Retaliatory Tariffs Against COOL</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </article>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
