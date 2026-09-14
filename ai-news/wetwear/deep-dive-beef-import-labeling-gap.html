@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="book-title" content="Wetwear Deep Dive">
 <title>Who Actually Asked for This Beef — Wetwear Deep Dive</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -183,6 +182,32 @@
     color: #333;
     text-transform: uppercase;
   }
+
+  /* Real narration, in the page's own colours. preload="none" so a 7.8 MB
+     file is not pulled down by anybody who only came to read. */
+  .listen {
+    border: 1px solid #c9a84c33;
+    background: #100e09;
+    padding: 14px 16px 12px;
+    margin: 26px 0 4px;
+  }
+  .listen-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 9px;
+  }
+  .listen audio { width: 100%; display: block; }
+  .listen-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    color: #777;
+    margin-top: 10px;
+  }
+  .listen-sub a { color: #c9a84c; }
 </style>
 </head>
 <body>
@@ -206,6 +231,18 @@
     <h1 class="headline">Who Actually Asked for This Beef</h1>
     <p class="deck">Six hundred and sixty one million pounds of tariff free foreign beef are entering the American food supply this fall, blended invisibly into ground beef with no label required, while the president who approved it met privately with a Brazilian meatpacking billionaire the day before he announced it.</p>
     <p class="byline">Sandy B. Patterson &middot; September 14, 2026</p>
+
+    <!-- The real narration from the podcast feed, not the browser's speech
+         synthesiser. This piece was recorded; reading it aloud with a robot
+         voice when a narrated version exists is the worse of the two. -->
+    <div class="listen">
+      <p class="listen-label">Listen &middot; 16 min 17 sec</p>
+      <audio controls preload="none"
+             src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/09-14-Deep-Dive---Who-Actually-Asked-for-This-Beef.mp3">
+        <a href="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/09-14-Deep-Dive---Who-Actually-Asked-for-This-Beef.mp3">Download the audio</a>
+      </audio>
+      <p class="listen-sub">Episode 26 of <a href="podcast.html">Wetwear: Biology Corrected</a> &mdash; subscribe and it arrives on its own.</p>
+    </div>
 
     <hr class="divider">
 
@@ -293,7 +330,6 @@
 
   <footer>&copy; Sandy B. Patterson</footer>
 
-  <script src="../../reader.js"></script>
 
 </body>
 </html>
