@@ -199,7 +199,38 @@
     color: #c9a84c;
     margin-bottom: 9px;
   }
-  .listen audio { width: 100%; display: block; }
+  /* color-scheme is what actually darkens the browser's own audio controls.
+     Not a filter or a hand-built player: the native control keeps the
+     keyboard handling, the lock-screen integration and the seek behaviour
+     that a hand-rolled one would have to reimplement and would get wrong. */
+  .listen audio {
+    width: 100%;
+    display: block;
+    color-scheme: dark;
+  }
+
+  .listen-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .listen-btn {
+    appearance: none;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    font-family: 'Courier New', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .listen-btn:hover { background: #c9a84c; color: #0a0a0a; text-decoration: none; }
+  .listen-btn:focus-visible { outline: 2px solid #f0f0f0; outline-offset: 2px; }
   .listen-sub {
     font-family: 'Courier New', monospace;
     font-size: 0.66rem;
@@ -241,7 +272,12 @@
              src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/09-14-Deep-Dive---Who-Actually-Asked-for-This-Beef.mp3">
         <a href="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/09-14-Deep-Dive---Who-Actually-Asked-for-This-Beef.mp3">Download the audio</a>
       </audio>
-      <p class="listen-sub">Episode 26 of <a href="podcast.html">Wetwear: Biology Corrected</a> &mdash; subscribe and it arrives on its own.</p>
+      <div class="listen-actions">
+        <a class="listen-btn" href="podcast://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/wetware-biology-corrected.xml">Apple Podcasts</a>
+        <a class="listen-btn" href="pktc://subscribe/pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/wetware-biology-corrected.xml">Pocket Casts</a>
+        <button type="button" class="listen-btn" id="feed-copy-btn" onclick="copyFeedLink()">Copy RSS link</button>
+      </div>
+      <p class="listen-sub" id="listen-sub">Episode 26 of <a href="podcast.html">Wetwear: Biology Corrected</a>. Every brief and deep dive is narrated and goes out on this feed, so subscribing once means new pieces arrive on their own.</p>
     </div>
 
     <hr class="divider">
@@ -330,6 +366,24 @@
 
   <footer>&copy; Sandy B. Patterson</footer>
 
+
+  <script>
+    // Same feed and the same copy-then-confirm behaviour as the podcast page,
+    // so the one place a reader is most likely to want the show is the place
+    // it is offered, rather than a link away.
+    function copyFeedLink() {
+      var url = 'https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/wetware-biology-corrected.xml';
+      var btn = document.getElementById('feed-copy-btn');
+      var sub = document.getElementById('listen-sub');
+      navigator.clipboard.writeText(url).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied - paste it in your podcast app';
+        setTimeout(function () { btn.textContent = original; }, 2600);
+      }, function () {
+        if (sub) sub.textContent = url;
+      });
+    }
+  </script>
 
 </body>
 </html>
