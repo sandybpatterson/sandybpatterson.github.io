@@ -194,6 +194,26 @@
     text-align: center;
   }
   .listen-sub a { color: #c9a84c; }
+
+  /* Same lead figure as the blog issues, so an article looks like an
+     article wherever it lives. */
+  .lead-figure { margin: 18px 0 0; }
+  .lead-figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  }
+  .lead-figure figcaption {
+    font-family: 'Courier New', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+  }
 </style>
 </head>
 <body>
@@ -221,6 +241,12 @@
     <div id="sbp-audio-player" data-audio-src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/09-14-Deep-Dive---Who-Actually-Asked-for-This-Beef.mp3"></div>
 
     <p class="listen-sub">Episode 26 of <a href="podcast.html">Wetwear: Biology Corrected</a> &mdash; <a href="podcast.html">subscribe to get new articles automatically</a>.</p>
+
+    <figure class="lead-figure">
+      <img src="/images/beef-label.jpeg"
+           alt="A shopper's hands hold a shrink-wrapped foam tray of ground beef in a supermarket, tilting it to read the small print on the back label, with rows of identical packages filling the refrigerated case behind." />
+      <figcaption>The label will tell you the fat ratio, not the country.</figcaption>
+    </figure>
 
     <hr class="divider">
 
