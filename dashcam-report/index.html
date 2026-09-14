@@ -15,6 +15,9 @@
     --good-bg: #dfe9e0;
     --bad: #a13f3f;
     --bad-bg: #ecdcda;
+    --chart-muted: #b7bbad;
+    --chart-tooltip-bg: #1b201d;
+    --chart-tooltip-ink: #f7f8f5;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -29,6 +32,9 @@
       --good-bg: #23302a;
       --bad: #d97873;
       --bad-bg: #332423;
+      --chart-muted: #4a4d44;
+      --chart-tooltip-bg: #e7e9e2;
+      --chart-tooltip-ink: #14161a;
     }
   }
   :root[data-theme="dark"] {
@@ -43,6 +49,9 @@
     --good-bg: #23302a;
     --bad: #d97873;
     --bad-bg: #332423;
+    --chart-muted: #4a4d44;
+    --chart-tooltip-bg: #e7e9e2;
+    --chart-tooltip-ink: #14161a;
   }
 
   * { box-sizing: border-box; }
@@ -247,6 +256,86 @@
     padding-top: 14px;
   }
 
+  /* Price comparison chart */
+  .chart { display: flex; flex-direction: column; gap: 12px; }
+  .chart-axis-row, .chart-row { display: flex; align-items: center; gap: 16px; }
+  .chart-axis-row { padding-bottom: 2px; }
+  .chart-label-col { width: 172px; flex-shrink: 0; }
+  .chart-axis-ticks {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+  }
+  .chart-row {
+    position: relative;
+    border-radius: 3px;
+    padding: 3px 4px;
+    margin: -3px -4px;
+  }
+  .chart-row:hover, .chart-row:focus-within { background: var(--paper-raised); }
+  .chart-row:focus-within { outline: 1px solid var(--line); }
+  .chart-label { width: 172px; flex-shrink: 0; }
+  .chart-track-wrap { flex: 1; display: flex; align-items: center; gap: 10px; }
+  .chart-track {
+    flex: 1;
+    height: 22px;
+    position: relative;
+    border-radius: 2px;
+    background-image: repeating-linear-gradient(
+      to right, var(--line) 0 1px, transparent 1px 20%
+    );
+  }
+  .chart-bar {
+    position: absolute;
+    left: 0; top: 3px; bottom: 3px;
+    background: var(--chart-muted);
+    border-radius: 0 4px 4px 0;
+  }
+  .chart-row.is-pick .chart-bar { background: var(--accent); }
+  .chart-value {
+    flex-shrink: 0;
+    width: 62px;
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 13.5px;
+  }
+  .pick-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-left: 6px;
+  }
+  .chart-tooltip {
+    position: absolute;
+    left: 172px; top: -6px;
+    transform: translateY(-100%);
+    background: var(--chart-tooltip-bg);
+    color: var(--chart-tooltip-ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    padding: 6px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+    z-index: 2;
+  }
+  .chart-row:hover .chart-tooltip, .chart-row:focus-within .chart-tooltip { opacity: 1; }
+  @media (max-width: 560px) {
+    .chart-axis-row, .chart-row { flex-direction: column; align-items: stretch; gap: 4px; }
+    .chart-label-col { display: none; }
+    .chart-label, .chart-track-wrap { width: 100%; }
+    .chart-tooltip { position: static; transform: none; opacity: 1; margin-top: 2px; white-space: normal; display: inline-block; }
+  }
+
   footer {
     margin-top: 56px;
     padding-top: 20px;
@@ -292,6 +381,82 @@
     <div class="buy-row">
       <a class="btn btn-primary" href="https://www.bestbuy.com/product/rexing-v1-basic-1080p-front-dash-cam-black/J3R8HGKTY2" target="_blank" rel="noopener">View &amp; buy at Best Buy &#8594;</a>
       <a class="btn btn-secondary" href="https://rexing.com/products/v1-basic" target="_blank" rel="noopener">Backup: Rexing.com &#8594;</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Price at a Glance</h2>
+    <p class="lede">All seven models from both tiers, lined up by their best confirmed price. The amber bar is the pick.</p>
+    <div class="chart" role="img" aria-label="Bar chart comparing dash cam prices from $49.99 to $119.99. Apeman C450A-Pro and Rexing V1 Basic tie for cheapest at $49.99; the Rexing is highlighted as the recommended pick. Nextbase 122 and Vantrue E1 Lite tie at $79.99. 70mai A810 Lite is $89.99. ROVE R2-4K Dual is $109.98. Viofo A119 Mini 2 is the most expensive at $119.99. Full specs are in the tables below.">
+      <div class="chart-axis-row">
+        <div class="chart-label-col"></div>
+        <div class="chart-axis-ticks">
+          <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span><span>$125</span>
+        </div>
+      </div>
+
+      <div class="chart-row" tabindex="0" aria-label="Apeman C450A-Pro, $49.99, Micro Center, ship-only">
+        <div class="chart-label"><div class="model-name">Apeman C450A&#8209;Pro</div><div class="model-sub">1080p &middot; front only</div></div>
+        <div class="chart-track-wrap">
+          <div class="chart-track"><div class="chart-bar" style="width:40.0%"></div></div>
+          <span class="chart-value">$49.99</span>
+        </div>
+        <div class="chart-tooltip">Micro Center &middot; ship&#8209;only</div>
+      </div>
+
+      <div class="chart-row is-pick" tabindex="0" aria-label="Rexing V1 Basic, $49.99, Best Buy, in stock, the recommended pick">
+        <div class="chart-label"><div class="model-name">Rexing V1 Basic<span class="pick-tag">Pick</span></div><div class="model-sub">1080p &middot; front only</div></div>
+        <div class="chart-track-wrap">
+          <div class="chart-track"><div class="chart-bar" style="width:40.0%"></div></div>
+          <span class="chart-value">$49.99</span>
+        </div>
+        <div class="chart-tooltip">Best Buy &middot; in stock, ships 9/18</div>
+      </div>
+
+      <div class="chart-row" tabindex="0" aria-label="Nextbase 122, $79.99, Amazon, 720p resolution">
+        <div class="chart-label"><div class="model-name">Nextbase 122</div><div class="model-sub">720p &middot; front only</div></div>
+        <div class="chart-track-wrap">
+          <div class="chart-track"><div class="chart-bar" style="width:64.0%"></div></div>
+          <span class="chart-value">$79.99</span>
+        </div>
+        <div class="chart-tooltip">Amazon &middot; lower res than the rest</div>
+      </div>
+
+      <div class="chart-row" tabindex="0" aria-label="Vantrue E1 Lite, $79.99, Vantrue.com, adds GPS and WiFi">
+        <div class="chart-label"><div class="model-name">Vantrue E1 Lite</div><div class="model-sub">1080p &middot; GPS &middot; WiFi</div></div>
+        <div class="chart-track-wrap">
+          <div class="chart-track"><div class="chart-bar" style="width:64.0%"></div></div>
+          <span class="chart-value">$79.99</span>
+        </div>
+        <div class="chart-tooltip">Vantrue.com &middot; GPS + WiFi/app</div>
+      </div>
+
+      <div class="chart-row" tabindex="0" aria-label="70mai A810 Lite, $89.99, cheapest dual-channel option">
+        <div class="chart-label"><div class="model-name">70mai A810 Lite</div><div class="model-sub">4K front + 1080p rear</div></div>
+        <div class="chart-track-wrap">
+          <div class="chart-track"><div class="chart-bar" style="width:72.0%"></div></div>
+          <span class="chart-value">$89.99</span>
+        </div>
+        <div class="chart-tooltip">70mai.store &middot; cheapest dual&#8209;channel</div>
+      </div>
+
+      <div class="chart-row" tabindex="0" aria-label="ROVE R2-4K Dual, $109.98, includes a 128GB card">
+        <div class="chart-label"><div class="model-name">ROVE R2&#8209;4K Dual</div><div class="model-sub">4K front + 1080p rear</div></div>
+        <div class="chart-track-wrap">
+          <div class="chart-track"><div class="chart-bar" style="width:88.0%"></div></div>
+          <span class="chart-value">$109.98</span>
+        </div>
+        <div class="chart-tooltip">Amazon &middot; includes 128GB card</div>
+      </div>
+
+      <div class="chart-row" tabindex="0" aria-label="Viofo A119 Mini 2, $119.99, sharpest single camera in the lineup">
+        <div class="chart-label"><div class="model-name">Viofo A119 Mini 2</div><div class="model-sub">2K &middot; front only</div></div>
+        <div class="chart-track-wrap">
+          <div class="chart-track"><div class="chart-bar" style="width:96.0%"></div></div>
+          <span class="chart-value">$119.99</span>
+        </div>
+        <div class="chart-tooltip">Viofo.com &middot; sharpest single cam</div>
+      </div>
     </div>
   </section>
 
