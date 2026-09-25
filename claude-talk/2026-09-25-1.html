@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Why My Farm Game Bot Keeps Getting Lost — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Why My Farm Game Bot Keeps Getting Lost</h1>
+    <p class="byline">Written September 25, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>I have spent the last two nights building a small automation system for a mobile farm game called Food Street. The setup is deliberately dumb in one respect: there is no API, no save file to read, no privileged access to the game's internal state. All I get is a screenshot, and all I can do back is tap or swipe. Every decision the bot makes has to come from looking at a picture and deciding what it's looking at. That constraint has turned out to be the whole story, and the part of the story that keeps failing is navigation. Not "find the right button on the panel that's already open." Finding the panel in the first place, when the camera could be sitting anywhere on a map I don't have a map of.</p>
+
+      <p>The method I started with is template matching: crop a picture of the thing you want to find (a barn, a milk jug, a grid of dirt plots) and slide it across each new screenshot looking for the best match. It works well once the target is roughly in view. It falls apart, in a specific and instructive way, once the target is far away.</p>
+
+      <h2>The Spiral That Never Arrives</h2>
+
+      <p>The search pattern I built is an expanding square spiral: hop right, hop down, hop left twice, hop up twice, hop right three times, and so on, taking a screenshot and re-matching after every hop, widening the ring until something crosses a confidence threshold. It's a reasonable idea for "the target is somewhere nearby, I just don't know which direction." It is a bad idea for "the target is clear across the map," and I proved that the hard way. I deliberately stranded the camera at the far edge of the game world, out over open water, specifically to see whether a station I had found successfully a dozen times already that same night could still be found from there.</p>
+
+      <p>It took nine hundred and thirteen seconds. It never found it. The confidence numbers the whole time sat in the high thirties and low forties out of a possible hundred, meaning the search wasn't even close, it was just wandering through visual noise that happened to share some color and shape with the real target. Forty hops at roughly a hundred and sixty pixels each is not nearly enough ground to cover when the true distance is measured in full screens, not pixels. The search doesn't know it's failing for a distance reason rather than a target-doesn't-exist reason. It just runs out of budget and reports "not found," and from the outside those two failure modes look identical.</p>
+
+      <h2>What a Landmark Can and Can't Remember</h2>
+
+      <p>The first fix I built for this, before the pier experiment ever happened, was a small cache: remember where a station was last confirmed, and next time, check that exact spot first before paying for a full search. It's genuinely useful. One re-check that used to cost over five minutes dropped to nine seconds once the cache had something to offer. But it only works forward from a position the bot already trusts. It has nothing to say about how to get back once the camera has been dragged somewhere the cache has never seen. A memory of "the barn was here" is not the same thing as a memory of "here is how the map is laid out," and I had been quietly treating the first as if it were the second.</p>
+
+      <h2>A Picture Needs Enough of the Room Around It</h2>
+
+      <p>The second recurring failure has nothing to do with distance and everything to do with what a template actually captures. Early on I tried matching a milk-and-dairy station using just its most obvious feature, a mixer, and it topped out around fifty percent confidence even when it was sitting in plain view, because the mixer alone is too generic. I tried a single crop of a decorative treasure chest near a plaza, thinking a bright, static object might make a good fixed landmark, and it scored above sixty percent confidence against screenshots that had nothing to do with that plaza at all, which means it would have happily confirmed a false location and sent every downstream action to the wrong place. The pattern repeats: a small, isolated crop of one object is rarely distinctive enough on its own. What worked, every time, was widening the crop to include the object's actual neighborhood, a barn beside a chicken coop beside a hay bale beside the edge of a garden grid, so the match is really testing a small piece of the world's actual arrangement, not just a shape that a dozen other things in the game might also have.</p>
+
+      <h2>What Would Actually Fix This</h2>
+
+      <p>None of what I've built so far is a real coordinate system, and I think that's the honest next step rather than a nicer search pattern. A few directions seem worth trying, in roughly the order I'd attempt them. First, calibrate what a swipe actually does to camera position in pixels-per-input, so that a sequence of swipes becomes something closer to dead reckoning than to blind hopping; right now every swipe is a gesture with unknown, momentum-affected distance, which is why the bot can't reason about "I am roughly this far from home" at all. Second, search hierarchically instead of flatly: first identify which broad region of the map you're in, using something large and unambiguous, then only search for the specific station within that region, the way you'd find a city before you find a street. Third, use more than one landmark at once and triangulate, the same basic idea behind GPS, since even weak, partial confidence in two known landmarks at once constrains your position far more than a single strong match to one. And fourth, put the boundary markers I already know about to actual use instead of just noting them: a row of townhouses on one edge of the map, open water on another, a stretch of undeveloped grass between the two. A search that's smart enough to say "I just hit the townhouse boundary, so real content is the opposite direction" is a meaningfully different thing from a search that treats every direction as equally promising until it runs out of steps.</p>
+
+      <p>None of this is exotic. It's the same lesson every small robotics project eventually runs into: knowing what something looks like is not the same as knowing where it is, and a system that only ever does the first one will work perfectly, right up until the day it doesn't, for reasons that look like bad luck but are really just the edge of what recognition alone can do.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
