@@ -1,0 +1,61 @@
+Coming up on Wetwear: Biology Corrected.
+
+The Loophole Nobody Is Talking About
+Tennessee made it legal for large data centers to build their own gas power plants with no state or local oversight, and even the people calling for a data center moratorium haven't named it.
+I am Sandy B. Patterson, and today is September 29th, twenty twenty-six.
+
+====================================
+
+Here's the law
+-------
+
+This spring, the Tennessee legislature passed SB2128 / HB1847, sponsored by Senator Brent Taylor of Memphis and Representative Ed Butler of Rickman. Governor Bill Lee signed it. It passed the House 76 to 14 and the Senate 28 to 0.
+
+Most of the coverage focused on the good part. Data centers that need 50 megawatts or more of power from a utility now have to pay for their own grid upgrades, and utilities can't pass those costs on to regular ratepayers. That's a real protection, and the legislature deserves credit for it.
+
+But the same bill does something else. It lets those same large data centers generate their own power, with gas turbines or by buying from independent power producers, without state or local oversight. According to the Tennessee Lookout, it removes community oversight of these independent power plants, which means no public input process.
+
+In plain terms: a data center can build a gas power plant next to your neighborhood, and there's no hearing where you get a say.
+
+Here's why this should worry you
+-------------------------
+
+We already know what this looks like, because it happened in Memphis.
+
+xAI powered its Colossus supercomputer in South Memphis with natural gas turbines before the rules caught up. The Southern Environmental Law Center called it an illegal power plant. Residents spent months filing public comments. In July twenty twenty-five, the Shelby County Health Department permitted 15 permanent turbines anyway.
+
+Memphis activist KeShaun Pearson put it plainly, saying: they still chose Elon Musk and xAI over Memphis and Shelby County.
+
+In April twenty twenty-six, the NAACP, represented by the Southern Environmental Law Center and Earthjustice, sued xAI, alleging the turbines ran without required Clean Air Act permits and harmed nearby Black neighborhoods most. In June, the U.S. Department of Justice moved to intervene and have the case dismissed.
+
+Memphis at least had a health department permit process, a public comment period, and a lawsuit. Those were weak tools, but they were tools. Under the new law, the next community may not get even that much.
+
+Trey Bussey of the Southern Environmental Law Center warned lawmakers what would follow, saying the change would mean harmful air pollution in whatever community got next in line. In his own words: gas-fired power plants will pop up in people's communities.
+
+Here's why a moratorium doesn't fix it
+-------------------------------
+
+Local governments are pushing back. McMinnville passed an 18-month moratorium on new data centers in June. Coffee County passed a one-year ban. Nashville and Memphis are debating their own, and the Memphis vote is set for October 6th. Jerri Green, a Memphis City Council member running for governor as a Democrat, has called for a statewide moratorium.
+
+Those pauses buy time, but none of them touches the law. When a moratorium ends, the loophole is still there. A community can write the best zoning rules in the state and still have no say over a gas plant built to power the data center those rules allow.
+
+It gets worse. This spring, six other bills dealing with data center registration, reporting, water permits, and public benefits all died in committee. The legislature passed the loophole and rejected the transparency.
+
+Here's why this isn't a left or right issue
+------------------------------------
+
+This is about who decides what gets built next to your house. The communities pushing back so far, McMinnville, Coffee County, Nashville, and Memphis, don't share a party or a zip code. They share a belief that the people who have to breathe the air should get a say before the turbines start.
+
+Conservatives who care about local control and property rights should oppose a law that takes power away from county commissions and gives it to out-of-state tech companies. Progressives who care about clean air and environmental justice should oppose it for what it did in South Memphis. Both should be able to agree on one sentence: no power plant without a public hearing.
+
+Here's what should happen
+------------------
+
+Three things would close this gap. First, repeal the self-generation provision of SB2128, or at minimum restore local permitting and public hearings for any on-site power plant serving a data center. Second, require data centers to disclose their power source, fuel, and emissions before approval, not after. Third, bring back the reporting and water permit bills that died in committee, so communities can see what each facility actually uses.
+
+Every candidate for the legislature and for governor should be asked one question: will you close the data center power plant loophole? Anyone who talks about protecting Tennessee communities should be able to answer yes.
+
+Here's the bottom line
+---------------
+
+Tennessee protected your electric bill and left your air unprotected. The same law that keeps data centers from sticking you with their grid costs lets them skip the grid entirely and build their own gas plants without asking you. Memphis already showed us how that ends. The fix is one line in one law. Call your state representative and senator and ask them to change it.

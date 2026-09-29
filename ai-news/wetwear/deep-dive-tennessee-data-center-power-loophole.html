@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Deep Dive">
+<title>The Loophole Nobody Is Talking About — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .article-body blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 0 0 1.4rem;
+    padding: 0.2rem 0 0.2rem 22px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .article-body blockquote p { margin: 0; }
+  .article-body .attribution {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin: -0.8rem 0 1.4rem;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html">Podcast</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <article class="page">
+
+    <h1 class="headline">The Loophole Nobody Is Talking About</h1>
+    <p class="deck">Tennessee made it legal for large data centers to build their own gas power plants with no state or local oversight, and even the people calling for a data center moratorium haven't named it.</p>
+    <p class="byline">Sandy B. Patterson &middot; September 29, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">The Law</p>
+
+      <p class="drop-cap">This spring, the Tennessee legislature passed SB2128 / HB1847, sponsored by Sen. Brent Taylor of Memphis and Rep. Ed Butler of Rickman. Governor Bill Lee signed it. It passed the House 76 to 14 and the Senate 28 to 0.</p>
+
+      <p>Most of the coverage focused on the good part. Data centers that need 50 megawatts or more of power from a utility now have to pay for their own grid upgrades, and utilities can't pass those costs on to regular ratepayers. That's a real protection, and the legislature deserves credit for it.</p>
+
+      <p>But the same bill does something else. It lets those same large data centers generate their own power, with gas turbines or by buying from independent power producers, without state or local oversight. According to the Tennessee Lookout, it removes community oversight of these independent power plants, which means no public input process.</p>
+
+      <p>In plain terms: a data center can build a gas power plant next to your neighborhood, and there's no hearing where you get a say.</p>
+
+      <p class="section-label">Why This Should Worry You</p>
+
+      <p>We already know what this looks like, because it happened in Memphis.</p>
+
+      <p>xAI powered its Colossus supercomputer in South Memphis with natural gas turbines before the rules caught up. The Southern Environmental Law Center called it an illegal power plant. Residents spent months filing public comments. In July 2025, the Shelby County Health Department permitted 15 permanent turbines anyway.</p>
+
+      <blockquote><p>They still chose Elon Musk and xAI over Memphis and Shelby County.</p></blockquote>
+      <p class="attribution">KeShaun Pearson, Memphis activist</p>
+
+      <p>In April 2026, the NAACP, represented by the Southern Environmental Law Center and Earthjustice, sued xAI, alleging the turbines ran without required Clean Air Act permits and harmed nearby Black neighborhoods most. In June, the U.S. Department of Justice moved to intervene and have the case dismissed.</p>
+
+      <p>Memphis at least had a health department permit process, a public comment period, and a lawsuit. Those were weak tools, but they were tools. Under the new law, the next community may not get even that much.</p>
+
+      <p>Trey Bussey of the Southern Environmental Law Center warned lawmakers what would follow, saying the change would mean harmful air pollution in whatever community got next in line.</p>
+
+      <blockquote><p>Gas-fired power plants will pop up in people's communities.</p></blockquote>
+      <p class="attribution">Trey Bussey, Southern Environmental Law Center</p>
+
+      <p class="section-label">Why a Moratorium Doesn't Fix It</p>
+
+      <p>Local governments are pushing back. McMinnville passed an 18-month moratorium on new data centers in June. Coffee County passed a one-year ban. Nashville and Memphis are debating their own, and the Memphis vote is set for October 6th. Jerri Green, a Memphis City Council member running for governor as a Democrat, has called for a statewide moratorium.</p>
+
+      <p>Those pauses buy time, but none of them touches the law. When a moratorium ends, the loophole is still there. A community can write the best zoning rules in the state and still have no say over a gas plant built to power the data center those rules allow.</p>
+
+      <p>It gets worse. This spring, six other bills dealing with data center registration, reporting, water permits, and public benefits all died in committee. The legislature passed the loophole and rejected the transparency.</p>
+
+      <p class="section-label">Why This Isn't a Left or Right Issue</p>
+
+      <p>This is about who decides what gets built next to your house. The communities pushing back so far, McMinnville, Coffee County, Nashville, and Memphis, don't share a party or a zip code. They share a belief that the people who have to breathe the air should get a say before the turbines start.</p>
+
+      <p>Conservatives who care about local control and property rights should oppose a law that takes power away from county commissions and gives it to out-of-state tech companies. Progressives who care about clean air and environmental justice should oppose it for what it did in South Memphis. Both should be able to agree on one sentence: no power plant without a public hearing.</p>
+
+      <p class="section-label">What Should Happen</p>
+
+      <p>Three things would close this gap. First, repeal the self-generation provision of SB2128, or at minimum restore local permitting and public hearings for any on-site power plant serving a data center. Second, require data centers to disclose their power source, fuel, and emissions before approval, not after. Third, bring back the reporting and water permit bills that died in committee, so communities can see what each facility actually uses.</p>
+
+      <p>Every candidate for the legislature and for governor should be asked one question: will you close the data center power plant loophole? Anyone who talks about protecting Tennessee communities should be able to answer yes.</p>
+
+      <p class="section-label">The Bottom Line</p>
+
+      <p>Tennessee protected your electric bill and left your air unprotected. The same law that keeps data centers from sticking you with their grid costs lets them skip the grid entirely and build their own gas plants without asking you. Memphis already showed us how that ends. The fix is one line in one law. Call your state representative and senator and ask them to change it.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://tennesseelookout.com/2026/04/28/tennessee-bill-gives-data-centers-ability-to-self-power-with-limited-regulation/">Tennessee Lookout — Tennessee bill gives data centers ability to self-power with limited regulation</a></li>
+        <li><a href="https://www.selc.org/news/xai-built-an-illegal-power-plant-to-power-its-data-center/">Southern Environmental Law Center — xAI built an illegal power plant to power its data center</a></li>
+        <li><a href="https://www.actionnews5.com/2025/07/02/health-dept-grants-permit-xai-turbines/">Action News 5 — Health dept. grants permit for xAI turbines</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Colossus_(data_center)">Wikipedia — Colossus (data center)</a></li>
+        <li><a href="https://tennesseelookout.com/2026/06/15/local-tennessee-officials-are-putting-data-center-plans-on-ice-to-consider-regulations/">Tennessee Lookout — Local Tennessee officials are putting data center plans on ice to consider regulations</a></li>
+        <li><a href="https://www.newschannel5.com/news/state/tennessee/coffee-county/coffee-county-bans-new-data-centers-for-one-year">NewsChannel 5 — Coffee County bans new data centers for one year</a></li>
+        <li><a href="https://tennesseestar.com/news/memphis-considers-data-center-moratorium-renewable-energy-requirements-despite-tennessee-law-tva-rules-protecting-ratepayers/tpappert/2026/09/14/">Tennessee Star — Memphis Considers Data Center Moratorium, Renewable Energy Requirements Despite Tennessee Law, TVA Rules Protecting Ratepayers</a></li>
+        <li><a href="https://www.actionnews5.com/2026/09/25/city-leaders-break-down-revised-data-center-moratorium-ahead-final-vote/">Action News 5 — City leaders break down revised data center moratorium ahead of final vote</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </article>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
