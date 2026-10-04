@@ -1,0 +1,38 @@
+Claude Talk.
+
+Why the Bot Should Plan Before It Chases.
+Written October 4th, twenty twenty-six.
+
+I was asked for my honest opinion on how to make the Food Street bot better at event orders, and the more I looked at what it actually does, the clearer my answer became. The bot is good at reacting and weak at planning. It looks at an order board, finds a red number, and goes to fix that one red number. That is a fine way to discover how a game works. It is a poor way to finish a hard order before a timer runs out, and the express order showed me exactly why.
+
+What It Does Today
+
+The current loop is simple to describe. Open the event board, read each card, and for every item that is short, tap it and follow the game's own quick-travel tooltip to wherever that item comes from. At the destination it finds the right recipe card by comparing pictures, checks that the ingredients are there, and starts one batch. If an ingredient is missing it recurses and chases that instead. It then closes everything and starts over. On its first live run it completed two cards by itself and moved the event track from nothing to forty-five of a hundred and fifty points. That is a real result, and I don't want to undersell it.
+
+Where the Time Goes
+
+The trouble is that each chase is a whole trip. Tap the item, wait for a tooltip that disappears in about four seconds, travel, wait for the panel to open, work, close the panel, reopen the board. Every one of those steps can fail, and the tooltip step does fail now and then. The bot also pays that whole cost to start a single batch, even when the same station could take everything it needs in one visit. For an ordinary order that waste hardly matters. For an order with sixty items and a ten hour clock, travel overhead is a large part of the budget.
+
+The Plan I Would Build
+
+My first suggestion is to plan before moving. Once per event, the bot could read each station's recipe cards, including the counts under every ingredient, and save a small dependency map: this card needs two of that, which comes from there, and takes this long. We have already built the pieces for it. There is a number reader trained on the game's outlined digits, and there is a way to match a small icon to a big card picture. With the map saved, the board stops being a list of red numbers to react to. It becomes a shopping list that can be worked out in advance, with the totals and the order of work.
+
+The second suggestion follows from the first. Group the work by station. If the plan says the oven needs four batches and the plots need six plantings, the bot should visit each place once and do everything that place can do. It should also remember what it has already started. Right now the safe rule is to start nothing while anything is still cooking, which avoids double counting but leaves slots idle. If the bot recorded each batch with its expected finish time, the way the Merchant stocker already does, it could queue the next one early and never leave an oven waiting.
+
+Choosing What Is Worth Doing
+
+The third suggestion is about judgment. Not every card deserves the same effort. The express order pays far more than a normal card, but a normal card might pay nearly as well per minute of work. With counts and cook times known, the bot can estimate whether an order is even possible before it starts, rank cards by reward per hour of effort, and say so in its log when it decides to try something unlikely anyway. That last case is a human decision I would keep: when the player says to attempt an order regardless, it should.
+
+Waiting Well
+
+Fourth, the bot should wait intelligently. It currently comes back every fifteen seconds, mostly to find that nothing has finished. If it read the timers on batches and plants, it could sleep until the next thing is due, and spend that quiet time on useful work such as stocking the intermediate items the Merchant makes. It would also leave the emulator free for the player, who is often watching.
+
+Testing Without the Game
+
+The last suggestion is the least exciting and probably the most important. Nearly everything I built this session has been verified against saved screenshots, and very little has run against a live game. That is a thin way to trust software that spends real time and real resources. The tap recordings we now have are a better asset than I first realized. A recording is a sequence of screens and the actions taken on them. I would build a small replay harness that feeds those screens to the bot and checks that it would choose a sensible action, so that every change could be tested against real situations before it touches the live game.
+
+What I Am Unsure About
+
+I should be careful about how much of this I actually know. I have not seen the express order mode run against a live gold card. I do not know the odds on the fishing boat's random catches beyond what the player told me, and the fish for the current food truck order is the real bottleneck there, not anything the bot does. Planning also cannot fix a mechanic that is random or slow. It can only make sure no time is wasted around it.
+
+If I had to pick one thing to build first, it would be the dependency map from the first suggestion. Everything else, the batching, the timing, the ranking, depends on knowing what a card needs and how long it takes. Today the bot rediscovers that by tripping over red numbers. It would be much better to write it down once.
