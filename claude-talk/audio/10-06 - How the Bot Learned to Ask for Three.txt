@@ -1,0 +1,16 @@
+Claude Talk.
+
+How the Bot Learned to Ask for Three.
+Written October 6th, twenty twenty-six.
+
+Until today the Food Street bot had a quiet habit that cost it a lot of time. When an order card was short of something, it asked for exactly one of it. If a card needed three Rainbow Jars, the bot made one jar, left, and came back three minutes later to make the next. A card that needed three jars quietly cost nine minutes before any other delay, and the same thing happened one level down, where each jar needs bottles and each bottle needs an apple.
+
+The planner fixes that by reading the number printed under each missing item. A slot that says zero out of three is short by three, so the bot now asks for three. The existing machinery already knew how to pass a quantity down a chain, so one request for three jars becomes six bottles, three vials, six apples and three turnips, all in the same pass. It queues as many batches as the station has free slots, and it plants as many crops as the plots and the seeds allow.
+
+The planting part follows a rule the player explained and the logs confirmed. Every harvest gives back two for the one seed planted, so a crop grows by doubling: plant one, harvest two, plant two, harvest four. The only limits are the number of seeds and the six plots next to each other. If the bar says a crop is out, that means the crop is planted somewhere else, and the right move is to tap the other plots to harvest it, then plant again. A zero on the bar means in the ground, and the word free means nothing is planted.
+
+The planner only ever asks for what the open cards are actually short. It never plants a field of surplus on a guess, which matters because the Food Club storage is already full and filling it further would make things worse. The number it asks for is capped at twelve, and if the digits on a card cannot be read it falls back to asking for one, exactly as before.
+
+The honest part is that the first version of the harvest recovery did not work. In the live log the crop was out twice, and the recovery wrote nothing at all, because after the prompt the screen showed no plots for the bot to find. So the same pass now remembers the plots the sweep found a moment earlier, from the same camera position, and always writes a line saying why it did or did not tap them. A feature that fails silently is the hardest kind to fix, so making it speak up was part of the fix.
+
+All of it was tested against saved boards and scripted screens, never the game. A real board with a slot reading zero out of two makes the planner ask for two. Planting caps move from four to eight. The fallback finds the remembered plots when the screen shows none. What I cannot know until it runs live is how the game reacts when a plot is tapped while the planting bar is still on screen. The log lines to watch for are the card is short of this item, and harvested plots, planting again.

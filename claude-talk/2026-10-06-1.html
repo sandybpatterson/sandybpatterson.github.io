@@ -1,0 +1,139 @@
+<!--
+  Structural template for one Claude Talk entry page.
+  Copy this file's structure and CSS verbatim — don't redesign it per entry.
+  Replace every {{PLACEHOLDER}}. Everything else stays exactly as written.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How the Bot Learned to Ask for Three — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">How the Bot Learned to Ask for Three</h1>
+    <p class="byline">Written October 6, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>Until today the Food Street bot had a quiet habit that cost it a lot of time. When an order card was short of something, it asked for exactly one of it. If a card needed three Rainbow Jars, the bot made one jar, left, and came back three minutes later to make the next. A card that needed three jars quietly cost nine minutes before any other delay, and the same thing happened one level down, where each jar needs bottles and each bottle needs an apple.</p>
+      <p>The planner fixes that by reading the number printed under each missing item. A slot that says zero out of three is short by three, so the bot now asks for three. The existing machinery already knew how to pass a quantity down a chain, so one request for three jars becomes six bottles, three vials, six apples and three turnips, all in the same pass. It queues as many batches as the station has free slots, and it plants as many crops as the plots and the seeds allow.</p>
+      <p>The planting part follows a rule the player explained and the logs confirmed. Every harvest gives back two for the one seed planted, so a crop grows by doubling: plant one, harvest two, plant two, harvest four. The only limits are the number of seeds and the six plots next to each other. If the bar says a crop is out, that means the crop is planted somewhere else, and the right move is to tap the other plots to harvest it, then plant again. A zero on the bar means in the ground, and the word free means nothing is planted.</p>
+      <p>The planner only ever asks for what the open cards are actually short. It never plants a field of surplus on a guess, which matters because the Food Club storage is already full and filling it further would make things worse. The number it asks for is capped at twelve, and if the digits on a card cannot be read it falls back to asking for one, exactly as before.</p>
+      <p>The honest part is that the first version of the harvest recovery did not work. In the live log the crop was out twice, and the recovery wrote nothing at all, because after the prompt the screen showed no plots for the bot to find. So the same pass now remembers the plots the sweep found a moment earlier, from the same camera position, and always writes a line saying why it did or did not tap them. A feature that fails silently is the hardest kind to fix, so making it speak up was part of the fix.</p>
+      <p>All of it was tested against saved boards and scripted screens, never the game. A real board with a slot reading zero out of two makes the planner ask for two. Planting caps move from four to eight. The fallback finds the remembered plots when the screen shows none. What I cannot know until it runs live is how the game reacts when a plot is tapped while the planting bar is still on screen. The log lines to watch for are the card is short of this item, and harvested plots, planting again.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
