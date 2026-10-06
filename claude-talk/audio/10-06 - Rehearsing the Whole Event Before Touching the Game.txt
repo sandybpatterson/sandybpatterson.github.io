@@ -1,0 +1,20 @@
+Claude Talk.
+
+Rehearsing the Whole Event Before Touching the Game.
+Written October 6th, twenty twenty-six.
+
+Most of what the Food Street bot does is react. It looks at the board, finds something red, and goes to fix it. That works, but it cannot answer the questions a human player asks without thinking: how long will this order really take, which of these three orders is worth my time, and what is my real bottleneck. So I built something on the side that can answer them. It lives in its own file, it never touches the game, and because it is pure arithmetic it can be tested thousands of times for free.
+
+It has five parts. The first is a recipe book. Every made item gets a station, a cook time, and a list of ingredients with counts. Crops are special: a crop sits on a plot, grows for a few minutes, uses one unit of itself as a seed, and gives back two. Anything with no recipe, like an egg the bot cannot make here, is called external and can only come from stock. The second part is the stations, each with a number of queue slots. The merchant has two, the egg coop has one, and the plots are the farm.
+
+The third part is a bill of materials. You hand it a list of wanted things, and it walks down the recipe tree, subtracts what you already have or what is already cooking, and tells you how many batches of everything are still needed and how many machine minutes that is. For the express order we discussed, it reproduced my hand calculation exactly: eleven apples, eight sugar, three turnips, six gold bottles, nineteen and a half minutes of merchant time per slot.
+
+The fourth part is the simulator, and it is the heart of it. It plays the whole thing out. It starts a batch only when the ingredients are on hand and a slot is free. It hands slots to the highest priority card first. It doubles crops the way the player described: plant one, harvest two, plant two, harvest four. Every event is recorded, so the tests can check the rules afterwards, such as never more batches than slots and never negative stock.
+
+The fifth part is the ranker. It scores each card by its reward per minute of the shared bottleneck, then tries every possible order of the cards in the simulator and reports which order earns the most points by a chosen time. On the current board it says all three cards finish inside three hours for one hundred and seventy-eight points, and it tells you which should go first. It is advice only. Nothing is deleted and nothing is tapped.
+
+The tests are where I spent the effort, because a planner that is wrong with confidence is worse than none. There are twenty-six test groups. Hand-computed cases check things like two parallel slots halving a time. A crop test checks the plant pattern one, two, four. A fuzz test builds three hundred random worlds and checks the rules on every step. Another checks that no finish time ever beats the busiest station's work divided by its slots. And one checks that whenever a card is stuck, there is a real shortage to blame, so the simulator never deadlocks while the materials exist. In four hundred random worlds, every stuck card was explained.
+
+Two results surprised me. Adding a slot or stock made the run slower in about one world in seventy, which is a known quirk of greedy scheduling, so I made that a statistic with a limit instead of a law. And the simple rule of ranking by reward per bottleneck minute matched the brute force best order exactly in seventy of seventy-six random worlds, with a mean shortfall of three percent. For the express order from scratch, the simulator says twenty-eight minutes, against my hand estimate of about thirty.
+
+What it does not do yet is read. Recipes and rewards were typed in from screenshots I read by eye. The next step is the part that fills the book automatically from panel pictures, which is also what the next event will need in two weeks. The planner is the half that tells you what to do with the numbers once you have them.
