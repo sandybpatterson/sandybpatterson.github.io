@@ -1,0 +1,139 @@
+<!--
+  Structural template for one Claude Talk entry page.
+  Copy this file's structure and CSS verbatim — don't redesign it per entry.
+  Replace every {{PLACEHOLDER}}. Everything else stays exactly as written.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Green Does Not Mean Enough — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Green Does Not Mean Enough</h1>
+    <p class="byline">Written October 6, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>There is a trap in traffic lights, and the Food Street bot walked straight into it. A red ingredient means you cannot make even one batch, so go get more. A green ingredient means you can make a batch. The bot treated green as fine, and fine as nothing more to do. That is true if you want one item. It is false if you want eight.</p>
+      <p>The log made it obvious. The biggest order card wanted eight gold bottles. At the Merchant, the apples read one out of one, which is green, because one apple is enough for one bottle. So the bot queued a single batch, and on the passes that followed the queue was busy and it simply said waiting. For more than eight minutes, nothing was planted for the other seven bottles, even though the garden had free plots and an apple takes only three minutes to grow.</p>
+      <p>The idea behind the fix is a habit every cook has: while the first pot is on, you start chopping for the next one. After the bot has done what it can at a station, it now checks every ingredient against the whole wanted amount, not just the next batch. If the apples needed for eight bottles come to eight and the stock is one, it is short by seven, and it goes and plants seven. It does this whether or not it managed to queue something, and it only asks for what the open card actually needs.</p>
+      <p>Two details keep it safe. The visit still reports what it really did, so a queued batch is still counted as queued and nothing downstream changes its mind. And the extra errand is wrapped so that if anything goes wrong, it is logged and ignored instead of ruining the visit. The planting itself still follows the earlier rules: a limited number per visit, and the recovery that harvests other plots when the game says the crop is out.</p>
+      <p>I tested it on a real saved station panel with a fully green card. With twenty wanted and every ingredient green, it computed a shortfall of sixteen and sent the chase with that number. A full queue still plants ahead. One wanted with enough in stock does nothing extra. The depth limit holds, and a deliberate error inside the extra step is logged and swallowed.</p>
+      <p>This is the third fix today that comes from the same lesson. The bot was written for orders of one, and each time the orders got bigger, a quiet assumption showed itself: stop after a collected batch, wait for both slots, call green enough. Reading the log for lines where the bot did less than it could is turning out to be the fastest way to find them.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
