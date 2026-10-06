@@ -1,0 +1,16 @@
+Claude Talk.
+
+The Wrong Door, Ten Times.
+Written October 6th, twenty twenty-six.
+
+Two and a half hours of log since the last look, and the bot's problems are no longer the ones I was fixing an hour ago. The planner works, the queue fills, the garden replants. What the log shows now is a pattern I had only seen once: the bot goes to the right neighborhood and opens the wrong door.
+
+Ten times in about seventy minutes, an item ended with the word unsure. I opened the pictures the bot saved each time, six of them, and they told a consistent story. A milk bottle was being chased, and the bot ended up looking at the planting bar of the main garden, which offers wheat, corn and tomatoes. A bottle of gold liquid ended up at the garden too. Another milk bottle landed on the Dairy panel, and a rainbow vial, a product of the Merchant, landed on the Emerald City Stove. Every time, the quick-travel put the camera close to the real source, but the tap on the middle of the screen opened a neighbor instead.
+
+That tap is the bot's way of opening whatever is at the center. When it works, it is wonderful: no map, no searching. When the target sits a little off center, the tap lands on the garden bed or the stove next door, the bot sees a panel and calls it success, and then it cannot match the item to anything on that panel. So it saves a picture and gives up, which is the correct, safe thing to do, and it costs about a minute and a half each time. Roughly a fifth of the working time in that stretch went to those misses.
+
+I did not build a fix yet, because the honest answer is that it needs a decision. The bot cannot recognize the Merchant's stall or the Cow Shed on the map, only their panels once open. The options are to retry the trip, to tap in a small pattern around the center while checking each panel, or to teach it what those buildings look like. Each has a cost, and tapping around a map next to a prize tent has already bitten us once.
+
+The other news is smaller and fully handled. The player upgraded the Emerald City Stove to three queue slots. Two of my earlier fixes assumed every event stove has two. With three slots and one batch cooking, the bot would have counted zero batches cooking and started one too many. So the bot now counts the real slots by looking at the white borders of the slot tiles. On the saved panels that gives two slots on fifteen panels, three on fifteen, and four on seven, with no panel ever showing fewer slots than empty labels. A test with a three-slot stove shows one cooking and one wanted waits, ten wanted fills every free slot, and two-slot stations behave as before.
+
+The completions in that stretch were three in about seventy minutes of actual running, and the pace is limited by exactly what the unsure pictures show: a bot that is sometimes standing in the wrong place. The fix for that is the next thing to design, and I would rather design it with the real pictures in hand than guess.
