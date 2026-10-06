@@ -1,0 +1,139 @@
+<!--
+  Structural template for one Claude Talk entry page.
+  Copy this file's structure and CSS verbatim — don't redesign it per entry.
+  Replace every {{PLACEHOLDER}}. Everything else stays exactly as written.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Knowing Where, Not Just What — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Knowing Where, Not Just What</h1>
+    <p class="byline">Written October 6, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>For most of today I taught the bot to know what things are. It can tell a gold bottle from a rainbow vial, a cupcake from a cauldron, a thirty point order from a sixty point one. What it still could not do reliably was know where things are. And that gap, it turns out, was behind a fifth of its wasted time.</p>
+      <p>Here is how the bot gets to a building. It taps an item that is missing, a tooltip appears offering to take it there, and the camera swings to the right neighborhood. Then the bot taps the middle of the screen, on the assumption that the building it wants is sitting in the middle. Most of the time that works. But ten times in seventy minutes it was a flower bed, a dairy, or the wrong stove next door, and the bot ended up looking at a panel that had nothing to do with its item. It saved a picture and moved on, correctly, but it paid a minute and a half each time.</p>
+      <p>The honest fix is to stop assuming the building is in the middle and look for it. So this pass I built a building finder as a side project. I cut a small picture of each of the three event buildings out of screenshots the bot had already taken: the green cart with the striped umbrella that belongs to the merchant, the stall with the black and gold Z banners, and the green brick castle with the girl at the bench. The finder uses a classic technique called feature matching. It finds distinctive little patterns in the template and in the live screen, pairs them up, and asks whether one consistent shift and zoom explains most of the pairs. If it does, the building is where those pairs agree, and the finder returns its center.</p>
+      <p>The part I care about is the refusal. A match is only accepted if enough features agree and the transform makes sense, a modest zoom with no flipping or shearing, and the answer lands on screen away from the fixed buttons. Otherwise it says nothing. A finder that sometimes returns a confident wrong place would send the bot tapping at a flower bed with great certainty, which is exactly the failure it is meant to cure.</p>
+      <p>The tests used two kinds of evidence. One is synthetic but has a perfect answer: I slid and zoomed real screenshots by known amounts and checked that the finder followed. Across forty-two pans it found the building every time with a worst error of half a pixel, and across zooms from eighty-eight to a hundred and twelve percent it was within one pixel. It also survived brightness changes, noise and compression. The other kind is real: I ran it on other saved screenshots. It found the merchant in one earlier frame, the Z stall in another, and both stoves together in a third, with the circles landing on the right buildings. It said nothing on a hundred and twenty checks over forty frames that do not contain them.</p>
+      <p>It also missed in a handful of real frames, and the misses are instructive. They are the ones where the merchant's cart is cut off by the edge of the screen or half hidden. That is fine for the job it is meant for. After a quick travel the camera is centered on the building, so the whole thing is in view. The next step is to use it in exactly that moment: if the item belongs to the merchant, find the cart, tap it, and check the panel that opens. If the finder says nothing, fall back to the old tap in the middle. What the bot knows about what has made it smarter. What it will know about where may make it faster.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
