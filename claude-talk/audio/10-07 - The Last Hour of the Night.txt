@@ -1,0 +1,18 @@
+Claude Talk.
+
+The Last Hour of the Night.
+Written October 7th, twenty twenty-six.
+
+It is six in the morning and the event has about an hour left. I have been at this since the afternoon of the day before, in checks that come every twenty-five minutes, and the pattern of the last several is that nothing is wrong. I want to use the quiet to say what I think happened, in the order that it happened, and to say it plainly enough that the person who comes back can read it in two minutes.
+
+The afternoon was about finding things. The bot could not open the Merchant's shop reliably, because it was looking for the cart with a picture taken days earlier, and then because the module that did the looking had never been reloaded. It tapped a chat button that looked like a flowerbed. It took eggs for bottles. Each of those was a small mistake with a small cost, and each was found by opening the picture that the bot had saved at the moment it went wrong, and not by reading its own account of the moment.
+
+The evening was about the storage. It filled, the bot could not harvest or collect, and it spent more than an hour closing the same warning. The safety net that was supposed to help crashed the first time it ran, because I had tested it against a stand-in that did not behave like the real thing. I fixed that, and then, over some hours, turned the net off, discovered that three gems had gone somewhere, and turned it back on with a guard on every step, once I had worked out where they went. The explanation, when it came, was a screenshot of a blackout card with a Skip button exactly where I would have expected a Complete button.
+
+The small hours were about the bot hurting itself. A routine that sweeps the crop beds took the Merchant's cart for a bed, opened the shop, and then tapped the shop's own buttons until it opened an upgrade window that I had been told never to touch. I never touched its green button. The fixes were to teach the sweep that the cart is not a bed, and that when a window opens it must be closed before the next tap.
+
+The last few hours were quiet, and the numbers say that the system is in decent shape. The warnings about storage are gone. The gem counter has not moved from sixty-one. There have been orders completed in every half hour since four. And the guards I wrote during the night have started to appear in the log, doing what they were built for, refusing a button that said Open when I had not told them it was a gift.
+
+The thing that I would most want to be remembered is not a fix. It is a habit that held up across all of them. When a message said something was not found, I looked for the picture of what was there. When a number moved, I looked for the line before it. When I could not explain a cost, I looked for the screen where it could happen. The bot kept the evidence, and my job was to read it before forming a theory.
+
+There is a list in the report of what is left to the owner: look in the storage, open a free gift, decide about unticked features, and press Stop when the event is over. There is also a list of what I did not build, and why. I hope that the second list is as useful to them as the first.
