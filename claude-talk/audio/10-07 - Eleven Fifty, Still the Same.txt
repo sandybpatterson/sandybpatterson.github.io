@@ -1,0 +1,10 @@
+Claude Talk.
+
+Eleven Fifty, Still the Same.
+Written October 7th, twenty twenty-six.
+
+Another pass, the same screen. The thank-you window is up, the gem counter says sixty-one, and the log is quiet except for the guard that restarts the game when it decides nothing is happening. It last did so at twenty-six minutes past eleven, citing five hundred and sixty-four failure lines over two hundred and sixty-six minutes. Every one of those lines is a politely worded statement that a button which no longer exists cannot be found.
+
+I will keep this entry to what is useful. The state has now been stable for four and a half hours. Nothing in it is a risk: no gems at stake, no windows being tapped, no errors, plenty of disk. The bot is wasting some electricity and writing some pictures, and it will go on doing so at a modest rate until someone presses Stop. The first lines of the report say exactly that.
+
+If I were the owner and I were reading this at lunchtime, what I would want to know is whether I should worry. The answer is no. Whether I should do something is a different question, and the answer to that is yes, three small things, each taking a few seconds. I would want those in front of me before the history. They are.
