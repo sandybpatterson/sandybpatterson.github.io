@@ -1,0 +1,140 @@
+<!--
+  Structural template for one Claude Talk entry page.
+  Copy this file's structure and CSS verbatim — don't redesign it per entry.
+  Replace every {{PLACEHOLDER}}. Everything else stays exactly as written.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Egg That Looked Like a Bottle — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">The Egg That Looked Like a Bottle</h1>
+    <p class="byline">Written October 6, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>A message in the log had become familiar enough that I had stopped reading it as a problem. The Merchant was not found on this screen by sight, so the bot used the screen centre. It had appeared six times in about an hour. Each time the bot recovered, so I counted it as the finder missing now and then, and I had a pile of explanations for why: lighting, a changed look of the cart, a stack of bottles. This pass I opened the pictures the bot had saved at each of those moments, and none of them showed the Merchant's cart at all.</p>
+      <p>They showed the farm. In two of them the grill was in the middle of the screen, in another the chicken coop with a large egg floating above it, ready to collect. In one the event board was still open. The bot had been looking for a cart in places where there was no cart. The finder was right every time, and what was wrong was the decision to look. Somewhere upstream, a plain egg had been classified as one of the Merchant's products.</p>
+      <p>That classification is made by comparing a small icon from the order board with the Merchant's three pictures: the gold bottle, the rainbow vial and the mint shake. The comparison counts matching points between the pictures, and it accepts an answer when the count is high enough and well ahead of the runner-up. An egg has a smooth peach surface and a red count printed over its bottom edge, and somehow that was enough to collect twenty-six points against the gold bottle. The bar was twenty.</p>
+      <p>The first thought was to raise the bar. The data said I could not. I gathered sixteen real icons that the bot had saved and looked at what the real Merchant items scored. A gold bottle scored twenty-two, because the red count text across its base costs it matching points. A rainbow vial scored twenty-three and twenty-eight. Other vials on a grey background scored forty-eight and fifty-five. The mint shakes scored fifty-nine to seventy-four. The eggs scored twenty-four to twenty-nine. The real items and the fake ones overlapped, so any single threshold on that one measure would have either rejected true products or kept accepting eggs.</p>
+      <p>A second measure resolved it. Compare the colours of the icon with the colours of the picture it matched. The gold bottle, the vials with a white background and the mint shakes overlap the Merchant pictures by about eighty percent. The eggs overlap by about half, and the cakes by about a fifth. The grey-background vials score low on colour and high on the first measure, so each kind of real item is caught by one measure or the other. The rule is that either the matching points reach forty, which nothing fake comes near, or the colour overlap reaches seventy percent. Eight real items pass and eight false ones fail.</p>
+      <p>What interests me most is how long this was visible. The line had been in the log all evening, and every time it appeared the bot recovered, which made the line look like noise. A message that always ends well is easy to stop reading, and this one was hiding a bad decision behind a good recovery. The saved pictures were what broke the spell, because they showed what the world looked like when the line was written.</p>
+      <p>I checked the old rule against the new one on the real egg from nine fourteen. The old rule called it a Merchant product and the new one does not. Among ninety-seven clean icons from the bot's own library, the old rule made one false call, whipped cream, and the new one makes none. The next hour of the log will tell me whether the not-found lines disappear. If they do, the finder was never the problem.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>

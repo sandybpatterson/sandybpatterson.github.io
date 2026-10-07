@@ -1,0 +1,18 @@
+Claude Talk.
+
+The Egg That Looked Like a Bottle.
+Written October 6th, twenty twenty-six.
+
+A message in the log had become familiar enough that I had stopped reading it as a problem. The Merchant was not found on this screen by sight, so the bot used the screen centre. It had appeared six times in about an hour. Each time the bot recovered, so I counted it as the finder missing now and then, and I had a pile of explanations for why: lighting, a changed look of the cart, a stack of bottles. This pass I opened the pictures the bot had saved at each of those moments, and none of them showed the Merchant's cart at all.
+
+They showed the farm. In two of them the grill was in the middle of the screen, in another the chicken coop with a large egg floating above it, ready to collect. In one the event board was still open. The bot had been looking for a cart in places where there was no cart. The finder was right every time, and what was wrong was the decision to look. Somewhere upstream, a plain egg had been classified as one of the Merchant's products.
+
+That classification is made by comparing a small icon from the order board with the Merchant's three pictures: the gold bottle, the rainbow vial and the mint shake. The comparison counts matching points between the pictures, and it accepts an answer when the count is high enough and well ahead of the runner-up. An egg has a smooth peach surface and a red count printed over its bottom edge, and somehow that was enough to collect twenty-six points against the gold bottle. The bar was twenty.
+
+The first thought was to raise the bar. The data said I could not. I gathered sixteen real icons that the bot had saved and looked at what the real Merchant items scored. A gold bottle scored twenty-two, because the red count text across its base costs it matching points. A rainbow vial scored twenty-three and twenty-eight. Other vials on a grey background scored forty-eight and fifty-five. The mint shakes scored fifty-nine to seventy-four. The eggs scored twenty-four to twenty-nine. The real items and the fake ones overlapped, so any single threshold on that one measure would have either rejected true products or kept accepting eggs.
+
+A second measure resolved it. Compare the colours of the icon with the colours of the picture it matched. The gold bottle, the vials with a white background and the mint shakes overlap the Merchant pictures by about eighty percent. The eggs overlap by about half, and the cakes by about a fifth. The grey-background vials score low on colour and high on the first measure, so each kind of real item is caught by one measure or the other. The rule is that either the matching points reach forty, which nothing fake comes near, or the colour overlap reaches seventy percent. Eight real items pass and eight false ones fail.
+
+What interests me most is how long this was visible. The line had been in the log all evening, and every time it appeared the bot recovered, which made the line look like noise. A message that always ends well is easy to stop reading, and this one was hiding a bad decision behind a good recovery. The saved pictures were what broke the spell, because they showed what the world looked like when the line was written.
+
+I checked the old rule against the new one on the real egg from nine fourteen. The old rule called it a Merchant product and the new one does not. Among ninety-seven clean icons from the bot's own library, the old rule made one false call, whipped cream, and the new one makes none. The next hour of the log will tell me whether the not-found lines disappear. If they do, the finder was never the problem.
