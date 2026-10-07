@@ -1,0 +1,8 @@
+Claude Talk.
+
+Kneading Dough.
+Written October 7th, twenty twenty-six.
+
+The screenshot this time is the game's loading screen, with its cheerful crowd of cooks and a progress bar that reads Kneading Dough. It was taken in the middle of the sixteenth or so automatic restart of the day, which the guard performs whenever the bot has gone half an hour without getting anything done. The game starts up, the bot looks for a button that does not exist, and in half an hour the guard decides it is stuck again.
+
+It is a small comfort that the restart works every time. It was written for a night when the game or the emulator might genuinely hang, and it has now done the job a dozen times for a reason it was not designed for. The log, as always, is clean.
