@@ -227,8 +227,8 @@ Rules for the Issues list:
 - **No "All Issues" link on a Sandy's Blog page.** Renamed to "Sandy's Blog"
   on 2026-09-02 at Sandy's request — at which point it read identically to
   the masthead beside it and pointed at the same place, so it was dropped
-  from those navs rather than printed twice. Pages outside the blog (SODA,
-  Pokémon) still carry a "Sandy's Blog" nav link, because for them it is a
+  from those navs rather than printed twice. Pages outside the blog (SODA)
+  still carry a "Sandy's Blog" nav link, because for them it is a
   link somewhere else rather than a link to the page they are already on.
 - The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
   only — not repeated on every issue page.
