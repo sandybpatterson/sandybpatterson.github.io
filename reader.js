@@ -658,17 +658,33 @@
 
   function wrapWordsInPara(paraEl) {
     if (paraEl.dataset.sbpWrapped) return;
-    // Trim to match extractParagraphs() so charIndex values from onboundary align.
-    const text = paraEl.textContent.trim();
-    let pos = 0;
-    const html = text.split(/(\s+)/).map(token => {
-      const start = pos;
-      pos += token.length;
-      return /^\s*$/.test(token)
-        ? token
-        : `<span class="sbp-word" data-cs="${start}">${token}</span>`;
-    }).join('');
-    paraEl.innerHTML = html;
+    // Wrap words text-node by text-node so links, <strong>, <em> etc. survive —
+    // rebuilding the paragraph from textContent used to flatten them all away.
+    // Offsets are relative to the trimmed text to match extractParagraphs(), so
+    // charIndex values from onboundary still align.
+    const lead = paraEl.textContent.length - paraEl.textContent.trimStart().length;
+    const walker = document.createTreeWalker(paraEl, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    let pos = -lead;
+    nodes.forEach(node => {
+      const frag = document.createDocumentFragment();
+      node.nodeValue.split(/(\s+)/).forEach(token => {
+        if (!token) return;
+        const start = pos;
+        pos += token.length;
+        if (/^\s+$/.test(token)) {
+          frag.appendChild(document.createTextNode(token));
+        } else {
+          const span = document.createElement('span');
+          span.className = 'sbp-word';
+          span.dataset.cs = Math.max(0, start);
+          span.textContent = token;
+          frag.appendChild(span);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
     paraEl.dataset.sbpWrapped = '1';
   }
 
