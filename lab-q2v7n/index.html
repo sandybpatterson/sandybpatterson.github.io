@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Log &amp; Settings Redesign</title>
+<style>
+  :root { --bg:#0a0a0a; --panel:#161616; --line:#2c2c2c; --text:#e8e8e8; --dim:#9a9a9a; --gold:#c9a84c;
+          --gold-dim:#6f5d2a; --red:#e06060; --green:#6fcf6f; --blue:#6aa8e8; --amber:#f0c040; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 Georgia,"Times New Roman",serif; }
+  nav { position:sticky; top:0; z-index:5; display:flex; justify-content:space-between; align-items:center; padding:10px 16px;
+        background:rgba(10,10,10,.94); border-bottom:1px solid var(--line); font:13px "Courier New",monospace; }
+  nav .brand { color:var(--gold); letter-spacing:.08em; }
+  nav a { color:var(--text); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:4px 12px; }
+  main { max-width:900px; margin:0 auto; padding:0 16px 80px; }
+  header { padding:44px 0 18px; border-bottom:1px solid var(--line); }
+  .eyebrow { font:12px "Courier New",monospace; color:var(--gold); letter-spacing:.18em; text-transform:uppercase; }
+  h1 { font-size:clamp(30px,7vw,46px); line-height:1.12; margin:10px 0 12px; font-weight:normal; }
+  .deck { color:var(--dim); font-size:18px; margin:0; }
+  h2 { font-weight:normal; font-size:26px; margin:50px 0 6px; } h2 .num { font:15px "Courier New",monospace; color:var(--gold); margin-right:10px; }
+  h3 { font-weight:normal; color:var(--gold); font-size:19px; margin:26px 0 6px; }
+  .muted { color:var(--dim); }
+  .figlabel { display:flex; gap:8px; align-items:center; margin-top:22px; font:13px "Courier New",monospace; color:var(--dim); flex-wrap:wrap; }
+  .tag { font:11px "Courier New",monospace; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--line); border-radius:999px; padding:2px 8px; }
+  .tag.real { color:var(--green); border-color:#2f5a2f; } .tag.mock { color:var(--amber); border-color:#5e4c1c; }
+  img.shot { width:100%; border:1px solid var(--line); border-radius:8px; display:block; margin-top:8px; }
+  ol.list { padding-left:22px; } ol.list li { margin:8px 0; }
+  .callout { border-left:3px solid var(--gold); background:var(--panel); padding:12px 16px; margin:20px 0; border-radius:0 8px 8px 0; }
+
+  .win { background:#1e1e1e; border:1px solid #3a3a3a; border-radius:8px; overflow:hidden; margin-top:8px; min-width:0;
+         font-family:"Segoe UI",Arial,sans-serif; font-size:13px; color:#e8e8e8; }
+  .tabs { display:flex; gap:6px; padding:10px 12px 0; border-bottom:1px solid var(--gold-dim); overflow-x:auto; }
+  .tab { padding:5px 12px; border:1px solid #555; border-bottom:none; border-radius:3px 3px 0 0; white-space:nowrap; }
+  .tab.on { background:var(--gold); color:#1e1e1e; border-color:var(--gold); } .tab.right { margin-left:auto; }
+  .body { padding:12px; min-width:0; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  .seg { display:inline-flex; border:1px solid #555; border-radius:4px; overflow:hidden; }
+  .seg span { padding:3px 12px; font-size:12px; } .seg .on { background:var(--gold); color:#1e1e1e; }
+  .chip { border:1px solid #555; border-radius:999px; padding:2px 10px; font-size:12px; white-space:nowrap; }
+  .chip.on { border-color:var(--gold); color:var(--gold); } .chip .n { color:#9a9a9a; margin-left:4px; }
+  .search { flex:1; min-width:120px; background:#1b1b1b; border:1px solid #444; border-radius:4px; padding:4px 8px; color:#8a8a8a; font-size:12px; }
+  .story { background:#262626; border:1px solid #3a3a3a; border-radius:6px; }
+  .ev { display:grid; grid-template-columns:52px 22px 1fr; gap:6px; align-items:start; padding:7px 10px; border-top:1px solid #333; }
+  .ev:first-child { border-top:none; }
+  .ev .t { color:#8a8a8a; font-size:12px; font-variant-numeric:tabular-nums; padding-top:1px; }
+  .ev .ic { text-align:center; }
+  .ev .tx { min-width:0; overflow-wrap:anywhere; } .ev .tx small { display:block; color:#8a8a8a; font-size:11px; }
+  .ev.good .tx b { color:var(--green); } .ev.warn .tx b { color:var(--amber); } .ev.bad .tx b { color:var(--red); } .ev.gold .tx b { color:#e0b020; }
+  .day { padding:6px 10px; font-size:11px; color:var(--gold); letter-spacing:.1em; background:#202020; border-top:1px solid #333; }
+  .raw { margin-top:10px; background:#0d0d0d; border:1px solid #333; border-radius:6px; padding:8px 10px; font:11.5px/1.55 "Courier New",monospace;
+         color:#cfcfcf; overflow-x:auto; white-space:pre; }
+  .raw .t { color:#666; } .raw .e { color:var(--blue); } .raw .p { color:#b48ce0; } .raw .s { color:var(--gold); } .raw .x { color:var(--red); }
+  .fold { color:#9a9a9a; border:1px dashed #555; border-radius:4px; padding:0 6px; }
+  .sbox { background:#262626; border:1px solid #3a3a3a; border-radius:6px; padding:10px 12px; margin-bottom:10px; }
+  .sbox h4 { margin:0 0 6px; color:var(--gold); font-size:13px; font-weight:600; }
+  .srow { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; padding:7px 0; border-top:1px solid #333; }
+  .srow:first-of-type { border-top:none; }
+  .srow .l { min-width:0; } .srow .l small { display:block; color:#8a8a8a; font-size:11px; }
+  .toggle { display:inline-block; width:32px; height:17px; border-radius:9px; background:var(--gold); position:relative; vertical-align:middle; }
+  .toggle::after { content:""; position:absolute; right:2px; top:2px; width:13px; height:13px; border-radius:50%; background:#1e1e1e; }
+  .toggle.off { background:#444; } .toggle.off::after { right:auto; left:2px; background:#999; }
+  .step { display:inline-flex; align-items:center; border:1px solid #555; border-radius:4px; overflow:hidden; }
+  .step b { padding:0 8px; font-weight:400; color:#bbb; } .step span { padding:2px 8px; background:#1b1b1b; min-width:44px; text-align:center; }
+  .i { color:#9a9a9a; margin-left:4px; }
+  .sgrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; } @media (max-width:640px) { .sgrid { grid-template-columns:1fr; } }
+  .sgrid > * { min-width:0; }
+  .ver { font-size:11px; color:#8a8a8a; display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+  footer { margin-top:60px; padding-top:16px; border-top:1px solid var(--line); color:var(--dim); font:12px "Courier New",monospace; }
+</style>
+</head>
+<body>
+<nav><span class="brand">AFSD · LAB</span><a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a></nav>
+<main>
+<header>
+  <div class="eyebrow">AutoFoodStreet · design report · October 20, 2026</div>
+  <h1>Redesigning the Log and Settings Tabs</h1>
+  <p class="deck">The last two tabs, in the same look as Prep work and Orders, so the whole window matches.</p>
+</header>
+
+<h2><span class="num">01</span>The Log tab</h2>
+<p class="figlabel"><span class="tag real">real screenshot</span> today</p>
+<img class="shot" src="log_before.jpg" alt="Current Log tab: a filter box, a follow checkbox and a wall of monospaced log lines including a Python traceback">
+<h3>What holds it back</h3>
+<ol class="list">
+  <li><b>It's written for me, not you.</b> SIFT inliers, card x-positions and tracebacks scroll by. The few lines that matter to you ("order completed +62", "storage full") are buried.</li>
+  <li><b>Everything is the same white text.</b> A crash looks exactly like "arrived → station".</li>
+  <li><b>Tracebacks take 20 lines</b> for one error, and a normal Stop shows up as one.</li>
+  <li><b>The filter box is the only tool,</b> and you have to know what to type.</li>
+</ol>
+
+<p class="figlabel"><span class="tag mock">mock-up</span> new Log tab, "Story" view</p>
+<div class="win">
+  <div class="tabs"><span class="tab">Orders</span><span class="tab">Prep work</span><span class="tab on">Log</span><span class="tab right">⚙ Settings</span></div>
+  <div class="body">
+    <div class="bar"><span class="seg"><span class="on">Story</span><span>Raw</span></span><span class="search">⌕ search the log…</span></div>
+    <div class="bar"><span class="chip on">All</span><span class="chip">Food Club<span class="n">42</span></span><span class="chip">Clipboard<span class="n">9</span></span><span class="chip">Prep<span class="n">14</span></span><span class="chip">Problems<span class="n">3</span></span><span class="chip">Tests<span class="n">31</span></span></div>
+    <div class="story">
+      <div class="day">TODAY · RUN STARTED 1:00 PM · 318 PTS/H</div>
+      <div class="ev gold"><span class="t">2:41</span><span class="ic">★</span><span class="tx"><b>Express done: American Pancakes ×3</b> — +294 points<small>alarm 2:24 · finished in 17 min · berries were in stock (express buffer)</small></span></div>
+      <div class="ev good"><span class="t">2:20</span><span class="ic">✓</span><span class="tx"><b>Order completed: Cherry Pie ×2</b> — +62 points</span></div>
+      <div class="ev"><span class="t">2:12</span><span class="ic">🧺</span><span class="tx">Prep work: collected 3 cheese, Cheese stocked (have 8 / want 8)</span></div>
+      <div class="ev warn"><span class="t">1:58</span><span class="ic">⚠</span><span class="tx"><b>Storage 28/30</b> — nearly full<small>simulator: full by 2:20 on this path</small></span></div>
+      <div class="ev"><span class="t">1:41</span><span class="ic">⏸</span><span class="tx">Held ice cream for clipboard order #2 — would block the Dairy 3 h while Food Club runs</span></div>
+      <div class="ev bad"><span class="t">1:33</span><span class="ic">✕</span><span class="tx"><b>Emulator stopped answering for 40 s</b> — reconnected by itself<small>details in Raw</small></span></div>
+      <div class="ev good"><span class="t">1:15</span><span class="ic">✓</span><span class="tx"><b>Closed the club leaderboard pop-up</b> (tapped Okay)</span></div>
+      <div class="ev"><span class="t">1:00</span><span class="ic">▶</span><span class="tx">Started: Food Club, Clipboard Orders, Prep work · update installed (4 files)</span></div>
+    </div>
+  </div>
+</div>
+
+<p class="figlabel"><span class="tag mock">mock-up</span> same tab, "Raw" view: today's log, but coloured and tidied</p>
+<div class="raw"><span class="t">13:33:12</span> <span class="x">[adb] adb timed out (attempt 1/3): LDPlayer is running but not answering adb</span>
+<span class="t">13:33:52</span> <span class="e">[event]</span> 'board item #2': arrived -> station
+<span class="t">13:33:53</span> <span class="e">[event]</span> 'board item #2': queued 1 batch(es) (wanted 1, stock allowed 1, EMPTY 2 -> 1).
+<span class="t">13:34:10</span> <span class="p">[prep]</span> Milk: have 2, cooking 1, want 3 -> make 0.
+<span class="t">13:40:00</span> <span class="s">[sim forecast]</span> storage in 30 min: about 29/30 (checked then)
+<span class="t">14:41:09</span> <span class="x">cycle 3: EXCEPTION -- adb tap timed out after 15 s</span>  <span class="fold">▸ 18 lines (traceback)</span></div>
+
+<h3>What changes</h3>
+<ol class="list">
+  <li><b>Story view (default):</b> only what you care about, in plain words with an icon: orders completed with points, expresses, Prep progress, warnings, problems. Grouped by run, newest first.</li>
+  <li><b>Raw view:</b> the full log, coloured by area (Food Club, Prep, simulator, problems in red). Tracebacks fold into one line, and a normal Stop isn't shown as an error.</li>
+  <li><b>Chips with counts</b> instead of typing filters: Food Club, Clipboard, Prep, Problems, Tests.</li>
+  <li><b>Send logs is unchanged:</b> the file I read stays exactly the same.</li>
+</ol>
+
+<h2><span class="num">02</span>The Settings tab</h2>
+<p class="figlabel"><span class="tag real">real screenshot</span> today (built yesterday)</p>
+<img class="shot" src="settings_before.jpg" alt="Current Settings tab: boxed sections with checkboxes, spinboxes and grey explanation text under each">
+<p>It's already in the new style, so this is polish, not a rebuild: the grey explanations move into ⓘ hovers, checkboxes
+become switches, and the sections sit side by side so nothing needs scrolling.</p>
+
+<p class="figlabel"><span class="tag mock">mock-up</span> polished Settings tab</p>
+<div class="win">
+  <div class="tabs"><span class="tab">Orders</span><span class="tab">Prep work</span><span class="tab">Log</span><span class="tab right on">⚙ Settings</span></div>
+  <div class="body">
+    <div class="sgrid">
+      <div class="sbox"><h4>Food Club</h4>
+        <div class="srow"><span class="l">Berries kept for the next express<span class="i">ⓘ</span></span><span class="step"><b>−</b><span>6</span><b>+</b></span></div>
+        <div class="srow"><span class="l">Wheat kept for the next express<span class="i">ⓘ</span></span><span class="step"><b>−</b><span>4</span><b>+</b></span></div>
+        <div class="srow"><span class="l">Other crops kept for replanting<span class="i">ⓘ</span></span><span class="step"><b>−</b><span>2</span><b>+</b></span></div>
+        <div class="srow"><span class="l">Storage guard<small>stop extras at 27/30 · waiting for your OK</small></span><span class="toggle off"></span></div>
+      </div>
+      <div class="sbox"><h4>Clipboard Orders</h4>
+        <div class="srow"><span class="l">Turn length while Food Club runs<span class="i">ⓘ</span></span><span class="step"><b>−</b><span>5 min</span><b>+</b></span></div>
+        <div class="srow"><span class="l">Keep long cooks off Food Club stations<span class="i">ⓘ</span></span><span class="toggle"></span></div>
+        <div class="srow"><span class="l">Long-cook limit</span><span class="step"><b>−</b><span>30 min</span><b>+</b></span></div>
+      </div>
+      <div class="sbox"><h4>Alarms</h4>
+        <div class="srow"><span class="l">Express alarm<small>beeps + pop-up</small></span><span class="toggle"></span></div>
+      </div>
+      <div class="sbox"><h4>Updates and logs</h4>
+        <div class="srow"><span class="l">Auto-update at every Start<span class="i">ⓘ</span></span><span class="toggle"></span></div>
+        <div class="srow"><span class="l">Send logs at every Stop<span class="i">ⓘ</span></span><span class="toggle"></span></div>
+        <div class="srow"><span class="l">Send logs now</span><span class="chip">Send</span></div>
+        <div class="ver"><span>code: event_orders 94854f · afsd_core 92315b</span><span>up to date ✓</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="callout"><b>Same look everywhere.</b> All four tabs would share the same pieces: rounded boxes, gold
+section titles, switches, − / + steppers, status pills and ⓘ hovers. Each tab gets a mock-up before it's built.</div>
+
+<h2><span class="num">03</span>Order to build them</h2>
+<ol class="list">
+  <li><b>Prep work:</b> you already loved it, and it fixes real clutter.</li>
+  <li><b>Orders:</b> the tab you look at most.</li>
+  <li><b>Log:</b> Story view first, Raw colouring second.</li>
+  <li><b>Settings:</b> polish, the smallest job.</li>
+</ol>
+
+<footer>AutoFoodStreet · design report written with Claude · unlisted page · top screenshots are the real tabs
+(the Log one shows old test lines); mock-ups are HTML drawn to look like AFSD, with example events, and are not built yet.</footer>
+</main>
+</body>
+</html>
