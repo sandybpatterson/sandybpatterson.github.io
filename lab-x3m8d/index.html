@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Orders Tab Redesign</title>
+<style>
+  :root { --bg:#0a0a0a; --panel:#161616; --line:#2c2c2c; --text:#e8e8e8; --dim:#9a9a9a; --gold:#c9a84c;
+          --gold-dim:#6f5d2a; --red:#e06060; --green:#6fcf6f; --blue:#6aa8e8; --amber:#f0c040; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 Georgia,"Times New Roman",serif; }
+  nav { position:sticky; top:0; z-index:5; display:flex; justify-content:space-between; align-items:center;
+        padding:10px 16px; background:rgba(10,10,10,.94); border-bottom:1px solid var(--line);
+        font-family:"Courier New",monospace; font-size:13px; }
+  nav .brand { color:var(--gold); letter-spacing:.08em; }
+  nav a { color:var(--text); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:4px 12px; }
+  main { max-width:900px; margin:0 auto; padding:0 16px 80px; }
+  header { padding:44px 0 18px; border-bottom:1px solid var(--line); }
+  .eyebrow { font-family:"Courier New",monospace; color:var(--gold); font-size:12px; letter-spacing:.18em; text-transform:uppercase; }
+  h1 { font-size:clamp(30px,7vw,46px); line-height:1.12; margin:10px 0 12px; font-weight:normal; }
+  .deck { color:var(--dim); font-size:18px; margin:0; }
+  h2 { font-weight:normal; font-size:26px; margin:50px 0 6px; }
+  h2 .num { font-family:"Courier New",monospace; color:var(--gold); font-size:15px; margin-right:10px; }
+  h3 { font-weight:normal; color:var(--gold); font-size:19px; margin:26px 0 6px; }
+  .muted { color:var(--dim); }
+  .figlabel { display:flex; gap:8px; align-items:center; margin-top:22px; font-family:"Courier New",monospace; font-size:13px; color:var(--dim); flex-wrap:wrap; }
+  .tag { font-family:"Courier New",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--line); border-radius:999px; padding:2px 8px; }
+  .tag.real { color:var(--green); border-color:#2f5a2f; } .tag.mock { color:var(--amber); border-color:#5e4c1c; }
+  img.shot { width:100%; border:1px solid var(--line); border-radius:8px; display:block; margin-top:8px; }
+  table { width:100%; border-collapse:collapse; margin:14px 0; font-size:15px; }
+  th, td { text-align:left; padding:9px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-family:"Courier New",monospace; font-size:12px; color:var(--gold); letter-spacing:.08em; text-transform:uppercase; font-weight:normal; }
+  ol.list { padding-left:22px; } ol.list li { margin:8px 0; }
+  .callout { border-left:3px solid var(--gold); background:var(--panel); padding:12px 16px; margin:20px 0; border-radius:0 8px 8px 0; }
+
+  /* ---------- AFSD-style mock ---------- */
+  .win { background:#1e1e1e; border:1px solid #3a3a3a; border-radius:8px; overflow:hidden; margin-top:8px;
+         font-family:"Segoe UI",Arial,sans-serif; font-size:13px; color:#e8e8e8; }
+  .tabs { display:flex; gap:6px; padding:10px 12px 0; border-bottom:1px solid var(--gold-dim); overflow-x:auto; }
+  .tab { padding:5px 12px; border:1px solid #555; border-bottom:none; border-radius:3px 3px 0 0; white-space:nowrap; }
+  .tab.on { background:var(--gold); color:#1e1e1e; border-color:var(--gold); } .tab.right { margin-left:auto; }
+  .body { padding:12px; }
+  .win, .body { min-width:0; max-width:100%; }
+  .strip > *, .board > *, .clip > * { min-width:0; }
+  .sec { flex-wrap:wrap; gap:2px 10px; }
+  .doing span { min-width:0; overflow-wrap:anywhere; }
+  .strip { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  @media (max-width:640px) { .strip { grid-template-columns:repeat(2,1fr); } }
+  .stat { background:#262626; border:1px solid #3a3a3a; border-radius:6px; padding:8px 10px; }
+  .stat .k { font-size:11px; color:#9a9a9a; text-transform:uppercase; letter-spacing:.06em; }
+  .stat .v { font-size:20px; font-weight:600; margin-top:2px; }
+  .stat .s { font-size:11px; color:#9a9a9a; }
+  .meter { height:6px; background:#3a3a3a; border-radius:3px; overflow:hidden; margin-top:6px; }
+  .meter i { display:block; height:100%; }
+  .doing { display:flex; align-items:center; gap:10px; margin:10px 0; padding:9px 12px; border:1px solid var(--gold-dim);
+           background:#2a2414; border-radius:6px; }
+  .dot { width:9px; height:9px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px rgba(111,207,111,.2); flex:none; }
+  .sec { display:flex; justify-content:space-between; align-items:baseline; margin:14px 2px 8px; }
+  .sec b { color:var(--gold); font-size:12px; letter-spacing:.12em; }
+  .sec span { font-size:11px; color:#9a9a9a; }
+  .board { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  @media (max-width:640px) { .board { grid-template-columns:1fr; } }
+  .ocard { background:#262626; border:1px solid #3a3a3a; border-radius:8px; padding:10px; position:relative; }
+  .ocard.active { border-color:var(--gold); box-shadow:0 0 0 1px var(--gold) inset; }
+  .ocard.express { border-color:#e0b020; background:linear-gradient(180deg,#3a2f10,#262626 45%); }
+  .ohead { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .ohead .t { font-weight:600; } .ohead .p { font-size:11px; color:var(--gold); border:1px solid var(--gold-dim); border-radius:999px; padding:1px 7px; }
+  .ring { width:30px; height:30px; }
+  .it { display:grid; grid-template-columns:1fr auto; gap:2px 8px; padding:5px 0; border-top:1px solid #333; }
+  .it .n { font-size:13px; } .it .c { font-size:12px; font-variant-numeric:tabular-nums; }
+  .it .st { grid-column:1 / -1; font-size:11px; color:#9a9a9a; }
+  .it .bar { grid-column:1 / -1; height:3px; background:#383838; border-radius:2px; overflow:hidden; }
+  .it .bar i { display:block; height:100%; background:#888; }
+  .c-red { color:var(--red); } .c-green { color:var(--green); } .c-amber { color:var(--amber); }
+  .bar .g { background:var(--green) !important; } .bar .a { background:var(--amber) !important; } .bar .r { background:var(--red) !important; }
+  .clip { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  @media (max-width:640px) { .clip { grid-template-columns:1fr; } }
+  .badge { font-size:11px; border-radius:999px; padding:1px 8px; border:1px solid; }
+  .b-good { color:var(--green); border-color:#2f5a2f; } .b-bad { color:var(--red); border-color:#5a2f2f; }
+  .feed { margin-top:12px; background:#262626; border:1px solid #3a3a3a; border-radius:6px; padding:8px 10px; }
+  .feed .r { display:flex; justify-content:space-between; gap:8px; padding:4px 0; border-top:1px solid #333; font-size:12px; }
+  .feed .r:first-of-type { border-top:none; }
+  footer { margin-top:60px; padding-top:16px; border-top:1px solid var(--line); color:var(--dim); font-family:"Courier New",monospace; font-size:12px; }
+</style>
+</head>
+<body>
+<nav><span class="brand">AFSD · LAB</span><a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a></nav>
+<main>
+
+<header>
+  <div class="eyebrow">AutoFoodStreet · design report · October 20, 2026</div>
+  <h1>Redesigning the Orders Tab</h1>
+  <p class="deck">Same look as the Prep work redesign. The Orders tab stops being a long list and becomes a live
+  dashboard: how the run is going, what the bot is doing right now, and the board the way the game shows it.</p>
+</header>
+
+<h2><span class="num">01</span>Today</h2>
+<p class="figlabel"><span class="tag real">real screenshot</span> current Orders tab (example orders filled in)</p>
+<img class="shot" src="before.jpg" alt="Current Orders tab: Food Club Event and Clipboard Orders as stacked lists of orders with items, counts and statuses">
+
+<h3>What works</h3>
+<p>Clear orders, honest counts, and the "working on it now…" line. The redesign keeps all of that.</p>
+<h3>What holds it back</h3>
+<ol class="list">
+  <li><b>The big picture is missing.</b> Points per hour, score to the next level, storage and the express state are only in the log.</li>
+  <li><b>One long column.</b> The game shows Food Club as three cards side by side; here they're stacked, so the clipboard falls off the bottom.</li>
+  <li><b>Every item looks the same.</b> "4/7" and "0/4" have the same weight. You can't see at a glance which card is close to done.</li>
+  <li><b>"Needs making" says nothing new.</b> The useful facts would be "cooking, ready in 2m", "growing, 3m" or "blocked: Dairy busy 3 h".</li>
+  <li><b>No reward on the card.</b> Points earned and coins on offer aren't shown, even though the bot now measures both.</li>
+</ol>
+
+<h2><span class="num">02</span>The redesign</h2>
+<p class="figlabel"><span class="tag mock">mock-up</span> new Orders tab during a run</p>
+<div class="win">
+  <div class="tabs"><span class="tab on">Orders</span><span class="tab">Prep work</span><span class="tab">Log</span><span class="tab right">⚙ Settings</span></div>
+  <div class="body">
+
+    <div class="strip">
+      <div class="stat"><div class="k">Points / hour</div><div class="v" style="color:var(--green)">318</div><div class="s">this run · 2 h 10 m</div></div>
+      <div class="stat"><div class="k">Score</div><div class="v">1127<span style="font-size:13px;color:#9a9a9a"> / 2000</span></div>
+        <div class="meter"><i style="width:56%;background:var(--gold)"></i></div><div class="s">next level ≈ 11:40 PM</div></div>
+      <div class="stat"><div class="k">Storage</div><div class="v" style="color:var(--amber)">24<span style="font-size:13px;color:#9a9a9a">/30</span></div>
+        <div class="meter"><i style="width:80%;background:linear-gradient(90deg,var(--blue),var(--amber))"></i></div><div class="s">full in ~25 min at this pace</div></div>
+      <div class="stat"><div class="k">Completed</div><div class="v">7</div><div class="s">+1 express ★ 294 pts</div></div>
+    </div>
+
+    <div class="doing"><span class="dot"></span><span><b>Now:</b> Assorted Meats at the Supermarket Snack Stand · queued 1, ready in 4m</span></div>
+
+    <div class="sec"><b>FOOD CLUB</b><span>read 8:41 PM · board refreshes when a card completes</span></div>
+    <div class="board">
+      <div class="ocard">
+        <div class="ohead"><span class="t">Order 1</span>
+          <svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#3a3a3a" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="80 95" transform="rotate(-90 18 18)"/></svg></div>
+        <div class="it"><span class="n">Cream</span><span class="c c-amber">1/2</span><div class="bar"><i class="a" style="width:50%"></i></div><span class="st">cooking at the Dairy · 1m</span></div>
+        <div class="it"><span class="n">Cola</span><span class="c c-amber">4/5</span><div class="bar"><i class="a" style="width:80%"></i></div><span class="st">cooking at the Snack Stand · 3m</span></div>
+        <div style="margin-top:6px"><span class="ohead p" style="font-size:11px;color:var(--green)">closest to done · ~4 min</span></div>
+      </div>
+      <div class="ocard active">
+        <div class="ohead"><span class="t">Order 2</span>
+          <svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#3a3a3a" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="45 95" transform="rotate(-90 18 18)"/></svg></div>
+        <div class="it"><span class="n">Assorted Meats</span><span class="c c-amber">4/7</span><div class="bar"><i class="a" style="width:57%"></i></div><span class="st" style="color:var(--gold)">◐ working on it now</span></div>
+        <div class="it"><span class="n">Spices</span><span class="c c-red">1/4</span><div class="bar"><i class="r" style="width:25%"></i></div><span class="st">growing · 6 plots · 2m</span></div>
+      </div>
+      <div class="ocard">
+        <div class="ohead"><span class="t">Order 3</span>
+          <svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#3a3a3a" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="20 95" transform="rotate(-90 18 18)"/></svg></div>
+        <div class="it"><span class="n">Bread</span><span class="c c-red">0/4</span><div class="bar"><i class="r" style="width:3%"></i></div><span class="st">waiting for wheat</span></div>
+        <div class="it"><span class="n">Vanilla Ice Cream</span><span class="c c-red">2/5</span><div class="bar"><i class="r" style="width:40%"></i></div><span class="st">queued · 2 ahead · ~9m</span></div>
+      </div>
+    </div>
+
+    <div class="sec"><b>CLIPBOARD</b><span>2 orders · turn 5 min while Food Club runs</span></div>
+    <div class="clip">
+      <div class="ocard">
+        <div class="ohead"><span class="t">Order 1</span><span class="badge b-good">210 coins · good</span></div>
+        <div class="it"><span class="n">Egg</span><span class="c c-green">2/2 ✓</span></div>
+        <div class="it"><span class="n">Apple</span><span class="c c-green">1/1 ✓</span></div>
+        <div class="it"><span class="n">Macaroni Cheese</span><span class="c c-red">0/2</span><span class="st">Breakfast Stove · 20m</span></div>
+      </div>
+      <div class="ocard">
+        <div class="ohead"><span class="t">Order 2</span><span class="badge b-bad">45 coins · skip?</span></div>
+        <div class="it"><span class="n">Ice Cream</span><span class="c c-red">0/1</span><span class="st" style="color:var(--red)">held: blocks the Dairy 3 h while Food Club runs</span></div>
+      </div>
+    </div>
+
+    <div class="feed">
+      <div style="font-size:11px;color:#9a9a9a;letter-spacing:.08em;margin-bottom:4px">RECENT</div>
+      <div class="r"><span>★ <b style="color:#e0b020">EXPRESS</b> American Pancakes ×3</span><span class="c-green">+294 pts · 8:12 PM</span></div>
+      <div class="r"><span>Cherry Pie ×2</span><span class="c-green">+62 pts · 7:58 PM</span></div>
+      <div class="r"><span>Clipboard: Egg ×2, Apple</span><span class="muted">+138 coins · 7:40 PM</span></div>
+    </div>
+  </div>
+</div>
+
+<h2><span class="num">03</span>What changes</h2>
+<table>
+  <tr><th>Today</th><th>New design</th></tr>
+  <tr><td>"updated 4 s ago" line</td><td>A <b>stats strip</b>: points per hour, score with a bar and next-level time, storage with a forecast, completed count</td></tr>
+  <tr><td>"working on it now…" on one item</td><td>A <b>Now:</b> bar at the top that says what the bot is doing and where</td></tr>
+  <tr><td>Food Club orders stacked</td><td><b>Three cards side by side</b>, like the game board (they stack on a narrow window). The card being worked on is outlined gold; an express card turns gold</td></tr>
+  <tr><td>"0 of 2 ready"</td><td>A <b>progress ring</b> per card, and the closest-to-done card is marked</td></tr>
+  <tr><td>"needs making"</td><td>The real state: cooking ⋅ time left, growing ⋅ time left, queued behind N, waiting for an ingredient, held/blocked and why</td></tr>
+  <tr><td>Plain counts</td><td>Count plus a thin bar; colour: red = far, amber = on the way, green = done</td></tr>
+  <tr><td>Clipboard below Food Club</td><td>Its own row of cards with a <b>coins badge</b> from the ranking test ("good" / "skip?")</td></tr>
+  <tr><td>Now / History buttons</td><td>A short <b>Recent</b> feed under the boards; the full History stays one click away</td></tr>
+</table>
+
+<div class="callout"><b>Only looks change.</b> Everything shown is something the bot already knows or is learning in
+the log-only tests (timers, storage, the simulator's forecasts, the coin ranking). No new taps.</div>
+
+<h2><span class="num">04</span>Questions for later</h2>
+<ol class="list">
+  <li><b>Stats strip:</b> are these the four numbers you want to see first? Swap candidates: gems, coins, "next express usually around…"</li>
+  <li><b>Clipboard badges:</b> show "skip?" only once the coin ranking test proves accurate. I'd hide them until then.</li>
+  <li><b>One look for every tab:</b> same cards, pills and bars for Orders, Prep work, Log and Settings. Do them one tab at a time, with a mock-up each?</li>
+</ol>
+
+<footer>AutoFoodStreet · design report written with Claude · unlisted page · the top screenshot is the real tab
+with example orders; the mock-up is HTML drawn to look like AFSD and is not built yet. Numbers in the mock-up are
+examples.</footer>
+</main>
+</body>
+</html>
