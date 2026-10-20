@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kitchen Simulator Plan</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --panel: #161616; --panel2: #1e1e1e; --line: #2c2c2c;
+    --text: #e8e8e8; --dim: #9a9a9a; --gold: #c9a84c; --gold-dim: #6f5d2a;
+    --red: #e06060; --green: #6fcf6f; --blue: #6aa8e8; --amber: #f0c040;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 17px/1.6 Georgia, "Times New Roman", serif; }
+  nav { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center;
+        padding: 10px 16px; background: rgba(10,10,10,.94); border-bottom: 1px solid var(--line);
+        font-family: "Courier New", monospace; font-size: 13px; }
+  nav .brand { color: var(--gold); letter-spacing: .08em; }
+  nav a { color: var(--text); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+  main { max-width: 820px; margin: 0 auto; padding: 0 16px 80px; }
+  header { padding: 48px 0 18px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-family: "Courier New", monospace; color: var(--gold); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { font-size: clamp(30px, 6vw, 46px); line-height: 1.12; margin: 10px 0 12px; font-weight: normal; }
+  .deck { color: var(--dim); font-size: 19px; margin: 0; }
+  h2 { font-weight: normal; font-size: 27px; margin: 54px 0 6px; }
+  h2 .num { font-family: "Courier New", monospace; color: var(--gold); font-size: 15px; margin-right: 10px; }
+  h3 { font-weight: normal; color: var(--gold); font-size: 19px; margin: 28px 0 6px; }
+  p { margin: 10px 0; }
+  .muted { color: var(--dim); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 18px 0; }
+  .callout { border-left: 3px solid var(--gold); background: var(--panel); padding: 12px 16px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+  .tag { font-family: "Courier New", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+         border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; color: var(--dim); }
+  .tag.real { color: var(--green); border-color: #2f5a2f; }
+  .tag.mock { color: var(--amber); border-color: #5e4c1c; }
+  pre.log { background: #050505; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; overflow-x: auto;
+            font: 12.5px/1.55 "Courier New", monospace; color: #cfcfcf; margin: 8px 0 0; white-space: pre; }
+  .log .t { color: #6b6b6b; } .log .m { color: var(--blue); } .log .g { color: var(--gold); }
+  .log .r { color: var(--red); } .log .ok { color: var(--green); }
+  .figlabel { display: flex; gap: 8px; align-items: center; margin-top: 22px; font-family: "Courier New", monospace;
+              font-size: 13px; color: var(--dim); }
+  svg { width: 100%; height: auto; display: block; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: "Courier New", monospace; font-size: 12px; color: var(--gold); letter-spacing: .08em; text-transform: uppercase; font-weight: normal; }
+  .size { font-family: "Courier New", monospace; font-size: 12px; }
+  .s-s { color: var(--green); } .s-m { color: var(--amber); } .s-l { color: var(--red); }
+  /* mock GUI */
+  .afsd { background: #1e1e1e; border: 1px solid #3a3a3a; border-radius: 8px; overflow: hidden; font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; }
+  .afsd .tabs { display: flex; gap: 6px; padding: 10px 12px 0; border-bottom: 1px solid var(--gold-dim); }
+  .afsd .tab { padding: 5px 12px; border: 1px solid #555; border-bottom: none; color: #ddd; border-radius: 3px 3px 0 0; }
+  .afsd .tab.on { background: var(--gold); color: #1e1e1e; border-color: var(--gold); }
+  .afsd .tab.right { margin-left: auto; }
+  .afsd .body { padding: 12px; }
+  .afsd .box { background: #2a2a2a; border: 1px solid var(--gold-dim); border-radius: 4px; padding: 10px 12px; margin-bottom: 10px; }
+  .afsd .box h4 { margin: 0 0 6px; color: var(--gold); font-weight: 600; font-size: 13px; }
+  .afsd .row { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; border-bottom: 1px dashed #383838; }
+  .afsd .row:last-child { border-bottom: none; }
+  .afsd .warn { color: var(--amber); } .afsd .bad { color: var(--red); } .afsd .good { color: var(--green); }
+  .afsd .meter { height: 8px; background: #3a3a3a; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .afsd .meter span { display: block; height: 100%; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } body { font-size: 16px; } }
+  footer { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--dim);
+           font-family: "Courier New", monospace; font-size: 12px; }
+</style>
+</head>
+<body>
+<nav><span class="brand">AFSD · LAB</span><a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a></nav>
+<main>
+
+<header>
+  <div class="eyebrow">AutoFoodStreet · design report · October 20, 2026</div>
+  <h1>A Simulator of the Whole Kitchen</h1>
+  <p class="deck">Today the bot reacts. This plan teaches it to look ahead: copy the kitchen into its head, play the
+  next two hours forward many different ways, and do whichever move ends best.</p>
+</header>
+
+<h2><span class="num">01</span>Why: one day of logs</h2>
+<p>Every serious problem on October 19 came from the same blind spot. The bot only sees what is in front of it
+right now, so it walks straight into collisions that were visible minutes or hours ahead.</p>
+
+<div class="card">
+<table>
+  <tr><th>When</th><th>What happened</th><th>What a look-ahead would have seen</th></tr>
+  <tr><td>Overnight</td><td>4 ice creams (3 h each) queued at the Dairy for a clipboard order. A Food Club Cream sat
+    behind them for 72+ minutes.</td><td>“Food Club needs the Dairy in 10 min. Don't block it for 12 h.”</td></tr>
+  <tr><td>02:30</td><td>An express appeared. Berries were at 0, and clipboard work ran 15 more minutes. Missed.</td>
+    <td>“Expresses usually want pancakes. Keep berries growing.”</td></tr>
+  <tr><td>11:41, 12:27</td><td>Storage hit 30/30 twice. The purge trashed 3 Food Club orders each time (6 lost).</td>
+    <td>“On this path storage overflows in 18 minutes. Cook the spare wheat first.”</td></tr>
+  <tr><td>Evening</td><td>Prep work made 8 more cheese while 8 sat uncollected.</td>
+    <td>A kitchen copy that tracks what is <em>finished but not collected</em>.</td></tr>
+</table>
+</div>
+
+<p class="figlabel"><span class="tag real">real log</span> the Dairy jam, from the stuck-slot test</p>
+<pre class="log"><span class="t">[2026-10-19T07:50:5]</span> <span class="m">[stuck test]</span> Cream at Dairu: waited 11 min, 4 busy slot(s) never changed and none were queued by the bot -- the fix WOULD put it in the free slot now.
+<span class="t">[2026-10-19T08:11:4]</span> <span class="m">[stuck test]</span> Cream at Dairu: still waiting, 21 min since the fix would have queued it.
+<span class="t">[2026-10-19T08:11:4]</span> <span class="m">[card test]</span> #1: 1 red, 1 units missing, on board 32 min (Cream 1/2) | #2: ... (Assorted Meats ?/?)</pre>
+
+<p class="figlabel"><span class="tag real">real log</span> the storage-full purge</p>
+<pre class="log"><span class="t">[2026-10-19T12:27:3]</span> 'Food Club Storage is full' popup -- closing it with its X (never Upgrade Now).
+<span class="t">[2026-10-19T12:28:3]</span> <span class="r">STORAGE FULL purge:</span> the storage-full popup appeared 3 times in the last 20 min -- discarding the event board's orders.
+<span class="t">[2026-10-19T12:29:0]</span> <span class="r">STORAGE FULL purge:</span> finished, 3 order(s) discarded.</pre>
+
+<h2><span class="num">02</span>What the simulator does</h2>
+<p>Think of a chess player looking a few moves ahead. The simulator never taps anything. It is a planner that
+decides the <em>order</em> the bot does things in. Every few minutes it runs one loop:</p>
+
+<p class="figlabel">Figure 1 · the planning loop</p>
+<div class="card">
+<svg viewBox="0 0 760 250" role="img" aria-label="Snapshot, list choices, play forward, score, act, repeat">
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#c9a84c"/></marker></defs>
+  <g font-family="Courier New, monospace" font-size="13" fill="#e8e8e8" text-anchor="middle">
+    <g><rect x="10" y="40" width="130" height="70" rx="8" fill="#1e1e1e" stroke="#c9a84c"/><text x="75" y="70" fill="#c9a84c">1 SNAPSHOT</text><text x="75" y="92" font-size="11" fill="#9a9a9a">stations, plots,</text><text x="75" y="105" font-size="11" fill="#9a9a9a">storage, orders</text></g>
+    <g><rect x="160" y="40" width="130" height="70" rx="8" fill="#1e1e1e" stroke="#c9a84c"/><text x="225" y="70" fill="#c9a84c">2 CHOICES</text><text x="225" y="92" font-size="11" fill="#9a9a9a">cook? plant?</text><text x="225" y="105" font-size="11" fill="#9a9a9a">wait? skip?</text></g>
+    <g><rect x="310" y="40" width="140" height="70" rx="8" fill="#1e1e1e" stroke="#c9a84c"/><text x="380" y="70" fill="#c9a84c">3 PLAY FORWARD</text><text x="380" y="92" font-size="11" fill="#9a9a9a">next 2 hours,</text><text x="380" y="105" font-size="11" fill="#9a9a9a">in a split second</text></g>
+    <g><rect x="470" y="40" width="130" height="70" rx="8" fill="#1e1e1e" stroke="#c9a84c"/><text x="535" y="70" fill="#c9a84c">4 SCORE</text><text x="535" y="92" font-size="11" fill="#9a9a9a">points, jams,</text><text x="535" y="105" font-size="11" fill="#9a9a9a">overflows</text></g>
+    <g><rect x="620" y="40" width="130" height="70" rx="8" fill="#2a2414" stroke="#c9a84c" stroke-width="2"/><text x="685" y="70" fill="#c9a84c">5 ACT</text><text x="685" y="92" font-size="11" fill="#9a9a9a">best move, for</text><text x="685" y="105" font-size="11" fill="#9a9a9a">real, same rules</text></g>
+    <path d="M140,75 L158,75" stroke="#c9a84c" stroke-width="2" marker-end="url(#ah)"/>
+    <path d="M290,75 L308,75" stroke="#c9a84c" stroke-width="2" marker-end="url(#ah)"/>
+    <path d="M450,75 L468,75" stroke="#c9a84c" stroke-width="2" marker-end="url(#ah)"/>
+    <path d="M600,75 L618,75" stroke="#c9a84c" stroke-width="2" marker-end="url(#ah)"/>
+    <path d="M685,112 C685,200 75,200 75,114" fill="none" stroke="#6f5d2a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah)"/>
+    <text x="380" y="222" font-size="12" fill="#9a9a9a">a few minutes later: new snapshot, plan again (the kitchen changed)</text>
+  </g>
+</svg>
+</div>
+
+<h3>One choice, played two ways</h3>
+<p class="figlabel">Figure 2 · the Dairy, next 3 hours <span class="tag mock">illustration</span></p>
+<div class="card">
+<svg viewBox="0 0 760 230" role="img" aria-label="Timeline comparing queueing ice cream first versus Cream first at the Dairy">
+  <g font-family="Courier New, monospace" font-size="12" fill="#9a9a9a">
+    <line x1="140" y1="20" x2="740" y2="20" stroke="#2c2c2c"/>
+    <text x="140" y="14">now</text><text x="335" y="14">+1 h</text><text x="535" y="14">+2 h</text><text x="715" y="14">+3 h</text>
+    <line x1="340" y1="18" x2="340" y2="215" stroke="#2c2c2c" stroke-dasharray="3 4"/><line x1="540" y1="18" x2="540" y2="215" stroke="#2c2c2c" stroke-dasharray="3 4"/>
+    <text x="10" y="62" fill="#e8e8e8">Choice A</text><text x="10" y="78">ice cream first</text>
+    <rect x="140" y="50" width="600" height="26" rx="4" fill="#3b2a12" stroke="#c9a84c"/>
+    <text x="150" y="68" fill="#f0c040">ICE CREAM · ICE CREAM · ICE CREAM · ICE CREAM  (3 h each)  →</text>
+    <text x="150" y="100" fill="#e06060">Cream for Food Club: stuck in line, card expires · score −75 pts</text>
+    <text x="10" y="152" fill="#e8e8e8">Choice B</text><text x="10" y="168">Cream first</text>
+    <rect x="140" y="140" width="22" height="26" rx="4" fill="#1d3a1d" stroke="#6fcf6f"/>
+    <rect x="165" y="140" width="575" height="26" rx="4" fill="#1e1e1e" stroke="#555"/>
+    <text x="175" y="158" fill="#9a9a9a">free for Food Club · clipboard ice cream waits until Food Club is off</text>
+    <text x="150" y="192" fill="#6fcf6f">Cream done in 1 min → card completes · score +75 pts → picks B</text>
+  </g>
+</svg>
+</div>
+
+<h2><span class="num">03</span>What it could predict</h2>
+<p>A prediction is the future played forward. It is only as good as what the bot knows, and it learns more from
+every day of logs. It can't see orders before they appear, but it can learn their patterns.</p>
+
+<p class="figlabel">Figure 3 · storage forecast <span class="tag mock">illustration, numbers from 10/19 11:07–11:41</span></p>
+<div class="card">
+<svg viewBox="0 0 760 240" role="img" aria-label="Storage over time: actual readings rising to full, forecast line crossing 30 at 11:41, guard line at 27">
+  <g font-family="Courier New, monospace" font-size="11" fill="#9a9a9a">
+    <line x1="60" y1="200" x2="740" y2="200" stroke="#2c2c2c"/><line x1="60" y1="20" x2="60" y2="200" stroke="#2c2c2c"/>
+    <text x="24" y="204">15</text><text x="24" y="134">22</text><text x="24" y="34">30</text>
+    <line x1="60" y1="30" x2="740" y2="30" stroke="#e06060" stroke-dasharray="5 5"/><text x="664" y="25" fill="#e06060">FULL 30</text>
+    <line x1="60" y1="60" x2="740" y2="60" stroke="#f0c040" stroke-dasharray="2 5"/><text x="606" y="55" fill="#f0c040">guard line 27</text>
+    <polyline fill="none" stroke="#6aa8e8" stroke-width="2.5" points="70,113 110,104 160,85 250,77 330,68 370,104 400,94 430,85 470,94 500,77 520,68 545,49"/>
+    <g fill="#6aa8e8"><circle cx="70" cy="113" r="3"/><circle cx="160" cy="85" r="3"/><circle cx="330" cy="68" r="3"/><circle cx="370" cy="104" r="3"/><circle cx="430" cy="85" r="3"/><circle cx="500" cy="77" r="3"/><circle cx="545" cy="49" r="3"/></g>
+    <polyline fill="none" stroke="#c9a84c" stroke-width="2" stroke-dasharray="7 5" points="545,49 600,38 640,30"/>
+    <circle cx="640" cy="30" r="5" fill="none" stroke="#e06060" stroke-width="2"/>
+    <text x="72" y="222">11:07</text><text x="320" y="222">11:24</text><text x="530" y="222">11:33</text><text x="625" y="222">11:41</text>
+    <text x="420" y="160" fill="#6aa8e8">— real readings</text><text x="420" y="176" fill="#c9a84c">- - forecast: full at 11:41</text>
+    <text x="420" y="192" fill="#e06060">○ real popup + purge followed</text>
+  </g>
+</svg>
+</div>
+
+<div class="grid2">
+  <div class="callout"><strong>Kitchen predictions</strong><br><span class="muted">“Berries hit 0 at 7:20.” · “Storage full in 25 min.” ·
+  “The Bread Oven is busy until 9:40.” · “You reach 2000 points around 11:40 PM at this pace.”</span></div>
+  <div class="callout"><strong>Advice for you, not the bot</strong><br><span class="muted">“The Dairy is tonight's bottleneck. Its
+  slot upgrade would pay back fastest.” · “This clipboard order earns 12 coins an hour. Skip it.”</span></div>
+</div>
+
+<h2><span class="num">04</span>What it would look like</h2>
+
+<p class="figlabel">Mock-up · a Forecast tab in AFSD <span class="tag mock">not built</span></p>
+<div class="afsd">
+  <div class="tabs"><span class="tab">Orders</span><span class="tab">Prep work</span><span class="tab on">Forecast</span><span class="tab">Log</span><span class="tab right">⚙ Settings</span></div>
+  <div class="body">
+    <div class="box"><h4>Next 2 hours</h4>
+      <div class="row"><span>Storage</span><span class="warn">24/30 now → <b>30/30 at 11:41</b> on this path</span></div>
+      <div class="meter"><span style="width:80%;background:linear-gradient(90deg,#6aa8e8,#f0c040)"></span></div>
+      <div class="row"><span>Assorted Berries</span><span class="bad">2 left → 0 at 7:20</span></div>
+      <div class="row"><span>Dairy</span><span class="warn">busy until 9:40 (ice cream)</span></div>
+      <div class="row"><span>Points at this pace</span><span class="good">~320 / hour · 2000 at 11:40 PM</span></div>
+    </div>
+    <div class="box"><h4>Best next move</h4>
+      <div class="row"><span>1. Cream at the Dairy (Food Club card #1)</span><span class="good">+75 pts</span></div>
+      <div class="row"><span>2. Plant berries (express insurance)</span><span class="good">safe</span></div>
+      <div class="row"><span class="muted">✕ Ice cream for clipboard order #4</span><span class="bad">blocks Dairy 3 h</span></div>
+    </div>
+  </div>
+</div>
+
+<p class="figlabel"><span class="tag mock">example log</span> forecast lines, step 3 (log only)</p>
+<pre class="log"><span class="t">[2026-10-21T19:04:12]</span> <span class="g">[forecast]</span> storage 24/30 -> 30/30 at 19:22 (wheat x4 harvest 19:15, cola x3 ready 19:21)
+<span class="t">[2026-10-21T19:04:12]</span> <span class="g">[forecast]</span> berries 2 -> 0 at 19:20 (pancakes x2 queued at the Deli)
+<span class="t">[2026-10-21T19:04:12]</span> <span class="g">[forecast]</span> Dairy busy until 21:40 (ice cream x1, not ours)
+<span class="t">[2026-10-21T19:22:30]</span> <span class="g">[forecast check]</span> storage at 19:22: predicted 30, real 29 <span class="ok">-- off by 1</span></pre>
+
+<p class="figlabel"><span class="tag mock">example log</span> advisor lines, step 4 (log only, bot doesn't follow yet)</p>
+<pre class="log"><span class="t">[2026-10-22T08:10:03]</span> <span class="g">[advisor]</span> best: Cream at Dairy (+75 pts in 2 h) | 2nd: plant berries (+0, express insurance) | worst: ice cream x1 for clipboard #4 (-75: blocks Dairy 3 h)
+<span class="t">[2026-10-22T08:10:41]</span> <span class="g">[advisor]</span> the bot chose: ice cream x1 for clipboard #4 <span class="r">-- disagrees with the advisor</span>
+<span class="t">[2026-10-22T09:00:00]</span> <span class="g">[advisor score]</span> last hour: advisor plan 380 pts (simulated), bot 140 pts (real)</pre>
+
+<h2><span class="num">05</span>How big a project</h2>
+<p>Big, but in pieces you get to use along the way. Same rule as everything else on this bot: test it in the logs
+first, and only let it steer once it has proven it beats what the bot does today.</p>
+<table>
+  <tr><th>Step</th><th>What</th><th>You get</th><th>Size</th></tr>
+  <tr><td>1</td><td><b>Read everything.</b> Stock numbers on cards, coins per order, timers.</td><td>Correct numbers. Partly built: Prep now saves pictures of unreadable stock boxes.</td><td class="size s-s">small</td></tr>
+  <tr><td>2</td><td><b>Kitchen model.</b> Stations, lines, cook times, crop doubling, storage, using the recipe book that already exists.</td><td>A rough version already powers Prep's start-time math.</td><td class="size s-m">medium</td></tr>
+  <tr><td>3</td><td><b>Forecasts, log-only.</b> Each forecast checked against what really happened.</td><td>A Forecast tab, and proof of whether it's accurate.</td><td class="size s-m">medium</td></tr>
+  <tr><td>4</td><td><b>Advisor, log-only.</b> “Best next move” next to what the bot actually did.</td><td>Proof of whether its plan beats the current bot.</td><td class="size s-m">medium</td></tr>
+  <tr><td>5</td><td><b>Pilot.</b> The bot follows the plan, with every safety rule unchanged.</td><td>More points per hour.</td><td class="size s-l">large</td></tr>
+</table>
+
+<h3>What it will not do</h3>
+<p>It never taps anything by itself and never spends gems, tokens or money. It doesn't know orders before they
+appear. Its job is only to decide the order of moves the bot already knows how to make, more safely.</p>
+
+<footer>AutoFoodStreet · plan written with Claude · unlisted page · logs labelled “real log” are copied from the
+10/19 run; everything labelled “example” or “illustration” is made up to show the idea.</footer>
+</main>
+</body>
+</html>
