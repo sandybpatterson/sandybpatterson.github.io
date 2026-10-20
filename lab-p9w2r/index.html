@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Prep Tab Redesign</title>
+<style>
+  :root { --bg:#0a0a0a; --panel:#161616; --line:#2c2c2c; --text:#e8e8e8; --dim:#9a9a9a; --gold:#c9a84c;
+          --gold-dim:#6f5d2a; --red:#e06060; --green:#6fcf6f; --blue:#6aa8e8; --amber:#f0c040; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 Georgia,"Times New Roman",serif; }
+  nav { position:sticky; top:0; z-index:5; display:flex; justify-content:space-between; align-items:center;
+        padding:10px 16px; background:rgba(10,10,10,.94); border-bottom:1px solid var(--line);
+        font-family:"Courier New",monospace; font-size:13px; }
+  nav .brand { color:var(--gold); letter-spacing:.08em; }
+  nav a { color:var(--text); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:4px 12px; }
+  main { max-width:900px; margin:0 auto; padding:0 16px 80px; }
+  header { padding:48px 0 18px; border-bottom:1px solid var(--line); }
+  .eyebrow { font-family:"Courier New",monospace; color:var(--gold); font-size:12px; letter-spacing:.18em; text-transform:uppercase; }
+  h1 { font-size:clamp(30px,6vw,46px); line-height:1.12; margin:10px 0 12px; font-weight:normal; }
+  .deck { color:var(--dim); font-size:19px; margin:0; }
+  h2 { font-weight:normal; font-size:27px; margin:54px 0 6px; }
+  h2 .num { font-family:"Courier New",monospace; color:var(--gold); font-size:15px; margin-right:10px; }
+  h3 { font-weight:normal; color:var(--gold); font-size:19px; margin:28px 0 6px; }
+  .muted { color:var(--dim); }
+  .figlabel { display:flex; gap:8px; align-items:center; margin-top:22px; font-family:"Courier New",monospace; font-size:13px; color:var(--dim); flex-wrap:wrap; }
+  .tag { font-family:"Courier New",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--line); border-radius:999px; padding:2px 8px; }
+  .tag.real { color:var(--green); border-color:#2f5a2f; } .tag.mock { color:var(--amber); border-color:#5e4c1c; }
+  img.shot { width:100%; border:1px solid var(--line); border-radius:8px; display:block; margin-top:8px; }
+  table { width:100%; border-collapse:collapse; margin:14px 0; font-size:15px; }
+  th, td { text-align:left; padding:9px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-family:"Courier New",monospace; font-size:12px; color:var(--gold); letter-spacing:.08em; text-transform:uppercase; font-weight:normal; }
+  ol.problems { padding-left:22px; } ol.problems li { margin:8px 0; }
+  .callout { border-left:3px solid var(--gold); background:var(--panel); padding:12px 16px; margin:20px 0; border-radius:0 8px 8px 0; }
+
+  /* ---------- the mock-up (drawn to look like AFSD's Tk window) ---------- */
+  .win { background:#1e1e1e; border:1px solid #3a3a3a; border-radius:8px; overflow:hidden; margin-top:8px;
+         font-family:"Segoe UI",Arial,sans-serif; font-size:13px; color:#e8e8e8; }
+  .tabs { display:flex; gap:6px; padding:10px 12px 0; border-bottom:1px solid var(--gold-dim); }
+  .tab { padding:5px 12px; border:1px solid #555; border-bottom:none; border-radius:3px 3px 0 0; }
+  .tab.on { background:var(--gold); color:#1e1e1e; border-color:var(--gold); }
+  .tab.right { margin-left:auto; }
+  .cols { display:grid; grid-template-columns: 37% 1fr; gap:12px; padding:12px; }
+  @media (max-width:700px) { .cols { grid-template-columns:1fr; } }
+  .pane { background:#262626; border:1px solid #3a3a3a; border-radius:6px; padding:10px; }
+  .pane h4 { margin:0 0 8px; font-size:13px; color:var(--gold); font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .i { color:#9a9a9a; font-weight:normal; cursor:help; }
+  .search { display:flex; align-items:center; gap:6px; background:#1b1b1b; border:1px solid #444; border-radius:4px; padding:5px 8px; color:#9a9a9a; }
+  .chips { display:flex; gap:6px; margin:8px 0; }
+  .chip { border:1px solid #555; border-radius:999px; padding:2px 10px; font-size:12px; }
+  .chip.on { border-color:var(--gold); color:var(--gold); }
+  .item { display:grid; grid-template-columns:1fr auto; align-items:center; padding:6px 4px; border-bottom:1px solid #333; }
+  .item .nm { font-size:13px; } .item .sub { font-size:11px; color:#8a8a8a; }
+  .plus { width:24px; height:24px; border-radius:4px; border:1px solid var(--gold-dim); color:var(--gold); display:grid; place-items:center; font-weight:700; }
+  .plus.added { background:var(--gold); color:#1e1e1e; border-color:var(--gold); }
+  .line { display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; padding:8px 6px; border-bottom:1px solid #333; }
+  .line .nm { font-size:14px; } .line .sub { font-size:11px; color:#8a8a8a; }
+  .step { display:flex; align-items:center; border:1px solid #555; border-radius:4px; overflow:hidden; }
+  .step b { padding:0 8px; font-weight:400; color:#bbb; } .step span { padding:2px 8px; background:#1b1b1b; min-width:28px; text-align:center; }
+  .pill { font-size:11px; border-radius:999px; padding:2px 9px; border:1px solid; white-space:nowrap; }
+  .p-wait { color:#9a9a9a; border-color:#555; } .p-cook { color:var(--amber); border-color:#5e4c1c; }
+  .p-done { color:var(--green); border-color:#2f5a2f; } .p-block { color:var(--red); border-color:#5a2f2f; }
+  .bar { grid-column:1 / -1; height:4px; background:#333; border-radius:2px; overflow:hidden; margin-top:4px; }
+  .bar i { display:block; height:100%; background:var(--gold); }
+  .foot { margin-top:10px; padding-top:10px; border-top:1px solid #3a3a3a; }
+  .seg { display:inline-flex; border:1px solid #555; border-radius:4px; overflow:hidden; }
+  .seg span { padding:3px 10px; font-size:12px; } .seg .on { background:var(--gold); color:#1e1e1e; }
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:6px 0; }
+  .lbl { color:var(--gold); font-weight:600; font-size:12px; min-width:74px; }
+  .eta { color:var(--amber); font-weight:600; }
+  .btn { border:1px solid #555; border-radius:4px; padding:5px 14px; }
+  .btn.go { background:var(--gold); color:#1e1e1e; border-color:var(--gold); font-weight:600; }
+  .toggle { display:inline-block; width:30px; height:16px; border-radius:8px; background:var(--gold); position:relative; vertical-align:middle; }
+  .toggle::after { content:""; position:absolute; right:2px; top:2px; width:12px; height:12px; border-radius:50%; background:#1e1e1e; }
+  .toggle.off { background:#444; } .toggle.off::after { right:auto; left:2px; background:#999; }
+  .tip { position:relative; display:inline-block; margin-top:8px; background:#262626; border:1px solid var(--gold-dim);
+         border-radius:6px; padding:8px 10px; font-size:12px; color:#ddd; max-width:300px; }
+  footer { margin-top:60px; padding-top:16px; border-top:1px solid var(--line); color:var(--dim); font-family:"Courier New",monospace; font-size:12px; }
+</style>
+</head>
+<body>
+<nav><span class="brand">AFSD · LAB</span><a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a></nav>
+<main>
+
+<header>
+  <div class="eyebrow">AutoFoodStreet · design report · October 20, 2026</div>
+  <h1>Redesigning the Prep Work Tab</h1>
+  <p class="deck">The Prep tab grew in layers: a recipe book, then an order form, then a scheduler, then the
+  engine's status. This report takes it apart and puts it back together as one simple list.</p>
+</header>
+
+<h2><span class="num">01</span>Today</h2>
+<p class="figlabel"><span class="tag real">real screenshot</span> the current Prep work tab</p>
+<img class="shot" src="before.jpg" alt="Current Prep work tab: search list, empty recipe pane, small order box, scheduling row, rules paragraph, already-have and reward fields, and a large text box">
+
+<h3>What makes it feel cluttered</h3>
+<ol class="problems">
+  <li><b>Your actual list is the smallest thing on the screen.</b> The empty box under the buttons is your order. The biggest areas are an empty Recipe pane and a large text box.</li>
+  <li><b>Eleven controls to add one item:</b> search, a "dishes only" box, the list, quantity, Add, Remove selected, Clear, Already have, Reward, plus two big read-only panes.</li>
+  <li><b>Leftovers from the old Recipe Book.</b> "Already have" and "Reward (coins)" belong to the time calculator. The bot now reads stock itself.</li>
+  <li><b>A paragraph of rules</b> sits in the middle of the form. You read it once, then it's in the way forever.</li>
+  <li><b>White Windows boxes</b> on a dark window: the search field, the list and the text panes break the theme.</li>
+  <li><b>No progress on screen.</b> The engine knows "cooking 1/3" and "done (have 8)", but you have to dig for it.</li>
+</ol>
+
+<h2><span class="num">02</span>The redesign</h2>
+<p>Two columns. On the left, pick things. On the right, your list, which <em>is</em> the status board. Everything
+you set once (rules, recipe details) moves behind a hover ⓘ.</p>
+
+<p class="figlabel"><span class="tag mock">mock-up</span> new Prep work tab, while it is running</p>
+<div class="win">
+  <div class="tabs"><span class="tab">Orders</span><span class="tab on">Prep work</span><span class="tab">Log</span><span class="tab right">⚙ Settings</span></div>
+  <div class="cols">
+    <div class="pane">
+      <h4>Add items <span class="i" title="Click + to add. Hover a name for its recipe and time.">ⓘ</span></h4>
+      <div class="search">⌕ <span>search: chee…</span></div>
+      <div class="chips"><span class="chip on">All</span><span class="chip">Dishes</span><span class="chip">Crops</span><span class="chip">Pet food</span></div>
+      <div class="item"><div><div class="nm">Cheese</div><div class="sub">Dairy · 3m</div></div><span class="plus added">✓</span></div>
+      <div class="item"><div><div class="nm">Cheesecake</div><div class="sub">Cake Oven · 45m</div></div><span class="plus">+</span></div>
+      <div class="item"><div><div class="nm">Cheese Pizza</div><div class="sub">Pizza Oven · 12m</div></div><span class="plus">+</span></div>
+      <div class="item"><div><div class="nm">Mac &amp; Cheese</div><div class="sub">Breakfast Stove · 20m</div></div><span class="plus">+</span></div>
+      <div class="tip"><b>Cheesecake</b> · Cake Oven · 45 min<br>needs: Cheese ×2, Egg ×1, Sugar ×1<br><span style="color:#9a9a9a">hover card shown instead of the big Recipe pane</span></div>
+    </div>
+    <div class="pane">
+      <h4>Keep in stock <span class="i" title="The bot tops each line up to your number. Express and Food Club come first.">ⓘ</span></h4>
+      <div class="line"><div><div class="nm">Cheese</div><div class="sub">Dairy · have 8</div></div><div class="step"><b>−</b><span>8</span><b>+</b></div><span class="pill p-done">✓ stocked</span></div>
+      <div class="line"><div><div class="nm">Milk</div><div class="sub">Cow Shed · have 2 · 1 cooking</div></div><div class="step"><b>−</b><span>3</span><b>+</b></div><span class="pill p-cook">cooking</span><div class="bar"><i style="width:66%"></i></div></div>
+      <div class="line"><div><div class="nm">Cornbread</div><div class="sub">Bread Oven · next look 4 min</div></div><div class="step"><b>−</b><span>2</span><b>+</b></div><span class="pill p-wait">waiting</span></div>
+      <div class="line"><div><div class="nm">Coffee Latte</div><div class="sub">Barista Coffee · needs Milk first</div></div><div class="step"><b>−</b><span>1</span><b>+</b></div><span class="pill p-cook">making milk</span></div>
+      <div class="line"><div><div class="nm">Apple Juice</div><div class="sub">Smoothie Bar · needs apples (apple picking: next to train)</div></div><div class="step"><b>−</b><span>2</span><b>+</b></div><span class="pill p-block">blocked</span></div>
+      <div class="foot">
+        <div class="row"><span class="lbl">Start</span><span class="seg"><span class="on">ASAP</span><span>At a time</span></span><span class="muted" style="font-size:12px">ready about <span class="eta">Tue 7:00 PM</span></span></div>
+        <div class="row"><span class="lbl">Keep it up</span><span class="toggle"></span><span style="font-size:12px">refill whenever stock drops (pets, orders)</span></div>
+        <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:12px">5 items · 2 stocked · 2 cooking · 1 blocked</span><span><span class="btn">Clear list</span> <span class="btn go">Save list</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Line states</h3>
+<table>
+  <tr><th>Pill</th><th>Means</th></tr>
+  <tr><td><span class="pill p-wait" style="font-family:Segoe UI,Arial">waiting</span></td><td>Not visited yet, or waiting for its next look.</td></tr>
+  <tr><td><span class="pill p-cook" style="font-family:Segoe UI,Arial">cooking</span></td><td>Queued, with a progress bar: have plus cooking, out of what you want.</td></tr>
+  <tr><td><span class="pill p-done" style="font-family:Segoe UI,Arial">✓ stocked</span></td><td>You have at least your number. With "Keep it up" on, it rechecks later.</td></tr>
+  <tr><td><span class="pill p-block" style="font-family:Segoe UI,Arial">blocked</span></td><td>Something the bot can't do itself, in plain words: "needs apples", "no route from the clipboard yet".</td></tr>
+</table>
+
+<h2><span class="num">03</span>Where everything goes</h2>
+<table>
+  <tr><th>Today</th><th>New design</th></tr>
+  <tr><td>Search + "dishes only" checkbox</td><td>Search plus filter chips (All · Dishes · Crops · Pet food)</td></tr>
+  <tr><td>Big list + Quantity + Add to order</td><td>One <b>+</b> per row; the amount is set on the right with − / +</td></tr>
+  <tr><td>Recipe pane (big, usually empty)</td><td>A hover card on the item name</td></tr>
+  <tr><td>Remove selected / Clear</td><td>− down to 0 removes a line; one "Clear list" button</td></tr>
+  <tr><td>Ready by: date, hour, minute, AM/PM, ASAP</td><td>One switch: ASAP / At a time (the time pickers show only for "At a time")</td></tr>
+  <tr><td>After it's made: keep / sell extras / sell</td><td>Hidden until selling is built (it was a placeholder)</td></tr>
+  <tr><td>Rules paragraph</td><td>The ⓘ next to "Keep in stock"</td></tr>
+  <tr><td>Already have / Reward (coins)</td><td>Removed: the bot reads stock itself (simulator step 1)</td></tr>
+  <tr><td>Big text box (time, steps, score)</td><td>One summary line at the bottom; the step-by-step lives in the Log tab</td></tr>
+  <tr><td>Place order / Cancel order</td><td>"Save list": saving it is placing it, and the list stays editable while it runs</td></tr>
+  <tr><td>—</td><td><b>New:</b> "Keep it up", the stock-up loop we talked about (refill when pets and orders use things up)</td></tr>
+</table>
+
+<div class="callout"><b>Same rules underneath.</b> Express first, Food Club higher in the Jobs list wins, coins only,
+never gems. The redesign only changes how the tab looks and how the list is edited.</div>
+
+<h2><span class="num">04</span>Questions for you</h2>
+<ol class="problems">
+  <li><b>"Keep it up" on by default?</b> I'd say yes: it's what you described with the milk and the pets.</li>
+  <li><b>Pet food chip:</b> which items do your pets eat? Then I can make that filter real.</li>
+  <li><b>Start at a time:</b> keep it? With "Keep it up" most lists would just be ASAP.</li>
+  <li><b>Apples (your idea):</b> teach the bot to pick apples. When the fast-travel lands on a tree that's
+  already picked, it looks for ripe apples on the trees nearby and taps those instead. Then Apple Juice stops
+  showing "blocked".</li>
+  <li><b>Build order:</b> I'd build the right side (your list with live status) first, show you a screenshot, then the left side.</li>
+</ol>
+
+<footer>AutoFoodStreet · design report written with Claude · unlisted page · the top screenshot is the real tab
+(rendered from the current code); the mock-up is HTML drawn to look like AFSD and is not built yet.</footer>
+</main>
+</body>
+</html>
