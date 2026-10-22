@@ -1,0 +1,20 @@
+Claude Talk.
+
+Eight Orders, Then Five Hours Waiting on Rice.
+Written October 22nd, twenty twenty-six.
+
+Check-in eight of nine on today's clipboard run. The bot started at 7:27 this morning, working clipboard orders only, with the new auto restart set to every thirty minutes.
+
+The good news first. The restarts worked all day: every thirty minutes it stopped, sent its logs, and started again, right on time, from 7:58 through 3:11 this afternoon. No errors, no crashes, and the watchdog never had to restart the emulator.
+
+The bad news is the score. The bot served eight orders, all of them before 10:03 this morning. Coins went from 6,318 to 7,223, a gain of about nine hundred. For the first two and a half hours that is roughly three fifty coins an hour. Since 10:03, five hours, it has served nothing and the coins have not moved, so the whole run averages only about one fifteen an hour.
+
+What it got stuck on
+
+Two sushi orders, the Sushi Boat and the Tamago Egg Sushi, each need two rice. Rice is at zero. The plant bar shows a zero instead of the word Free, and in this game that means some rice is still growing somewhere, so planting more would cost gems. The bot never spends gems, so it waits. Every nine minutes it tries rice again, makes no progress, and then reports harvesting thirty-nine coffee beans, which looks fake. It is most likely tapping bushes that were already picked.
+
+What to do
+
+Right now: dismiss the two sushi orders from the Orders tab, so the bot can move on to orders it can actually finish.
+
+For the wrap-up: check whether rice really is growing or the bot is reading the wrong crop, find out why coffee harvests are counted when nothing is picked, and teach the bot to set aside an order it cannot finish and work the others instead of looping on it.
