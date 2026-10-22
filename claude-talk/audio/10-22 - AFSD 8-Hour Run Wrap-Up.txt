@@ -1,0 +1,26 @@
+Claude Talk.
+
+AFSD 8-Hour Run: Wrap-Up.
+Written October 22nd, twenty twenty-six.
+
+Today's clipboard run lasted from 7:27 in the morning to 4:13 in the afternoon, almost nine hours, with the bot working clipboard orders only and restarting itself every thirty minutes.
+
+The numbers
+
+Eight orders served. Coins went from 6,318 to 7,223, a gain of about nine hundred. That is roughly one hundred coins an hour over the whole run. But it was really two runs: in the first two and a half hours it made about three fifty coins an hour, and in the six and a half hours after 10:03 it made nothing at all.
+
+What worked
+
+The new auto restart did its job all day: stop, send the logs, start again, every half hour, eighteen times in a row without a single error. When the emulator dropped off at 4:05, the watchdog closed it and launched it fresh on its own. The bot never crashed and never spent a gem.
+
+What went wrong
+
+Two things, and they fed each other. First, two sushi orders needed rice. Rice was at zero, and the plant bar said some was still growing, so the bot waited rather than pay gems. It waited for six hours, which means either rice grows very slowly or the bot was reading the wrong crop's number.
+
+Second, the coffee harvests were fake, just as suspected. The log shows the bot tapping the exact same spot three times in a row and calling each one a fresh harvest of ripe coffee beans, while the coffee count stayed exactly where it was. A bush that has already been picked still looks ripe enough to fool it. Because each fake harvest counts as progress, the bot never gives up on the espresso order either, so it loops: rice, no luck, coffee, fake success, repeat, every nine minutes.
+
+What to fix next
+
+One: check that a harvest really happened. After tapping a bush, the bot should read the coffee count again, and if it did not go up, treat the bush as empty and stop calling it progress.
+
+Two: stop looping on a blocked order. If an order has made no real progress for about half an hour, the bot should put it aside, work the other orders, and tell you, so you can dismiss it with one click. Either fix alone would likely have turned today's five dead hours into another five or six hundred coins.

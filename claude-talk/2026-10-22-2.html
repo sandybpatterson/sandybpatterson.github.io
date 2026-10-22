@@ -1,0 +1,144 @@
+<!--
+  Structural template for one Claude Talk entry page.
+  Copy this file's structure and CSS verbatim — don't redesign it per entry.
+  Replace every {{PLACEHOLDER}}. Everything else stays exactly as written.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AFSD 8-Hour Run: Wrap-Up — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">AFSD 8-Hour Run: Wrap-Up</h1>
+    <p class="byline">Written October 22, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>Today's clipboard run lasted from 7:27 in the morning to 4:13 in the afternoon, almost nine hours, with the bot working clipboard orders only and restarting itself every thirty minutes.</p>
+<h2>The numbers</h2>
+<p>Eight orders served. Coins went from 6,318 to 7,223, a gain of about 900. That is roughly 100 coins an hour over the whole run. But it was really two runs: in the first two and a half hours it made about 350 coins an hour, and in the six and a half hours after 10:03 it made nothing at all.</p>
+<h2>What worked</h2>
+<p>The new auto restart did its job all day: stop, send the logs, start again, every half hour, eighteen times in a row without a single error. When the emulator dropped off at 4:05, the watchdog closed it and launched it fresh on its own. The bot never crashed and never spent a gem.</p>
+<h2>What went wrong</h2>
+<p>Two things, and they fed each other. First, two sushi orders needed rice. Rice was at zero, and the plant bar said some was still growing, so the bot waited rather than pay gems. It waited for six hours, which means either rice grows very slowly or the bot was reading the wrong crop's number.</p>
+<p>Second, the coffee harvests were fake, just as suspected. The log shows the bot tapping the exact same spot three times in a row and calling each one a fresh harvest of ripe coffee beans, while the coffee count stayed exactly where it was. A bush that has already been picked still looks ripe enough to fool it. Because each fake harvest counts as progress, the bot never gives up on the espresso order either, so it loops: rice, no luck, coffee, fake success, repeat, every nine minutes.</p>
+<h2>What to fix next</h2>
+<p>One: check that a harvest really happened. After tapping a bush, the bot should read the coffee count again, and if it did not go up, treat the bush as empty and stop calling it progress.</p>
+<p>Two: stop looping on a blocked order. If an order has made no real progress for about half an hour, the bot should put it aside, work the other orders, and tell you, so you can dismiss it with one click. Either fix alone would likely have turned today's five dead hours into another five or six hundred coins.</p>
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
