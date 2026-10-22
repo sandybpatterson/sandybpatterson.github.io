@@ -386,9 +386,3 @@ has a real cover: `images/dmotcover.jpeg`.
 ---
 
 *Last updated: August 2026*
-- 10/22 8-HOUR CLIPBOARD RUN (07:27-16:13, auto restart 30 min): 8 orders, coins 6,318 -> 7,223 (~100/h; ~350/h until
-  10:03, then 0 for 6 h). Auto restart 18/18 OK, watchdog restarted LDPlayer once (16:05, worked), no errors. Stuck on
-  two sushi orders (rice 0, plant bar "0" = growing -> waits) + FAKE coffee harvests (same spot (300,624) "harvested" 3x,
-  coffee stock unchanged 1/2 -> counted as progress -> endless 9-min loop). NEXT (owner to OK): (1) verify a harvest by
-  re-reading the stock, no rise = empty bush, no progress; (2) set aside an order with no real progress for ~30 min,
-  work the others, tell the owner (Dismiss). Wrap-up: claude-talk/2026-10-22-2.html.
