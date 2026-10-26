@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AFSD Status Report: The 24-Hour Plan — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">AFSD Status Report: The 24-Hour Plan</h1>
+    <p class="byline">Written October 26, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p><strong>To:</strong> Owner, AFSD<br><strong>From:</strong> Project Manager<br><strong>Team:</strong> Claude (coder), Muse (data analyst)<br><strong>Subject:</strong> 24 hours unattended, with at most one owner touch</p>
+
+<h2>Executive summary</h2>
+
+<p>The bot can already play. What it cannot yet do is keep playing. Our longest unattended stretch so far is about nine hours, the eight-hour clipboard run on October 22, and six of those hours produced nothing. The goal you set is a full day with no more than one intervention from you. My assessment: that is reachable in about two weeks of focused work, but only if we stop adding features and spend that time on staying alive, wasting less, and measuring everything. The biggest single obstacle is not code. It is the laptop going to sleep.</p>
+
+<h2>Where we stand</h2>
+
+<p>The analyst's numbers from the last week tell a consistent story. On a good daytime stretch the bot earns two hundred to three hundred fifty coins an hour on the clipboard. Overnight it drops to almost nothing. The lost time comes from four places, in this order of cost.</p>
+
+<p><strong>One: the machine stops.</strong> The laptop battery died one night and took nine hours with it. On October 25 the PC slept for two and a half hours in the afternoon, then again for forty five minutes in the evening. No bot fix can recover time while Windows is asleep.</p>
+
+<p><strong>Two: a screen the bot does not understand.</strong> One night in October, a single unidentified panel held the bot for seven hours. A Facebook login popup cost forty five minutes. A club leaderboard popup cost about the same. Each was fixed after it happened, but each new popup is a new outage until someone teaches the bot about it.</p>
+
+<p><strong>Three: loops that look like work.</strong> The bot "harvested" one empty coffee bush five hundred twenty seven times. It tapped a tomato plot every thirty seconds for twenty minutes because the Pantry was full. It made one hundred twenty six trips to apple trees with no ripe apples. These are now guarded, but they show the pattern: the expensive failures are the ones where the bot is busy and wrong.</p>
+
+<p><strong>Four: the emulator freezes.</strong> LDPlayer stops answering several times a night. Most recover within minutes. The watchdog has already restarted it twice on its own and both times it worked.</p>
+
+<h2>The plan, in three workstreams</h2>
+
+<h2>Workstream A: stay alive (coder, highest priority)</h2>
+
+<p>The rule for this workstream: every way the bot can get stuck must end in a recovery, never in waiting forever. The pieces exist: the watchdog, the unstuck ladder that tries the Back key, the red X, a game restart and finally an emulator restart, and the popup closers. What they lack is proof under real conditions. The coder will make three changes. First, a stuck-time ceiling: if nothing useful has happened in thirty minutes, the bot escalates to a restart no matter what it thinks it is doing. That catches the busy-and-wrong loops the guards miss. Second, every unknown screen that the ladder clears gets remembered with the escape that worked, so the same popup never costs time twice. Third, a single alarm to you, sent only when every rung of the ladder has failed. That alarm is your one intervention, and it should be rare.</p>
+
+<h2>Workstream B: waste less (coder and analyst)</h2>
+
+<p>Once the bot stays alive, the next question is how much of its day is productive. The analyst will measure, from the logs, what fraction of each hour ends in a queued dish, a harvest, or a served order, versus trips that changed nothing. The coder fixes the biggest category each round, and only that one. Known candidates already on the list: a full Pantry that needs selling, which is now wired and waiting for its first live sale; picked trees, now handled with Ask for Help; and orders that will never finish, which are dismissed after thirty minutes. After that, the ranking of orders by coins per hour, which is built and tested in the log but waiting on your approval to steer.</p>
+
+<h2>Workstream C: measure every day (analyst)</h2>
+
+<p>The analyst runs the same eight-point check on every log: results, crashes, loops, dismissals, popups, the never-press check, stuck time, and anything new. Each report ends with the top three problems by cost. Those three items are the coder's entire work queue for the next day. Nothing else gets built unless it outranks them. This is how we stop the project from feeling scattered: the logs pick the work, not the newest idea.</p>
+
+<h2>What I need from you</h2>
+
+<p>Four things, about ten minutes total. Set Windows to never sleep while plugged in, and keep the laptop plugged in. Turn on Auto-update, Send logs at every Stop, and Restart every sixty minutes, so the bot refreshes itself and sends evidence without you. Keep "Always start as administrator" on, so the watchdog can restart the emulator. And agree to a feature freeze: for the next two weeks, new ideas go on the freetime list, not into the code, unless the daily report ranks them in the top three.</p>
+
+<h2>Milestones</h2>
+
+<p><strong>Milestone one:</strong> a twelve-hour overnight run with zero interventions and no silent gap in the log longer than ten minutes. <strong>Milestone two:</strong> a full twenty four hours with at most one intervention. <strong>Milestone three:</strong> three twenty-four-hour runs in a row meeting milestone two. When milestone three is met, AFSD is done in the sense that matters: it runs your restaurant while you live your week.</p>
+
+<h2>How we will know it is working</h2>
+
+<p>Five numbers, reported daily by the analyst: hours of real uptime, coins per hour averaged over the full day rather than the best hour, orders served per day, minutes stuck, and the number of times you had to step in. The last one is the only number you need to watch. Everything else is the team's job.</p>
+
+<h2>Risks</h2>
+
+<p>The game changes. New events, new stoves, and new popups will keep arriving, and each one is a possible outage. The recovery ladder is the answer, because it does not need to understand a screen to escape it. The second risk is the team itself: the coder is fast and eager to build, and the analyst occasionally misreads a picture. Both are managed the same way: the coder checks every claim from the analyst against the logs before acting, and builds only what the daily report ranks. The third risk is you burning out. The whole point of this plan is that your job shrinks to one look a day. If it does not shrink, the plan has failed, and I want to hear about it.</p>
+
+<h2>Bottom line</h2>
+
+<p>We do not need a smarter bot. We need a more stubborn one, one that never waits forever, never repeats a useless move for long, and always tells you when it truly cannot help itself. Two weeks, one checklist a day, and a laptop that stays awake.</p>
+
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
