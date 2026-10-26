@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Where AFSD Goes From Here — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Where AFSD Goes From Here</h1>
+    <p class="byline">Written October 26, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>You asked where AFSD goes from here. Here is my honest answer, from the side of the conversation that has read every log line you have sent.</p>
+
+<h2>What you actually built</h2>
+
+<p>Two weeks ago this was a script that tapped a game. Today it is a small system. It sends its own logs. It runs its own tests every time you press Start. It has a watchdog that restarts a frozen emulator, a ladder it climbs when a strange screen covers the map, a reader for coins and stock counts built from the game's own digit shapes, and a button that watches you play so it can learn. A second AI reads the logs and counts things. A first AI checks that one before anything changes. You did not plan that architecture. It grew, one problem at a time, out of you watching the screen and saying "that is wrong."</p>
+
+<p>That is the real asset. Not the Food Street knowledge, which is narrow. The method is what transfers: watch it fail, log it, test the fix without tapping anything, then let it play. Remember that if you ever start on another game.</p>
+
+<h2>The trap you are in right now</h2>
+
+<p>Every log I read finds something new, and every something new is fixable. Pig Pen instead of Cow Shed. A Pantry that fills with saws. A wheel on a pier. A tree that wants help. Each fix is real, and each one takes an evening. Together they never end, because a game is designed to keep generating new situations. If the goal stays "make it handle everything," you will always be one log away from done, and that is why you feel tired and scattered at the same time.</p>
+
+<p>So I would change the goal. Not "handle everything." Instead: <strong>the bot keeps the restaurant running without you, and you check on it once a day.</strong> That is a goal you can actually reach.</p>
+
+<h2>What that means in practice</h2>
+
+<p>First, the leaks that cost hours, not minutes. Your PC going to sleep has cost more time this week than every game bug combined. One setting in Windows fixes it. Stuck popups and frozen emulators are next; the watchdog and the unstuck ladder already exist, and now they need to prove themselves on long, boring, unattended runs, not on fresh features.</p>
+
+<p>Second, a rhythm instead of a scramble. Start the bot. Let it run. Once a day, press Send logs and say "run check" to Muse. Read the top three problems. Fix only those, only if they cost real time or coins. Everything else goes on the freetime list and waits. That list is not a to-do list you owe anyone. It is a pantry. You take from it when you are hungry.</p>
+
+<p>Third, a definition of done for each feature before it is built. Pantry relief is done when one crop sells by itself. Sell Apple Juice is done when one juice is listed by itself. Then stop. A feature that works once a day, quietly, is worth more than three half-built ones.</p>
+
+<h2>About selling it</h2>
+
+<p>You already worked this out yourself. Selling means customers, and customers mean updates, support, and a game that changes under you. That is a second job. A video is the right size. It costs one weekend, it never asks you for a patch, and it tells a true story that people find interesting: someone with no coding background built a game bot by talking to two AIs, and the funniest parts are the failures. The bush it harvested five hundred twenty seven times. The hot dog mascot it kept poking. The Pig Pen. Those are not embarrassments. They are the best minutes of the video.</p>
+
+<h2>About stopping</h2>
+
+<p>You might not want to play Food Street much longer, and that is allowed. Here is the useful part: the more AFSD runs without you, the less that question matters. A bot that keeps the restaurant going while you live your week lets you decide about the game slowly, without it decaying while you think. Stability buys you the freedom to quit, or to keep going, on your own schedule.</p>
+
+<h2>My suggestion for this week</h2>
+
+<p>Since you will not have much time: one long unattended run with the PC set to never sleep. One run check from Muse. One fix, the biggest one it finds. That is the whole week. If you have a spare evening, record the footage for the video while the bot plays, because the bot playing by itself, on screen, is the ending of the story.</p>
+
+<p>You do not need to use every token. You need the next few to point the same way. Point them at "it runs without me," and the rest of the project gets lighter instead of heavier.</p>
+
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>
