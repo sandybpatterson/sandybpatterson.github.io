@@ -1,0 +1,148 @@
+<!--
+  Structural template for one Claude Talk entry page.
+  Copy this file's structure and CSS verbatim — don't redesign it per entry.
+  Replace every {{PLACEHOLDER}}. Everything else stays exactly as written.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Waiting to See — Claude Talk</title>
+<meta name="book-title" content="Claude Talk">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .masthead-strip {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 14px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 32px; }
+
+  .content h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    font-weight: 400;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #d8d8d8;
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content blockquote {
+    border-left: 2px solid #c9a84c;
+    margin: 2em 0;
+    padding: 0 0 0 24px;
+    color: #c9a84c;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .content blockquote p { color: #c9a84c; margin-bottom: 0; }
+  .content strong { color: #f0f0f0; font-weight: 600; }
+  .content em { font-style: italic; color: #e0e0e0; }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="masthead-strip">
+    <div class="name"><a href="index.html">Claude Talk</a></div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Waiting to See</h1>
+    <p class="byline">Written November 1, 2026</p>
+
+    <hr class="divider">
+
+    <main class="content" id="content">
+      <p>The bot does not think slowly. It decides what to do in a fraction of a millisecond. It does not tap slowly either; a tap lands in a few milliseconds. What it does slowly is look. Every time it wants to see the game, it asks the emulator for a brand new photograph, and on the last day of October that photograph took between 1.8 and 3.9 seconds to arrive. The bot looks about a thousand times an hour. Do the arithmetic and the bot spends somewhere between half and all of every hour waiting for pictures.</p>
+<h2>How it looks today</h2>
+<p>Each look goes the long way round. The PC starts a fresh copy of the adb program. adb connects to the emulator. Inside the emulator, Android copies the whole screen, 1600 by 900 pixels, close to six megabytes of raw colour. Those six megabytes are carried back through adb to the PC, and Python turns the bytes into a picture the bot can read. Then all of it is thrown away, and the next look starts from nothing.</p>
+<p>Worse, it gets slower as the day goes on. On October 31 a fresh emulator gave a picture in 1.75 seconds. A few hours and six hundred pictures later the average was 3.87 seconds. A restart brought it straight back to 1.8. The emulator tires, and the bot pays for it on every single look.</p>
+<h2>What FLASH means</h2>
+<p>FLASH stands for Fast Live Access to Screen History. The idea is simple: stop asking for photographs, and keep a live feed running instead. When the bot wants to look, it takes the newest frame the feed already has. The picture is waiting before the question is asked.</p>
+<p>There are two ways to build that feed. The first, option B, is to have Windows copy the LDPlayer window directly, the same way a screen recorder does. No adb at all. That takes a hundredth to three hundredths of a second, and the pixels are exact. Its risks are practical ones: LDPlayer draws with the graphics card, and some capture methods get back a black rectangle; the window may need to be visible, which could fail when it is minimised or the screen is locked; and the window's pixels have to be mapped onto the game's 1600 by 900 coordinates.</p>
+<p>The second, option A, works the way the free mirroring tool scrcpy does. A small server program runs inside the emulator and streams the screen to the PC as video, over one connection that stays open. The PC keeps only the newest frame. That is about a twentieth of a second per look. Its catch is quality. Video is compressed, so every frame is very slightly blurred, and every threshold this bot uses, the 0.6 here and the 0.85 there, and every digit reader, was tuned on perfect, uncompressed pictures. Some of them might quietly stop matching.</p>
+<h2>What changes in the bot</h2>
+<p>Almost nothing, and that is the beauty of it. About a hundred places in the bot ask for a picture, and every one of them goes through a single function. FLASH replaces the inside of that one function. If the feed is running and has a frame taken after the last tap, the bot gets that frame. If not, it does it the old way, exactly as today. The bot never acts on a stale picture, and if the feed dies, it falls back by itself and says so in the log.</p>
+<h2>The plan</h2>
+<p>Step one changes nothing about how the bot plays. A test grabs the same screen both ways, the old photograph and the new window capture, side by side. It records how long each took, whether the new one came back black, how closely the two pictures agree, and whether the bot's known pictures and digit readers still find what they should on both. Only the log sees any of it.</p>
+<p>If window capture turns out exact and not black, that is the road. If it fails, the video stream gets the same treatment, checked first against saved pictures for blur. Only after the numbers prove it does FLASH get a switch in Settings, off by default, and run live with its fallback in place.</p>
+<p>The prize is large. The bot spends most of its waking life waiting to see. Take that wait from two or three seconds down to a few hundredths, and the same bot, making the same decisions, simply gets to make many more of them.</p>
+
+    </main>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../reader.js"></script>
+
+</body>
+</html>

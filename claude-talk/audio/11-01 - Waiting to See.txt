@@ -1,0 +1,32 @@
+Claude Talk.
+
+Waiting to See.
+Written November 1st, twenty twenty-six.
+
+The bot does not think slowly. It decides what to do in a fraction of a millisecond. It does not tap slowly either; a tap lands in a few milliseconds. What it does slowly is look. Every time it wants to see the game, it asks the emulator for a brand new photograph, and on the last day of October that photograph took between one point eight and three point nine seconds to arrive. The bot looks about a thousand times an hour. Do the arithmetic and the bot spends somewhere between half and all of every hour waiting for pictures.
+
+How it looks today
+
+Each look goes the long way round. The PC starts a fresh copy of the adb program. adb connects to the emulator. Inside the emulator, Android copies the whole screen, sixteen hundred by nine hundred pixels, close to six megabytes of raw colour. Those six megabytes are carried back through adb to the PC, and Python turns the bytes into a picture the bot can read. Then all of it is thrown away, and the next look starts from nothing.
+
+Worse, it gets slower as the day goes on. On October 31st a fresh emulator gave a picture in one point seven five seconds. A few hours and six hundred pictures later the average was three point eight seven seconds. A restart brought it straight back to one point eight. The emulator tires, and the bot pays for it on every single look.
+
+What FLASH means
+
+FLASH stands for Fast Live Access to Screen History. The idea is simple: stop asking for photographs, and keep a live feed running instead. When the bot wants to look, it takes the newest frame the feed already has. The picture is waiting before the question is asked.
+
+There are two ways to build that feed. The first, option B, is to have Windows copy the LDPlayer window directly, the same way a screen recorder does. No adb at all. That takes a hundredth to three hundredths of a second, and the pixels are exact. Its risks are practical ones: LDPlayer draws with the graphics card, and some capture methods get back a black rectangle; the window may need to be visible, which could fail when it is minimised or the screen is locked; and the window's pixels have to be mapped onto the game's sixteen hundred by nine hundred coordinates.
+
+The second, option A, works the way the free mirroring tool scrcpy does. A small server program runs inside the emulator and streams the screen to the PC as video, over one connection that stays open. The PC keeps only the newest frame. That is about a twentieth of a second per look. Its catch is quality. Video is compressed, so every frame is very slightly blurred, and every threshold this bot uses, the zero point six here and the zero point eight five there, and every digit reader, was tuned on perfect, uncompressed pictures. Some of them might quietly stop matching.
+
+What changes in the bot
+
+Almost nothing, and that is the beauty of it. About a hundred places in the bot ask for a picture, and every one of them goes through a single function. FLASH replaces the inside of that one function. If the feed is running and has a frame taken after the last tap, the bot gets that frame. If not, it does it the old way, exactly as today. The bot never acts on a stale picture, and if the feed dies, it falls back by itself and says so in the log.
+
+The plan
+
+Step one changes nothing about how the bot plays. A test grabs the same screen both ways, the old photograph and the new window capture, side by side. It records how long each took, whether the new one came back black, how closely the two pictures agree, and whether the bot's known pictures and digit readers still find what they should on both. Only the log sees any of it.
+
+If window capture turns out exact and not black, that is the road. If it fails, the video stream gets the same treatment, checked first against saved pictures for blur. Only after the numbers prove it does FLASH get a switch in Settings, off by default, and run live with its fallback in place.
+
+The prize is large. The bot spends most of its waking life waiting to see. Take that wait from two or three seconds down to a few hundredths, and the same bot, making the same decisions, simply gets to make many more of them.
