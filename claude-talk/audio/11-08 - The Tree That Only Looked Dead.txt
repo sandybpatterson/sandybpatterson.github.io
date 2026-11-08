@@ -1,0 +1,36 @@
+Claude Talk.
+
+The Tree That Only Looked Dead.
+Written November 8th, twenty twenty-six.
+
+Most of today's work started with a simple request: teach the bot to deal with spent trees. A fruit tree in Food Street gets picked, then you ask a visitor for help, then it fruits again, and after the second harvest it is finished. All that is left in its menu is a green Remove button that costs a saw. The bot had been meeting these trees for weeks and walking away from them, because removing one uses an item, and the rule has always been that the bot never spends items on its own.
+
+So the new project got a name, O.R.C.H.A.R.D., short for Orchard Rounds: Cut, Harvest, Ask, Replant, Decide. The first step was teaching the bot to read the little white number on the Remove button, the one that says how many saws or Helping Hands you have. The game's own digits there are bold enough that the usual reader stumbled on the fours and the ones, so it borrowed the shapes from the coin counter in the top bar instead. It read all forty-eight saved menus correctly.
+
+The menu that lies
+
+Then came the catch, and you named it before I could: a tree that is still waiting for its visitor looks spent too. Its menu has no Ask for Help button either, because help was already asked. The only way to tell the two apart is outside the menu, on the map, where a small red hand sign hangs over a tree that is still waiting. Cut that tree and you waste a saw on something that was about to fruit again.
+
+Your own recording from late October had exactly that red hand in it, hanging over a dark tree among the apples. That one picture became the check. Before cutting, the bot looks at the map picture it took just before tapping the tree. If a red hand is anywhere near the tap, it leaves the tree alone. It also skips any kind of tree it asked help on in the last day, cuts at most three a day, and only when a saw or Helping Hand is actually in stock. If the red hand picture is somehow missing from your PC, it cuts nothing at all, because a check that cannot look should not pretend it looked.
+
+Why it had never cut anything
+
+When I went back through three days of logs, the bot had met spent trees twenty-five times and cut none of them. Every time, the reason was the same: no map picture from before the tap. That turned out to be the most useful thread of the day to pull.
+
+The spent menus were not coming from fruit-picking trips at all. They came from orders that ask for fruit itself, like eight apples. The quick-travel arrow for an apple lands at the trees, not at a kitchen station, but the bot treated the trip like any station visit. When no station menu appeared, it tapped the middle of the screen twice hoping to collect a finished dish, and those blind taps landed on a spent tree and opened its menu. The trip was logged as a station that would not open, which is the same complaint Muse had been raising for days. Now an order that wants apples, coffee beans or lemons simply picks ripe fruit when it lands at the trees, and that path keeps the before-tap picture, so the orchard check can finally do its job.
+
+Small things with big shadows
+
+Several other fixes were small in code and large in effect. Prep could never reach the pork because your PC had learned it at a station it misread as Pia Pen, a place nothing leads to. Pork is now treated as the recipe book's Ham at the Pig Pen, and any learned station with a typo snaps to the nearest real one. The Prep tab also stops saying an item has just started when Prep had already given up on it.
+
+S.P.R.O.U.T. had been naming crops on the plots correctly about three hundred times, but it also learned three crops that do not exist, called Ting Food Street, Eddie's Place and Nato, from the titles of other screens. It now only accepts real crop names. The Chef Challenge takeout task never started because the title's count, zero of two, was read as zero one two. That is now read as zero of two.
+
+The most interesting bug was in how the bot remembers orders. It recognises each order by a tiny picture of its header. With FLASH, the fast window copies are slightly scaled, so a card can land a pixel or two off between looks. On saved boards, a two-pixel shift made the same order look more different than two different orders do. That is why a cabbage the bot had promised to leave alone until 7:43 that evening got checked five times before then. The bot now recognises orders the same way Dismiss has since November 1st, by cutting the header again at a few nearby positions on the current screen. Same card, always a match. Different cards, never.
+
+The bot also now works at any widescreen size, not just sixteen hundred by nine hundred. If LDPlayer comes back at nineteen twenty by ten eighty after a restart, the bot shrinks each picture to the size its templates know and scales its taps back up. On saved screens blown up and shrunk back, coins, gems, saw counts and order cards read the same. Crop plots matched about four times out of five, the same weakness FLASH copies have, so sixteen hundred by nine hundred is still the best setting. And when a station refuses to open, the log now says which item and which station, so the repeat offender finally has a name.
+
+What the numbers said no to
+
+Not every idea earned its place. The Jam Guard was meant to stop long cooks from blocking quick ones at the same station. Over three days the bot started about fifty long cooks. A quicker item was waiting behind one only about ten times, and a long cook actually got in the way of a visit once. That is a small win, and I would shelve it unless you have seen it hurt.
+
+What is waiting on you is short. One Let Me Play recording of you removing a spent tree and replanting it from the build menu, so the bot can learn the replant half of the orchard. The three S.P.R.O.U.T. questions about how many crops to keep in storage and in the ground. And your call on the Jam Guard. Everything else from today is pushed and will arrive with the next Update and a reopened AFSD.
