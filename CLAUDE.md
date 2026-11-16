@@ -32,6 +32,12 @@ books live in their own repos; some live as folders inside this repo.
 - **SODA — free podcast tool** — links to `/soda/`
 - **Stories from Winchester** — lives here, in `/stories/`
 - **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
+- **Starlight Patrol Pinball** — lives here, in `/pinball/index.html`. A
+  self-contained canvas pinball game (no libraries, synthesized sound,
+  high score in localStorage). Added 2026-11-16. Its look borrows the
+  turn-of-the-century desktop-pinball era (window chrome, LCD side panel,
+  chrome rails, space art), but the table, name and art are original;
+  keep it that way rather than copying any existing game.
 
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
