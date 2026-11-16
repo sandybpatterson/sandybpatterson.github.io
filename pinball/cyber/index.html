@@ -508,30 +508,17 @@ function render(dt) {
 function drawBackglass() {
   const cv = document.getElementById('g'), gw = 346, gh = 294;
   cv.width = gw * 2; cv.height = gh * 2; const b = cv.getContext('2d'); b.scale(2, 2);
-  let seed = 77; const R = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  const sk = b.createLinearGradient(0, 0, 0, gh); sk.addColorStop(0, '#0a0420'); sk.addColorStop(0.5, '#3a0a5a'); sk.addColorStop(0.72, '#ff3a8a'); sk.addColorStop(0.74, '#1a0630'); sk.addColorStop(1, '#05020e');
-  b.fillStyle = sk; b.fillRect(0, 0, gw, gh);
-  for (let i = 0; i < 90; i++) { b.fillStyle = `rgba(255,255,255,${R() * 0.8})`; b.fillRect(R() * gw, R() * gh * 0.5, 1, 1); }
-  b.save(); b.beginPath(); b.arc(250, 178, 52, Math.PI, 0); b.clip();
-  const sg = b.createLinearGradient(0, 126, 0, 180); sg.addColorStop(0, '#ffe25a'); sg.addColorStop(1, '#ff2a8a'); b.fillStyle = sg; b.fillRect(190, 120, 130, 60);
-  b.fillStyle = '#3a0a5a'; for (let i = 0; i < 6; i++) b.fillRect(190, 150 + i * 5, 130, 1 + i * 0.6); b.restore();
-  let x = -4;
-  while (x < gw) {
-    const w = 16 + R() * 26, h = 50 + R() * 110, top = 212 - h;
-    b.fillStyle = R() < 0.5 ? '#0b0820' : '#120a2c'; b.fillRect(x, top, w, h);
-    for (let yy = top + 5; yy < 210; yy += 6) for (let xx = x + 3; xx < x + w - 3; xx += 5) if (R() < 0.35) { b.fillStyle = R() < 0.5 ? 'rgba(62,240,255,.8)' : 'rgba(255,200,90,.7)'; b.fillRect(xx, yy, 2, 2); }
-    x += w + 2;
-  }
-  b.save(); b.beginPath(); b.rect(0, 212, gw, gh - 212); b.clip(); b.strokeStyle = 'rgba(255,62,168,.7)'; b.shadowColor = '#ff3ea8'; b.shadowBlur = 6;
-  for (let i = -12; i <= 12; i++) { b.beginPath(); b.moveTo(gw / 2 + i * 10, 212); b.lineTo(gw / 2 + i * 60, gh); b.stroke(); }
-  for (let j = 0; j < 8; j++) { const y = 212 + Math.pow(j / 7, 1.8) * (gh - 212); b.beginPath(); b.moveTo(0, y); b.lineTo(gw, y); b.stroke(); }
-  b.restore();
-  b.save(); b.translate(70, 108); b.fillStyle = '#d8e0ff'; b.beginPath(); b.moveTo(0, 8); b.lineTo(14, 0); b.lineTo(40, 0); b.lineTo(52, 8); b.lineTo(48, 13); b.lineTo(4, 13); b.closePath(); b.fill();
-  b.fillStyle = '#3ef0ff'; b.fillRect(18, 3, 16, 4); b.shadowColor = '#ff3ea8'; b.shadowBlur = 12; b.fillStyle = '#ff3ea8'; b.fillRect(-26, 9, 24, 2); b.restore();
-  b.textAlign = 'center'; b.font = '900 16px Orbitron'; b.fillStyle = '#d6a8ff'; b.shadowColor = '#b06aff'; b.shadowBlur = 10; b.fillText('PINBALL', gw / 2, 34);
-  b.font = '900 40px Orbitron'; b.shadowColor = '#3ef0ff'; b.shadowBlur = 18;
-  const tg = b.createLinearGradient(0, 40, 0, 80); tg.addColorStop(0, '#e8ffff'); tg.addColorStop(1, '#3ef0ff'); b.fillStyle = tg; b.fillText('CYBER CITY', gw / 2, 76);
-  b.shadowColor = '#ff3ea8'; b.shadowBlur = 4; b.strokeStyle = '#ff3ea8'; b.lineWidth = 1.5; b.strokeText('CYBER CITY', gw / 2, 76);
+  const img = new Image();
+  img.onload = () => {
+    b.drawImage(img, 0, 0, gw, gh);
+    b.textAlign = 'center';
+    b.font = '900 15px Orbitron'; b.fillStyle = '#e2c4ff'; b.shadowColor = '#b06aff'; b.shadowBlur = 10; b.fillText('PINBALL', gw / 2, 30);
+    b.font = '900 40px Orbitron'; b.shadowColor = '#3ef0ff'; b.shadowBlur = 20;
+    const tg = b.createLinearGradient(0, 38, 0, 76); tg.addColorStop(0, '#f0ffff'); tg.addColorStop(1, '#3ef0ff');
+    b.fillStyle = tg; b.fillText('CYBER CITY', gw / 2, 72);
+    b.shadowColor = '#ff3ea8'; b.shadowBlur = 4; b.strokeStyle = '#ff3ea8'; b.lineWidth = 1.5; b.strokeText('CYBER CITY', gw / 2, 72);
+  };
+  img.src = 'backglass.jpg';
 }
 
 // ============ Panel ============

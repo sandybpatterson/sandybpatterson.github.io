@@ -44,7 +44,9 @@ books live in their own repos; some live as folders inside this repo.
   geometry is in that image's pixel coordinates; append `#debug` to the URL
   to draw the walls/bumpers/ramp paths over the art when re-aligning.
   Sandy can supply more art (backglass, sprites, higher-res playfield) on
-  request. The tilt is a CSS rotateX on the canvas.
+  request. The tilt is a CSS rotateX on the canvas. Backglass art is
+  `pinball/cyber/backglass.jpg` (Sandy's, cropped to 346:294); the title
+  text is drawn over its empty sky in code, not baked into the image.
 
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
