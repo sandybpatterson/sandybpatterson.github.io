@@ -40,7 +40,7 @@ books live in their own repos; some live as folders inside this repo.
   keep it that way rather than copying any existing game.
 - **Cyber City Pinball** — `/pinball/cyber/index.html`, added 2026-11-16. A
   neon table built on Sandy's own AI-generated playfield art
-  (`pinball/cyber/playfield.jpg`, 568x896, straight top-down). All physics
+  (`pinball/cyber/playfield.jpg`, 710x1120 upscale of the original 568x896, straight top-down; the game still uses 568x896 logical coordinates and scales the image down). All physics
   geometry is in that image's pixel coordinates; append `#debug` to the URL
   to draw the walls/bumpers/ramp paths over the art when re-aligning.
   Sandy can supply more art (backglass, sprites, higher-res playfield) on
