@@ -251,7 +251,7 @@ function collideSeg(b, ax, ay, bx, by, rad, e) {
 function collideFlipper(b, f) {
   const ax = f.px, ay = f.py, dx = Math.cos(f.a) * FL, dy = Math.sin(f.a) * FL;
   let t = ((b.x - ax) * dx + (b.y - ay) * dy) / (FL * FL); t = t < 0 ? 0 : t > 1 ? 1 : t;
-  const cx = ax + t * dx, cy = ay + t * dy, rad = 12 - 6 * t;
+  const cx = ax + t * dx, cy = ay + t * dy, rad = 16 - 9.5 * t;
   const px = b.x - cx, py = b.y - cy, d = Math.hypot(px, py), min = b.r + rad;
   if (d >= min || d === 0) return;
   const nx = px / d, ny = py / d; b.x = cx + nx * min; b.y = cy + ny * min;
@@ -374,6 +374,7 @@ function launch() {
 // ============ Rendering ============
 const cvs = document.getElementById('t'), ctx = cvs.getContext('2d');
 const art = new Image(); art.src = 'playfield.jpg';
+const flipImg = new Image(); flipImg.src = 'flipper.png';
 let scale = 1;
 function resize() {
   const mobile = innerWidth <= 820;
@@ -443,23 +444,34 @@ function render(dt) {
   if (plungerPull > 0) { ctx.fillStyle = `hsl(${300 - plungerPull * 120},95%,60%)`; ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 10; ctx.fillRect(502, 880 - plungerPull * 140, 3, plungerPull * 140); }
   ctx.restore();
 
+  // flippers: Sandy's sprite (pivot at 63.6,66.6 and 222px pivot-to-tip in flipper.png), mirrored for the right side
+  if (flipImg.complete && flipImg.naturalWidth) {
+    const k = FL / 222;
+    flippers.forEach((f, i) => {
+      ctx.save(); ctx.translate(f.px, f.py); ctx.rotate(f.a); if (i === 1) ctx.scale(1, -1);
+      ctx.save(); ctx.globalAlpha = 0.5; ctx.filter = 'brightness(0)'; ctx.drawImage(flipImg, -63.6 * k + 3, -66.6 * k + 6, flipImg.width * k, flipImg.height * k); ctx.restore();
+      ctx.drawImage(flipImg, -63.6 * k, -66.6 * k, flipImg.width * k, flipImg.height * k);
+      ctx.restore();
+    });
+  } else {
   // flippers: dark chrome with a neon edge to match the art
-  for (const f of flippers) {
-    const ca = Math.cos(f.a), sa = Math.sin(f.a), tx = f.px + ca * FL, ty = f.py + sa * FL, nx = -sa, ny = ca;
-    ctx.save(); ctx.beginPath();
-    ctx.moveTo(f.px + nx * 12, f.py + ny * 12); ctx.lineTo(tx + nx * 6, ty + ny * 6);
-    ctx.arc(tx, ty, 6, f.a + Math.PI / 2, f.a - Math.PI / 2, true);
-    ctx.lineTo(f.px - nx * 12, f.py - ny * 12); ctx.arc(f.px, f.py, 12, f.a - Math.PI / 2, f.a + Math.PI / 2, true); ctx.closePath();
-    ctx.shadowColor = 'rgba(0,0,0,0.7)'; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 6; ctx.shadowBlur = 6;
-    const g = ctx.createLinearGradient(f.px - nx * 12, f.py - ny * 12, f.px + nx * 12, f.py + ny * 12);
-    g.addColorStop(0, '#f2f4fa'); g.addColorStop(0.5, '#9aa2bc'); g.addColorStop(1, '#2a2e40');
-    ctx.fillStyle = g; ctx.fill();
-    ctx.shadowColor = '#ff3ea8'; ctx.shadowOffsetX = ctx.shadowOffsetY = 0; ctx.shadowBlur = 14;
-    ctx.strokeStyle = '#ff3ea8'; ctx.lineWidth = 3; ctx.stroke();
-    ctx.shadowBlur = 0; ctx.fillStyle = '#3ef0ff'; ctx.beginPath(); ctx.arc(f.px, f.py, 4, 0, 7); ctx.fill();
-    ctx.restore();
+    for (const f of flippers) {
+      const ca = Math.cos(f.a), sa = Math.sin(f.a), tx = f.px + ca * FL, ty = f.py + sa * FL, nx = -sa, ny = ca;
+      ctx.save(); ctx.beginPath();
+      ctx.moveTo(f.px + nx * 12, f.py + ny * 12); ctx.lineTo(tx + nx * 6, ty + ny * 6);
+      ctx.arc(tx, ty, 6, f.a + Math.PI / 2, f.a - Math.PI / 2, true);
+      ctx.lineTo(f.px - nx * 12, f.py - ny * 12); ctx.arc(f.px, f.py, 12, f.a - Math.PI / 2, f.a + Math.PI / 2, true); ctx.closePath();
+      ctx.shadowColor = 'rgba(0,0,0,0.7)'; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 6; ctx.shadowBlur = 6;
+      const g = ctx.createLinearGradient(f.px - nx * 12, f.py - ny * 12, f.px + nx * 12, f.py + ny * 12);
+      g.addColorStop(0, '#f2f4fa'); g.addColorStop(0.5, '#9aa2bc'); g.addColorStop(1, '#2a2e40');
+      ctx.fillStyle = g; ctx.fill();
+      ctx.shadowColor = '#ff3ea8'; ctx.shadowOffsetX = ctx.shadowOffsetY = 0; ctx.shadowBlur = 14;
+      ctx.strokeStyle = '#ff3ea8'; ctx.lineWidth = 3; ctx.stroke();
+      ctx.shadowBlur = 0; ctx.fillStyle = '#3ef0ff'; ctx.beginPath(); ctx.arc(f.px, f.py, 4, 0, 7); ctx.fill();
+      ctx.restore();
+    }
+  
   }
-
   for (const s of sparks) { ctx.globalAlpha = Math.max(0, s.t / 0.4); ctx.fillStyle = s.c; ctx.fillRect(s.x - 1.5, s.y - 1.5, 3, 3); }
   ctx.globalAlpha = 1;
 
