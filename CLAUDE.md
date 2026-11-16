@@ -38,6 +38,13 @@ books live in their own repos; some live as folders inside this repo.
   turn-of-the-century desktop-pinball era (window chrome, LCD side panel,
   chrome rails, space art), but the table, name and art are original;
   keep it that way rather than copying any existing game.
+- **Cyber City Pinball** — `/pinball/cyber/index.html`, added 2026-11-16. A
+  neon table built on Sandy's own AI-generated playfield art
+  (`pinball/cyber/playfield.jpg`, 568x896, straight top-down). All physics
+  geometry is in that image's pixel coordinates; append `#debug` to the URL
+  to draw the walls/bumpers/ramp paths over the art when re-aligning.
+  Sandy can supply more art (backglass, sprites, higher-res playfield) on
+  request. The tilt is a CSS rotateX on the canvas.
 
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
