@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
 <title>Cyber City Pinball | Sandy B. Patterson</title>
-<meta name="description" content="Cyber City: a free neon pinball game, playable in your browser." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Doto:wght@900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+<meta name="description" content="Cyber City: a free neon pinball game. Install it to your home screen and play offline." />
+<meta name="theme-color" content="#06070c" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Cyber City" />
 <style>
+@font-face{font-family:'Doto';src:url(fonts/doto.woff2) format('woff2');font-weight:900;font-display:block}
+@font-face{font-family:'Orbitron';src:url(fonts/orbitron.woff2) format('woff2');font-weight:400 900;font-display:block}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:#0a0a0a;color:#e8e8e8;font-family:Georgia,'Times New Roman',serif;min-height:100vh}
+html,body{overscroll-behavior:none}
+body{background:#0a0a0a;color:#e8e8e8;font-family:Georgia,'Times New Roman',serif;min-height:100vh;-webkit-tap-highlight-color:transparent}
 a{color:#c9a84c;text-decoration:none}
 nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:rgba(10,10,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid #1e1e1e}
 .nav-brand{font-family:'Courier New',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:#c9a84c}
@@ -18,44 +26,66 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 .nav-links a{font-family:'Courier New',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#888;padding:5px 14px;border:1px solid transparent;border-radius:999px;transition:color .15s,border-color .15s}
 .nav-links a:hover{color:#c9a84c;border-color:#c9a84c44}
 
-.stage{display:flex;justify-content:center;padding:20px 12px 50px;background:radial-gradient(ellipse at 30% 0%,#14234a,#0a0a0a 70%)}
-.win{background:#111318;border:1px solid #3a3f4a;border-radius:9px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.7);max-width:100%}
-.tb{height:32px;display:flex;align-items:center;justify-content:space-between;background:#1c1e24;color:#e8e8e8;font:13px 'Segoe UI',Tahoma,sans-serif;padding-left:12px;user-select:none}
+.stage{display:flex;justify-content:center;padding:16px 8px 30px;background:radial-gradient(ellipse at 30% 0%,#14234a,#0a0a0a 70%)}
+.win{background:#111318;border:1px solid #3a3f4a;border-radius:9px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.7);max-width:100%;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.tb{height:30px;display:flex;align-items:center;justify-content:space-between;background:#1c1e24;color:#e8e8e8;font:13px 'Segoe UI',Tahoma,sans-serif;padding-left:12px}
 .tb .ic{display:inline-block;width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff 0 12%,#3ef0ff 35%,#7a1aff 80%);vertical-align:-3px;margin-right:9px}
-.tb .b{display:flex}.tb .b span{width:44px;text-align:center;color:#bbb}
+.tb .b{display:flex}.tb .b span{width:40px;text-align:center;color:#bbb}
 .mb{display:flex;gap:2px;padding:2px 6px;background:#1c1e24;font:13px 'Segoe UI',Tahoma,sans-serif}
-.mb button{background:none;border:0;color:#ddd;font:inherit;padding:4px 10px;border-radius:4px;cursor:pointer}
+.mb button{background:none;border:0;color:#ddd;font:inherit;padding:5px 10px;border-radius:4px;cursor:pointer;touch-action:manipulation}
 .mb button:hover{background:#2c2f38}
-.body{display:flex;background:#06070c}
-.cab{position:relative;perspective:1100px;padding:14px 26px 0;background:linear-gradient(90deg,#08090e,#1a1e2c 6%,#08090e 12%,#08090e 88%,#1a1e2c 94%,#08090e);touch-action:none}
-#t{display:block;transform-origin:50% 100%;transform:rotateX(22deg);touch-action:none;user-select:none;-webkit-user-select:none;
- box-shadow:-10px 0 30px rgba(62,240,255,.18),10px 0 30px rgba(255,62,168,.18),0 0 0 2px #000}
-.lockbar{height:16px;margin:0 -10px;background:linear-gradient(#c8cede,#5a6078 50%,#2a2e3c);border-radius:4px 4px 0 0;position:relative;z-index:2}
-.panel{width:330px;flex:none;padding:14px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(#14161e,#0c0d12)}
+#mInstall{display:none;margin-left:auto;color:#3ef0ff;border:1px solid #3ef0ff66}
+
+/* scoreboard across the top */
+.hud{display:flex;gap:8px;padding:8px;background:linear-gradient(#14161e,#0c0d12)}
 .box{border:3px solid #3c4152;border-radius:4px;background:#000}
-.glass{position:relative;aspect-ratio:346/294}
+.glass{flex:none;width:190px;aspect-ratio:346/294}
 .glass canvas{display:block;width:100%;height:100%}
-.ballbox{position:absolute;right:7px;bottom:7px;display:flex;gap:8px;align-items:center;background:#000;border:2px solid #5a1010;padding:2px 9px;font:900 28px 'Doto',monospace;color:#ff3030;text-shadow:0 0 8px #ff2020}
-.ballbox b{border:2px solid #7a1515;padding:0 7px}
-.row{display:flex;gap:8px}
-.pn{width:54px;font:900 38px 'Doto',monospace;color:#2ef2ff;text-shadow:0 0 10px #2ef2ff;text-align:center;padding:4px 0}
-.score{flex:1;font:900 36px 'Doto',monospace;color:#ff3030;text-shadow:0 0 10px #ff2020;text-align:center;padding:6px 0;white-space:nowrap}
-.player{padding:10px 14px;font:700 26px 'Segoe UI',sans-serif;color:#3aa8ff;text-shadow:0 0 10px rgba(58,168,255,.6)}
-.player small{display:block;font:900 15px/1.3 'Doto',monospace;color:#7ad8ff;margin-top:4px;text-shadow:0 0 6px #2ef2ff}
-.msg{flex:1;min-height:110px;padding:12px 14px;font:900 27px/1.15 'Doto',monospace;color:#2ef2ff;text-shadow:0 0 10px #2ef2ff;text-transform:uppercase}
-.help{font:12px/1.55 'Courier New',monospace;color:#8fa0c0}
+.hud-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.row{display:flex;gap:6px}
+.ballbox{flex:none;display:flex;gap:6px;align-items:center;padding:2px 8px;font:900 24px 'Doto',monospace;color:#ff3030;text-shadow:0 0 8px #ff2020;border-color:#5a1010}
+.ballbox b{border:2px solid #7a1515;padding:0 6px}
+.score{flex:1;font:900 34px 'Doto',monospace;color:#ff3030;text-shadow:0 0 10px #ff2020;text-align:center;padding:2px 0;white-space:nowrap;overflow:hidden}
+.msg{padding:6px 10px;font:900 20px/1.1 'Doto',monospace;color:#2ef2ff;text-shadow:0 0 10px #2ef2ff;text-transform:uppercase;min-height:2.6em}
+.player{padding:4px 10px;font:900 13px/1.35 'Doto',monospace;color:#7ad8ff;text-shadow:0 0 6px #2ef2ff}
+.player small{display:block;font:inherit}
+
+.cab{position:relative;perspective:1100px;padding:8px 18px 0;display:flex;flex-direction:column;align-items:center;background:linear-gradient(90deg,#08090e,#1a1e2c 6%,#08090e 12%,#08090e 88%,#1a1e2c 94%,#08090e);touch-action:none}
+#t{display:block;transform-origin:50% 100%;transform:rotateX(22deg);touch-action:none;
+ box-shadow:-10px 0 30px rgba(62,240,255,.18),10px 0 30px rgba(255,62,168,.18),0 0 0 2px #000}
+.lockbar{align-self:stretch;height:14px;margin:0 -10px;background:linear-gradient(#c8cede,#5a6078 50%,#2a2e3c);border-radius:4px 4px 0 0;position:relative;z-index:2}
+
+/* touch controls: flipper buttons + pull-down plunger */
+.controls{display:none;gap:10px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#0c0d12;touch-action:none}
+.fbtn{flex:1;height:84px;border-radius:16px;border:2px solid #ff3ea8;background:radial-gradient(ellipse at 50% 30%,#3a0f2e,#12060f);color:#ffd0ec;
+ font:900 18px 'Orbitron',sans-serif;letter-spacing:1px;box-shadow:0 0 14px rgba(255,62,168,.45),inset 0 0 18px rgba(255,62,168,.25);touch-action:none;-webkit-touch-callout:none}
+.fbtn.on{background:#ff3ea8;color:#fff;box-shadow:0 0 28px #ff3ea8}
+.plunger{flex:none;width:86px;height:84px;position:relative;border-radius:12px;border:2px solid #3ef0ff;background:linear-gradient(#081820,#02080c);overflow:hidden;touch-action:none;
+ box-shadow:0 0 14px rgba(62,240,255,.4);color:#9ff6ff;font:900 10px 'Orbitron',sans-serif;text-align:center}
+.plunger .rod{position:absolute;left:50%;top:0;width:8px;margin-left:-4px;height:100%;background:repeating-linear-gradient(#5a6078 0 3px,#c8cede 3px 6px);opacity:.5}
+.plunger .knob{position:absolute;left:50%;top:6px;width:46px;height:26px;margin-left:-23px;border-radius:13px;background:radial-gradient(circle at 40% 30%,#fff,#3ef0ff 45%,#0a5a70);box-shadow:0 0 12px #3ef0ff}
+.plunger span{position:absolute;left:0;right:0;bottom:5px}
+.plunger.idle{opacity:.35}
+.help{font:12px/1.55 'Courier New',monospace;color:#8fa0c0;padding:8px 12px 12px;background:#0c0d12}
 .help b{color:#e8e8e8;font-weight:normal;background:#22283c;border:1px solid #3c4668;border-radius:3px;padding:0 4px}
-@media (max-width:820px){
- nav{padding:12px 16px}
- .stage{padding:8px 4px 30px}
- .body{flex-direction:column}
- .cab{padding:8px 8px 0;display:flex;flex-direction:column;align-items:center}
- .lockbar{width:100%}
- .panel{width:auto;padding:8px;gap:6px}
- .glass,.help,.tb .b{display:none}
- .score{font-size:28px}.pn{font-size:30px;width:44px}
- .player{font-size:18px;padding:6px 10px}.player small{font-size:13px}
- .msg{min-height:0;font-size:19px;padding:8px 10px}
+
+@media (hover:none),(pointer:coarse){.controls{display:flex}.help{display:none}}
+@media (max-width:640px){
+ nav{padding:10px 14px}
+ .stage{padding:0}
+ .win{border-radius:0;border:0;width:100%}
+ .tb,.glass{display:none}
+ .hud{padding:6px;gap:6px}
+ .score{font-size:26px}.ballbox{font-size:18px}
+ .msg{font-size:15px;min-height:2.3em;padding:4px 8px}
+ .player{font-size:11px;padding:3px 8px}
+ .cab{padding:6px 10px 0}
+}
+@media (display-mode:standalone),(display-mode:fullscreen){
+ nav,.tb{display:none}
+ .stage{padding:0}
+ .win{border:0;border-radius:0;width:100%}
+ .hud{padding-top:calc(6px + env(safe-area-inset-top))}
 }
 </style>
 </head>
@@ -68,23 +98,25 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
     <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
   </div>
 </nav>
-<div class="stage"><div class="win">
+<div class="stage"><div class="win" id="win">
   <div class="tb"><span><span class="ic"></span>Cyber City Pinball</span><span class="b"><span>&#8212;</span><span>&#9744;</span><span>&#10005;</span></span></div>
-  <div class="mb"><button id="mNew">Game: New</button><button id="mPause">Pause</button><button id="mSound">Sound: On</button></div>
-  <div class="body">
-    <div class="cab"><canvas id="t" aria-label="Pinball table"></canvas><div class="lockbar"></div></div>
-    <div class="panel">
-      <div class="box glass"><canvas id="g"></canvas><div class="ballbox">BALL <b id="ballN">1</b></div></div>
-      <div class="row"><div class="box pn">1</div><div class="box score" id="score">000,000,000</div></div>
-      <div class="box player">Player 1<small id="rank">RANK: GUEST</small><small id="mission">MISSION: LAUNCH</small></div>
+  <div class="mb"><button id="mNew">New Game</button><button id="mPause">Pause</button><button id="mSound">Sound: On</button><button id="mInstall">Install</button></div>
+  <header class="hud" id="hud">
+    <div class="box glass"><canvas id="g"></canvas></div>
+    <div class="hud-main">
+      <div class="row"><div class="box ballbox">BALL <b id="ballN">1</b></div><div class="box score" id="score">000,000,000</div></div>
       <div class="box msg" id="msg">AWAITING CONNECTION...</div>
-      <div class="help">
-        <b>Z</b>/<b>&larr;</b> left flipper &nbsp; <b>/</b>/<b>&rarr;</b> right<br>
-        <b>Space</b> hold &amp; release to launch<br>
-        <b>P</b> pause &nbsp; <b>N</b> new game<br>
-        Touch: tap left or right half. Hold the right side to pull the plunger.
-      </div>
+      <div class="box player"><small id="rank">RANK: GUEST</small><small id="mission">MISSION: LAUNCH</small></div>
     </div>
+  </header>
+  <div class="cab" id="cab"><canvas id="t" aria-label="Pinball table"></canvas><div class="lockbar"></div></div>
+  <div class="controls" id="controls">
+    <button class="fbtn" id="bL" aria-label="Left flipper">&#9664; FLIP</button>
+    <div class="plunger idle" id="plunger" aria-label="Plunger: pull down and let go"><div class="rod"></div><div class="knob" id="knob"></div><span>PULL &#9660;</span></div>
+    <button class="fbtn" id="bR" aria-label="Right flipper">FLIP &#9654;</button>
+  </div>
+  <div class="help" id="help">
+    <b>Z</b>/<b>&larr;</b> left flipper &nbsp; <b>/</b>/<b>&rarr;</b> right flipper &nbsp; <b>Space</b> hold &amp; release to launch &nbsp; <b>P</b> pause &nbsp; <b>N</b> new game
   </div>
 </div></div>
 
@@ -251,7 +283,7 @@ function collideSeg(b, ax, ay, bx, by, rad, e) {
 function collideFlipper(b, f) {
   const ax = f.px, ay = f.py, dx = Math.cos(f.a) * FL, dy = Math.sin(f.a) * FL;
   let t = ((b.x - ax) * dx + (b.y - ay) * dy) / (FL * FL); t = t < 0 ? 0 : t > 1 ? 1 : t;
-  const cx = ax + t * dx, cy = ay + t * dy, rad = 16 - 9.5 * t;
+  const cx = ax + t * dx, cy = ay + t * dy, rad = 12 - 6 * t;
   const px = b.x - cx, py = b.y - cy, d = Math.hypot(px, py), min = b.r + rad;
   if (d >= min || d === 0) return;
   const nx = px / d, ny = py / d; b.x = cx + nx * min; b.y = cy + ny * min;
@@ -374,16 +406,23 @@ function launch() {
 // ============ Rendering ============
 const cvs = document.getElementById('t'), ctx = cvs.getContext('2d');
 const art = new Image(); art.src = 'playfield.jpg';
-const flipImg = new Image(); flipImg.src = 'flipper.png';
 let scale = 1;
 function resize() {
-  const mobile = innerWidth <= 820;
-  const navH = document.querySelector('nav').offsetHeight;
-  const availH = innerHeight - navH - (mobile ? 250 : 120);
-  const availW = Math.min(innerWidth - (mobile ? 24 : 420), 760);
-  scale = Math.max(0.4, Math.min(availH / H, availW / W, 1.3));
+  const vis = el => el && el.offsetParent !== null ? el.offsetHeight : 0;
+  const nav = document.querySelector('nav');
+  const chrome = vis(nav) + vis(document.querySelector('.tb')) + vis(document.querySelector('.mb')) + vis($('hud')) + vis($('controls')) + vis($('help')) + 14 + 24;
+  const vh = window.visualViewport ? visualViewport.height : innerHeight;
+  const availW = Math.min(innerWidth - 24, 760);
   const dpr = Math.min(devicePixelRatio || 1, 2.5);
-  cvs.style.width = Math.round(W * scale) + 'px'; cvs.style.height = Math.round(H * scale) + 'px';
+  let ratio = 1;                      // how much of the canvas height survives the tilt
+  for (let pass = 0; pass < 2; pass++) {
+    scale = Math.max(0.35, Math.min((vh - chrome) / (H * ratio), availW / W, 1.4));
+    cvs.style.width = Math.round(W * scale) + 'px'; cvs.style.height = Math.round(H * scale) + 'px';
+    cvs.style.marginTop = '0px';
+    const r = cvs.getBoundingClientRect();
+    ratio = Math.min(1, r.height / (H * scale));
+    cvs.style.marginTop = -Math.round(H * scale * (1 - ratio)) + 'px';
+  }
   cvs.width = Math.round(W * scale * dpr); cvs.height = Math.round(H * scale * dpr);
   ctx.setTransform(scale * dpr, 0, 0, scale * dpr, 0, 0);
 }
@@ -444,16 +483,8 @@ function render(dt) {
   if (plungerPull > 0) { ctx.fillStyle = `hsl(${300 - plungerPull * 120},95%,60%)`; ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 10; ctx.fillRect(502, 880 - plungerPull * 140, 3, plungerPull * 140); }
   ctx.restore();
 
-  // flippers: Sandy's sprite (pivot at 63.6,66.6 and 222px pivot-to-tip in flipper.png), mirrored for the right side
-  if (flipImg.complete && flipImg.naturalWidth) {
-    const k = FL / 222;
-    flippers.forEach((f, i) => {
-      ctx.save(); ctx.translate(f.px, f.py); ctx.rotate(f.a); if (i === 1) ctx.scale(1, -1);
-      ctx.save(); ctx.globalAlpha = 0.5; ctx.filter = 'brightness(0)'; ctx.drawImage(flipImg, -63.6 * k + 3, -66.6 * k + 6, flipImg.width * k, flipImg.height * k); ctx.restore();
-      ctx.drawImage(flipImg, -63.6 * k, -66.6 * k, flipImg.width * k, flipImg.height * k);
-      ctx.restore();
-    });
-  } else {
+  // flippers: dark chrome with a neon edge to match the art
+  {
   // flippers: dark chrome with a neon edge to match the art
     for (const f of flippers) {
       const ca = Math.cos(f.a), sa = Math.sin(f.a), tx = f.px + ca * FL, ty = f.py + sa * FL, nx = -sa, ny = ca;
@@ -612,6 +643,59 @@ const blurAfter = fn => e => { fn(); e.currentTarget.blur(); };
 $('mNew').addEventListener('click', blurAfter(newGame));
 $('mPause').addEventListener('click', blurAfter(togglePause));
 $('mSound').addEventListener('click', blurAfter(toggleSound));
+
+
+// ---- touch controls ----
+function holdBtn(el, down, upFn) {
+  el.addEventListener('pointerdown', e => { e.preventDefault(); ac(); try { el.setPointerCapture(e.pointerId); } catch (_) {} el.classList.add('on'); down(e); });
+  const end = e => { if (!el.classList.contains('on')) return; el.classList.remove('on'); upFn(e); };
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(t => el.addEventListener(t, end));
+  el.addEventListener('contextmenu', e => e.preventDefault());
+}
+holdBtn($('bL'), () => setFlipper(0, true), () => setFlipper(0, false));
+holdBtn($('bR'), () => setFlipper(1, true), () => setFlipper(1, false));
+// plunger: drag the knob down and let go; a plain press-and-hold also charges it
+const pl = $('plunger'); let pY = 0;
+holdBtn(pl, e => { pY = e.clientY; if (!paused) plungerHeld = true; }, () => { plungerHeld = false; launch(); });
+pl.addEventListener('pointermove', e => {
+  if (!pl.classList.contains('on') || paused) return;
+  const dy = e.clientY - pY;
+  if (dy > 6) { plungerHeld = false; plungerPull = Math.max(0, Math.min(1, dy / 70)); }
+});
+(function knobLoop() {
+  $('knob').style.transform = `translateY(${Math.round(plungerPull * 40)}px)`;
+  pl.classList.toggle('idle', !(G && ball.live && ball.inLane && !G.over));
+  requestAnimationFrame(knobLoop);
+})();
+document.addEventListener('gesturestart', e => e.preventDefault());   // iOS pinch zoom
+let lastTouchEnd = 0;
+document.addEventListener('touchend', e => { const n = Date.now(); if (n - lastTouchEnd < 350 && e.target.closest('.win')) e.preventDefault(); lastTouchEnd = n; }, { passive: false }); // iOS double-tap zoom
+
+// ---- pause when the app is hidden; keep the screen awake while playing ----
+let wake = null;
+async function keepAwake() { try { if ('wakeLock' in navigator && !wake && document.visibilityState === 'visible') { wake = await navigator.wakeLock.request('screen'); wake.addEventListener('release', () => wake = null); } } catch (_) {} }
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { if (!paused && G.started && !G.over) togglePause(); setFlipper(0, false); setFlipper(1, false); plungerHeld = false; }
+  else { last = performance.now(); keepAwake(); }
+});
+addEventListener('pointerdown', keepAwake, { once: true });
+addEventListener('keydown', keepAwake, { once: true });
+if (window.visualViewport) visualViewport.addEventListener('resize', resize);
+addEventListener('orientationchange', () => setTimeout(resize, 300));
+
+// ---- install + offline ----
+let deferredPrompt = null;
+const standalone = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; $('mInstall').style.display = 'inline-block'; });
+addEventListener('appinstalled', () => { $('mInstall').style.display = 'none'; deferredPrompt = null; });
+if (isIOS && !standalone) $('mInstall').style.display = 'inline-block';
+$('mInstall').addEventListener('click', async e => {
+  e.currentTarget.blur();
+  if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; $('mInstall').style.display = 'none'; }
+  else if (isIOS) setMsg('TAP SHARE, THEN ADD TO HOME SCREEN');
+});
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => {});
 
 addEventListener('resize', resize);
 resize(); newGame(); requestAnimationFrame(frame);

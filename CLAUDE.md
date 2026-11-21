@@ -47,8 +47,13 @@ books live in their own repos; some live as folders inside this repo.
   request. The tilt is a CSS rotateX on the canvas. Backglass art is
   `pinball/cyber/backglass.jpg` (Sandy's, cropped to 346:294); the title
   text is drawn over its empty sky in code, not baked into the image.
-  Flippers use `pinball/cyber/flipper.png` (Sandy's sprite, black keyed to
-  alpha; pivot at 63.6,66.6 and 222px pivot-to-tip), mirrored for the right.
+  Flippers are drawn in code (Sandy tried a sprite and preferred these).
+  Scoreboard sits above the table; touch devices get FLIP buttons and a
+  drag-down plunger under it. It is a PWA scoped to `/pinball/cyber/`:
+  `manifest.webmanifest`, `sw.js`, icons, and self-hosted fonts in
+  `fonts/` (no Google Fonts, so it works offline). **Bump `VERSION` in
+  `sw.js` whenever any cached file changes**, or installed copies keep
+  serving old art; the page itself is network-first so HTML updates land.
 
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
