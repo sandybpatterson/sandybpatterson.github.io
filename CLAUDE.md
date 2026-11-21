@@ -54,6 +54,9 @@ books live in their own repos; some live as folders inside this repo.
   `fonts/` (no Google Fonts, so it works offline). **Bump `VERSION` in
   `sw.js` whenever any cached file changes**, or installed copies keep
   serving old art; the page itself is network-first so HTML updates land.
+  Top-10 scores with initials live in localStorage `sbp-cybercity-scores`
+  (per device; the older single `sbp-cybercity-high` is migrated in). On
+  phones the site nav is hidden and a "Shelf" link sits in the menu bar.
 
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not

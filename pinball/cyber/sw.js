@@ -1,6 +1,6 @@
 // Cyber City Pinball service worker. Bump VERSION whenever any file below changes,
 // or installed copies keep serving the old asset from cache.
-const VERSION = 'cybercity-v1';
+const VERSION = 'cybercity-v3';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest',
   'playfield.jpg', 'backglass.jpg',

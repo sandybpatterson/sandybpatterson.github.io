@@ -34,7 +34,18 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 .mb{display:flex;gap:2px;padding:2px 6px;background:#1c1e24;font:13px 'Segoe UI',Tahoma,sans-serif}
 .mb button{background:none;border:0;color:#ddd;font:inherit;padding:5px 10px;border-radius:4px;cursor:pointer;touch-action:manipulation}
 .mb button:hover{background:#2c2f38}
-#mInstall{display:none;margin-left:auto;color:#3ef0ff;border:1px solid #3ef0ff66}
+#mInstall{display:none;color:#3ef0ff;border:1px solid #3ef0ff66}
+#mShelf{display:none;margin-left:auto;align-self:center;padding:5px 8px;color:#c9a84c;font:12px 'Courier New',monospace;text-transform:uppercase}
+.scores{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(2,0,10,.8);padding:16px}
+.scores.show{display:flex}
+.scores .card{width:min(360px,100%);border:2px solid #ff3ea8;border-radius:10px;background:#06070c;box-shadow:0 0 30px rgba(255,62,168,.4);padding:16px;font:900 18px 'Doto',monospace;color:#2ef2ff;text-shadow:0 0 8px #2ef2ff}
+.scores h2{font:900 20px 'Orbitron',sans-serif;color:#ff8fd0;text-align:center;margin-bottom:10px;text-shadow:0 0 10px #ff3ea8}
+.scores ol{list-style:none}
+.scores li{display:flex;justify-content:space-between;padding:3px 4px}
+.scores li.me{background:#3ef0ff22;color:#fff}
+.scores .entry{text-align:center;margin-bottom:10px;color:#ffd23a;text-shadow:0 0 8px #ffd23a}
+.scores input{width:5.5em;margin:8px auto 0;display:block;text-align:center;font:900 28px 'Doto',monospace;letter-spacing:6px;text-transform:uppercase;background:#000;color:#ff3030;border:2px solid #7a1515;border-radius:4px;padding:4px}
+.scores button{display:block;margin:12px auto 0;background:#ff3ea8;color:#fff;border:0;border-radius:8px;padding:8px 18px;font:900 14px 'Orbitron',sans-serif;cursor:pointer}
 
 /* scoreboard across the top */
 .hud{display:flex;gap:8px;padding:8px;background:linear-gradient(#14161e,#0c0d12)}
@@ -51,35 +62,39 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 .player small{display:block;font:inherit}
 
 .cab{position:relative;perspective:1100px;padding:8px 18px 0;display:flex;flex-direction:column;align-items:center;background:linear-gradient(90deg,#08090e,#1a1e2c 6%,#08090e 12%,#08090e 88%,#1a1e2c 94%,#08090e);touch-action:none}
-#t{display:block;transform-origin:50% 100%;transform:rotateX(22deg);touch-action:none;
+#t{display:block;transform-origin:50% 100%;transform:rotateX(17deg);touch-action:none;
  box-shadow:-10px 0 30px rgba(62,240,255,.18),10px 0 30px rgba(255,62,168,.18),0 0 0 2px #000}
 .lockbar{align-self:stretch;height:14px;margin:0 -10px;background:linear-gradient(#c8cede,#5a6078 50%,#2a2e3c);border-radius:4px 4px 0 0;position:relative;z-index:2}
 
 /* touch controls: flipper buttons + pull-down plunger */
-.controls{display:none;gap:10px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#0c0d12;touch-action:none}
-.fbtn{flex:1;height:84px;border-radius:16px;border:2px solid #ff3ea8;background:radial-gradient(ellipse at 50% 30%,#3a0f2e,#12060f);color:#ffd0ec;
- font:900 18px 'Orbitron',sans-serif;letter-spacing:1px;box-shadow:0 0 14px rgba(255,62,168,.45),inset 0 0 18px rgba(255,62,168,.25);touch-action:none;-webkit-touch-callout:none}
+.controls{display:none;gap:8px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:#0c0d12;touch-action:none}
+.fbtn{flex:1;height:58px;border-radius:14px;border:2px solid #ff3ea8;background:radial-gradient(ellipse at 50% 30%,#3a0f2e,#12060f);color:#ffd0ec;
+ font:900 15px 'Orbitron',sans-serif;letter-spacing:1px;box-shadow:0 0 14px rgba(255,62,168,.45),inset 0 0 18px rgba(255,62,168,.25);touch-action:none;-webkit-touch-callout:none}
 .fbtn.on{background:#ff3ea8;color:#fff;box-shadow:0 0 28px #ff3ea8}
-.plunger{flex:none;width:86px;height:84px;position:relative;border-radius:12px;border:2px solid #3ef0ff;background:linear-gradient(#081820,#02080c);overflow:hidden;touch-action:none;
+.plunger{flex:none;width:64px;height:58px;position:relative;border-radius:12px;border:2px solid #3ef0ff;background:linear-gradient(#081820,#02080c);overflow:hidden;touch-action:none;
  box-shadow:0 0 14px rgba(62,240,255,.4);color:#9ff6ff;font:900 10px 'Orbitron',sans-serif;text-align:center}
 .plunger .rod{position:absolute;left:50%;top:0;width:8px;margin-left:-4px;height:100%;background:repeating-linear-gradient(#5a6078 0 3px,#c8cede 3px 6px);opacity:.5}
-.plunger .knob{position:absolute;left:50%;top:6px;width:46px;height:26px;margin-left:-23px;border-radius:13px;background:radial-gradient(circle at 40% 30%,#fff,#3ef0ff 45%,#0a5a70);box-shadow:0 0 12px #3ef0ff}
-.plunger span{position:absolute;left:0;right:0;bottom:5px}
+.plunger .knob{position:absolute;left:50%;top:4px;width:38px;height:18px;margin-left:-19px;border-radius:9px;background:radial-gradient(circle at 40% 30%,#fff,#3ef0ff 45%,#0a5a70);box-shadow:0 0 12px #3ef0ff}
+.plunger span{position:absolute;left:0;right:0;bottom:3px;font-size:8px}
 .plunger.idle{opacity:.35}
 .help{font:12px/1.55 'Courier New',monospace;color:#8fa0c0;padding:8px 12px 12px;background:#0c0d12}
 .help b{color:#e8e8e8;font-weight:normal;background:#22283c;border:1px solid #3c4668;border-radius:3px;padding:0 4px}
 
 @media (hover:none),(pointer:coarse){.controls{display:flex}.help{display:none}}
 @media (max-width:640px){
- nav{padding:10px 14px}
+ nav{display:none}
+ #mShelf{display:block}
+ .mb{gap:0;padding:2px 4px}
+ .mb button{padding:5px 6px;font-size:12px;white-space:nowrap}
+ #mShelf{font-size:11px;padding:4px}
  .stage{padding:0}
  .win{border-radius:0;border:0;width:100%}
  .tb,.glass{display:none}
  .hud{padding:6px;gap:6px}
  .score{font-size:26px}.ballbox{font-size:18px}
- .msg{font-size:15px;min-height:2.3em;padding:4px 8px}
+ .msg{font-size:14px;height:2.5em;min-height:0;overflow:hidden;padding:4px 8px}
  .player{font-size:11px;padding:3px 8px}
- .cab{padding:6px 10px 0}
+ .cab{padding:4px 4px 0}
 }
 @media (display-mode:standalone),(display-mode:fullscreen){
  nav,.tb{display:none}
@@ -100,7 +115,7 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 </nav>
 <div class="stage"><div class="win" id="win">
   <div class="tb"><span><span class="ic"></span>Cyber City Pinball</span><span class="b"><span>&#8212;</span><span>&#9744;</span><span>&#10005;</span></span></div>
-  <div class="mb"><button id="mNew">New Game</button><button id="mPause">Pause</button><button id="mSound">Sound: On</button><button id="mInstall">Install</button></div>
+  <div class="mb"><button id="mNew">New Game</button><button id="mPause">Pause</button><button id="mSound">Sound: On</button><button id="mScores">Scores</button><button id="mInstall">Install</button><a id="mShelf" href="https://sandybpatterson.github.io/bookshelf.html">&larr; Shelf</a></div>
   <header class="hud" id="hud">
     <div class="box glass"><canvas id="g"></canvas></div>
     <div class="hud-main">
@@ -118,6 +133,12 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
   <div class="help" id="help">
     <b>Z</b>/<b>&larr;</b> left flipper &nbsp; <b>/</b>/<b>&rarr;</b> right flipper &nbsp; <b>Space</b> hold &amp; release to launch &nbsp; <b>P</b> pause &nbsp; <b>N</b> new game
   </div>
+</div></div>
+<div class="scores" id="scores"><div class="card">
+  <h2>TOP SCORES</h2>
+  <div class="entry" id="entry" hidden>NEW HIGH SCORE!<br>ENTER YOUR INITIALS<input id="initials" maxlength="3" autocomplete="off" autocapitalize="characters" spellcheck="false" /></div>
+  <ol id="scoreList"></ol>
+  <button id="scoresOk">OK</button>
 </div></div>
 
 <script>
@@ -204,7 +225,15 @@ const SHOT_SPOT = { bumps: [352, 248, 80], targets: [382, 156, 40], rampL: [140,
 
 // ============ State ============
 let G, high = 0, paused = false, soundOn = true;
-try { high = +localStorage.getItem('sbp-cybercity-high') || 0; } catch (e) {}
+let board = [];
+try {
+  board = JSON.parse(localStorage.getItem('sbp-cybercity-scores') || '[]');
+  const old = +localStorage.getItem('sbp-cybercity-high') || 0;   // carry over the single high score from before
+  if (old && !board.length) board = [{ n: 'YOU', s: old, d: Date.now() }];
+} catch (e) { board = []; }
+if (!Array.isArray(board)) board = [];
+high = board.length ? board[0].s : 0;
+const saveBoard = () => { try { localStorage.setItem('sbp-cybercity-scores', JSON.stringify(board)); } catch (e) {} };
 const ball = { x: 518, y: PLUNGER_REST - BR, vx: 0, vy: 0, r: BR, live: false, inLane: true, still: 0, ramp: null, s: 0 };
 let plungerPull = 0, plungerHeld = false;
 const popups = [], sparks = [];
@@ -214,7 +243,7 @@ function newGame() {
         over: false, started: false, save: 0, extra: false, combo: 0 };
   targets.forEach(t => t.up = true);
   resetBall();
-  setMsg('AWAITING CONNECTION... HOLD SPACE TO LAUNCH');
+  setMsg(matchMedia('(pointer: coarse)').matches ? 'AWAITING CONNECTION... PULL TO LAUNCH' : 'AWAITING CONNECTION... HOLD SPACE TO LAUNCH');
   updatePanel(true);
 }
 function resetBall() {
@@ -386,8 +415,9 @@ function loseBall() {
   sfx.drain();
   if (G.ball >= G.balls) {
     G.over = true;
-    if (G.score > high) { high = G.score; try { localStorage.setItem('sbp-cybercity-high', String(high)); } catch (e) {} setMsg('CONNECTION LOST. NEW HIGH SCORE! PRESS N'); }
-    else setMsg('CONNECTION LOST. GAME OVER. PRESS N');
+    const qualifies = G.score > 0 && (board.length < 10 || G.score > board[board.length - 1].s);
+    setMsg(qualifies ? 'CONNECTION LOST. NEW TOP SCORE!' : 'CONNECTION LOST. GAME OVER. PRESS N');
+    if (qualifies) setTimeout(() => showScores(G.score), 900);
     updatePanel(true); return;
   }
   G.ball++; setMsg(`SIGNAL DROPPED. BALL ${G.ball}`);
@@ -528,7 +558,7 @@ function render(dt) {
 
   if (paused || (G && G.over) || (G && !G.started && ball.inLane)) {
     const txt = paused ? 'PAUSED' : G.over ? 'GAME OVER' : 'PULL THE PLUNGER';
-    const sub = paused ? 'Press P to resume' : G.over ? 'Press N or Game: New' : (matchMedia('(pointer: coarse)').matches ? 'Hold the right side, then let go' : 'Hold SPACE, then let go');
+    const sub = paused ? 'Press P to resume' : G.over ? 'Press N or Game: New' : (matchMedia('(pointer: coarse)').matches ? 'Drag the PULL plunger down, then let go' : 'Hold SPACE, then let go');
     ctx.save(); ctx.fillStyle = 'rgba(5,0,20,0.75)'; ctx.fillRect(84, 445, 400, 70);
     ctx.strokeStyle = '#ff3ea8'; ctx.shadowColor = '#ff3ea8'; ctx.shadowBlur = 12; ctx.lineWidth = 2; ctx.strokeRect(84, 445, 400, 70);
     ctx.textAlign = 'center'; ctx.font = '900 26px Orbitron'; ctx.fillStyle = '#7ff6ff'; ctx.shadowColor = '#3ef0ff'; ctx.fillText(txt, 284, 480);
@@ -660,10 +690,10 @@ holdBtn(pl, e => { pY = e.clientY; if (!paused) plungerHeld = true; }, () => { p
 pl.addEventListener('pointermove', e => {
   if (!pl.classList.contains('on') || paused) return;
   const dy = e.clientY - pY;
-  if (dy > 6) { plungerHeld = false; plungerPull = Math.max(0, Math.min(1, dy / 70)); }
+  if (dy > 6) { plungerHeld = false; plungerPull = Math.max(0, Math.min(1, dy / 50)); }
 });
 (function knobLoop() {
-  $('knob').style.transform = `translateY(${Math.round(plungerPull * 40)}px)`;
+  $('knob').style.transform = `translateY(${Math.round(plungerPull * 28)}px)`;
   pl.classList.toggle('idle', !(G && ball.live && ball.inLane && !G.over));
   requestAnimationFrame(knobLoop);
 })();
@@ -681,6 +711,42 @@ document.addEventListener('visibilitychange', () => {
 addEventListener('pointerdown', keepAwake, { once: true });
 addEventListener('keydown', keepAwake, { once: true });
 if (window.visualViewport) visualViewport.addEventListener('resize', resize);
+// ---- top scores ----
+let pending = null;
+function renderBoard(mark) {
+  $('scoreList').innerHTML = '';
+  for (let i = 0; i < 10; i++) {
+    const r = board[i], li = document.createElement('li');
+    if (r && r === mark) li.className = 'me';
+    li.textContent = '';
+    const a = document.createElement('span'); a.textContent = `${String(i + 1).padStart(2, ' ')}. ${r ? r.n : '---'}`;
+    const b = document.createElement('span'); b.textContent = r ? r.s.toLocaleString() : '0';
+    li.append(a, b); $('scoreList').append(li);
+  }
+}
+function showScores(newScore) {
+  if (!paused && G.started && !G.over) togglePause();
+  pending = newScore || null;
+  $('entry').hidden = !pending;
+  renderBoard(null);
+  $('scores').classList.add('show');
+  if (pending) { const i = $('initials'); i.value = (localStorage.getItem('sbp-cybercity-initials') || ''); setTimeout(() => i.focus(), 50); }
+}
+function closeScores() {
+  if (pending) {
+    const n = ($('initials').value.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'AAA').slice(0, 3);
+    try { localStorage.setItem('sbp-cybercity-initials', n); } catch (e) {}
+    const row = { n, s: pending, d: Date.now() };
+    board.push(row); board.sort((x, y) => y.s - x.s); board = board.slice(0, 10); saveBoard();
+    high = board[0].s; pending = null; $('entry').hidden = true; renderBoard(row); updatePanel(true);
+    return;   // leave the table up so the new row can be seen; OK again closes it
+  }
+  $('scores').classList.remove('show');
+}
+$('scoresOk').addEventListener('click', closeScores);
+$('initials').addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Enter') closeScores(); });
+$('initials').addEventListener('keyup', e => e.stopPropagation());
+$('mScores').addEventListener('click', e => { e.currentTarget.blur(); showScores(); });
 addEventListener('orientationchange', () => setTimeout(resize, 300));
 
 // ---- install + offline ----
