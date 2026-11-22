@@ -58,8 +58,8 @@ books live in their own repos; some live as folders inside this repo.
   (per device; the older single `sbp-cybercity-high` is migrated in). On
   phones the site nav is hidden and a "Shelf" link sits in the menu bar.
 
-**Unlisted, not on the shelf:**
-- **Shopping List** — `/shopping/index.html`, added 2026-11-22. A blank,
+- **Shopping List &mdash; ad-free app** — `/shopping/index.html`, added
+  2026-11-22, last button in the link-tree. A blank,
   general-purpose shopping checklist (check = cross out + drop to bottom,
   × deletes, type to add, Clear checked / Clear all). Saved per device in
   localStorage `sbp-recipe-checklist` (key kept from its recipe-checklist
