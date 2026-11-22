@@ -38,7 +38,9 @@ books live in their own repos; some live as folders inside this repo.
   (`pinball/cyber/playfield.jpg`, 1536x2730, 9:16, replaced 2026-11-22; same layout as the
   first 568x896 art drawn taller). The table is 568x1010 logical units; geometry is still
   written in the first art's coordinates and mapped onto the new one by `X()`/`Y()` near the
-  top of the script; append `#debug` to the URL
+  top of the script; the wheel (`WHEEL`) is the one exception, measured directly on the new
+  art. Wheel wedge labels (BUMPERS, TARGETS, PINK RAMP, CYAN RAMP, SCOOP, SLINGS) are drawn in
+  code from `MISSIONS[].seg`, since the art has no text; ramps are called PINK and CYAN in messages. append `#debug` to the URL
   to draw the walls/bumpers/ramp paths over the art when re-aligning.
   Sandy can supply more art (backglass, sprites, higher-res playfield) on
   request. The tilt is a CSS rotateX on the canvas. Backglass art is

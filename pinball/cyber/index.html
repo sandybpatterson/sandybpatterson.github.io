@@ -211,9 +211,9 @@ function spline(p, n = 10) {
   return { pts: o, len, total: len[len.length - 1] };
 }
 const ramps = [
-  { name: 'OVERDRIVE', key: 'rampL', ex: 150, ey: 338, col: '#ff3ea8',
+  { name: 'PINK', key: 'rampL', ex: 150, ey: 338, col: '#ff3ea8',
     path: spline([[150, 338], [108, 255], [62, 160], [72, 72], [150, 38], [240, 62], [268, 135], [228, 222], [150, 300], [80, 400], [64, 500], [88, 600], [104, 650]]) },
-  { name: 'CYBER', key: 'rampR', ex: 392, ey: 352, col: '#3ef0ff',
+  { name: 'CYAN', key: 'rampR', ex: 392, ey: 352, col: '#3ef0ff',
     path: spline([[392, 352], [448, 275], [478, 160], [438, 62], [330, 40], [238, 66], [190, 150], [205, 285], [350, 360], [462, 430], [488, 520], [460, 600], [444, 652]]) },
 ];
 
@@ -226,12 +226,13 @@ const flippers = [
 // Mode wheel insert, center + its six labelled segments (clockwise from the top-left)
 const WHEEL = { x: 267, y: 572, r0: 30, r1: 92 };
 const MISSIONS = [
-  { seg: 'HACK',      a: -2.1, text: 'HIT THE HEX BUMPERS 20 TIMES', key: 'bumps', need: 20 },
-  { seg: 'GRID',      a: -1.05, text: 'KNOCK DOWN ALL 3 GRID TARGETS', key: 'targets', need: 1 },
-  { seg: 'OVERDRIVE', a: 0,    text: 'SHOOT THE PINK OVERDRIVE RAMP', key: 'rampL', need: 1 },
-  { seg: 'CYBER',     a: 1.05, text: 'SHOOT THE CYAN CYBER RAMP', key: 'rampR', need: 1 },
-  { seg: 'UPLOADING', a: 2.1,  text: 'SINK THE JACKPOT SCOOP', key: 'scoop', need: 1 },
-  { seg: 'UPGRADE',   a: Math.PI, text: 'HIT THE SLINGSHOTS 10 TIMES', key: 'slings', need: 10 },
+  // seg = the label drawn on that wedge of the wheel (two lines where it is split by '|')
+  { seg: 'BUMPERS',    a: -2.1, text: 'HIT THE HEX BUMPERS 20 TIMES', key: 'bumps', need: 20 },
+  { seg: 'TARGETS',    a: -1.05, text: 'KNOCK DOWN ALL 3 YELLOW TARGETS', key: 'targets', need: 1 },
+  { seg: 'PINK|RAMP',  a: 0,    text: 'SHOOT THE PINK RAMP', key: 'rampL', need: 1 },
+  { seg: 'CYAN|RAMP',  a: 1.05, text: 'SHOOT THE CYAN RAMP', key: 'rampR', need: 1 },
+  { seg: 'SCOOP',      a: 2.1,  text: 'SINK THE SCOOP', key: 'scoop', need: 1 },
+  { seg: 'SLINGS',     a: Math.PI, text: 'HIT THE SLINGSHOTS 10 TIMES', key: 'slings', need: 10 },
 ];
 const RANKS = ['GUEST', 'USER', 'SCRIPTER', 'NETRUNNER', 'HACKER', 'SYSOP', 'ROOT'];
 // where each mission's shot is, for the blinking guide light
@@ -248,6 +249,7 @@ for (const r of ramps) {
   P.total = P.len[P.len.length - 1];
 }
 for (const f of flippers) { f.px = X(f.px); f.py = Y(f.py); }
+Object.assign(WHEEL, { x: 268, y: 653, r0: 19, r1: 76 });   // measured on the 9:16 art
 for (const k in SHOT_SPOT) { const sp = SHOT_SPOT[k]; sp[0] = X(sp[0]); sp[1] = Y(sp[1]); }
 
 // ============ State ============
@@ -313,7 +315,7 @@ function progress(key, n = 1) {
     G.score += 500000; G.lit.fill(false); G.mult = Math.min(5, G.mult + 1);
     setMsg(`SYSTEM OVERRIDE! +500,000  MULTIPLIER ${G.mult}X`);
     if (!G.extra) { G.extra = true; G.balls++; later(() => setMsg('EXTRA BALL!'), 2600); }
-  } else setMsg(`${m.seg} COMPLETE +${bonus.toLocaleString()}`);
+  } else setMsg(`${m.seg.replace('|', ' ')} COMPLETE +${bonus.toLocaleString()}`);
   // next unlit segment, going clockwise
   for (let i = 1; i <= 6; i++) { const j = (G.mission + i) % 6; if (!G.lit[j]) { G.mission = j; break; } }
   updatePanel(true);
@@ -456,7 +458,7 @@ function stepBall(b, dt, pTop) {
       t.up = false; t.flash = 0.3; G.bn.targets++; addScore(2500, t.x - 30, t.y + 20); sfx.target();
       if (targets.every(q => !q.up)) {
         targetReset = 2; addScore(15000);
-        if (!G.multi) { G.lockLit = true; setMsg(G.locks ? "GRID BREACHED! LOCK LIT: SINK THE SCOOP FOR MULTIBALL" : "GRID BREACHED! LOCK IS LIT AT THE SCOOP"); } else setMsg('GRID BREACHED! +15,000');
+        if (!G.multi) { G.lockLit = true; setMsg(G.locks ? "TARGETS DOWN! LOCK LIT: SINK THE SCOOP FOR MULTIBALL" : "TARGETS DOWN! LOCK IS LIT AT THE SCOOP"); } else setMsg('TARGETS DOWN! +15,000');
         progress('targets');
       }
     }
@@ -623,7 +625,19 @@ function renderTable(dt) {
     ctx.beginPath(); ctx.arc(WHEEL.x, WHEEL.y, WHEEL.r1, m.a - 0.52, m.a + 0.52); ctx.arc(WHEEL.x, WHEEL.y, WHEEL.r0, m.a + 0.52, m.a - 0.52, true); ctx.closePath();
     ctx.fillStyle = lit ? '#ffffff' : '#3ef0ff'; ctx.fill(); ctx.restore();
   }
-  if (G && G.mult > 1) { ctx.save(); ctx.font = '900 18px Orbitron'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#fff'; ctx.shadowColor = '#3ef0ff'; ctx.shadowBlur = 14; ctx.fillText(G.mult + 'X', WHEEL.x, WHEEL.y); ctx.restore(); }
+  for (let i = 0; i < 6; i++) {
+    const m = MISSIONS[i], lit = G && G.lit[i], cur = G && i === G.mission && G.started;
+    const lx = WHEEL.x + Math.cos(m.a) * 50, ly = WHEEL.y + Math.sin(m.a) * 50, lines = m.seg.split('|');
+    ctx.save(); ctx.font = '900 8.5px Orbitron'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,0.85)'; ctx.fillStyle = lit || cur ? '#ffffff' : 'rgba(225,235,255,0.82)';
+    if (lit || cur) { ctx.shadowColor = '#3ef0ff'; ctx.shadowBlur = 8; }
+    lines.forEach((t, j) => {
+      const yy = ly + (j - (lines.length - 1) / 2) * 10, w = ctx.measureText(t).width, fit = Math.min(1, 34 / w);   // shrink long words to fit the wedge
+      ctx.save(); ctx.translate(lx, yy); ctx.scale(fit, fit); ctx.strokeText(t, 0, 0); ctx.fillText(t, 0, 0); ctx.restore();
+    });
+    ctx.restore();
+  }
+  if (G && G.mult > 1) { ctx.save(); ctx.font = '900 18px Orbitron'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#fff'; ctx.shadowColor = '#3ef0ff'; ctx.shadowBlur = 14; ctx.font = '900 13px Orbitron'; ctx.fillText(G.mult + 'X', WHEEL.x, WHEEL.y); ctx.restore(); }
 
   // guide light on the current mission's shot
   if (G && G.started) { const s = SHOT_SPOT[MISSIONS[G.mission].key]; glowDot(s[0], s[1], s[2], 'rgba(120,240,255,0.55)', 0.5 + 0.5 * Math.sin(clock * 6)); }
