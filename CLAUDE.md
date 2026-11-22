@@ -56,6 +56,18 @@ books live in their own repos; some live as folders inside this repo.
   gradient title bar, status bar), carried over from Starlight Patrol, an
   earlier space-pinball table that Sandy had removed on 2026-11-22.
 
+- **Shopping List &mdash; ad-free app** — `/shopping/index.html`, added
+  2026-11-22, last button in the link-tree. A blank,
+  general-purpose shopping checklist (check = cross out + drop to bottom,
+  × deletes, type to add, Clear checked / Clear all). Saved per device in
+  localStorage `sbp-recipe-checklist` (key kept from its recipe-checklist
+  origins so existing lists survive). PWA scoped to `/shopping/`
+  (`manifest.webmanifest`, `sw.js`, icons); the nav "Install" button opens a
+  popup with Add-to-Home-Screen steps and a share/copy link. Its nav reads
+  "&larr; Homepage" instead of "Bookshelf" at Sandy's request. Bump `VERSION`
+  in `sw.js` if icons/manifest change. `recipes/checklist.html` is just a
+  redirect to it (the two recipe pages it came from were deleted).
+
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
 as a link-tree RSS button (the old "Copy Podcast RSS Link" button was
