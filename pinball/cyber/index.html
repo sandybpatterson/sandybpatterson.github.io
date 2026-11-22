@@ -154,10 +154,14 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 <script>
 (() => {
 'use strict';
-// ============ Geometry, in pixels of playfield.jpg (568 x 896) ============
-const W = 568, H = 896, BR = 10;
-const GRAV = 1300, MAX_V = 3000, SUB = 12;
-const LANE_X = 497, PLUNGER_REST = 852;
+// ============ Geometry ============
+// Coordinates below were traced on the first 568x896 art. The current art (playfield.jpg,
+// 1536x2730, 9:16) has the same layout drawn taller, so X()/Y() map every traced point
+// onto it; the table is 568 x 1010 logical units.
+const X = x => x * 1.01 - 4, Y = y => y * 1.125 + 3;
+const W = 568, H = 1010, BR = 10;
+const MAX_V = 3000, SUB = 12;
+const LANE_X = X(497), PLUNGER_REST = Y(852);
 const DEBUG = /debug/.test(location.hash);
 
 const walls = [];
@@ -232,6 +236,19 @@ const MISSIONS = [
 const RANKS = ['GUEST', 'USER', 'SCRIPTER', 'NETRUNNER', 'HACKER', 'SYSOP', 'ROOT'];
 // where each mission's shot is, for the blinking guide light
 const SHOT_SPOT = { bumps: [352, 248, 80], targets: [382, 156, 40], rampL: [140, 400, 45], rampR: [362, 440, 45], scoop: [180, 212, 32], slings: [267, 700, 60] };
+
+// map the traced geometry onto the taller art
+for (const w of walls) { w.ax = X(w.ax); w.bx = X(w.bx); w.ay = Y(w.ay); w.by = Y(w.by); }
+for (const sl of slings) sl.pts = sl.pts.map(([x, y]) => [X(x), Y(y)]);
+for (const o of [...bumpers, ...targets, scoop, WHEEL]) { o.x = X(o.x); o.y = Y(o.y); }
+for (const r of ramps) {
+  r.ex = X(r.ex); r.ey = Y(r.ey);
+  const P = r.path; P.pts = P.pts.map(([x, y]) => [X(x), Y(y)]);
+  P.len = [0]; for (let i = 1; i < P.pts.length; i++) P.len.push(P.len[i - 1] + Math.hypot(P.pts[i][0] - P.pts[i - 1][0], P.pts[i][1] - P.pts[i - 1][1]));
+  P.total = P.len[P.len.length - 1];
+}
+for (const f of flippers) { f.px = X(f.px); f.py = Y(f.py); }
+for (const k in SHOT_SPOT) { const sp = SHOT_SPOT[k]; sp[0] = X(sp[0]); sp[1] = Y(sp[1]); }
 
 // ============ State ============
 let G, high = 0, paused = false, soundOn = true;
@@ -410,7 +427,7 @@ function stepBall(b, dt, pTop) {
   }
 
   b.vy += grav * dt; b.x += b.vx * dt; b.y += b.vy * dt;
-  b.inLane = b.x > LANE_X && b.y > 160;
+  b.inLane = b.x > LANE_X && b.y > Y(160);
   if (b.x > LANE_X && b.y + BR > pTop) {
     b.y = pTop - BR; if (b.vy > 0) b.vy = -b.vy * 0.15; if (Math.abs(b.vy) < 20) b.vy = 0; b.vx *= 0.9;
   }
@@ -449,7 +466,7 @@ function stepBall(b, dt, pTop) {
     if (b.vy < -250 && Math.hypot(b.x - r.ex, b.y - r.ey) < 22) { rampHit(b, r); return; }
   }
   // kickback in the left outlane
-  if (G.kick && !G.tilted && b.x > 47 && b.x < 82 && b.y > 705 && b.y < 755 && b.vy > 0) {
+  if (G.kick && !G.tilted && b.x > 47 && b.x < 82 && b.y > Y(705) && b.y < Y(755) && b.vy > 0) {
     G.kick = false; b.vy = -1350; b.vx = 25; G.shake = 0.12;
     setMsg('KICKBACK!'); tone(140, 0.25, 'sawtooth', 0.06, 700);
   }
@@ -635,7 +652,7 @@ function renderTable(dt) {
   if (G && G.lockLit && !G.multi) label('LOCK', scoop.x, scoop.y - 22, '#3dff7a');
   if (G && G.multi && G.jp >= 2) label('SUPER', scoop.x, scoop.y - 22, '#ffd23a');
   if (G && G.multi) for (const r of ramps) { glowDot(r.ex, r.ey, 34, 'rgba(255,210,60,0.9)', 0.5 + 0.5 * Math.sin(clock * 8)); label('JACKPOT', r.ex, r.ey + 32, '#ffd23a'); }
-  if (G && G.kick) { glowDot(64, 712, 22, 'rgba(61,255,122,0.9)', 0.55 + 0.35 * Math.sin(clock * 5)); label('KICK', 64, 742, '#3dff7a'); }
+  if (G && G.kick) { glowDot(64, Y(712), 22, 'rgba(61,255,122,0.9)', 0.55 + 0.35 * Math.sin(clock * 5)); label('KICK', 64, Y(742), '#3dff7a'); }
 
   // plunger
   const pt = PLUNGER_REST + plungerPull * 26;
@@ -643,11 +660,11 @@ function renderTable(dt) {
   const pg = ctx.createLinearGradient(508, 0, 528, 0); pg.addColorStop(0, '#666'); pg.addColorStop(0.5, '#f4f4f4'); pg.addColorStop(1, '#555');
   ctx.fillStyle = pg; ctx.fillRect(508, pt, 20, 7); ctx.fillRect(515, pt + 7, 6, H - pt);
   if (G && G.skillOn && ball.live && ball.inLane) {
-    ctx.fillStyle = 'rgba(255,255,255,0.14)'; ctx.fillRect(501, 740, 5, 140);
+    ctx.fillStyle = 'rgba(255,255,255,0.14)'; ctx.fillRect(501, Y(740), 5, Y(880) - Y(740));
     ctx.shadowColor = '#3dff7a'; ctx.shadowBlur = 10; ctx.fillStyle = 'rgba(61,255,122,0.85)';
-    ctx.fillRect(499, 880 - (G.skill + 0.08) * 140, 9, 0.16 * 140); ctx.shadowBlur = 0;
+    ctx.fillRect(499, Y(880) - (G.skill + 0.08) * (Y(880) - Y(740)), 9, 0.16 * (Y(880) - Y(740))); ctx.shadowBlur = 0;
   }
-  if (plungerPull > 0) { ctx.fillStyle = `hsl(${300 - plungerPull * 120},95%,60%)`; ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 10; ctx.fillRect(502, 880 - plungerPull * 140, 3, plungerPull * 140); }
+  if (plungerPull > 0) { ctx.fillStyle = `hsl(${300 - plungerPull * 120},95%,60%)`; ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 10; ctx.fillRect(502, Y(880) - plungerPull * (Y(880) - Y(740)), 3, plungerPull * (Y(880) - Y(740))); }
   ctx.restore();
 
   // flippers: dark chrome with a neon edge to match the art
@@ -696,10 +713,10 @@ function renderTable(dt) {
   if (paused || (G && G.over) || (G && G.tilted) || (G && !G.started && ball.inLane)) {
     const txt = paused ? 'PAUSED' : G.tilted ? 'TILT'  : G.over ? 'GAME OVER' : 'PULL THE PLUNGER';
     const sub = G.tilted && !paused ? 'Flippers are dead until the ball drains' : paused ? (matchMedia('(pointer: coarse)').matches ? 'Tap to resume' : 'Press P to resume') : G.over ? (matchMedia('(pointer: coarse)').matches ? 'Tap a button to play again' : 'Press N or New Game') : (matchMedia('(pointer: coarse)').matches ? 'Drag the PULL plunger down, then let go' : 'Hold SPACE, then let go');
-    ctx.save(); ctx.fillStyle = 'rgba(5,0,20,0.75)'; ctx.fillRect(84, 445, 400, 70);
-    ctx.strokeStyle = '#ff3ea8'; ctx.shadowColor = '#ff3ea8'; ctx.shadowBlur = 12; ctx.lineWidth = 2; ctx.strokeRect(84, 445, 400, 70);
-    ctx.textAlign = 'center'; ctx.font = '900 26px Orbitron'; ctx.fillStyle = '#7ff6ff'; ctx.shadowColor = '#3ef0ff'; ctx.fillText(txt, 284, 480);
-    ctx.shadowBlur = 0; ctx.font = '14px "Courier New", monospace'; ctx.fillStyle = '#e6d8ff'; ctx.fillText(sub, 284, 502); ctx.restore();
+    ctx.save(); ctx.fillStyle = 'rgba(5,0,20,0.75)'; ctx.fillRect(84, 485, 400, 70);
+    ctx.strokeStyle = '#ff3ea8'; ctx.shadowColor = '#ff3ea8'; ctx.shadowBlur = 12; ctx.lineWidth = 2; ctx.strokeRect(84, 485, 400, 70);
+    ctx.textAlign = 'center'; ctx.font = '900 26px Orbitron'; ctx.fillStyle = '#7ff6ff'; ctx.shadowColor = '#3ef0ff'; ctx.fillText(txt, 284, 520);
+    ctx.shadowBlur = 0; ctx.font = '14px "Courier New", monospace'; ctx.fillStyle = '#e6d8ff'; ctx.fillText(sub, 284, 542); ctx.restore();
   }
 
   if (DEBUG) {

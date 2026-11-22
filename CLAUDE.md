@@ -35,8 +35,10 @@ books live in their own repos; some live as folders inside this repo.
 - **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
 - **Cyber City Pinball** — `/pinball/cyber/index.html`, added 2026-11-16. A
   neon table built on Sandy's own AI-generated playfield art
-  (`pinball/cyber/playfield.jpg`, 710x1120 upscale of the original 568x896, straight top-down; the game still uses 568x896 logical coordinates and scales the image down). All physics
-  geometry is in that image's pixel coordinates; append `#debug` to the URL
+  (`pinball/cyber/playfield.jpg`, 1536x2730, 9:16, replaced 2026-11-22; same layout as the
+  first 568x896 art drawn taller). The table is 568x1010 logical units; geometry is still
+  written in the first art's coordinates and mapped onto the new one by `X()`/`Y()` near the
+  top of the script; append `#debug` to the URL
   to draw the walls/bumpers/ramp paths over the art when re-aligning.
   Sandy can supply more art (backglass, sprites, higher-res playfield) on
   request. The tilt is a CSS rotateX on the canvas. Backglass art is
