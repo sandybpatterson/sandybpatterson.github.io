@@ -55,6 +55,15 @@ books live in their own repos; some live as folders inside this repo.
   Window chrome is turn-of-the-century desktop style (grey bevels, blue
   gradient title bar, status bar), carried over from Starlight Patrol, an
   earlier space-pinball table that Sandy had removed on 2026-11-22.
+  Rules (added 2026-11-22): skill shot (release the plunger in the green
+  band on the lane meter), nudge (X / Space / the plunger button while no
+  ball waits; 3+ quick nudges = TILT, flippers dead, bonus lost), left
+  outlane kickback (relit by missions), end-of-ball bonus count-up, and
+  multiball (knock down all 3 GRID targets to light the lock, sink the
+  scoop to lock; second lock releases 3 balls, ramps = jackpots, both then
+  scoop = super jackpot). Casual / Normal / Expert modes (menu button,
+  localStorage `sbp-cybercity-mode`) change ball save, ball count, gravity
+  and kickback relighting; top-score rows are tagged EZ / PRO.
 
 - **Shopping List &mdash; ad-free app** — `/shopping/index.html`, added
   2026-11-22, last button in the link-tree. A blank,

@@ -81,7 +81,8 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 .plunger .rod{position:absolute;left:50%;top:0;width:8px;margin-left:-4px;height:100%;background:repeating-linear-gradient(#5a6078 0 3px,#c8cede 3px 6px);opacity:.5}
 .plunger .knob{position:absolute;left:50%;top:4px;width:38px;height:18px;margin-left:-19px;border-radius:9px;background:radial-gradient(circle at 40% 30%,#fff,#3ef0ff 45%,#0a5a70);box-shadow:0 0 12px #3ef0ff}
 .plunger span{position:absolute;left:0;right:0;bottom:3px;font-size:8px}
-.plunger.idle{opacity:.35}
+.plunger.idle{border-color:#ff8a2a;box-shadow:0 0 14px rgba(255,138,42,.4);color:#ffc890}
+.plunger.idle .knob{opacity:.25}
 .help{font:12px/1.55 'Courier New',monospace;color:#8fa0c0;padding:8px 12px 12px;background:#0c0d12}
 .help b{color:#e8e8e8;font-weight:normal;background:#22283c;border:1px solid #3c4668;border-radius:3px;padding:0 4px}
 
@@ -121,7 +122,7 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 </nav>
 <div class="stage"><div class="win" id="win">
   <div class="tb"><span><span class="ic"></span>Cyber City Pinball</span><span class="b"><span>&#8212;</span><span>&#9744;</span><span>&#10005;</span></span></div>
-  <div class="mb"><button id="mNew">New Game</button><button id="mPause">Pause</button><button id="mSound">Sound: On</button><button id="mScores">Scores</button><button id="mInstall">Install</button><a id="mShelf" href="https://sandybpatterson.github.io/bookshelf.html">&larr; Shelf</a></div>
+  <div class="mb"><button id="mNew">New</button><button id="mPause">Pause</button><button id="mSound">Sound</button><button id="mScores">Scores</button><button id="mMode">Normal</button><button id="mInstall">Install</button><a id="mShelf" href="https://sandybpatterson.github.io/bookshelf.html">&larr; Shelf</a></div>
   <div class="inset">
   <header class="hud" id="hud">
     <div class="box glass"><canvas id="g"></canvas></div>
@@ -139,7 +140,7 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
   </div>
   </div>
   <div class="help" id="help">
-    <b>Z</b>/<b>&larr;</b> left flipper &nbsp; <b>/</b>/<b>&rarr;</b> right flipper &nbsp; <b>Space</b> hold &amp; release to launch &nbsp; <b>P</b> pause &nbsp; <b>N</b> new game
+    <b>Z</b>/<b>&larr;</b> left flipper &nbsp; <b>/</b>/<b>&rarr;</b> right flipper &nbsp; <b>Space</b> hold &amp; release to launch &nbsp; <b>X</b> nudge &nbsp; <b>P</b> pause &nbsp; <b>N</b> new game
   </div>
   <div class="status"><span id="statusTxt">Ready</span><span>&copy; Sandy B. Patterson</span></div>
 </div></div>
@@ -243,7 +244,15 @@ try {
 if (!Array.isArray(board)) board = [];
 high = board.length ? board[0].s : 0;
 const saveBoard = () => { try { localStorage.setItem('sbp-cybercity-scores', JSON.stringify(board)); } catch (e) {} };
-const ball = { x: 518, y: PLUNGER_REST - BR, vx: 0, vy: 0, r: BR, live: false, inLane: true, still: 0, ramp: null, s: 0 };
+const DIFFS = {
+  CASUAL: { save: 12, balls: 5, grav: 1150, kick: 'ball', tag: 'EZ' },
+  NORMAL: { save: 7, balls: 3, grav: 1300, kick: 'mission', tag: '' },
+  EXPERT: { save: 3, balls: 3, grav: 1450, kick: 'none', tag: 'PRO' },
+};
+let mode = 'NORMAL'; try { const m = localStorage.getItem('sbp-cybercity-mode'); if (DIFFS[m]) mode = m; } catch (e) {}
+let grav = DIFFS[mode].grav;
+const mkBall = () => ({ x: 518, y: PLUNGER_REST - BR, vx: 0, vy: 0, r: BR, live: true, inLane: true, still: 0, ramp: null, s: 0, hold: 0, rcd: 0, scd: 0 });
+let ball = mkBall(), balls = [ball];
 let plungerPull = 0, plungerHeld = false;
 const popups = [], sparks = [];
 
@@ -255,16 +264,18 @@ function newGame() {
   paused = false; $('mPause').textContent = 'Pause';
   plungerHeld = false; plungerPull = 0; flippers.forEach(f => f.on = false);
   $('scores').classList.remove('show');
-  G = { score: 0, ball: 1, balls: 3, mult: 1, done: 0, lit: [false, false, false, false, false, false], mission: 0, prog: 0,
-        over: false, started: false, save: 0, extra: false, combo: 0 };
+  const D = DIFFS[mode]; grav = D.grav;
+  G = { score: 0, ball: 1, balls: D.balls, mult: 1, done: 0, lit: [false, false, false, false, false, false], mission: 0, prog: 0,
+        over: false, started: false, save: 0, extra: false, combo: 0, D, bn: freshBonus(), kick: true, lockLit: false, locks: 0,
+        multi: false, jp: 0, tilt: 0, tilted: false, nudgeCD: 0, shake: 0, skill: 0.5, skillOn: true };
   targets.forEach(t => t.up = true);
   resetBall();
-  setMsg(matchMedia('(pointer: coarse)').matches ? 'AWAITING CONNECTION... PULL TO LAUNCH' : 'AWAITING CONNECTION... HOLD SPACE TO LAUNCH');
+  setMsg((mode !== 'NORMAL' ? mode + ' MODE. ' : '') + (matchMedia('(pointer: coarse)').matches ? 'PULL TO LAUNCH. GREEN ZONE = SKILL SHOT' : 'HOLD SPACE TO LAUNCH. GREEN ZONE = SKILL SHOT'));
   updatePanel(true);
 }
 function resetBall() {
-  Object.assign(ball, { x: 518, y: PLUNGER_REST - BR, vx: 0, vy: 0, live: true, inLane: true, still: 0, ramp: null });
-  scoop.hold = 0;
+  ball = mkBall(); balls = [ball];
+  if (G) { G.skill = 0.3 + Math.random() * 0.55; G.skillOn = true; }
 }
 function addScore(n, x, y) {
   const v = n * G.mult; G.score += v;
@@ -276,7 +287,8 @@ function progress(key, n = 1) {
   if (m.key !== key) return;
   G.prog += n;
   if (G.prog < m.need) { updatePanel(); return; }
-  G.lit[G.mission] = true; G.done++; G.prog = 0;
+  G.lit[G.mission] = true; G.done++; G.prog = 0; G.bn.missions++;
+  if (G.D.kick !== 'none' && !G.kick) { G.kick = true; later(() => setMsg('KICKBACK RELIT'), 1800); }
   const bonus = 50000 * Math.min(G.done, 6);
   G.score += bonus;
   sfx.mission();
@@ -337,98 +349,184 @@ function collideFlipper(b, f) {
   if (vn < 0) { b.vx -= 1.3 * vn * nx; b.vy -= 1.3 * vn * ny; }
 }
 
-let rampCD = 0;
+// ---- nudge / tilt ----
+function nudge() {
+  if (!G.started || G.over || G.tilted || paused || G.nudgeCD > 0) return;
+  G.nudgeCD = 0.3; G.shake = 0.18; G.tilt += 1;
+  for (const b of balls) if (b.live && !b.ramp && b.hold <= 0 && !b.inLane) { b.vy -= 260; b.vx += (Math.random() - 0.5) * 260; }
+  tone(90, 0.12, 'square', 0.05, -30);
+  if (G.tilt >= 3.2) { G.tilted = true; flippers.forEach(f => f.on = false); setMsg('TILT! FLIPPERS DEAD, BONUS LOST'); tone(70, 0.8, 'sawtooth', 0.06, -20); }
+  else if (G.tilt >= 2) setMsg('DANGER! DANGER! EASY ON THE NUDGE');
+}
+
 function step(dt) {
   for (const f of flippers) {
+    if (G.tilted) f.on = false;
     const target = f.on ? f.up : f.rest, prev = f.a, diff = target - f.a, maxd = (f.on ? 24 : 15) * dt;
     f.a += Math.abs(diff) < maxd ? diff : Math.sign(diff) * maxd; f.w = (f.a - prev) / dt;
   }
   if (plungerHeld) plungerPull = Math.min(1, plungerPull + dt * 1.1);
   const pTop = PLUNGER_REST + plungerPull * 26;
-  if (!ball.live) return;
-  if (rampCD > 0) rampCD -= dt;
-
-  // riding a ramp: the ball follows the track, drawn raised above the table
-  if (ball.ramp) {
-    const P = ball.ramp.path;
-    ball.s += Math.max(700, 1300 - ball.s * 0.4) * dt;
-    if (ball.s >= P.total) {
-      const n = P.pts.length, a = P.pts[n - 2], z = P.pts[n - 1], l = Math.hypot(z[0] - a[0], z[1] - a[1]) || 1;
-      ball.x = z[0]; ball.y = z[1]; ball.vx = (z[0] - a[0]) / l * 380; ball.vy = (z[1] - a[1]) / l * 380;
-      ball.ramp = null; rampCD = 0.6; return;
+  for (const b of balls) if (b.live) stepBall(b, dt, pTop);
+  // balls knock into each other during multiball
+  for (let i = 0; i < balls.length; i++) for (let j = i + 1; j < balls.length; j++) {
+    const a = balls[i], c = balls[j];
+    if (!a.live || !c.live || a.ramp || c.ramp || a.hold > 0 || c.hold > 0) continue;
+    const dx = c.x - a.x, dy = c.y - a.y, d = Math.hypot(dx, dy);
+    if (d > 0 && d < BR * 2) {
+      const nx = dx / d, ny = dy / d, o = (BR * 2 - d) / 2;
+      a.x -= nx * o; a.y -= ny * o; c.x += nx * o; c.y += ny * o;
+      const rv = (c.vx - a.vx) * nx + (c.vy - a.vy) * ny;
+      if (rv < 0) { const k = -rv * 0.95; a.vx -= nx * k; a.vy -= ny * k; c.vx += nx * k; c.vy += ny * k; }
     }
-    let i = 1; while (P.len[i] < ball.s) i++;
-    const k = (ball.s - P.len[i - 1]) / (P.len[i] - P.len[i - 1]);
-    ball.x = P.pts[i - 1][0] + (P.pts[i][0] - P.pts[i - 1][0]) * k;
-    ball.y = P.pts[i - 1][1] + (P.pts[i][1] - P.pts[i - 1][1]) * k;
+  }
+  let drained = 0;
+  for (const b of balls) if (b.live && b.y > H + 20) { b.live = false; drained++; }
+  if (drained) onDrain(drained);
+}
+
+function stepBall(b, dt, pTop) {
+  if (b.rcd > 0) b.rcd -= dt;
+  if (b.scd > 0) b.scd -= dt;
+  // riding a ramp: the ball follows the track, drawn raised above the table
+  if (b.ramp) {
+    const P = b.ramp.path;
+    b.s += Math.max(700, 1300 - b.s * 0.4) * dt;
+    if (b.s >= P.total) {
+      const n = P.pts.length, a = P.pts[n - 2], z = P.pts[n - 1], l = Math.hypot(z[0] - a[0], z[1] - a[1]) || 1;
+      b.x = z[0]; b.y = z[1]; b.vx = (z[0] - a[0]) / l * 380; b.vy = (z[1] - a[1]) / l * 380;
+      b.ramp = null; b.rcd = 0.6; return;
+    }
+    let i = 1; while (P.len[i] < b.s) i++;
+    const k = (b.s - P.len[i - 1]) / (P.len[i] - P.len[i - 1]);
+    b.x = P.pts[i - 1][0] + (P.pts[i][0] - P.pts[i - 1][0]) * k;
+    b.y = P.pts[i - 1][1] + (P.pts[i][1] - P.pts[i - 1][1]) * k;
+    return;
+  }
+  if (b.hold > 0) {
+    b.hold -= dt; b.x = scoop.x; b.y = scoop.y; b.vx = b.vy = 0;
+    if (b.hold <= 0) { b.y = scoop.y + 22; b.vx = 140 + Math.random() * 80; b.vy = 380; b.scd = 0.6; sfx.launch(); }
     return;
   }
 
-  if (scoop.hold > 0) {
-    scoop.hold -= dt; ball.x = scoop.x; ball.y = scoop.y; ball.vx = ball.vy = 0;
-    if (scoop.hold <= 0) { ball.y = scoop.y + 22; ball.vx = 140 + Math.random() * 80; ball.vy = 380; sfx.launch(); }
-    return;
+  b.vy += grav * dt; b.x += b.vx * dt; b.y += b.vy * dt;
+  b.inLane = b.x > LANE_X && b.y > 160;
+  if (b.x > LANE_X && b.y + BR > pTop) {
+    b.y = pTop - BR; if (b.vy > 0) b.vy = -b.vy * 0.15; if (Math.abs(b.vy) < 20) b.vy = 0; b.vx *= 0.9;
   }
-
-  ball.vy += GRAV * dt; ball.x += ball.vx * dt; ball.y += ball.vy * dt;
-  ball.inLane = ball.x > LANE_X && ball.y > 160;
-  if (ball.x > LANE_X && ball.y + BR > pTop) {
-    ball.y = pTop - BR; if (ball.vy > 0) ball.vy = -ball.vy * 0.15; if (Math.abs(ball.vy) < 20) ball.vy = 0; ball.vx *= 0.9;
-  }
-
   for (const w of walls) {
-    const h = collideSeg(ball, w.ax, w.ay, w.bx, w.by, 2.5, w.e);
+    const h = collideSeg(b, w.ax, w.ay, w.bx, w.by, 2.5, w.e);
     if (!h) continue;
     if (w.kind === 'sling' && h.vn < -120) {
-      ball.vx += h.nx * 600; ball.vy += h.ny * 600; w.sling.flash = 0.15;
-      addScore(250, ball.x, ball.y); sfx.sling(); progress('slings');
+      b.vx += h.nx * 600; b.vy += h.ny * 600; w.sling.flash = 0.15;
+      addScore(250, b.x, b.y); sfx.sling(); progress('slings');
     } else if (h.vn < -250) sfx.wall(-h.vn);
   }
-  for (const b of bumpers) {
-    const dx = ball.x - b.x, dy = ball.y - b.y, d = Math.hypot(dx, dy), min = BR + b.r;
+  for (const bm of bumpers) {
+    const dx = b.x - bm.x, dy = b.y - bm.y, d = Math.hypot(dx, dy), min = BR + bm.r;
     if (d < min && d > 0) {
-      const nx = dx / d, ny = dy / d; ball.x = b.x + nx * min; ball.y = b.y + ny * min;
-      const vn = ball.vx * nx + ball.vy * ny; if (vn < 0) { ball.vx -= 2 * vn * nx; ball.vy -= 2 * vn * ny; }
-      ball.vx += nx * 480; ball.vy += ny * 480; b.flash = 0.2;
-      for (let i = 0; i < 8; i++) sparks.push({ x: b.x + nx * b.r, y: b.y + ny * b.r, vx: nx * 220 + (Math.random() - 0.5) * 300, vy: ny * 220 + (Math.random() - 0.5) * 300, t: 0.4, c: b.col });
-      addScore(1000, b.x, b.y - 34); sfx.bump(); progress('bumps');
+      const nx = dx / d, ny = dy / d; b.x = bm.x + nx * min; b.y = bm.y + ny * min;
+      const vn = b.vx * nx + b.vy * ny; if (vn < 0) { b.vx -= 2 * vn * nx; b.vy -= 2 * vn * ny; }
+      b.vx += nx * 480; b.vy += ny * 480; bm.flash = 0.2;
+      for (let i = 0; i < 8; i++) sparks.push({ x: bm.x + nx * bm.r, y: bm.y + ny * bm.r, vx: nx * 220 + (Math.random() - 0.5) * 300, vy: ny * 220 + (Math.random() - 0.5) * 300, t: 0.4, c: bm.col });
+      G.bn.bumps++; addScore(1000, bm.x, bm.y - 34); sfx.bump(); progress('bumps');
     }
   }
   for (const t of targets) {
     if (!t.up) continue;
-    const h = collideSeg(ball, t.x - 7, t.y - 19, t.x + 7, t.y + 19, 4, 0.4);
+    const h = collideSeg(b, t.x - 7, t.y - 19, t.x + 7, t.y + 19, 4, 0.4);
     if (h && h.vn < -60) {
-      t.up = false; t.flash = 0.3; addScore(2500, t.x - 30, t.y + 20); sfx.target();
-      if (targets.every(q => !q.up)) { targetReset = 2; addScore(15000); setMsg('GRID BREACHED! +15,000'); progress('targets'); }
+      t.up = false; t.flash = 0.3; G.bn.targets++; addScore(2500, t.x - 30, t.y + 20); sfx.target();
+      if (targets.every(q => !q.up)) {
+        targetReset = 2; addScore(15000);
+        if (!G.multi) { G.lockLit = true; setMsg(G.locks ? "GRID BREACHED! LOCK LIT: SINK THE SCOOP FOR MULTIBALL" : "GRID BREACHED! LOCK IS LIT AT THE SCOOP"); } else setMsg('GRID BREACHED! +15,000');
+        progress('targets');
+      }
     }
   }
-  if (Math.hypot(ball.x - scoop.x, ball.y - scoop.y) < scoop.r && Math.hypot(ball.vx, ball.vy) < 1100) {
-    scoop.hold = 1.2; sfx.scoop();
-    const v = G.lit.filter(Boolean).length;
-    addScore(10000 + v * 10000, scoop.x + 40, scoop.y - 10);
-    setMsg(v ? `JACKPOT UPLOAD x${v + 1}` : 'UPLOADING...');
-    progress('scoop'); return;
+  if (b.scd <= 0 && Math.hypot(b.x - scoop.x, b.y - scoop.y) < scoop.r && Math.hypot(b.vx, b.vy) < 1100) { scoopHit(b); return; }
+  if (b.rcd <= 0) for (const r of ramps) {
+    if (b.vy < -250 && Math.hypot(b.x - r.ex, b.y - r.ey) < 22) { rampHit(b, r); return; }
   }
-  if (rampCD <= 0) for (const r of ramps) {
-    if (ball.vy < -250 && Math.hypot(ball.x - r.ex, ball.y - r.ey) < 22) {
-      ball.ramp = r; ball.s = 0; sfx.ramp();
-      G.combo = (G.combo && performance.now() - G.combo < 4000) ? G.combo : 0;
-      const combo = G.combo ? 2 : 1; G.combo = performance.now();
-      addScore(7500 * combo, r.ex, r.ey - 20);
-      setMsg(combo > 1 ? `COMBO! ${r.name} RAMP x2` : `${r.name} RAMP`);
-      progress(r.key); return;
-    }
+  // kickback in the left outlane
+  if (G.kick && !G.tilted && b.x > 47 && b.x < 82 && b.y > 705 && b.y < 755 && b.vy > 0) {
+    G.kick = false; b.vy = -1350; b.vx = 25; G.shake = 0.12;
+    setMsg('KICKBACK!'); tone(140, 0.25, 'sawtooth', 0.06, 700);
   }
-  for (const f of flippers) collideFlipper(ball, f);
-  const sp = Math.hypot(ball.vx, ball.vy); if (sp > MAX_V) { ball.vx *= MAX_V / sp; ball.vy *= MAX_V / sp; }
-  if (ball.y > H + 20) loseBall();
+  for (const f of flippers) collideFlipper(b, f);
+  const sp = Math.hypot(b.vx, b.vy); if (sp > MAX_V) { b.vx *= MAX_V / sp; b.vy *= MAX_V / sp; }
+  // free a ball that has come to rest somewhere it can't leave
+  if (!b.inLane) { if (sp < 8) { if ((b.still += dt) > 3) { b.vy = -400; b.vx = (Math.random() - 0.5) * 300; b.still = 0; } } else b.still = 0; }
 }
 
+function scoopHit(b) {
+  b.hold = 1.2; sfx.scoop();
+  if (G.multi) {
+    if (G.jp >= 2) { G.jp = 0; addScore(250000, scoop.x + 40, scoop.y - 10); setMsg('SUPER JACKPOT!'); sfx.mission(); }
+    else { addScore(10000, scoop.x + 40, scoop.y - 10); setMsg('JACKPOTS ARE LIT ON THE RAMPS'); }
+    progress('scoop'); return;
+  }
+  const v = G.lit.filter(Boolean).length;
+  addScore(10000 + v * 10000, scoop.x + 40, scoop.y - 10);
+  setMsg(v ? `JACKPOT UPLOAD x${v + 1}` : 'UPLOADING...');
+  progress('scoop');
+  if (!G.lockLit) return;
+  G.lockLit = false; G.locks++;
+  if (G.locks >= 2) { startMultiball(b); return; }
+  // lock this ball and hand the player a fresh one at the plunger
+  b.hold = 0; b.live = false; balls = balls.filter(x => x !== b);
+  ball = serveBall(false); G.skillOn = true; G.skill = 0.3 + Math.random() * 0.55;
+  setMsg('BALL LOCKED (1/2). LAUNCH THE NEXT ONE');
+}
+function startMultiball(b) {
+  G.multi = true; G.locks = 0; G.jp = 0; G.save = Math.max(G.save, 10);
+  for (const h of [1.9, 2.6]) { const x = mkBall(); Object.assign(x, { x: scoop.x, y: scoop.y, inLane: false, hold: h }); balls.push(x); }
+  b.hold = 1.2;
+  setMsg('MULTIBALL! JACKPOTS LIT ON BOTH RAMPS'); sfx.mission(); later(() => sfx.mission(), 450);
+}
+function rampHit(b, r) {
+  b.ramp = r; b.s = 0; sfx.ramp(); G.bn.ramps++;
+  G.combo = (G.combo && performance.now() - G.combo < 4000) ? G.combo : 0;
+  const combo = G.combo ? 2 : 1; G.combo = performance.now();
+  addScore(7500 * combo, r.ex, r.ey - 20);
+  if (G.multi) {
+    G.jp++; addScore(100000, r.ex, r.ey - 44); sfx.mission();
+    setMsg(G.jp >= 2 ? 'JACKPOT! SUPER JACKPOT LIT AT THE SCOOP' : `${r.name} JACKPOT!`);
+  } else setMsg(combo > 1 ? `COMBO! ${r.name} RAMP x2` : `${r.name} RAMP`);
+  progress(r.key);
+}
+function serveBall(auto) {
+  const b = mkBall(); balls.push(b);
+  if (auto) b.vy = -(1500 + Math.random() * 300);   // fires straight up the shooter lane
+  return b;
+}
+function onDrain(n) {
+  balls = balls.filter(b => b.live);
+  if (G.multi && G.save > 0) { for (let i = 0; i < n; i++) serveBall(true); setMsg('BALL SAVED'); }
+  if (balls.length) {
+    if (!balls.includes(ball)) ball = balls[0];
+    if (G.multi && balls.length === 1) { G.multi = false; G.jp = 0; setMsg('MULTIBALL OVER'); }
+    return;
+  }
+  loseBall();
+}
+
+const freshBonus = () => ({ ramps: 0, bumps: 0, targets: 0, missions: 0 });
 function loseBall() {
-  ball.live = false;
   if (!G.started) { resetBall(); return; }
-  if (G.save > 0) { setMsg('BALL SAVED. RECONNECTING...'); later(resetBall, 700); return; }
-  sfx.drain();
+  if (G.save > 0 && !G.tilted) { setMsg('BALL SAVED. RECONNECTING...'); later(resetBall, 700); return; }
+  sfx.drain(); G.multi = false; G.jp = 0;
+  const tilted = G.tilted; G.tilted = false; G.tilt = 0;
+  const bn = G.bn, items = [['RAMPS', bn.ramps, 5000], ['BUMPERS', bn.bumps, 100], ['TARGETS', bn.targets, 1000], ['MISSIONS', bn.missions, 25000]].filter(x => x[1] > 0);
+  const base = items.reduce((s, x) => s + x[1] * x[2], 0), bx = Math.min(5, 1 + bn.missions), total = tilted ? 0 : base * bx;
+  let lines = items.map(([n, c, v]) => `${n} ${c} x ${v.toLocaleString()}`).concat(`BONUS ${bx}X = ${total.toLocaleString()}`);
+  if (tilted) lines = ['TILT. NO BONUS'];
+  else if (!items.length) lines = ['NO BONUS THIS BALL'];
+  lines.forEach((ln, i) => later(() => { setMsg(ln); tone(600 + i * 120, 0.08, 'square', 0.04); }, i * 650));
+  later(() => { G.score += total; updatePanel(true); nextBall(); }, lines.length * 650 + 500);
+}
+function nextBall() {
+  G.bn = freshBonus();
   if (G.ball >= G.balls) {
     G.over = true;
     const qualifies = G.score > 0 && (board.length < 10 || G.score > board[board.length - 1].s);
@@ -436,15 +534,21 @@ function loseBall() {
     if (qualifies) showScores(G.score);
     updatePanel(true); return;
   }
-  G.ball++; setMsg(`SIGNAL DROPPED. BALL ${G.ball}`);
-  later(() => { if (!G.over) resetBall(); }, 900);
-  updatePanel(true);
+  G.ball++; if (G.D.kick === 'ball') G.kick = true;
+  setMsg(`BALL ${G.ball}. HIT THE GREEN ZONE FOR A SKILL SHOT`);
+  resetBall(); updatePanel(true);
 }
 function launch() {
   if (ball.live && ball.inLane && !G.over && ball.y + BR >= PLUNGER_REST + plungerPull * 26 - 3) {
     ball.vy = -(900 + plungerPull * 1300);
     if (!G.started) G.started = true;
-    G.save = 7; setMsg('BALL SAVE ACTIVE'); sfx.launch(); updatePanel(true);
+    G.save = Math.max(G.save, G.D.save);
+    if (G.skillOn) {
+      G.skillOn = false;
+      if (Math.abs(plungerPull - G.skill) <= 0.08) { const v = 25000 * G.ball; addScore(v, 470, 760); setMsg(`SKILL SHOT! +${(v * G.mult).toLocaleString()}`); sfx.mission(); }
+      else setMsg('BALL SAVE ACTIVE');
+    }
+    sfx.launch(); updatePanel(true);
   }
   plungerPull = 0;
 }
@@ -482,6 +586,12 @@ function hexPath(x, y, r) { ctx.beginPath(); for (let i = 0; i < 6; i++) { const
 
 let clock = 0;
 function render(dt) {
+  ctx.save();
+  if (G && G.shake > 0) ctx.translate((Math.random() - 0.5) * 40 * G.shake, (Math.random() - 0.5) * 40 * G.shake);
+  renderTable(dt);
+  ctx.restore();
+}
+function renderTable(dt) {
   clock += dt;
   if (art.complete && art.naturalWidth) ctx.drawImage(art, 0, 0, W, H); else { ctx.fillStyle = '#0a0b18'; ctx.fillRect(0, 0, W, H); }
 
@@ -519,13 +629,24 @@ function render(dt) {
     ctx.fillRect(-5, -19, 10, 38); ctx.restore();
   }
   // scoop
-  glowDot(scoop.x, scoop.y, 26, G && G.lit.some(Boolean) ? 'rgba(255,210,60,0.9)' : 'rgba(176,106,255,0.6)', 0.5 + 0.3 * Math.sin(clock * 4));
+  const sc = G && G.multi && G.jp >= 2 ? 'rgba(255,210,60,1)' : G && G.lockLit ? 'rgba(61,255,122,0.95)' : G && G.lit.some(Boolean) ? 'rgba(255,210,60,0.9)' : 'rgba(176,106,255,0.6)';
+  glowDot(scoop.x, scoop.y, 26, sc, 0.5 + 0.3 * Math.sin(clock * 4));
+  const label = (txt, x, y, col) => { ctx.save(); ctx.font = '900 11px Orbitron'; ctx.textAlign = 'center'; ctx.fillStyle = col; ctx.shadowColor = col; ctx.shadowBlur = 8; ctx.fillText(txt, x, y); ctx.restore(); };
+  if (G && G.lockLit && !G.multi) label('LOCK', scoop.x, scoop.y - 22, '#3dff7a');
+  if (G && G.multi && G.jp >= 2) label('SUPER', scoop.x, scoop.y - 22, '#ffd23a');
+  if (G && G.multi) for (const r of ramps) { glowDot(r.ex, r.ey, 34, 'rgba(255,210,60,0.9)', 0.5 + 0.5 * Math.sin(clock * 8)); label('JACKPOT', r.ex, r.ey + 32, '#ffd23a'); }
+  if (G && G.kick) { glowDot(64, 712, 22, 'rgba(61,255,122,0.9)', 0.55 + 0.35 * Math.sin(clock * 5)); label('KICK', 64, 742, '#3dff7a'); }
 
   // plunger
   const pt = PLUNGER_REST + plungerPull * 26;
   ctx.save();
   const pg = ctx.createLinearGradient(508, 0, 528, 0); pg.addColorStop(0, '#666'); pg.addColorStop(0.5, '#f4f4f4'); pg.addColorStop(1, '#555');
   ctx.fillStyle = pg; ctx.fillRect(508, pt, 20, 7); ctx.fillRect(515, pt + 7, 6, H - pt);
+  if (G && G.skillOn && ball.live && ball.inLane) {
+    ctx.fillStyle = 'rgba(255,255,255,0.14)'; ctx.fillRect(501, 740, 5, 140);
+    ctx.shadowColor = '#3dff7a'; ctx.shadowBlur = 10; ctx.fillStyle = 'rgba(61,255,122,0.85)';
+    ctx.fillRect(499, 880 - (G.skill + 0.08) * 140, 9, 0.16 * 140); ctx.shadowBlur = 0;
+  }
   if (plungerPull > 0) { ctx.fillStyle = `hsl(${300 - plungerPull * 120},95%,60%)`; ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 10; ctx.fillRect(502, 880 - plungerPull * 140, 3, plungerPull * 140); }
   ctx.restore();
 
@@ -553,7 +674,7 @@ function render(dt) {
   ctx.globalAlpha = 1;
 
   // ball (bigger, with a long shadow, while it's up on a ramp)
-  if (ball.live) {
+  for (const ball of balls) if (ball.live) {
     const up = ball.ramp ? 1 : 0, r = BR * (1 + up * 0.25);
     ctx.save();
     ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.beginPath(); ctx.arc(ball.x + 4 + up * 8, ball.y + 6 + up * 12, r, 0, 7); ctx.fill();
@@ -572,9 +693,9 @@ function render(dt) {
   }
   ctx.globalAlpha = 1;
 
-  if (paused || (G && G.over) || (G && !G.started && ball.inLane)) {
-    const txt = paused ? 'PAUSED' : G.over ? 'GAME OVER' : 'PULL THE PLUNGER';
-    const sub = paused ? (matchMedia('(pointer: coarse)').matches ? 'Tap to resume' : 'Press P to resume') : G.over ? (matchMedia('(pointer: coarse)').matches ? 'Tap a button to play again' : 'Press N or New Game') : (matchMedia('(pointer: coarse)').matches ? 'Drag the PULL plunger down, then let go' : 'Hold SPACE, then let go');
+  if (paused || (G && G.over) || (G && G.tilted) || (G && !G.started && ball.inLane)) {
+    const txt = paused ? 'PAUSED' : G.tilted ? 'TILT'  : G.over ? 'GAME OVER' : 'PULL THE PLUNGER';
+    const sub = G.tilted && !paused ? 'Flippers are dead until the ball drains' : paused ? (matchMedia('(pointer: coarse)').matches ? 'Tap to resume' : 'Press P to resume') : G.over ? (matchMedia('(pointer: coarse)').matches ? 'Tap a button to play again' : 'Press N or New Game') : (matchMedia('(pointer: coarse)').matches ? 'Drag the PULL plunger down, then let go' : 'Hold SPACE, then let go');
     ctx.save(); ctx.fillStyle = 'rgba(5,0,20,0.75)'; ctx.fillRect(84, 445, 400, 70);
     ctx.strokeStyle = '#ff3ea8'; ctx.shadowColor = '#ff3ea8'; ctx.shadowBlur = 12; ctx.lineWidth = 2; ctx.strokeRect(84, 445, 400, 70);
     ctx.textAlign = 'center'; ctx.font = '900 26px Orbitron'; ctx.fillStyle = '#7ff6ff'; ctx.shadowColor = '#3ef0ff'; ctx.fillText(txt, 284, 480);
@@ -639,9 +760,9 @@ function frame(now) {
     for (let i = popups.length - 1; i >= 0; i--) if ((popups[i].t -= dt) <= 0) popups.splice(i, 1);
     for (let i = sparks.length - 1; i >= 0; i--) { const s = sparks[i]; s.x += s.vx * dt; s.y += s.vy * dt; if ((s.t -= dt) <= 0) sparks.splice(i, 1); }
     if (msgT > 0 && (msgT -= dt) <= 0 && !G.over) $('msg').textContent = G.started ? 'CONNECTED' : 'AWAITING CONNECTION...';
-    if (ball.live && !ball.inLane && !ball.ramp && scoop.hold <= 0) {
-      if (Math.hypot(ball.vx, ball.vy) < 8) { if ((ball.still += dt) > 3) { ball.vy = -400; ball.vx = (Math.random() - 0.5) * 300; ball.still = 0; } } else ball.still = 0;
-    }
+    if (G.shake > 0) G.shake -= dt;
+    if (G.nudgeCD > 0) G.nudgeCD -= dt;
+    if (G.tilt > 0 && !G.tilted) G.tilt = Math.max(0, G.tilt - dt * 0.5);
   }
   render(dt);
   requestAnimationFrame(frame);
@@ -649,7 +770,7 @@ function frame(now) {
 
 // ============ Input ============
 function setFlipper(i, on) {
-  const f = flippers[i]; if (paused || G.over) on = false;
+  const f = flippers[i]; if (paused || G.over || G.tilted) on = false;
   if (on && !f.on) sfx.flip();
   f.on = on;
 }
@@ -659,7 +780,8 @@ addEventListener('keydown', e => {
   ac();
   if (LK.includes(e.code)) { setFlipper(0, true); e.preventDefault(); }
   else if (RK.includes(e.code)) { setFlipper(1, true); e.preventDefault(); }
-  else if (PK.includes(e.code)) { if (!e.repeat && !paused) plungerHeld = true; e.preventDefault(); }
+  else if (PK.includes(e.code)) { if (!e.repeat && !paused) { if (ball.live && ball.inLane) plungerHeld = true; else nudge(); } e.preventDefault(); }
+  else if (e.code === 'KeyX' || e.code === 'KeyC') { if (!e.repeat) nudge(); }
   else if (e.code === 'KeyP' || e.code === 'Escape') togglePause();
   else if (e.code === 'KeyN' || e.code === 'F2') { e.preventDefault(); newGame(); }
 });
@@ -685,11 +807,19 @@ const up = e => {
 cvs.addEventListener('pointerup', up); cvs.addEventListener('pointercancel', up);
 cvs.addEventListener('contextmenu', e => e.preventDefault());
 function togglePause() { if (G.over) return; paused = !paused; $('mPause').textContent = paused ? 'Resume' : 'Pause'; }
-function toggleSound() { soundOn = !soundOn; $('mSound').textContent = 'Sound: ' + (soundOn ? 'On' : 'Off'); }
+function toggleSound() { soundOn = !soundOn; $('mSound').textContent = soundOn ? 'Sound' : 'Muted'; }
+const MODES = ['NORMAL', 'CASUAL', 'EXPERT'];
+const showMode = () => $('mMode').textContent = mode.charAt(0) + mode.slice(1).toLowerCase();
+function cycleMode() {
+  mode = MODES[(MODES.indexOf(mode) + 1) % MODES.length]; showMode();
+  try { localStorage.setItem('sbp-cybercity-mode', mode); } catch (e) {}
+  if (!G.started || G.over) newGame(); else setMsg(`${mode} MODE STARTS NEXT GAME`);
+}
 const blurAfter = fn => e => { fn(); e.currentTarget.blur(); };
 $('mNew').addEventListener('click', blurAfter(newGame));
 $('mPause').addEventListener('click', blurAfter(togglePause));
 $('mSound').addEventListener('click', blurAfter(toggleSound));
+$('mMode').addEventListener('click', blurAfter(cycleMode)); showMode();
 
 
 // ---- touch controls ----
@@ -711,8 +841,8 @@ function holdBtn(el, down, upFn) {
 holdBtn($('bL'), () => setFlipper(0, true), () => setFlipper(0, false));
 holdBtn($('bR'), () => setFlipper(1, true), () => setFlipper(1, false));
 // plunger: drag the knob down and let go; a plain press-and-hold also charges it
-const pl = $('plunger'); let pY = 0;
-holdBtn(pl, e => { pY = e.clientY; if (!paused) plungerHeld = true; }, () => { plungerHeld = false; launch(); });
+const pl = $('plunger'), plLabel = pl.querySelector('span'); let pY = 0;
+holdBtn(pl, e => { pY = e.clientY; if (paused) return; if (ball.live && ball.inLane) plungerHeld = true; else nudge(); }, () => { plungerHeld = false; launch(); });
 pl.addEventListener('pointermove', e => {
   if (!pl.classList.contains('on') || paused) return;
   const dy = e.clientY - pY;
@@ -720,7 +850,9 @@ pl.addEventListener('pointermove', e => {
 });
 (function knobLoop() {
   $('knob').style.transform = `translateY(${Math.round(plungerPull * 28)}px)`;
-  pl.classList.toggle('idle', !(G && ball.live && ball.inLane && !G.over));
+  const ready = !!(G && ball.live && ball.inLane && !G.over);
+  pl.classList.toggle('idle', !ready);
+  const lbl = ready ? 'PULL \u25BC' : 'NUDGE'; if (plLabel.textContent !== lbl) plLabel.textContent = lbl;
   requestAnimationFrame(knobLoop);
 })();
 document.addEventListener('gesturestart', e => e.preventDefault());   // iOS pinch zoom
@@ -745,7 +877,7 @@ function renderBoard(mark) {
     const r = board[i], li = document.createElement('li');
     if (r && r === mark) li.className = 'me';
     li.textContent = '';
-    const a = document.createElement('span'); a.textContent = `${String(i + 1).padStart(2, ' ')}. ${r ? r.n : '---'}`;
+    const a = document.createElement('span'); a.textContent = `${String(i + 1).padStart(2, ' ')}. ${r ? r.n + (r.m ? ' ' + r.m : '') : '---'}`;
     const b = document.createElement('span'); b.textContent = r ? r.s.toLocaleString() : '0';
     li.append(a, b); $('scoreList').append(li);
   }
@@ -762,7 +894,7 @@ function closeScores() {
   if (pending) {
     const n = ($('initials').value.toUpperCase().replace(/[^A-Z0-9]/g, '') || 'AAA').slice(0, 3);
     try { localStorage.setItem('sbp-cybercity-initials', n); } catch (e) {}
-    const row = { n, s: pending, d: Date.now() };
+    const row = { n, s: pending, d: Date.now(), m: G.D.tag };
     board.push(row); board.sort((x, y) => y.s - x.s); board = board.slice(0, 10); saveBoard();
     high = board[0].s; pending = null; $('entry').hidden = true; renderBoard(row); updatePanel(true);
     return;   // leave the table up so the new row can be seen; OK again closes it
@@ -792,7 +924,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 addEventListener('resize', resize);
 resize(); newGame(); requestAnimationFrame(frame);
 (document.fonts ? document.fonts.load('900 20px Orbitron') : Promise.resolve()).then(drawBackglass, drawBackglass);
-window.__pin = { ball, G: () => G };
+window.__pin = { get ball() { return ball; }, get balls() { return balls; }, G: () => G };
 })();
 </script>
 </body>
