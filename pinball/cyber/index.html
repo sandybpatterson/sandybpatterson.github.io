@@ -27,15 +27,20 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 .nav-links a:hover{color:#c9a84c;border-color:#c9a84c44}
 
 .stage{display:flex;justify-content:center;padding:16px 8px 30px;background:radial-gradient(ellipse at 30% 0%,#14234a,#0a0a0a 70%)}
-.win{background:#111318;border:1px solid #3a3f4a;border-radius:9px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.7);max-width:100%;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
-.tb{height:30px;display:flex;align-items:center;justify-content:space-between;background:#1c1e24;color:#e8e8e8;font:13px 'Segoe UI',Tahoma,sans-serif;padding-left:12px}
+.win{background:#c3c3c3;padding:3px;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:1px 1px 0 #000,0 30px 80px rgba(0,0,0,.7);max-width:100%;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.tb{height:24px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#0a246a,#3a6ea5 60%,#a6caf0);color:#fff;font:bold 12px Tahoma,Verdana,'Segoe UI',sans-serif;padding:0 3px 0 6px}
 .tb .ic{display:inline-block;width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff 0 12%,#3ef0ff 35%,#7a1aff 80%);vertical-align:-3px;margin-right:9px}
-.tb .b{display:flex}.tb .b span{width:40px;text-align:center;color:#bbb}
-.mb{display:flex;gap:2px;padding:2px 6px;background:#1c1e24;font:13px 'Segoe UI',Tahoma,sans-serif}
-.mb button{background:none;border:0;color:#ddd;font:inherit;padding:5px 10px;border-radius:4px;cursor:pointer;touch-action:manipulation}
-.mb button:hover{background:#2c2f38}
-#mInstall{display:none;color:#3ef0ff;border:1px solid #3ef0ff66}
-#mShelf{display:none;margin-left:auto;align-self:center;padding:5px 8px;color:#c9a84c;font:12px 'Courier New',monospace;text-transform:uppercase}
+.tb .b{display:flex;gap:2px}.tb .b span{width:16px;height:14px;background:#c3c3c3;color:#000;border:1px solid;border-color:#fff #404040 #404040 #fff;font:bold 9px/12px Tahoma,sans-serif;text-align:center}
+.mb{display:flex;align-items:center;gap:2px;padding:2px;background:#c3c3c3;font:12px Tahoma,Verdana,'Segoe UI',sans-serif}
+.mb button{background:none;border:1px solid transparent;color:#000;font:inherit;padding:3px 8px;cursor:pointer;touch-action:manipulation}
+.mb button:hover,.mb button:active{border-color:#fff #808080 #808080 #fff}
+.mb button::first-letter{text-decoration:underline}
+.inset{border:2px solid;border-color:#808080 #fff #fff #808080;background:#06070c}
+.status{display:flex;gap:3px;margin-top:3px;font:11px Tahoma,Verdana,sans-serif;color:#000}
+.status span{border:1px solid;border-color:#808080 #fff #fff #808080;padding:2px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status span:first-child{flex:1}
+#mInstall{display:none;color:#0a246a;font-weight:bold}
+#mShelf{display:none;margin-left:auto;padding:3px 6px;color:#0a246a;font:12px Tahoma,Verdana,sans-serif}
 .scores{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(2,0,10,.8);padding:16px}
 .scores.show{display:flex}
 .scores .card{width:min(360px,100%);border:2px solid #ff3ea8;border-radius:10px;background:#06070c;box-shadow:0 0 30px rgba(255,62,168,.4);padding:16px;font:900 18px 'Doto',monospace;color:#2ef2ff;text-shadow:0 0 8px #2ef2ff}
@@ -87,6 +92,8 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
  .mb{gap:0;padding:2px 4px}
  .mb button{padding:5px 6px;font-size:12px;white-space:nowrap}
  #mShelf{font-size:11px;padding:4px}
+ .status{display:none}
+ .win{padding:2px;border-width:1px}
  .stage{padding:0}
  .win{border-radius:0;border:0;width:100%}
  .tb,.glass{display:none}
@@ -99,8 +106,8 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 @media (display-mode:standalone),(display-mode:fullscreen){
  nav,.tb{display:none}
  .stage{padding:0}
- .win{border:0;border-radius:0;width:100%}
- .hud{padding-top:calc(6px + env(safe-area-inset-top))}
+ .win{width:100%}
+ .win{padding-top:calc(2px + env(safe-area-inset-top))}
 }
 </style>
 </head>
@@ -108,7 +115,6 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 <nav>
   <span class="nav-brand">Sandy B. Patterson</span>
   <div class="nav-links">
-    <a href="https://sandybpatterson.github.io/pinball/">Starlight Patrol</a>
     <a href="https://sandybpatterson.github.io/ai-news/">Sandy's Blog</a>
     <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
   </div>
@@ -116,6 +122,7 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 <div class="stage"><div class="win" id="win">
   <div class="tb"><span><span class="ic"></span>Cyber City Pinball</span><span class="b"><span>&#8212;</span><span>&#9744;</span><span>&#10005;</span></span></div>
   <div class="mb"><button id="mNew">New Game</button><button id="mPause">Pause</button><button id="mSound">Sound: On</button><button id="mScores">Scores</button><button id="mInstall">Install</button><a id="mShelf" href="https://sandybpatterson.github.io/bookshelf.html">&larr; Shelf</a></div>
+  <div class="inset">
   <header class="hud" id="hud">
     <div class="box glass"><canvas id="g"></canvas></div>
     <div class="hud-main">
@@ -130,9 +137,11 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
     <div class="plunger idle" id="plunger" aria-label="Plunger: pull down and let go"><div class="rod"></div><div class="knob" id="knob"></div><span>PULL &#9660;</span></div>
     <button class="fbtn" id="bR" aria-label="Right flipper">FLIP &#9654;</button>
   </div>
+  </div>
   <div class="help" id="help">
     <b>Z</b>/<b>&larr;</b> left flipper &nbsp; <b>/</b>/<b>&rarr;</b> right flipper &nbsp; <b>Space</b> hold &amp; release to launch &nbsp; <b>P</b> pause &nbsp; <b>N</b> new game
   </div>
+  <div class="status"><span id="statusTxt">Ready</span><span>&copy; Sandy B. Patterson</span></div>
 </div></div>
 <div class="scores" id="scores"><div class="card">
   <h2>TOP SCORES</h2>
@@ -440,7 +449,7 @@ let scale = 1;
 function resize() {
   const vis = el => el && el.offsetParent !== null ? el.offsetHeight : 0;
   const nav = document.querySelector('nav');
-  const chrome = vis(nav) + vis(document.querySelector('.tb')) + vis(document.querySelector('.mb')) + vis($('hud')) + vis($('controls')) + vis($('help')) + 14 + 24;
+  const chrome = vis(nav) + vis(document.querySelector('.tb')) + vis(document.querySelector('.mb')) + vis($('hud')) + vis($('controls')) + vis($('help')) + vis(document.querySelector('.status')) + 14 + 34;
   const vh = window.visualViewport ? visualViewport.height : innerHeight;
   const availW = Math.min(innerWidth - 24, 760);
   const dpr = Math.min(devicePixelRatio || 1, 2.5);
@@ -597,7 +606,7 @@ function drawBackglass() {
 // ============ Panel ============
 const $ = id => document.getElementById(id);
 let msgT = 0, lastKey = '';
-function setMsg(m) { $('msg').textContent = m; msgT = 4; }
+function setMsg(m) { $('msg').textContent = m; msgT = 4; $('statusTxt').textContent = m.charAt(0) + m.slice(1).toLowerCase(); }
 function updatePanel(force) {
   if (!G) return;
   const key = [G.score, G.ball, G.balls, G.done, G.mission, G.prog, G.over, G.started].join('|');

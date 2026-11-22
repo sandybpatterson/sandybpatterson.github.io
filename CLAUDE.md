@@ -19,25 +19,20 @@ GitHub Pages redirect from `index.html`) and links out to every book. Some
 books live in their own repos; some live as folders inside this repo.
 
 **On the shelf, in shelf order:**
-1. **Wetwear: Biology Corrected** (the podcast, not a book) — cover links to
-   `/ai-news/wetwear/podcast.html`, a dedicated landing page (RSS link, link
-   to all Wetwear Issues, link to Sandy's Blog). Added to the shelf
-   2026-08-29, deliberately first — see "Shelf vs. link-tree" below.
+1. **Sandy's Blog** (not a book): cover `images/blogcover.jpeg` links to
+   `/ai-news/`, in a landscape `.sbp-cover-wide` variant of the square cover.
+   Swapped in 2026-11-22 (see "Shelf vs. link-tree" below).
 2. **The Original Bug** — separate repo `original-bug-book` (has its own CLAUDE.md)
 3. **Beyond Ice and Steam** — separate repo `beyond-ice-and-steam` (has its own CLAUDE.md)
 4. **Dead Men on Thrones** — lives here, in `/dead-men-on-thrones/` (full 64-chapter outline, no chapters drafted yet — see below)
 
 **In the link-tree at the bottom of the shelf, not as book covers:**
-- **Sandy's Blog** — top button, links to `/ai-news/`
+- **Wetwear: Biology Corrected** — top item, a `.link-cover` image card
+  (podcast cover art + "Listen to Wetwear" label) linking to
+  `/ai-news/wetwear/podcast.html`
 - **SODA — free podcast tool** — links to `/soda/`
 - **Stories from Winchester** — lives here, in `/stories/`
 - **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
-- **Starlight Patrol Pinball** — lives here, in `/pinball/index.html`. A
-  self-contained canvas pinball game (no libraries, synthesized sound,
-  high score in localStorage). Added 2026-11-16. Its look borrows the
-  turn-of-the-century desktop-pinball era (window chrome, LCD side panel,
-  chrome rails, space art), but the table, name and art are original;
-  keep it that way rather than copying any existing game.
 - **Cyber City Pinball** — `/pinball/cyber/index.html`, added 2026-11-16. A
   neon table built on Sandy's own AI-generated playfield art
   (`pinball/cyber/playfield.jpg`, 710x1120 upscale of the original 568x896, straight top-down; the game still uses 568x896 logical coordinates and scales the image down). All physics
@@ -57,6 +52,9 @@ books live in their own repos; some live as folders inside this repo.
   Top-10 scores with initials live in localStorage `sbp-cybercity-scores`
   (per device; the older single `sbp-cybercity-high` is migrated in). On
   phones the site nav is hidden and a "Shelf" link sits in the menu bar.
+  Window chrome is turn-of-the-century desktop style (grey bevels, blue
+  gradient title bar, status bar), carried over from Starlight Patrol, an
+  earlier space-pinball table that Sandy had removed on 2026-11-22.
 
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
@@ -66,6 +64,11 @@ removed). The show's **canonical RSS feed** is
 — **NOT `feed.xml`; that URL is wrong, don't use it.** The podcast page's
 one-tap subscribe deep links (Apple Podcasts `podcast://`, Pocket Casts
 `pktc://`) and its Copy-RSS button all point at this canonical feed.
+
+**Superseded 2026-11-22:** Sandy asked to swap the blog and the podcast:
+Sandy's Blog is now the first shelf cover and Wetwear is the image card at
+the top of the link-tree, each restyled to match the spot it moved into.
+The Wetwear details below still apply otherwise.
 
 **Shelf vs. link-tree, as of 2026-08-29:** Stories from Winchester and Arden
 Remembers were demoted from full book covers to plain buttons in

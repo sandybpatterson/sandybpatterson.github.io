@@ -232,6 +232,8 @@
     .sbp-cover-square { aspect-ratio: 1 / 1; }
     .sbp-cover-square::before, .sbp-cover-square::after { display: none; }
     .sbp-cover-square.sbp-img-cover img { border-radius: 10px; }
+    /* The blog cover is landscape art, so it keeps its own proportions. */
+    .sbp-cover-wide { aspect-ratio: 1200 / 896; }
 
     .sbp-summary {
       position: absolute;
@@ -387,15 +389,15 @@
 
   <div class="shelf-wrap">
     <div class="sbp-shelf">
-      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html" class="sbp-book">
-        <div class="sbp-cover sbp-img-cover sbp-cover-square">
-          <img src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/covers/wetware-biology-corrected-20260829094625.jpg" alt="Wetwear: Biology Corrected" />
+      <a href="https://sandybpatterson.github.io/ai-news/" class="sbp-book">
+        <div class="sbp-cover sbp-img-cover sbp-cover-square sbp-cover-wide">
+          <img src="images/blogcover.jpeg" alt="Sandy's Blog: a collection of thoughts, adventures, and everyday musings" />
         </div>
         <div class="sbp-summary">
-          <div class="sbp-summary-title">Wetwear: Biology Corrected</div>
-          <p>Biology, misinformation, public health data, and politics — the daily brief, narrated in full, so the news can catch up to you instead of the other way around.</p>
+          <div class="sbp-summary-title">Sandy's Blog</div>
+          <p>Thoughts, adventures, and everyday musings, plus every Wetwear daily brief and Deep Dive, newest first.</p>
         </div>
-        <div class="sbp-label">Listen Now</div>
+        <div class="sbp-label">Read Now</div>
       </a>
       <a href="https://sandybpatterson.github.io/original-bug-book/" class="sbp-book">
         <div class="sbp-cover sbp-img-cover">
@@ -433,15 +435,14 @@
   </div>
 
   <div class="link-tree">
-    <a href="https://sandybpatterson.github.io/ai-news/" class="link-cover">
-      <img src="images/blogcover.jpeg" width="1200" height="896"
-           alt="Sandy's Blog — a collection of thoughts, adventures, and everyday musings" />
-      <span class="link-cover-label">Read every article</span>
+    <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html" class="link-cover">
+      <img src="https://pub-07bb9339abe34b74953a720fc1cc566b.r2.dev/covers/wetware-biology-corrected-20260829094625.jpg" width="1200" height="1200"
+           alt="Wetwear: Biology Corrected, the podcast" />
+      <span class="link-cover-label">Listen to Wetwear</span>
     </a>
     <a href="https://sandybpatterson.github.io/soda/" class="link-btn">SODA &mdash; free podcast tool</a>
     <a href="https://sandybpatterson.github.io/stories/" class="link-btn">Stories from Winchester</a>
     <a href="https://sandybpatterson.github.io/arden-remembers/" class="link-btn">Arden Remembers</a>
-    <a href="https://sandybpatterson.github.io/pinball/" class="link-btn">Starlight Patrol &mdash; play pinball</a>
     <a href="https://sandybpatterson.github.io/pinball/cyber/" class="link-btn">Cyber City &mdash; neon pinball</a>
   </div>
 
