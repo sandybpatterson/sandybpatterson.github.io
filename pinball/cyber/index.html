@@ -247,7 +247,14 @@ const ball = { x: 518, y: PLUNGER_REST - BR, vx: 0, vy: 0, r: BR, live: false, i
 let plungerPull = 0, plungerHeld = false;
 const popups = [], sparks = [];
 
+let gid = 0;   // bumps every new game so timers left over from the last game never fire into this one
+const later = (fn, ms) => { const g = gid; setTimeout(() => { if (g === gid) fn(); }, ms); };
 function newGame() {
+  if (typeof pending !== 'undefined' && pending) return;   // finish entering initials first
+  gid++;
+  paused = false; $('mPause').textContent = 'Pause';
+  plungerHeld = false; plungerPull = 0; flippers.forEach(f => f.on = false);
+  $('scores').classList.remove('show');
   G = { score: 0, ball: 1, balls: 3, mult: 1, done: 0, lit: [false, false, false, false, false, false], mission: 0, prog: 0,
         over: false, started: false, save: 0, extra: false, combo: 0 };
   targets.forEach(t => t.up = true);
@@ -276,7 +283,7 @@ function progress(key, n = 1) {
   if (G.lit.every(Boolean)) {
     G.score += 500000; G.lit.fill(false); G.mult = Math.min(5, G.mult + 1);
     setMsg(`SYSTEM OVERRIDE! +500,000  MULTIPLIER ${G.mult}X`);
-    if (!G.extra) { G.extra = true; G.balls++; setTimeout(() => setMsg('EXTRA BALL!'), 2600); }
+    if (!G.extra) { G.extra = true; G.balls++; later(() => setMsg('EXTRA BALL!'), 2600); }
   } else setMsg(`${m.seg} COMPLETE +${bonus.toLocaleString()}`);
   // next unlit segment, going clockwise
   for (let i = 1; i <= 6; i++) { const j = (G.mission + i) % 6; if (!G.lit[j]) { G.mission = j; break; } }
@@ -420,17 +427,17 @@ function step(dt) {
 function loseBall() {
   ball.live = false;
   if (!G.started) { resetBall(); return; }
-  if (G.save > 0) { setMsg('BALL SAVED. RECONNECTING...'); setTimeout(resetBall, 700); return; }
+  if (G.save > 0) { setMsg('BALL SAVED. RECONNECTING...'); later(resetBall, 700); return; }
   sfx.drain();
   if (G.ball >= G.balls) {
     G.over = true;
     const qualifies = G.score > 0 && (board.length < 10 || G.score > board[board.length - 1].s);
-    setMsg(qualifies ? 'CONNECTION LOST. NEW TOP SCORE!' : 'CONNECTION LOST. GAME OVER. PRESS N');
-    if (qualifies) setTimeout(() => showScores(G.score), 900);
+    setMsg(qualifies ? 'CONNECTION LOST. NEW TOP SCORE!' : (matchMedia('(pointer: coarse)').matches ? 'CONNECTION LOST. TAP TO PLAY AGAIN' : 'CONNECTION LOST. GAME OVER. PRESS N'));
+    if (qualifies) showScores(G.score);
     updatePanel(true); return;
   }
   G.ball++; setMsg(`SIGNAL DROPPED. BALL ${G.ball}`);
-  setTimeout(() => { if (!G.over) resetBall(); }, 900);
+  later(() => { if (!G.over) resetBall(); }, 900);
   updatePanel(true);
 }
 function launch() {
@@ -567,7 +574,7 @@ function render(dt) {
 
   if (paused || (G && G.over) || (G && !G.started && ball.inLane)) {
     const txt = paused ? 'PAUSED' : G.over ? 'GAME OVER' : 'PULL THE PLUNGER';
-    const sub = paused ? 'Press P to resume' : G.over ? 'Press N or Game: New' : (matchMedia('(pointer: coarse)').matches ? 'Drag the PULL plunger down, then let go' : 'Hold SPACE, then let go');
+    const sub = paused ? (matchMedia('(pointer: coarse)').matches ? 'Tap to resume' : 'Press P to resume') : G.over ? (matchMedia('(pointer: coarse)').matches ? 'Tap a button to play again' : 'Press N or New Game') : (matchMedia('(pointer: coarse)').matches ? 'Drag the PULL plunger down, then let go' : 'Hold SPACE, then let go');
     ctx.save(); ctx.fillStyle = 'rgba(5,0,20,0.75)'; ctx.fillRect(84, 445, 400, 70);
     ctx.strokeStyle = '#ff3ea8'; ctx.shadowColor = '#ff3ea8'; ctx.shadowBlur = 12; ctx.lineWidth = 2; ctx.strokeRect(84, 445, 400, 70);
     ctx.textAlign = 'center'; ctx.font = '900 26px Orbitron'; ctx.fillStyle = '#7ff6ff'; ctx.shadowColor = '#3ef0ff'; ctx.fillText(txt, 284, 480);
@@ -665,6 +672,7 @@ addEventListener('blur', () => { setFlipper(0, false); setFlipper(1, false); plu
 const ptrs = new Map();
 cvs.addEventListener('pointerdown', e => {
   e.preventDefault(); ac(); cvs.setPointerCapture(e.pointerId);
+  if (wakeTap()) return;
   const r = cvs.getBoundingClientRect(), side = (e.clientX - r.left) < r.width / 2 ? 0 : 1;
   let role = side;
   if (side === 1 && ball.live && ball.inLane && !paused) { role = 'P'; plungerHeld = true; } else setFlipper(side, true);
@@ -685,9 +693,18 @@ $('mSound').addEventListener('click', blurAfter(toggleSound));
 
 
 // ---- touch controls ----
+function wakeTap() {
+  if ($('scores').classList.contains('show')) return true;
+  if (G.over) { newGame(); return true; }
+  if (paused) { togglePause(); return true; }
+  return false;
+}
 function holdBtn(el, down, upFn) {
-  el.addEventListener('pointerdown', e => { e.preventDefault(); ac(); try { el.setPointerCapture(e.pointerId); } catch (_) {} el.classList.add('on'); down(e); });
-  const end = e => { if (!el.classList.contains('on')) return; el.classList.remove('on'); upFn(e); };
+  el.addEventListener('pointerdown', e => {
+    e.preventDefault(); ac(); try { el.setPointerCapture(e.pointerId); } catch (_) {} el.classList.add('on');
+    el._skip = wakeTap(); if (!el._skip) down(e);
+  });
+  const end = e => { if (!el.classList.contains('on')) return; el.classList.remove('on'); if (!el._skip) upFn(e); el._skip = false; };
   ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(t => el.addEventListener(t, end));
   el.addEventListener('contextmenu', e => e.preventDefault());
 }
