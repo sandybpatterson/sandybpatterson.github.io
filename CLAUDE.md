@@ -58,6 +58,18 @@ books live in their own repos; some live as folders inside this repo.
   (per device; the older single `sbp-cybercity-high` is migrated in). On
   phones the site nav is hidden and a "Shelf" link sits in the menu bar.
 
+**Unlisted, not on the shelf:**
+- **Shopping List** — `/shopping/index.html`, added 2026-11-22. A blank,
+  general-purpose shopping checklist (check = cross out + drop to bottom,
+  × deletes, type to add, Clear checked / Clear all). Saved per device in
+  localStorage `sbp-recipe-checklist` (key kept from its recipe-checklist
+  origins so existing lists survive). PWA scoped to `/shopping/`
+  (`manifest.webmanifest`, `sw.js`, icons); the nav "Install" button opens a
+  popup with Add-to-Home-Screen steps and a share/copy link. Its nav reads
+  "&larr; Homepage" instead of "Bookshelf" at Sandy's request. Bump `VERSION`
+  in `sw.js` if icons/manifest change. `recipes/checklist.html` is just a
+  redirect to it (the two recipe pages it came from were deleted).
+
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
 as a link-tree RSS button (the old "Copy Podcast RSS Link" button was
