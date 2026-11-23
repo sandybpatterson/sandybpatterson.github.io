@@ -64,16 +64,15 @@ Use WebSearch for Tennessee news from roughly the last 24–48 hours. Check the 
 
 Where a story is still developing, prefer the most recent numbers over ones already used in a prior article — check the last article or two in `ai-news/tennessee-today/` if you're unsure whether a stat has already run, since restating the exact same figures two days running reads as stale rather than as an update.
 
-## 2. Pick the Big Story and write the sections: carrot and stick
+## 2. Pick the Big Story and write the sections
 
-Tennessee Today runs on a carrot-and-stick structure. The hard news comes first; the piece closes with something palatable. Write in full narrative prose throughout — this is a long-form digest, not a bullet-point roundup:
+Tennessee Today leads with the hard news and closes with something palatable. Write in full narrative prose throughout — this is a long-form digest, not a bullet-point roundup:
 
 - **The Big Story**: the single most significant Tennessee story of the day, good or bad. One to six paragraphs, the longest piece in the article, covering the key facts, numbers, context, and why it matters. It can come from any topic area; use judgment about real-world impact and newsworthiness rather than defaulting to whichever area feels most "big story shaped."
-- **The Sticks**: the hard news, one to two paragraphs per story. Topic areas: current events, politics and political quotes, bills, infrastructure issues, pollution and green energy, misinformation, human rights, ranked choice voting, corruption, politicians lying. Two standing features belong here when the day's news supports them:
-  - **They Said It**: one quote from a Tennessee politician, checked against the record. Quote them exactly, then say plainly whether the record backs it up.
+- **The Sticks**: the hard news, one to two paragraphs per story. Topic areas: current events, politics and political quotes, bills, infrastructure issues, pollution and green energy, misinformation, human rights, ranked choice voting, corruption, politicians lying. One standing feature belongs here when the day's news supports it:
   - **Bill Watch**: one bill in the General Assembly — what it does, who it affects, and where it stands.
   Skip a topic entirely if nothing notable turned up. Don't pad it out to hit a quota.
-- **The Carrots**: good news stories, one to two paragraphs each, closing the piece on something palatable. Genuinely positive Tennessee stories: a recovery, a win, a rescue, a milestone, a neighbor doing something remarkable. Tennessee history can appear here when there's a good one, but it is not a daily fixture — Sandy does not want an "on this day" item every day. If nothing legitimately positive turned up, say so in a single honest sentence rather than stretching a neutral story into good news.
+- **Good News**: good news stories, one to two paragraphs each, closing the piece on something palatable. Genuinely positive Tennessee stories: a recovery, a win, a rescue, a milestone, a neighbor doing something remarkable. Tennessee history can appear here when there's a good one, but it is not a daily fixture — Sandy does not want an "on this day" item every day. If nothing legitimately positive turned up, say so in a single honest sentence rather than stretching a neutral story into good news.
 - **Sources**: every URL you actually cited, as a linked list (built in step 3).
 
 Write a real, specific headline drawn from the Big Story — never a generic "Tennessee Today — [date]" pattern. Sandy has explicitly rejected that pattern before (see the Wetwear brief's history in `/CLAUDE.md`). Keep the headline short: one clause, roughly 60 characters or fewer. Sandy called the first article's two-clause headline too long on 2026-11-23. Write a one-sentence deck teasing the rest of the day's stories.
