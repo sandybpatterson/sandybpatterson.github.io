@@ -1,0 +1,298 @@
+<!--
+  Structural template for a Wetwear Daily News Brief page.
+  Copy this file's structure and CSS verbatim — don't redesign it. The whole
+  point of a template is that every brief looks identical; drifting the
+  markup or styling from one day to the next is the thing to avoid.
+
+  Replace every {{PLACEHOLDER}} with real content. Everything else —
+  tags, classes, the <style> block — stays exactly as written here.
+
+  Section labels ({{SECTION_LABEL}}) are usually, in order: Biggest Story,
+  Biology, Misinformation, Public Health Data, Politics, Good News, Sources.
+  Skip a section entirely (delete its label + paragraphs) if nothing notable
+  turned up that day in that area — don't pad it. The first <p> under each
+  section label should carry class="drop-cap" (only the very first one in
+  the whole article gets the actual drop-cap letter styling, per the CSS
+  rule .article-body p.drop-cap::first-letter, but it's harmless to mark
+  every section's opening paragraph the same way for consistency; only the
+  first-of-type will actually render the drop cap).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The United States Has Lost Its Measles Elimination Status, and Cases Are Still Climbing — Wetwear Daily News Brief</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html">Podcast</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Daily News Brief</div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">The United States Has Lost Its Measles Elimination Status, and Cases Are Still Climbing</h1>
+    <p class="deck">Plus a virus family that may predate cells, leukemia's 50-year fuse, a fabricated diabetes cure, Ebola's toll in the Congo, an early flu season, and overdose deaths at their lowest since 2016.</p>
+    <p class="byline">Sandy B. Patterson &middot; November 23, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">Biggest Story</p>
+
+      <p class="drop-cap">The United States has lost its measles elimination status, a designation it held since 2000. The Pan American Health Organization announced on November 17 that endemic measles transmission has been reestablished in the country, meaning the same strain has circulated continuously for more than 12 months. The CDC counted 5,838 confirmed cases in 2026 as of November 19, up 426 in a single week and about 2.6 times the total for all of 2025. About 96 percent of cases are tied to outbreaks, and the CDC lists six deaths and 591 hospitalizations so far this year. It is the highest annual case total since 1991. Kindergarten vaccination coverage has slipped from 95.2 percent in the 2019 to 2020 school year to 92.4 percent in 2025 to 2026, leaving roughly 280,000 kindergartners without full protection. To win the status back, the country must file a corrective action plan and go a full year without endemic transmission. The CDC has directed about $100 million to state and local health departments for outbreak response. Bolivia and Mexico lost their elimination status in the same announcement, and Canada lost its own in 2025, so the Americas no longer hold measles-free standing as a region.</p>
+
+      <p class="section-label">Biology</p>
+
+      <p class="drop-cap">Researchers at the University of Miami have discovered a previously unknown group of viruses that share a key protein fold with structures found inside cells. The fold, known as HK97, appears both in these viruses and in cellular encapsulins, tiny protein compartments that cells use to store and protect molecules. The match suggests that viruses may have helped shape some of the earliest biological structures on Earth, blurring the line between what came first. The findings were published in Nature Communications.</p>
+
+      <p>Leukemia can begin developing as much as 50 years before it is diagnosed, according to researchers at Cambridge and University College London. The team reconstructed how acute myeloid leukemia develops across a lifetime and found that the first cancer-driving mutation appeared before age 20 in two-thirds of the cases they studied. The cancer then evolves silently for decades before symptoms appear. The work, published in Nature, could eventually help doctors spot the disease years earlier, when it may be easier to treat.</p>
+
+      <p>Proteins with roots in ancient viruses stand guard over genetic switches left behind by mobile DNA, researchers at EPFL report. The team traced a family called SCAN zinc-finger proteins across 68 vertebrate genomes and found that they keep regulatory sequences derived from transposable elements switched off. The proteins' key domain traces back to an ancient retrovirus, meaning a virus that infected an ancestor long ago left behind a tool the genome still uses. The study was published in Nature Genetics.</p>
+
+      <p>Scientists at the University of Michigan have uncovered how microscopic organisms survive making some of the most potent drug-like molecules in nature. They identified a family of more than 40,000 proteins, which they call REACT proteins, that protect bacteria and fungi from the toxic by-products of producing natural compounds such as the cancer drug doxorubicin. Understanding that protection could help researchers engineer microbes to manufacture new medicines more safely. The findings were published in Science.</p>
+
+      <p class="section-label">Misinformation</p>
+
+      <p class="drop-cap">A viral paper claiming that vaccinated children in Florida have three times the autism rate and four times the asthma rate of unvaccinated children does not hold up. A fact-check by Tech ARP found that the analysis used only 14,235 records out of more than 10 million in the Florida Medicaid data, misclassified vaccinated children as unvaccinated, and appeared in an unindexed journal tied to anti-vaccine advocacy groups. The verdict is false.</p>
+
+      <p>The claims keep circulating even as the evidence stays settled. A new Annenberg survey finds that 17 percent of United States adults still believe the debunked claim that childhood vaccines cause autism, while 64 percent correctly reject it. The survey lands in the same week the country lost its measles elimination status, a milestone public health officials tie directly to falling vaccination coverage.</p>
+
+      <p>A viral claim that Moderna's new mRNA flu shot is unsafe and does not work is false. Bot Sentinel rated the claim false after an FDA review of more than 35,000 recipients found mostly mild, short-lived reactions and a relative efficacy of 26.6 percent compared with a standard flu shot. In other words, the shot prevented more flu than the standard one in the trial, not less.</p>
+
+      <p>A viral post claiming that University of Ghana researchers found a cassava compound called cassavarin that reverses type 2 diabetes in 71 percent of patients is fabricated. An investigation by Engineerine found no such compound, no such trial, and no such researchers in any registry, and the story's claims of a pharmaceutical lawsuit do not exist either. There is no cassavarin.</p>
+
+      <p class="section-label">Public Health Data</p>
+
+      <p class="drop-cap">The Ebola outbreak in the Democratic Republic of the Congo remains a public health emergency of international concern. The World Health Organization kept that designation in place on November 18, reporting 11,613 confirmed cases and 5,678 deaths in the DRC as of November 17, a fatality ratio of 48.9 percent. The outbreak, caused by the Bundibugyo virus, has also drawn in Kenya and Nigeria.</p>
+
+      <p>Flu season is off to an early and heavy start in the United States. CDC estimates reported by CIDRAP put the season so far at 3.7 million illnesses, 50,000 hospitalizations, and 2,800 deaths, including seven pediatric deaths. Flu-like illness accounted for 3.8 percent of outpatient visits in the latest FluView week, and activity continues to climb.</p>
+
+      <p>Oregon has confirmed its first human case of avian influenza in 2026. The Oregon Health Authority said the patient is a dairy worker in Morrow County, the first dairy-associated case in the state and the fourth in United States dairy workers this year. Officials have identified no human-to-human transmission.</p>
+
+      <p class="section-label">Politics</p>
+
+      <p class="drop-cap">The Senate Appropriations Committee's fiscal 2027 Labor-HHS bill would give the National Institutes of Health $49 billion, a raise of about $500 million over fiscal 2026, Science reports. The bill also funds the CDC at $9.26 billion and rejects the administration's proposed 12 percent cut to NIH, along with its plan to eliminate three NIH institutes. If it becomes law, federal science funding would grow slightly instead of shrinking sharply.</p>
+
+      <p>A Reagan-appointed federal judge has permanently blocked the administration from conditioning Ryan White HIV/AIDS Program funds on providers refusing to recognize transgender patients' identities or offer gender-affirming care. United States District Judge William Young ruled on November 19 that the conditions violate the First and Fifth Amendments. The ruling means HIV clinics keep their funding without the new conditions.</p>
+
+      <p>The FDA has created a new safety council inside its biologics center to independently review post-market safety signals for vaccines, cell and gene therapies, and blood products. The CBER Safety Council reports directly to the center director and sits apart from the offices that approve products, a structure the agency says is meant to strengthen oversight after products reach the market.</p>
+
+      <p>HHS and CMS have awarded $47 million to 15 organizations to test chronic disease prevention approaches in Medicare. The MAHA ELEVATE awards, chosen from nearly 450 applications, will fund trials of lifestyle and functional-medicine interventions for conditions including diabetes, obesity, dementia, and heart failure.</p>
+
+      <p>Three Democratic senators have asked the HHS inspector general to investigate whether staff cuts at the FDA and CDC slowed the response to this summer's Cyclospora outbreak. The outbreak, linked to lettuce, sickened 12,883 people in 21 states and killed two. The senators point to the loss of more than 4,600 FDA employees and about 3,000 CDC employees since January 2025.</p>
+
+      <p class="section-label">Good News</p>
+
+      <p class="drop-cap">Overdose deaths in the United States have fallen to their lowest level in a decade. CDC provisional data show about 64,433 reported deaths, or 65,724 predicted, in the 12 months ending June 2026. That is roughly 42 percent below the 2023 peak and the lowest 12-month total since December 2016. Whatever the arguments over who deserves credit, tens of thousands fewer families are getting the worst phone call there is.</p>
+
+      <p>The Hainan gibbon, once down to just seven to nine individuals in the early 1980s, has grown to 44 animals across seven groups. It is now the only gibbon species in the world whose population continues to grow, a recovery Xinhua credits to China's tropical rainforest conservation work.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.contagionlive.com/view/measles-update-november-20-2026">Contagion Live — Measles Update: November 20, 2026</a></li>
+        <li><a href="https://www.healthline.com/health-news/u-s-loses-measles-elimination-status-after-26-years">Healthline — U.S. Loses Measles Elimination Status After 26 Years</a></li>
+        <li><a href="https://sciencedaily.com/releases/2026/11/261122060334.htm">ScienceDaily — Mysterious new viruses reveal a missing link in evolution</a></li>
+        <li><a href="https://sciencedaily.com/releases/2026/11/261121221122.htm">ScienceDaily — Scientists discover that leukemia can begin developing 50 years before diagnosis</a></li>
+        <li><a href="https://phys.org/news/2026-11-proteins-ancient-viral-roots-genetic.html">phys.org — Proteins with ancient viral roots guard genetic switches left by mobile DNA</a></li>
+        <li><a href="https://www.news-medical.net/news/20261123/Scientists-uncover-mechanism-that-enables-microscopic-organisms-to-produce-drug-like-molecules.aspx">News-Medical — Scientists uncover mechanism that enables microscopic organisms to produce drug-like molecules</a></li>
+        <li><a href="https://www.techarp.com/fact-check/florida-medicaid-vaccine-study-autism-asthma/">Tech ARP — Florida Vaccine Study: 3x Autism &amp; 4x Asthma? Fact Check</a></li>
+        <li><a href="https://sciencedaily.com/releases/2026/11/261122060323.htm">ScienceDaily — U.S. loses measles elimination status after 25 years as vaccine myths persist</a></li>
+        <li><a href="https://botsentinel.com/narratives/3676">Bot Sentinel — Moderna's new mRNA flu shot is unsafe and doesn't work</a></li>
+        <li><a href="https://engineerine.com/ghana-cassava-diabetes-remission-science/">Engineerine — Ghana Cassava Diabetes Reversal Claim: What Real Science Shows</a></li>
+        <li><a href="https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON630">World Health Organization — Ebola Disease Caused by Bundibugyo Virus</a></li>
+        <li><a href="https://www.cidrap.umn.edu/influenza-general/us-flu-activity-continues-climb">CIDRAP — US Flu Activity Continues to Climb</a></li>
+        <li><a href="https://content.govdelivery.com/accounts/ORHA/bulletins/4336c53">Oregon Health Authority — OHA Confirms State's First Human Case of Avian Influenza of 2026</a></li>
+        <li><a href="https://www.science.org/content/article/senate-bill-gives-nih-500-million-raise-2027">Science — Senate bill gives NIH a $500 million raise in 2027</a></li>
+        <li><a href="https://www.newsmax.com/newsfront/trump-reagan-hiv/2026/11/19/id/1276958">Newsmax — Reagan-Appointed Judge Blocks Trump HIV Funding Rules</a></li>
+        <li><a href="https://www.fda.gov/vaccines-blood-biologics/whats-new-biologics/fda-establishes-cber-safety-council-strengthen-postmarketing-oversight-biological-products">FDA — FDA Establishes CBER Safety Council to Strengthen Postmarketing Oversight of Biological Products</a></li>
+        <li><a href="https://www.hhs.gov/press-room/hhs-awards-47-million-maha-elevate-medicare-chronic-disease-prevention.html">HHS — HHS Announces $47 Million in MAHA ELEVATE Awards</a></li>
+        <li><a href="https://www.medicaldaily.com/senators-hhs-watchdog-investigate-cyclospora-outbreak-response-481505">Medical Daily — Senators Ask HHS Watchdog to Investigate Cyclospora Outbreak Response</a></li>
+        <li><a href="https://www.khsu.org/2026-11-18/as-overdose-deaths-fall-white-house-makes-misleading-claims-about-who-deserves-credit?_amp=true">KHSU — As Overdose Deaths Fall, White House Makes Misleading Claims About Who Deserves Credit</a></li>
+        <li><a href="http://english.scio.gov.cn/chinavoices/2026-11/23/content_118785382.html">Xinhua — Hainan gibbon population recovery highlights China's progress in tropical rainforest conservation</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Daily News Brief</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+</body>
+</html>
