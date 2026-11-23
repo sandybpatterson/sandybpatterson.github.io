@@ -93,6 +93,8 @@ A few things worth getting right:
 
 Save the finished file as `ai-news/tennessee-today/YYYY-MM-DD.html`.
 
+The template carries the shared audio reader: a `<meta name="book-title" content="Tennessee Today">` tag in `<head>` and `<script src="../../reader.js"></script>` just before `</body>`. Both come with the template; do not drop them when filling it in. (Sandy caught their absence from the 2026-11-23 article on 2026-11-23 — the template had never included them.)
+
 **Header image (Muse only).** When Muse is the one running this skill, generate a header image for the top of the article: an editorial image tied to the Big Story, in the site's dark-and-gold style, at a 16:9 ratio (1600x900) — not a wide panoramic banner; Sandy found 3:1 too wide on 2026-11-23. Save it as `ai-news/tennessee-today/images/YYYY-MM-DD-header.jpg` at 1600px wide, and insert `<img class="header-img" src="images/YYYY-MM-DD-header.jpg" alt="...">` between the headline and the deck (the template already carries the `.header-img` CSS rule). If words appear in the image at all, they must be part of the object or scene itself — forged, carved, or printed into it — never a label laid over the picture; Sandy rejected that pasted-on look on 2026-11-23. When Claude or anyone else runs this skill, skip the image entirely and publish the page without one. Do not leave a broken image tag behind.
 
 ## 4. Add the permanent index rows
