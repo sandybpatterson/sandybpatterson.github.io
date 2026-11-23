@@ -443,6 +443,30 @@ bullet-point digest, but its prompt never specified a file path or repo to
 publish to, so it didn't appear to write anything to this site. Redundant
 with the Routine above — Sandy confirmed it should be disabled.
 
+**Tennessee Today (`/ai-news/tennessee-today/`)** — a Tennessee-focused
+news digest, built 2026-11-23 at Sandy's request, with its own skill at
+`.claude/skills/tennessee-today/` (`SKILL.md` +
+`references/tennessee-template.html`). Carrot-and-stick structure: "The
+Big Story" (the day's most significant Tennessee story, good or bad, up
+to ~6 paragraphs), "The Sticks" (hard news at 1-2 paragraphs each:
+politics and political quotes, bills, infrastructure, pollution and
+green energy, misinformation, human rights, ranked choice voting,
+corruption, politicians lying; standing features "They Said It" and
+"Bill Watch" when the day's news supports them), and "The Carrots"
+(good news to close; Tennessee history only occasionally, not a daily
+fixture — Sandy does not want an "on this day" item every day). Same
+invariants as Wetwear: every day's article is a permanent row at the
+top of the unified Issues list on `ai-news/index.html` plus a row in
+`tennessee-today/index.html`, real specific headline, one-sentence
+deck, byline date, no em dashes, no sentence over 400 characters. No
+podcast `.txt` companion — the HTML page is the whole product. Article
+pages use the standard article nav (Bookshelf far left, Read the Book
+and AI Tools in the middle, Sandy's Blog far right); the "Podcast"
+middle link is Wetwear-only. Standing Tennessee source list (state
+government and data, state and local news including Tennessee Holler
+and the Murfreesboro papers, universities, nature and history) is
+baked into the skill's research step.
+
 ---
 
 ## Cover Art
