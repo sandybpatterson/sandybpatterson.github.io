@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="robots" content="noindex">
+  <title>Transcribe Test</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0a; color: #e8e8e8;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.08rem; line-height: 1.75; min-height: 100vh;
+    }
+    a { color: #c9a84c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 40px; background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px); border-bottom: 1px solid #1e1e1e;
+    }
+    .nav-brand, .nav-links a, .eyebrow, .mono {
+      font-family: 'Courier New', monospace; text-transform: uppercase;
+    }
+    .nav-brand { font-size: 0.75rem; letter-spacing: 0.15em; color: #c9a84c; }
+    .nav-links a {
+      font-size: 0.72rem; letter-spacing: 0.08em; color: #888;
+      padding: 5px 14px; border: 1px solid transparent; border-radius: 999px;
+    }
+    .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+    main { max-width: 680px; margin: 0 auto; padding: 56px 24px 80px; }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; color: #c9a84c; margin-bottom: 12px; }
+    h1 { font-size: 2.2rem; line-height: 1.2; font-weight: normal; margin-bottom: 10px; }
+    .sub { color: #999; font-style: italic; margin-bottom: 36px; }
+    label { display: block; font-family: 'Courier New', monospace; font-size: 0.75rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: #c9a84c; margin-bottom: 8px; }
+    input[type=url] {
+      width: 100%; padding: 14px 16px; font-size: 1rem; font-family: inherit;
+      background: #121212; color: #e8e8e8; border: 1px solid #2a2a2a; border-radius: 6px;
+    }
+    input[type=url]:focus { outline: none; border-color: #c9a84c; }
+    .hint { color: #888; font-size: 0.9rem; margin-top: 8px; }
+    .btn {
+      display: inline-block; margin-top: 22px; padding: 14px 30px; cursor: pointer;
+      font-family: 'Courier New', monospace; font-size: 0.9rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 999px; border: 1px solid #c9a84c;
+      background: #c9a84c; color: #0a0a0a;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn.ghost { background: transparent; color: #c9a84c; }
+    .filepick { margin-top: 18px; padding: 16px; border: 1px dashed #c9a84c66; border-radius: 6px; }
+    .filepick input { margin-top: 8px; color: #bbb; font-family: inherit; }
+    .hidden { display: none !important; }
+
+    .warn {
+      margin: 40px 0 28px; padding: 28px 20px; text-align: center;
+      border: 3px solid #e05a4a; border-radius: 10px; background: #e05a4a14;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    .warn .big {
+      font-family: 'Courier New', monospace; font-weight: bold; color: #ff6b5a;
+      font-size: clamp(1.6rem, 6vw, 2.6rem); line-height: 1.15; letter-spacing: 0.04em;
+    }
+    .warn .small { color: #e8c0b8; margin-top: 10px; font-size: 0.95rem; }
+    @keyframes pulse { 50% { border-color: #ff8a7a; background: #e05a4a22; } }
+    @media (prefers-reduced-motion: reduce) { .warn { animation: none; } }
+
+    .status { font-family: 'Courier New', monospace; font-size: 0.85rem; color: #c9a84c;
+      letter-spacing: 0.06em; margin-bottom: 10px; }
+    .bar { height: 22px; background: #161616; border: 1px solid #2a2a2a; border-radius: 999px; overflow: hidden; }
+    .bar > div { height: 100%; width: 0%; background: linear-gradient(90deg, #a8862f, #c9a84c);
+      transition: width 0.4s ease; }
+    .nums { display: flex; justify-content: space-between; color: #888; font-size: 0.85rem;
+      font-family: 'Courier New', monospace; margin-top: 8px; }
+    .latest { margin-top: 22px; color: #aaa; font-style: italic; font-size: 0.95rem;
+      border-left: 2px solid #c9a84c55; padding-left: 14px; min-height: 1.75em; }
+
+    .done { margin-top: 40px; text-align: center; padding: 32px 20px;
+      border: 1px solid #c9a84c66; border-radius: 10px; }
+    .done h2 { font-weight: normal; font-size: 1.6rem; margin-bottom: 6px; }
+    .done p { color: #999; }
+    .error { margin-top: 28px; padding: 16px 18px; border: 1px solid #e05a4a88; border-radius: 6px;
+      color: #f0c0b8; background: #e05a4a10; }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 16px; }
+      main { padding: 40px 16px 64px; }
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="https://sandybpatterson.github.io/bookshelf.html">Sandy B. Patterson</a>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/bookshelf.html">&larr; Bookshelf</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="eyebrow">Test page</div>
+    <h1>Podcast to Transcript</h1>
+    <p class="sub">Runs entirely on this device. Nothing is uploaded anywhere.</p>
+
+    <section id="form">
+      <label for="url">Episode audio link</label>
+      <input id="url" type="url" placeholder="https://example.com/episode.mp3" autocomplete="off">
+      <p class="hint">Paste a direct link to the audio file (usually ends in .mp3), not the episode's web page.</p>
+
+      <div id="filepick" class="filepick hidden">
+        <label for="file">Or use a file you downloaded</label>
+        <input id="file" type="file" accept="audio/*,.mp3,.m4a">
+      </div>
+
+      <button id="start" class="btn" type="button">Start conversion</button>
+    </section>
+
+    <section id="progress" class="hidden">
+      <div class="warn" role="alert">
+        <div class="big">DO NOT CLOSE<br>THIS PAGE</div>
+        <div class="small">Keep this tab open and in front, and keep the laptop plugged in.<br>Long episodes can take an hour or more.</div>
+      </div>
+      <div class="status" id="status">Starting&hellip;</div>
+      <div class="bar"><div id="fill"></div></div>
+      <div class="nums"><span id="pct">0%</span><span id="eta"></span></div>
+      <div class="latest" id="latest"></div>
+    </section>
+
+    <section id="done" class="done hidden">
+      <h2>Transcript ready</h2>
+      <p id="doneInfo"></p>
+      <button id="download" class="btn" type="button">Download transcript</button><br>
+      <button id="again" class="btn ghost" type="button">Transcribe another</button>
+    </section>
+
+    <div id="error" class="error hidden"></div>
+  </main>
+
+<script type="module">
+// ---------- settings ----------
+const MODEL = 'Xenova/whisper-base.en';          // English-only, small enough for a laptop
+const LIBS = [                                    // tried in order
+  'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1',
+  'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.0',
+];
+const PIECE_SECONDS = 300;                        // audio is processed 5 minutes at a time
+
+const $ = id => document.getElementById(id);
+const show = (el, on = true) => el.classList.toggle('hidden', !on);
+
+// ---------- MP3 splitting (so a 3-hour file never has to be decoded all at once) ----------
+const BR1 = [0,32,40,48,56,64,80,96,112,128,160,192,224,256,320];
+const BR2 = [0,8,16,24,32,40,48,56,64,80,96,112,128,144,160];
+const SR = { 3: [44100,48000,32000], 2: [22050,24000,16000], 0: [11025,12000,8000] };
+
+function id3Skip(b) {
+  if (b[0] === 0x49 && b[1] === 0x44 && b[2] === 0x33) {
+    const size = (b[6] & 0x7f) << 21 | (b[7] & 0x7f) << 14 | (b[8] & 0x7f) << 7 | (b[9] & 0x7f);
+    return 10 + size + ((b[5] & 0x10) ? 10 : 0);
+  }
+  return 0;
+}
+function frameInfo(b, i) {
+  if (i + 4 > b.length || b[i] !== 0xFF || (b[i+1] & 0xE0) !== 0xE0) return null;
+  const ver = (b[i+1] >> 3) & 3, layer = (b[i+1] >> 1) & 3;
+  if (ver === 1 || layer !== 1) return null;                 // Layer III only
+  const bri = b[i+2] >> 4, sri = (b[i+2] >> 2) & 3, pad = (b[i+2] >> 1) & 1;
+  if (bri === 0 || bri === 15 || sri === 3) return null;
+  const br = (ver === 3 ? BR1 : BR2)[bri] * 1000, sr = SR[ver][sri];
+  return { len: Math.floor((ver === 3 ? 144 : 72) * br / sr) + pad, br };
+}
+function isSync(b, i) {                                       // require 3 frames in a row
+  let p = i;
+  for (let k = 0; k < 3; k++) {
+    const f = frameInfo(b, p);
+    if (!f) return false;
+    p += f.len;
+    if (p >= b.length) return true;
+  }
+  return true;
+}
+function findSync(b, from) {
+  for (let i = from; i < b.length - 4; i++) if (isSync(b, i)) return i;
+  return -1;
+}
+function splitMp3(b) {
+  const first = findSync(b, id3Skip(b));
+  if (first < 0 || first > id3Skip(b) + 65536) return null;  // not an MP3
+  const br = frameInfo(b, first).br;
+  const step = Math.max(1 << 20, Math.round(br / 8 * PIECE_SECONDS));
+  const cuts = [first];
+  let pos = first + step;
+  while (pos < b.length) {
+    const s = findSync(b, pos);
+    if (s < 0) break;
+    cuts.push(s);
+    pos = s + step;
+  }
+  cuts.push(b.length);
+  const pieces = [];
+  for (let k = 0; k < cuts.length - 1; k++) pieces.push([cuts[k], cuts[k+1]]);
+  return pieces;
+}
+
+// ---------- decoding to 16 kHz mono, which is what Whisper wants ----------
+async function decode16k(bytes) {
+  let buf;
+  try {
+    buf = await new OfflineAudioContext(1, 1, 16000).decodeAudioData(bytes);
+  } catch (e) {
+    if (e && e.name === 'EncodingError') throw e;
+    buf = await new OfflineAudioContext(1, 1, 44100).decodeAudioData(bytes);
+  }
+  const n = buf.length, ch = buf.numberOfChannels;
+  let mono = new Float32Array(n);
+  for (let c = 0; c < ch; c++) {
+    const d = buf.getChannelData(c);
+    for (let i = 0; i < n; i++) mono[i] += d[i] / ch;
+  }
+  if (buf.sampleRate !== 16000) {                             // fallback resample
+    const ratio = buf.sampleRate / 16000, out = new Float32Array(Math.floor(n / ratio));
+    for (let i = 0; i < out.length; i++) {
+      const x = i * ratio, j = Math.floor(x), t = x - j;
+      out[i] = mono[j] * (1 - t) + (mono[j + 1] ?? mono[j]) * t;
+    }
+    mono = out;
+  }
+  return mono;
+}
+window.__tx = { splitMp3, decode16k };                        // for testing
+
+// ---------- helpers ----------
+function hms(s) {
+  s = Math.max(0, Math.round(s));
+  const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+  return [h, m, x].map(v => String(v).padStart(2, '0')).join(':');
+}
+function setProgress(frac, label) {
+  const p = Math.min(100, Math.max(0, frac * 100));
+  $('fill').style.width = p.toFixed(1) + '%';
+  $('pct').textContent = Math.floor(p) + '%';
+  if (label) $('status').textContent = label;
+  document.title = Math.floor(p) + '% · Transcribe Test';
+}
+function fail(msg) {
+  running = false;
+  releaseWake();
+  show($('progress'), false);
+  show($('form'), true);
+  $('start').disabled = false;
+  $('error').innerHTML = msg;
+  show($('error'), true);
+  document.title = 'Transcribe Test';
+}
+
+// ---------- keep the screen awake, warn before closing ----------
+let running = false, wake = null;
+async function grabWake() {
+  try { if ('wakeLock' in navigator) wake = await navigator.wakeLock.request('screen'); } catch {}
+}
+function releaseWake() { try { wake && wake.release(); } catch {} wake = null; }
+document.addEventListener('visibilitychange', () => {
+  if (running && document.visibilityState === 'visible') grabWake();
+});
+window.addEventListener('beforeunload', e => { if (running) { e.preventDefault(); e.returnValue = ''; } });
+
+// ---------- loading the speech model ----------
+let transcriber = null;
+async function loadModel(onFrac) {
+  if (transcriber) return transcriber;
+  let lib = null;
+  for (const u of LIBS) { try { lib = await import(u); break; } catch {} }
+  if (!lib) throw new Error('Could not load the transcription code. Check the internet connection and try again.');
+  lib.env.allowLocalModels = false;
+  const files = {};
+  const progress_callback = p => {
+    if (p.status === 'progress' && p.total) {
+      files[p.file] = [p.loaded, p.total];
+      let l = 0, t = 0;
+      for (const [a, b] of Object.values(files)) { l += a; t += b; }
+      onFrac(l / t);
+    }
+  };
+  let gpu = false;
+  try { gpu = !!(navigator.gpu && await navigator.gpu.requestAdapter()); } catch {}
+  if (gpu) {
+    try {
+      transcriber = await lib.pipeline('automatic-speech-recognition', MODEL,
+        { device: 'webgpu', dtype: 'fp32', progress_callback });
+      return transcriber;
+    } catch (e) { console.warn('WebGPU failed, using CPU', e); }
+  }
+  try { lib.env.backends.onnx.wasm.proxy = true; } catch {}
+  transcriber = await lib.pipeline('automatic-speech-recognition', MODEL,
+    { device: 'wasm', dtype: 'q8', progress_callback });
+  return transcriber;
+}
+
+// ---------- getting the audio ----------
+async function fetchAudio(url, onFrac) {
+  let res;
+  try { res = await fetch(url); }
+  catch {
+    show($('filepick'), true);
+    throw new Error('blocked');
+  }
+  if (!res.ok) throw new Error(`The link answered with an error (${res.status}). Check the link and try again.`);
+  const type = res.headers.get('content-type') || '';
+  if (type.includes('text/html')) throw new Error('That link is a web page, not an audio file. Find the direct .mp3 link (on the podcast\'s RSS feed or its "download" button) and paste that instead.');
+  const total = +res.headers.get('content-length') || 0;
+  const reader = res.body.getReader();
+  const chunks = []; let got = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value); got += value.length;
+    if (total) onFrac(got / total);
+  }
+  return new Uint8Array(await new Blob(chunks).arrayBuffer());
+}
+
+// ---------- the whole job ----------
+let transcript = '', outName = 'transcript.txt';
+
+async function run() {
+  const url = $('url').value.trim();
+  const file = $('file').files[0];
+  if (!url && !file) { $('url').focus(); return; }
+
+  show($('error'), false);
+  show($('form'), false);
+  show($('progress'), true);
+  $('start').disabled = true;
+  $('latest').textContent = ''; $('eta').textContent = '';
+  running = true;
+  grabWake();
+  const t0 = Date.now();
+
+  // 0-10%: model, 10-20%: audio download, 20-100%: transcription
+  try {
+    setProgress(0, 'Loading the speech model (first time only, about 150 MB)…');
+    await loadModel(f => setProgress(f * 0.10));
+  } catch (e) { return fail(e.message); }
+
+  let bytes;
+  try {
+    if (file) {
+      setProgress(0.10, 'Reading the file…');
+      bytes = new Uint8Array(await file.arrayBuffer());
+    } else {
+      setProgress(0.10, 'Downloading the episode…');
+      bytes = await fetchAudio(url, f => setProgress(0.10 + f * 0.10));
+    }
+  } catch (e) {
+    if (e.message === 'blocked') return fail('The podcast\'s host won\'t let this page download the audio directly. Download the episode yourself (open the link and save it), then use <b>“Or use a file you downloaded”</b> below.');
+    return fail(e.message);
+  }
+  const base = ((file && file.name) || decodeURIComponent(url.split('?')[0].split('/').pop()) || 'episode')
+    .replace(/\.[a-z0-9]{2,4}$/i, '') || 'episode';
+  outName = base + ' - transcript.txt';
+
+  // Build the list of pieces to work through
+  let pieces = splitMp3(bytes), whole = null;
+  if (!pieces) {
+    setProgress(0.20, 'Decoding the audio (not an MP3, so this is done in one go)…');
+    try { whole = await decode16k(bytes.slice().buffer); }
+    catch { return fail('This file couldn\'t be decoded. It may not be an audio file, or the device ran out of memory on a very long non-MP3 file. MP3 works best.'); }
+    pieces = [];
+    const step = PIECE_SECONDS * 16000;
+    for (let s = 0; s < whole.length; s += step) pieces.push([s, Math.min(whole.length, s + step)]);
+  }
+  const span = pieces[pieces.length - 1][1] - pieces[0][0];
+
+  const lines = [];
+  let offset = 0, doneUnits = 0;
+  const tStart = Date.now();
+  for (let k = 0; k < pieces.length; k++) {
+    const [s, e] = pieces[k];
+    setProgress(0.20 + 0.80 * doneUnits / span, `Transcribing part ${k + 1} of ${pieces.length}…`);
+    let audio;
+    try { audio = whole ? whole.subarray(s, e) : await decode16k(bytes.slice(s, e).buffer); }
+    catch { audio = null; }
+    if (audio && audio.length > 1600) {
+      let out;
+      try {
+        out = await transcriber(audio, { chunk_length_s: 30, stride_length_s: 5, return_timestamps: true });
+      } catch (err) {
+        return fail('Transcription stopped: ' + (err && err.message || err) + '. Try again, or try a shorter episode.');
+      }
+      for (const c of (out.chunks || [{ timestamp: [0], text: out.text }])) {
+        const text = (c.text || '').trim();
+        if (!text) continue;
+        lines.push(`[${hms(offset + (c.timestamp?.[0] ?? 0))}] ${text}`);
+        $('latest').textContent = '“' + text + '”';
+      }
+      offset += audio.length / 16000;
+    }
+    doneUnits += e - s;
+    const frac = doneUnits / span;
+    const spent = (Date.now() - tStart) / 1000;
+    if (frac < 1) $('eta').textContent = 'About ' + Math.max(1, Math.round(spent / frac * (1 - frac) / 60)) + ' min left';
+    setProgress(0.20 + 0.80 * frac);
+  }
+
+  const mins = Math.round((Date.now() - t0) / 60000);
+  transcript = `Transcript: ${base}\nSource: ${file ? file.name : url}\nMade ${new Date().toLocaleString()} with Whisper (${MODEL}), on this device.\nLength: ${hms(offset)}\n\n` + lines.join('\n') + '\n';
+  running = false;
+  releaseWake();
+  setProgress(1, 'Done');
+  document.title = 'Done · Transcribe Test';
+  $('doneInfo').textContent = `${hms(offset)} of audio, ${lines.length} lines, took about ${mins || 1} min.`;
+  show($('progress'), false);
+  show($('done'), true);
+}
+
+$('start').addEventListener('click', run);
+$('url').addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+$('download').addEventListener('click', () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([transcript], { type: 'text/plain' }));
+  a.download = outName;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+});
+$('again').addEventListener('click', () => {
+  show($('done'), false); show($('form'), true);
+  $('start').disabled = false; $('url').value = ''; $('file').value = '';
+  setProgress(0, ''); document.title = 'Transcribe Test';
+});
+</script>
+</body>
+</html>
