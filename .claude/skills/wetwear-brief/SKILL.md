@@ -116,6 +116,8 @@ A few things worth getting right:
 
 Save the finished file as `ai-news/wetwear/YYYY-MM-DD.html`.
 
+The template carries the shared audio reader: a `<meta name="book-title" content="Wetwear Daily News Brief">` tag in `<head>` and `<script src="../../reader.js"></script>` just before `</body>`. Both come with the template; do not drop them when filling it in. (Sandy caught their absence from the 2026-11-23 brief on 2026-11-23 — the template had never included them.)
+
 ## 4. Generate the `.txt` companion
 
 Don't hand-write this — run the bundled converter, which turns your finished HTML
