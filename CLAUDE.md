@@ -446,13 +446,13 @@ with the Routine above — Sandy confirmed it should be disabled.
 **Tennessee Today (`/ai-news/tennessee-today/`)** — a Tennessee-focused
 news digest, built 2026-11-23 at Sandy's request, with its own skill at
 `.claude/skills/tennessee-today/` (`SKILL.md` +
-`references/tennessee-template.html`). Carrot-and-stick structure: "The
+`references/tennessee-template.html`). Structure: "The
 Big Story" (the day's most significant Tennessee story, good or bad, up
 to ~6 paragraphs), "The Sticks" (hard news at 1-2 paragraphs each:
 politics and political quotes, bills, infrastructure, pollution and
 green energy, misinformation, human rights, ranked choice voting,
-corruption, politicians lying; standing features "They Said It" and
-"Bill Watch" when the day's news supports them), and "The Carrots"
+corruption, politicians lying; standing feature "Bill Watch" when the
+day's news supports it), and "Good News"
 (good news to close; Tennessee history only occasionally, not a daily
 fixture — Sandy does not want an "on this day" item every day). Same
 invariants as Wetwear: every day's article is a permanent row at the
