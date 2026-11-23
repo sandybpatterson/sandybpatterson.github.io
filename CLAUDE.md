@@ -33,15 +33,19 @@ books live in their own repos; some live as folders inside this repo.
 - **SODA — free podcast tool** — links to `/soda/`
 - **Stories from Winchester** — lives here, in `/stories/`
 - **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
-- **Cyber City Pinball** — `/pinball/cyber/index.html`, added 2026-11-16. A
-  neon table built on Sandy's own AI-generated playfield art
-  (`pinball/cyber/playfield.jpg`, 1536x2730, 9:16, replaced 2026-11-22; same layout as the
-  first 568x896 art drawn taller). The table is 568x1010 logical units; geometry is still
-  written in the first art's coordinates and mapped onto the new one by `X()`/`Y()` near the
-  top of the script; the wheel (`WHEEL`) is the one exception, measured directly on the new
-  art. Wheel wedge labels (BUMPERS, TARGETS, PINK RAMP, CYAN RAMP, SCOOP, SLINGS) are drawn in
-  code from `MISSIONS[].seg`, since the art has no text; ramps are called PINK and CYAN in messages. append `#debug` to the URL
-  to draw the walls/bumpers/ramp paths over the art when re-aligning.
+- **Cyber City Pinball** — `/pinball/cyber/index.html`, added 2026-11-16. As of
+  2026-11-23 the table is **drawn in code**: Sandy found the AI-painted playfields messy
+  (ramps that went nowhere), so the only image on the table is a plain floor texture,
+  `pinball/cyber/floor.jpg` (Sandy's, 9:16, a city/circuit backdrop with no machine
+  parts). Every rail, ramp, bumper, target, the scoop, slingshots, the mode wheel, arrows
+  and lamps are drawn by `buildLayers()` from the same coordinates the physics uses, so what
+  you see is what the ball hits. Don't go back to painted playfields that carry geometry.
+  The table is 568x1010 logical units. Most geometry is written in the coordinates of the
+  first (retired) art and mapped by `X()`/`Y()` near the top of the script; the ramps and the
+  wheel are set directly in table coordinates. Ramps are two U-shaped tracks (pink up/down
+  the left, cyan up/down the right) that each drop into their own side's inlane. Wheel wedge
+  labels come from `MISSIONS[].seg`; ramps are called PINK and CYAN in messages. Append
+  `#debug` to the URL to draw the collision geometry.
   Sandy can supply more art (backglass, sprites, higher-res playfield) on
   request. The tilt is a CSS rotateX on the canvas. Backglass art is
   `pinball/cyber/backglass.jpg` (Sandy's, cropped to 346:294); the title

@@ -1,9 +1,9 @@
 // Cyber City Pinball service worker. Bump VERSION whenever any file below changes,
 // or installed copies keep serving the old asset from cache.
-const VERSION = 'cybercity-v8';
+const VERSION = 'cybercity-v9';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest',
-  'playfield.jpg', 'backglass.jpg',
+  'floor.jpg', 'backglass.jpg',
   'fonts/doto.woff2', 'fonts/orbitron.woff2',
   'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png',
 ];
