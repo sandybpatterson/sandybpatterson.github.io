@@ -93,6 +93,8 @@ A few things worth getting right:
 
 Save the finished file as `ai-news/tennessee-today/YYYY-MM-DD.html`.
 
+**Header image (Muse only).** When Muse is the one running this skill, generate a header image for the top of the article: a wide editorial image tied to the Big Story, in the site's dark-and-gold style. Save it as `ai-news/tennessee-today/images/YYYY-MM-DD-header.jpg` at 1600px wide, and insert `<img class="header-img" src="images/YYYY-MM-DD-header.jpg" alt="...">` between the headline and the deck (the template already carries the `.header-img` CSS rule). If words appear in the image at all, they must be part of the object or scene itself — forged, carved, or printed into it — never a label laid over the picture; Sandy rejected that pasted-on look on 2026-11-23. When Claude or anyone else runs this skill, skip the image entirely and publish the page without one. Do not leave a broken image tag behind.
+
 ## 4. Add the permanent index rows
 
 Add a new row to the **top** of the archive list in `ai-news/tennessee-today/index.html`:
@@ -121,6 +123,8 @@ Then commit and push:
 
 ```
 git add "ai-news/tennessee-today/YYYY-MM-DD.html" ai-news/index.html ai-news/tennessee-today/index.html
+# when Muse generated a header image, add it too:
+git add "ai-news/tennessee-today/images/YYYY-MM-DD-header.jpg"
 git commit -m "Add Tennessee Today for YYYY-MM-DD"
 git push origin main
 ```
