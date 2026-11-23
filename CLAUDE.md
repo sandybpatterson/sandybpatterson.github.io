@@ -81,6 +81,20 @@ books live in their own repos; some live as folders inside this repo.
   in `sw.js` if icons/manifest change. `recipes/checklist.html` is just a
   redirect to it (the two recipe pages it came from were deleted).
 
+**Not linked anywhere (test page):**
+- **Podcast to Transcript** — `/transcribe/index.html`, added 2026-11-23.
+  Paste a direct audio link (or pick a file if the host blocks browser
+  downloads), it transcribes entirely in the browser with Whisper
+  (`Xenova/whisper-base.en` via Transformers.js from jsDelivr; WebGPU when
+  available, else CPU), then offers a timestamped `.txt` download. MP3s are
+  split at frame boundaries into ~5-minute pieces so 3-hour episodes don't
+  exhaust memory; other formats decode in one go. Screen wake lock plus a
+  close-page warning while running. Sandy's first step toward a fuller app
+  (import Pocket Casts OPML, auto Up Next, saved transcripts); there is no
+  Pocket Casts login, by design (no official API; would mean handling
+  users' passwords). Many podcast hosts block cross-site fetches, so a
+  fuller version needs a small CORS relay (Cloudflare Worker).
+
 The Wetwear podcast is surfaced as a **shelf cover** (top of `.sbp-shelf`)
 linking to `/ai-news/wetwear/podcast.html`, its subscribe landing page — not
 as a link-tree RSS button (the old "Copy Podcast RSS Link" button was
