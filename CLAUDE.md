@@ -31,6 +31,7 @@ books live in their own repos; some live as folders inside this repo.
   (podcast cover art + "Listen to Wetwear" label) linking to
   `/ai-news/wetwear/podcast.html`
 - **SODA — free podcast tool** — links to `/soda/`
+- **AutoFoodStreet — Food Street bot** — links to `/food-street-bot/` (added 2026-11-23: page + `AutoFoodStreet.zip` test build, built from the private `afsd` repo; rebuild the zip from there when the bot changes)
 - **Stories from Winchester** — lives here, in `/stories/`
 - **Arden Remembers** — lives here, in `/arden-remembers/` (empty template — see below)
 - **Cyber City Pinball** — `/pinball/cyber/index.html`, added 2026-11-16. As of
