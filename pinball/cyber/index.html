@@ -155,9 +155,8 @@ nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
 (() => {
 'use strict';
 // ============ Geometry ============
-// Coordinates below were traced on the first 568x896 art. The current art (playfield.jpg,
-// 1536x2730, 9:16) has the same layout drawn taller, so X()/Y() map every traced point
-// onto it; the table is 568 x 1010 logical units.
+// Most coordinates below were traced on the first 568x896 painted art (since retired) and are
+// mapped onto the 568 x 1010 table by X()/Y(). The table itself is drawn in code (buildLayers).
 const X = x => x * 1.01 - 4, Y = y => y * 1.125 + 3;
 const W = 568, H = 1010, BR = 10;
 const MAX_V = 3000, SUB = 12;
