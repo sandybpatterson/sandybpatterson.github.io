@@ -459,7 +459,11 @@ invariants as Wetwear: every day's article is a permanent row at the
 top of the unified Issues list on `ai-news/index.html` plus a row in
 `tennessee-today/index.html`, real specific headline, one-sentence
 deck, byline date, no em dashes, no sentence over 400 characters. No
-podcast `.txt` companion — the HTML page is the whole product. Article
+podcast `.txt` companion — the HTML page is the whole product. When
+Muse runs the skill, it also generates a header image for the top of
+the article (dark-and-gold, tied to the Big Story, saved under
+`tennessee-today/images/`); when Claude runs it, the page publishes
+without one. Article
 pages use the standard article nav (Bookshelf far left, Read the Book
 and AI Tools in the middle, Sandy's Blog far right); the "Podcast"
 middle link is Wetwear-only. Standing Tennessee source list (state
