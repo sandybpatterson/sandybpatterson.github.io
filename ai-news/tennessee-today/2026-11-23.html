@@ -1,0 +1,300 @@
+<!--
+  Structural template for a Tennessee Today page.
+  Copy this file's structure and CSS verbatim — don't redesign it. The whole
+  point of a template is that every article looks identical; drifting the
+  markup or styling from one day to the next is the thing to avoid.
+
+  Replace every {{PLACEHOLDER}} with real content. Everything else —
+  tags, classes, the <style> block — stays exactly as written here.
+
+  Section labels ({{SECTION_LABEL}}) are, in order: The Big Story,
+  The Sticks, The Carrots, Sources. The Big Story is the day's most
+  significant Tennessee story (good or bad), up to about six paragraphs.
+  The Sticks are the hard-news items at one to two paragraphs each
+  (politics, bills, infrastructure, pollution and green energy,
+  misinformation, human rights, ranked choice voting, corruption,
+  politicians lying), including the standing features They Said It and
+  Bill Watch when the day's news supports them. The Carrots close the
+  piece with good news stories; Tennessee history appears here only
+  occasionally, not as a daily fixture. Skip a section entirely (delete
+  its label + paragraphs) if nothing notable turned up that day — don't
+  pad it. The first <p> under each section label should carry
+  class="drop-cap" (only the very first one in the whole article gets
+  the actual drop-cap letter styling, per the CSS rule
+  .article-body p.drop-cap::first-letter, but it's harmless to mark
+  every section's opening paragraph the same way for consistency; only
+  the first-of-type will actually render the drop cap).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>188 Children Died in Tennessee This Year, and the Incoming Governor Wants Answers — Tennessee Today</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .header-img { width: 100%; border: 1px solid #1e1e1e; display: block; margin-bottom: 18px; }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/original-bug-book/">Read the Book</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Tennessee Today</div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">188 Children Died in Tennessee This Year, and the Incoming Governor Wants Answers</h1>
+    <img class="header-img" src="images/2026-11-23-header.jpg" alt="A small empty wooden chair in a dim room, lit by a shaft of golden light">
+    <p class="deck">Plus dark money ads, data center fights, a banned voting method, and St. Jude sharing its cancer models with the world.</p>
+    <p class="byline">Sandy B. Patterson &middot; November 23, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">The Big Story</p>
+
+      <p class="drop-cap">Governor-elect Marsha Blackburn has named a four-person advisory committee to review the Tennessee Department of Children's Services, the state's troubled child welfare agency. The panel, announced November 10, is chaired by Jim Henry, who ran the department from 2013 to 2015. Its job is to assess the agency's operations, structure, and challenges and to recommend its future direction and leadership. The announcement set no timeline, and it did not say whether the committee's findings will be made public.</p>
+
+      <p>The numbers behind the review are stark. State quarterly reports count 188 child deaths in Tennessee so far in 2026, after 211 in 2025. More than half of the children who died had prior involvement with the department. In 2025, 113 of the 211 deaths, about 54 percent, involved children with previous DCS history. The department's own summaries for the first three quarters of 2026 list 177 non-custody deaths, 95 of them children the agency had contact with within the previous three years.</p>
+
+      <p>The agency has been under audit pressure for years. A 2022 audit found that DCS failed to meet the needs of abused and neglected children, delayed investigations including reports of sexual abuse inside its own facilities, and lacked oversight in juvenile detention facilities. A 2025 audit found poor conditions in the transitional homes the department set up so children would not have to sleep in state offices. A performance audit released by the state Comptroller in December 2025 found that DCS had not fully reported, and in some cases had not yet reported, information on 2023 and 2024 deaths and near deaths of children involved with the agency.</p>
+
+      <p>Commissioner Margie Quin has led the $1.6 billion agency since 2022, tapped by Governor Bill Lee to bring reforms after reports of foster children forced to sleep on office floors, in some cases for months. Blackburn has not said whether Quin will stay. The committee's findings, her transition team says, will inform the incoming administration's decisions about the department. What those findings will say, and whether the public will ever see them, is still an open question.</p>
+
+      <p class="section-label">The Sticks</p>
+
+      <p class="drop-cap">Tennessee's campaign finance regulator wants to know who paid for $1.6 million in ads attacking state senators. The Registry of Election Finance has set a January show-cause hearing for SHIFT, a dark-money group the Attorney General's office found spent the money on ads against senators who backed SB 2040, the law banning companies like CVS from owning both pharmacies and a pharmacy benefit manager. The hearing is meant to find the source behind the ads.</p>
+
+      <p>Gas turbines powering xAI's Colossus 2 data center raised local nitrogen dioxide levels by about half, according to satellite data in a new preprint. The study estimates four premature deaths a year from the added pollution, with roughly 77,000 of the 116,000 people in the affected hotspot living in Tennessee. The work is a preprint, not yet peer-reviewed, so treat the death estimate as preliminary.</p>
+
+      <p>Rutherford County has paused new data centers for a year, but the pause has a hole in it. The County Commission approved a 12-month moratorium on new data center applications on unincorporated land. Incorporated cities, including Murfreesboro, La Vergne, and Smyrna, are not covered and are charting their own course.</p>
+
+      <p>TVA is reconsidering where to put a 900 megawatt natural gas plant in Cheatham County. After public opposition during the federal environmental review process, the utility is no longer prioritizing its proposed site off Lockertsville Road and is evaluating alternatives, including a nearby industrial park.</p>
+
+      <p>A draft state water permit for the $6.6 billion Project Crucible smelter in Clarksville would allow filling 2.08 acres of wetlands and raising the site's Cumberland River withdrawal to 8.8 million gallons a day. The TVA board has already approved 230 megawatts of power for the Korea Zinc project, which is expected to bring more than 400 local jobs with construction starting in 2027. Written public comments on the permit are due November 26.</p>
+
+      <p>Two Sullivan County commissioners want to declare biblical law over civil government. Resolution No. 2026-11-37, introduced by Commissioners Lakie Derrick and Josh Hayes, declares Jesus Christ sovereign over civil government and urges state lawmakers to subject women who obtain abortions to homicide penalties. The Freedom From Religion Foundation condemned the measure. The 24-member commission votes December 17.</p>
+
+      <p>Viral videos claimed this month's nationwide Emergency Alert System test signaled a secret 90-day power shutdown. It does not. FEMA says the one-minute test on November 17 was routine, and there is no evidence of any planned blackout or coordinated cyberattack.</p>
+
+      <p>State lawmakers questioned Tennessee Department of Safety and Homeland Security officials this month over denying driver's licenses to immigrants holding valid federal work permits. A Nashville judge earlier in November ordered the department to resume issuing licenses to eligible immigrants while the legal challenge continues.</p>
+
+      <p>Ranked choice voting is banned in Tennessee, and this month's governor's race showed what that means in practice. State law has prohibited the method for statewide and local offices since 2022. Marsha Blackburn won the governorship with about 45.5 percent of the vote in a 15-candidate field, making her the first Tennessee governor in at least 100 years elected without a majority.</p>
+
+      <p>They Said It: Jerri Green, launching her state Senate campaign, wrote, "This election season Tennessee flipped six seats across the state. And now it's time to flip one more." The record backs her up. Democrats flipped six state House seats on November 3: three in Rutherford County, plus seats in Knoxville, Clarksville, and Memphis. They also flipped a congressional seat, with Victoria Broderick unseating Rep. Scott DesJarlais by 280 votes. If anything, the quote understates the night.</p>
+
+      <p>Bill Watch: HB 12, filed by Deputy House Speaker Jason Zachary of Knoxville, would cap annual local property tax revenue growth at inflation plus 8 percent over four years and require voter approval for any increase above that. It follows voter approval of Amendment 2, which put a state property tax ban in the Tennessee Constitution. The bill is expected to be taken up when the 115th General Assembly convenes January 12.</p>
+
+      <p class="section-label">The Carrots</p>
+
+      <p class="drop-cap">St. Jude Children's Research Hospital has built an open-source pipeline that produced 3D organoids from 135 pediatric tumors, along with 82 patient-matched cell cultures and 20 renewable cancer cell lines. The models, published in Nature Communications, are shared freely with researchers worldwide through the Childhood Solid Tumor Network, giving labs everywhere better tools to study rare childhood cancers.</p>
+
+      <p>One of the Smokies' classic climbs is back. Great Smoky Mountains National Park has reopened the Bullhead Trail, a popular route up Mount Le Conte, after a two-year rehabilitation that regraded four miles of trail. The work was backed by $1.16 million from Friends of the Smokies' Trails Forever endowment.</p>
+
+      <p>Vanderbilt Health has won a $4 million NIH grant to test a remote physical-activity recovery program after lumbar spine surgery. In the pilot, only 4 percent of participants were using opioids at 12 months, compared with 21 percent under usual care. The new trial will test whether the program holds up at larger scale.</p>
+
+      <p>Northeast Tennessee credit unions picked up the grocery tab for Thanksgiving shoppers this month. The credit unions raised $1,600 to surprise shoppers in Elizabethton, Bristol, Erwin, Johnson City, and Kingsport by paying all or most of their grocery bills at the register.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.memphisflyer.com/blackburn-taps-child-welfare-advisory-group-to-review-tennessee-department-of-childrens-services/">Memphis Flyer — Blackburn Taps Child Welfare Advisory Group to Review Tennessee Department of Children's Services</a></li>
+        <li><a href="https://fathersadvocacynetwork.com/stories/tennessee-dcs-188-child-deaths-2026-prior-contact/">Fathers Advocacy Network — Tennessee DCS Child Deaths Reach 188 in 2026 So Far</a></li>
+        <li><a href="https://www.herenashville.com/2026/11/21/tennessee-registry-hearing-shift-pbm-ads-donor-disclosure/">Tennessee Lookout — Tennessee campaign finance regulator to try to find the source behind $1.6M in ads over PBM bill</a></li>
+        <li><a href="https://papershort.com/a/gas-turbines-powering-an-ai-data-center-raised-local-nitrogen-dioxide-by-about-h">PaperShort — Gas turbines powering an AI data center raised local nitrogen dioxide by about half</a></li>
+        <li><a href="https://focalnews.org/nashville-tn/local/rutherford-county-halts-new-data-centers-for-a-year-but-cities-chart-their-own-course">Nashville Focal — Rutherford County Halts New Data Centers for a Year, but Cities Chart Their Own Course</a></li>
+        <li><a href="https://www.environmentenergyleader.com/articles/1853-tva-reconsiders-cheatham-gas-plant-site-amid-pushback">Environment+Energy Leader — TVA Reconsiders Cheatham Gas Plant Site Amid Pushback</a></li>
+        <li><a href="https://clarksvillejournal.com/crucible-smelter-wetland-river-permit/">Clarksville Journal — Clarksville smelter permit: wetland fill, comments to Nov. 26</a></li>
+        <li><a href="https://ffrf.org/news/releases/ffrf-condemns-tenn-county-supervisors-push-to-impose-biblical-law/">Freedom From Religion Foundation — FFRF condemns Tenn. county supervisors' push to impose biblical law</a></li>
+        <li><a href="https://www.tennessean.com/story/news/local/2026/11/17/blackout-time-emergency-alert-system-test-tennessee/92824274007/">The Tennessean — FEMA Emergency Alert System test prompts blackout fears. What to know in Tennessee</a></li>
+        <li><a href="http://www.tba.org/?pg=LawBlog&blAction=showEntry&blogEntry=154943">Tennessee Bar Association Law Blog — State Lawmakers Question State Officials on Immigration Enforcement</a></li>
+        <li><a href="https://supercitizen.org/reform/ranked-choice-voting">SuperCitizen — Ranked-choice voting: where it stands in every state</a></li>
+        <li><a href="https://www.commercialappeal.com/story/news/politics/2026/11/23/jerri-green-tennessee-senate-campaign/92863268007/">Commercial Appeal — Green eyes Taylor's state Senate seat</a></li>
+        <li><a href="https://nashvillebanner.com/2026/11/05/high-voter-turnout-tennessee-election/">Nashville Banner — High voter turnout drives competitive Tennessee elections</a></li>
+        <li><a href="https://focalnews.org/nashville-tn/politics/tennessee-bill-would-cap-local-property-tax-revenue-growth-at-inflation-plus-8-require-voter-approval-for-higher-increases">Nashville Focal — Tennessee bill would cap local property tax revenue growth at inflation plus 8%, require voter approval for higher increases</a></li>
+        <li><a href="https://www.stjude.org/media-resources/news-releases/2026-medicine-science-news/critical-pediatric-cancer-model-development-expands-through-childhood-solid-tumor-network.html">St. Jude Children's Research Hospital — Critical pediatric cancer model development expands through Childhood Solid Tumor Network</a></li>
+        <li><a href="https://www.nps.gov/grsm/learn/news/great-smoky-mountains-national-park-reopens-rehabilitated-bullhead-trail.htm">U.S. National Park Service — Great Smoky Mountains National Park Reopens Rehabilitated Bullhead Trail</a></li>
+        <li><a href="https://www.beckersspine.com/spine/vanderbilt-health-secures-4m-grant-for-spine-surgery-trial/">Becker's Spine Review — Vanderbilt Health secures $4M grant for spine surgery trial</a></li>
+        <li><a href="https://thecudaily.com/one-way-to-beat-grocery-costs-northeast-community-cu-picks-up-the-tab/">Credit Union Daily — One Way to Beat High Grocery Costs: Northeastern Tennessee CUs Pick Up the Tab</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Tennessee Today</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+</body>
+</html>
