@@ -162,6 +162,18 @@ reads for Media Session branding:
 There is now exactly one copy of this file. A fix made here is live for
 every book the moment it's pushed — no per-repo sync needed, ever.
 
+Standing rule (2026-11-24, Sandy's direction): every future blog post
+gets reader.js too — the Wetwear Daily Brief, every Wetwear Deep Dive,
+and Tennessee Today. Each article carries a `<meta name="book-title"
+content="...">` tag in `<head>` (brief: "Wetwear Daily News Brief";
+deep dive: "Wetwear Deep Dive"; Tennessee Today: "Tennessee Today") and
+`<script src="../../reader.js"></script>` just before `</body>`, both
+supplied by the article template. Whoever runs the skill checks the
+built file contains both before publishing and verifies the live page
+returns reader.js after pushing. The one exception is
+`ai-news/wetwear/deep-dive-beef-import-labeling-gap.html`, which has its
+own recorded-podcast player and deliberately does not use reader.js.
+
 ---
 
 
