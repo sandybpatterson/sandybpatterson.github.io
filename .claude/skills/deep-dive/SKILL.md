@@ -106,8 +106,7 @@ A few things worth getting right:
   month name, no leading zero on the day).
 - Sources go in citation order, not alphabetical, as `<li><a href="URL">Publication
   — Headline or description</a></li>`.
-- Note this template keeps the `<script src="../../reader.js"></script>` tag at the
-  bottom (the Daily Brief template doesn't load `reader.js` at all) — leave it in.
+- Every post carries the shared audio reader: a `<meta name="book-title" content="Wetwear Deep Dive">` tag in `<head>` and `<script src="../../reader.js"></script>` just before `</body>`. Both come with the template; do not drop them when filling it in. Before publishing, check the built file contains both; after pushing, verify the live page returns reader.js. (Sandy caught their absence from the 2026-11-23 brief and Tennessee Today article on 2026-11-23 — those templates had never included them. Standing rule from 2026-11-24: every future blog post gets reader.js. The one exception is deep-dive-beef-import-labeling-gap.html, which has its own recorded-podcast player and does not use reader.js.)
 
 Save the finished file as `ai-news/wetwear/deep-dive-{topic-slug}.html`.
 
