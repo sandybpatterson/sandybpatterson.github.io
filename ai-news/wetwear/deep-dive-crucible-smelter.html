@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Deep Dive">
+<title>The Biggest Bet in Tennessee History Is a Smelter — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html">Podcast</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <article class="page">
+
+    <h1 class="headline">The Biggest Bet in Tennessee History Is a Smelter</h1>
+    <p class="deck">Korea Zinc wants to build the largest smelter America has seen in decades on the Cumberland River, with billions from Washington and a permit deadline this week.</p>
+    <p class="byline">Sandy B. Patterson &middot; November 24, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">The Deal</p>
+
+      <p class="drop-cap">On December 15, 2025, Korea Zinc announced it would build its first American operations in Clarksville, Tennessee, alongside Governor Bill Lee and state economic development commissioner Stuart McWhorter. The company put the capital spending at $6.6 billion and the full project at about $7.4 billion once financing and working capital are counted. Either way, it is the largest single private corporate investment in Tennessee history, topping the $5.6 billion Ford and SK On put into BlueOval City in 2021.</p>
+
+      <p>The project, called Project Crucible, is an integrated smelting and refining facility that would produce 12 metals, zinc, lead, copper, silver, gold, indium, antimony, bismuth, tellurium, palladium, gallium, and germanium, plus industrial and semiconductor-grade sulfuric acid. Eleven of the 12 metals are on the federal critical minerals list. At full capacity it would take in about a million tons of raw material a year and turn out about 540,000 tons of finished product, including 300,000 tons of zinc and 200,000 tons of lead. It is modeled on Korea Zinc's Onsan smelter in Ulsan, South Korea, at roughly half the scale, with practices borrowed from its Sun Metals refinery in Townsville, Australia.</p>
+
+      <p>The site is not a green field. It is 1800 Zinc Plant Road in Clarksville, next to the existing zinc smelter that opened in 1978 and is the only primary zinc producer left in the United States. Korea Zinc bought that plant, plus mines in East and Middle Tennessee, from the commodities trader Trafigura in April 2026. The old plant keeps running while the new one is built, then shuts down about six months before the new plant starts up and is dismantled and paved over.</p>
+
+      <p>The jobs promise is 740 new positions over about five years: 420 at the Clarksville refinery and 320 at the Gordonsville mines in Smith County, which would reopen after closing in 2023. The roughly 300 people already working at the Clarksville smelter stay on, separate from the 740. The county projects about 1,464 total jobs once suppliers and spin-off work are counted. Pay projections shared during the county's incentive talks put 271 office and production jobs at $83,000, 112 installation and maintenance jobs at $100,000, and 37 management jobs at $196,000.</p>
+
+      <p class="section-label">Why Washington Is Paying</p>
+
+      <p>The money is the story. The capital stack, as reported in federal filings and trade coverage, is about $210 million in CHIPS grant money, $4.698 billion in debt split evenly between the U.S. government and JPMorgan at $2.349 billion each, and about $2.5 billion in equity from Korea Zinc and other partners through the Crucible joint venture. The Department of Commerce added the $210 million grant through the CHIPS program, aimed at the semiconductor-grade sulfuric acid the plant would make. Korea Zinc is also issuing about $1.94 billion in new shares to the joint venture, giving American investors about 10 percent of the parent company.</p>
+
+      <p>Washington is paying because of China. China produces about 98 percent of the world's primary gallium and about 91 percent of its primary germanium, and in December 2024 it banned exports of both metals to the United States. The ban was later suspended, but only until November 27, 2026. China also curbed antimony exports in 2024. Gallium, germanium, and antimony go into semiconductors, fiber optics, aerospace radar, and missile guidance, which is why the state announcement describes the project as supporting advanced military technology and reducing American dependence on China for critical minerals.</p>
+
+      <p>The government stake is now reported in more than one place, though still not in an official U.S. government release. Mining Journal, citing Reuters, reports the War Department will hold a 40 percent stake in Crucible JV while Korea Zinc holds less than 10 percent. Construction Review Online reports the same split, saying the company said so. The War Department also received warrants for up to 14.5 percent of Crucible Metals at a nominal price, plus up to another 20 percent tied to performance milestones. Read the 40 percent figure as widely reported by the company and Reuters, not as confirmed by Washington itself.</p>
+
+      <p>The economics also run on tax credits. The project qualifies for the Section 45X Advanced Manufacturing Production Credit, worth 10 percent of production costs for critical minerals. Those credits phase down starting in 2031 and end in 2034, which makes 2029 and 2030 the peak benefit years. The sulfuric acid matters on its own: semiconductor-grade acid is used in about 70 percent of chip fabrication steps, and domestic supply is short. Korea Zinc's recycling arm, PedalPoint, is also merging with SolarCycle to form a company called Jupiter, with eight American recycling sites, to feed recovered metals from old electronics into the Clarksville smelter.</p>
+
+      <p class="section-label">The Permit That Is Live Right Now</p>
+
+      <p>The permit fight happening this week is not about the whole plant. It is a state water permit, file NRS26.194, and it covers only water quality. It would let Crucible Metals fill four wetlands totaling 2.08 acres to build a heavy haul road, run 21.5 feet of an unnamed stream through a metal pipe under that road, build a barge dock on the Cumberland River, and raise the plant's river withdrawal from about 1,200 gallons a minute to 6,160 gallons a minute, or 8.8 million gallons a day, roughly five times what the old plant draws.</p>
+
+      <p>Three of the four wetlands are rated low-quality scrub-shrub. The fourth, 0.28 acres of forested wetland, is rated moderate. The developer must buy about four acres of wetland mitigation credits at a two-to-one ratio. The state's preliminary finding is that the work would cause only, in its term, de minimis degradation. The new withdrawal would be 0.4 percent of the rivers' combined low flow, and state rules count a single withdrawal under 5 percent of low flow as minor. The permit would require the developer to record river withdrawal daily and report it to the state.</p>
+
+      <p>The barge dock exists because the equipment is too heavy for the roads. Some process modules weigh about 500 tons. River Road has a 10-ton weight limit, the legal gross truck weight in Tennessee is 40 tons, and a standard rail car carries 100 to 115 tons. Construction needs 48,000 tons of steel, and one barge carries as much as 35 rail cars or 134 trucks. The developer weighed four options. The chosen route touches more wetland than the original design but avoids two archaeological sites in the river floodplain. Surveys found three sites on the plant property eligible for historic listing, and the state's rationale says harm to all three cannot be avoided under any option.</p>
+
+      <p>The state held a public hearing on the permit on Monday, November 16, at the L and N Train Station in Clarksville. Written comments are due November 26, Thanksgiving Day. The TDEC notice reportedly calls that date a Saturday. Comments go to ARAP.permits@tn.gov, naming Crucible Metals and permit NRS26.194. Only the applicant or someone who commented in writing or spoke at the hearing can appeal the final permit, and the department says it will answer every comment in writing when it decides.</p>
+
+      <p class="section-label">What the Old Plant Already Puts Out</p>
+
+      <p>The existing smelter's pollution record is public, and it is the baseline the new plant will be judged against. In 2024 the Nyrstar Clarksville plant reported 14.3 million pounds of toxic chemical releases under the federal Toxics Release Inventory. Almost all of it, 98.4 percent, went to land on site. About 200,000 pounds went to air and about 30,000 pounds to water. By chemical, the plant reported 9.7 million pounds of zinc compounds, 2.3 million pounds of lead and lead compounds, and about 600,000 pounds of cadmium compounds, a known carcinogen. The plant ranked first among 630 reporting facilities in Tennessee and 25th among 21,482 nationwide.</p>
+
+      <p>Those numbers need context. Toxics Release Inventory figures are self-reported estimates under a right-to-know law, not measurements taken by the EPA, and a release is not a measure of what nearby residents actually breathe or drink. The overwhelming majority of the total goes to land on site, which means the residue ponds that hold 50 years of smelting leftovers. For scale, the nearby TVA Cumberland Fossil Plant released about 2 million pounds to air and 230,000 pounds to water in 2024.</p>
+
+      <p>What the new plant would emit is not yet public in any comparable form. Crucible Metals says that while the new smelter will be much larger, with higher permit levels, it will be much more environmentally clean and efficient, pointing to high-efficiency dust collection, enclosed emission capture, advanced off-gas treatment, and monitoring. Its Direct Redox Smelting process is meant to streamline smelting and cut down on material transfers and dust. No separate state air permit application for the new plant had turned up in public reporting as of November 23, and the air side appears to be tracked through the federal fast-track process.</p>
+
+      <p>The federal review has already cleared its biggest hurdle. The Department of War, as lead agency, issued a Finding of No Significant Impact on September 11, 2026, after an environmental assessment. That finding means the federal review found no impact significant enough to require a full environmental impact statement. It does not mean zero impact, and it does not replace state permits. The water permit is still pending, and the federal permitting dashboard still shows several federal reviews unfinished, with a timeline running into 2028.</p>
+
+      <p class="section-label">The Cleanup Hook</p>
+
+      <p>The most interesting part of the project may be what it does with the mess already there. The site holds five historic residue ponds with about 620,000 metric tons of smelting leftovers. The new plant is designed to reprocess 60,000 to 80,000 dry metric tons of that material a year over 10 to 15 years, recovering copper, silver, gallium, germanium, and indium. It will have no residue ponds of its own. Korea Zinc is acquiring the ponds as an asset, not a liability.</p>
+
+      <p>That is both a cleanup and a revenue play, and the article should not present it as pure altruism. The ponds are the main reason the existing plant's land releases are so large. Reprocessing them turns a waste pile into feedstock and, eventually, into an empty site. It is the one part of the project where the company's interests and the neighbors' interests point in the same direction, and it is worth watching whether the 10 to 15 year schedule holds once the plant is running.</p>
+
+      <p class="section-label">What Clarksville Gets, and What It Gives Up</p>
+
+      <p>The case for the plant is jobs, pay, and taxes. About 300 soldiers leave Fort Campbell every month, a steady pipeline the company cited as a reason for picking Clarksville, and the Tennessee College of Applied Technology in Clarksville runs manufacturing pathways. The state extended a $45 million FastTrack grant tied to investment and hiring commitments. The county's Industrial Development Board approved a 20-year Tier 5 payment-in-lieu-of-taxes agreement that phases property tax in over time. The county projects a $288.6 million net benefit over 20 years, $210 million to county government and $78 million to the schools.</p>
+
+      <p>The case against it is growth, traffic, and water. Clarksville's population has doubled since 1995 and is close to passing Chattanooga as the state's fourth-largest city. Residents worry about housing prices, truck traffic, noise, and a large industrial building near the river. At a January county commission meeting, resident Lenore Erickson warned the plant would overwhelm Clarksville and urged lobbying for federal money to rebuild the 41A Bypass, Ashton City Road, Martin Luther King Jr. Boulevard, and Exit 11 before the trucks arrive. The state's 2026 budget includes $40 million for bridge work in Montgomery County near the plant.</p>
+
+      <p>The county's own zoning had to be fixed before the project could expand. Smelting had been accidentally dropped from the county zoning resolution in a past update, described as a scrivener's error from copying the city's industrial-use page. The county restored it as a permitted-on-review use in heavy industrial zones, with a 100-acre minimum and 500-foot residential setbacks, and the commission approved the change 19 to 2 on October 19, 2026. At a November 12 hearing, Crucible Metals sought use-on-review approval plus a height variance from 100 feet to 240 feet. No published account of that decision had turned up as of November 23.</p>
+
+      <p>The company held a public information session on November 10 at the William O. Beach Civic Hall. More than 150 people attended. Korea Zinc president Kiwon Park spoke, and three employees from the Sun Metals refinery in Australia came to answer questions. Economic development chief Buck Dellinger praised Korea Zinc's environmental record. WKRN News 2 reported the facility is sparking concerns about environmental safety. City councilman Eric Claunch opposed the zoning change, objecting to local minerals going to the Department of Defense. In online reaction, the most repeated worry was that the jobs would go to Korean workers rather than locals. No source confirms any such split, and it should be treated as speculation, not fact. No major environmental group had issued a public position on the project that turned up in the research.</p>
+
+      <p class="section-label">The Cautionary Parallel</p>
+
+      <p>Clarksville has a recent example of what a record-breaking announcement is worth. Ford pledged 5,800 jobs for about $1 billion in state incentives at BlueOval City. Five years later, delays, a strategy shift, and the end of the SK On battery partnership pushed everything back. Ford now plans to build gas trucks at the renamed Tennessee Truck Plant from 2029, and the battery side laid off 150 workers in March 2026. Ford still has 10 years to reach 90 percent of its jobs promise.</p>
+
+      <p>Korea Zinc differs in two ways that matter. It bought a running plant with trained workers, not an empty field, and its products, zinc and copper, sell into established markets rather than depending on one carmaker's strategy. But weak zinc prices closed the Gordonsville mines in 2015 and again in 2023, and the same risk applies to the new plant's economics. A record announcement is still a promise, not a finished plant, and the mines have no reopening date.</p>
+
+      <p class="section-label">What Happens Next</p>
+
+      <p>The first deadline is the closest one. Written comments on the water permit are due November 26, and only people who comment or spoke at the hearing can appeal what the state decides. After that, construction is scheduled to start in 2027, TVA approved a 230 megawatt power request on November 10 with supply scheduled to begin in 2029, and phased commercial operations are targeted for 2029 with fuller operations in 2030. Federal permits run into 2028, and the exact government ownership split is still not confirmed by Washington itself.</p>
+
+      <p>The smelter will test a simple question. The United States has decided it cannot depend on China for the metals its chips and weapons need, and it is willing to pay billions to fix that. Clarksville is where that decision lands: on a river, in a fast-growing city, next to a plant that has been there since 1978. The jobs and the tax money are real. So are the wetlands, the water, and the trucks. Which side of that ledger matters more will be decided one permit at a time.</p>
+
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.tn.gov/ecd/news/2025/12/15/korea-zinc-selects-tennessee-for-first-u-s--operations--announces--6-6-billion-investment-.html">Tennessee Department of Economic and Community Development — Korea Zinc Selects Tennessee for First U.S. Operations, Announces $6.6 Billion Investment</a></li>
+        <li><a href="https://www.permits.performance.gov/fast-41-covered-projects-postings-agencies-project-crucible-1">Federal Permitting Dashboard — Project Crucible (FAST-41)</a></li>
+        <li><a href="https://clarksvillejournal.com/crucible-smelter-wetland-river-permit/">Clarksville Journal — Clarksville smelter permit: wetland fill, comments to Nov. 26</a></li>
+        <li><a href="https://www.byteseu.com/2524516/">Clarksville Now — Crucible Metals answers environmental questions on new Clarksville smelter</a></li>
+        <li><a href="https://www.byteseu.com/2515032/">Clarksville Now — Crucible Metals holds public information session in Clarksville</a></li>
+        <li><a href="https://clarksvillepartnership.com/news/2025/12/15/all/montgomery-county-announces-state-s-largest-direct-foreign-investment/">Clarksville-Montgomery County Economic Development Council — Montgomery County Announces State's Largest Direct Foreign Investment</a></li>
+        <li><a href="https://realtennesseelife.com/a-6-6-billion-plant-is-coming-to-tennessee-in-the-states-largest-investment/">Real Tennessee Life — A $6.6 Billion Plant Is Coming to Tennessee in the State's Largest Investment</a></li>
+        <li><a href="https://www.denix.osd.mil/ProjectCrucible/">Department of War — Project Crucible Environmental Review</a></li>
+        <li><a href="https://www.nist.gov/news-events/news/2025/12/department-commerce-awards-chips-incentives-subsidiary-korea-zinc-crucible">National Institute of Standards and Technology — Department of Commerce Awards CHIPS Incentives to Subsidiary of Korea Zinc</a></li>
+        <li><a href="https://www.mining-journal.com/energy-minerals/news-articles/4539687/korea-zinc-merges-recycling-business">Mining Journal — Korea Zinc merges recycling business</a></li>
+        <li><a href="https://plainenviro.com/facilities/tennessee/nyrstar-clarksville-inc-n1800z">PlainEnviro (EPA Toxics Release Inventory and ECHO data) — Nyrstar Clarksville Inc.</a></li>
+        <li><a href="https://www.theinvestor.co.kr/article/10637157">The Investor — Korea Zinc to build $7.4B smelter in Tennessee</a></li>
+        <li><a href="https://www.koreajoongangdaily.com/business/korea-zinc-to-build-74b-smelter-in-tennessee-in-rare-partnership-with-washington/11936990">Korea JoongAng Daily — Korea Zinc to build $7.4B smelter in Tennessee in rare partnership with Washington</a></li>
+        <li><a href="https://www.Techtimes.com/articles/323691/20260810/korea-zinc-tennessee-smelter-will-produce-chip-grade-sulfuric-acid-us-fabs.htm">Tech Times — Korea Zinc Tennessee Smelter Will Produce Chip-Grade Sulfuric Acid for US Fabs</a></li>
+        <li><a href="https://en.sedaily.com/business/2026/11/15/korea-zinc-wins-power-approval-for-us-smelter-project">Seoul Economic Daily — Korea Zinc wins power approval for US smelter project</a></li>
+        <li><a href="http://tennesseerecord.org/montgomerycounty/development/czo-2-2026-smelting-and-metal-refining">Tennessee Record — CZO-2-2026: Smelting and Metal Refining</a></li>
+        <li><a href="https://www.nyrstar.com/resource-center/press-releases/nyrstar-completes-sale-of-its-us-assets-to-korea-zinc">Nyrstar — Nyrstar Completes Sale of Its US Assets to Korea Zinc</a></li>
+        <li><a href="https://dailyclarksville.com/local-news/editions/11-03-2026">Daily Clarksville — Crucible Metals public information session notice</a></li>
+        <li><a href="https://koreantechtexas.com/korea-zinc-crucible-fonsi-epcm/">Korean Tech Texas — Korea Zinc's Project Crucible clears federal review before EPCM pick (capital stack table, 40 percent JV stake, warrants)</a></li>
+        <li><a href="https://constructionreviewonline.com/korea-zinc-and-u-s-government-make-plans-to-build-7-4-billion-smelter-project-in-u-s/">Construction Review Online — Project Crucible: Korea Zinc Advances $7.4B U.S. Smelter (40 percent stake, company said)</a></li>
+        <li><a href="https://www.thelec.net/news/articleView.html?idxno=15630">The Elec — Korea Zinc Secures Power Approval for US Critical Minerals Smelter (TVA 230 MW, board approval Nov. 10, supply from 2029)</a></li>
+        <!-- one <li> per source actually used, in the order first cited -->
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </article>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
