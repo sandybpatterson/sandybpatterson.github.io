@@ -116,7 +116,7 @@ A few things worth getting right:
 
 Save the finished file as `ai-news/wetwear/YYYY-MM-DD.html`.
 
-The template carries the shared audio reader: a `<meta name="book-title" content="Wetwear Daily News Brief">` tag in `<head>` and `<script src="../../reader.js"></script>` just before `</body>`. Both come with the template; do not drop them when filling it in. (Sandy caught their absence from the 2026-11-23 brief on 2026-11-23 — the template had never included them.)
+The template carries the shared audio reader: a `<meta name="book-title" content="Wetwear Daily News Brief">` tag in `<head>` and `<script src="../../reader.js"></script>` just before `</body>`. Both come with the template; do not drop them when filling it in. Before publishing, check the built file contains both; after pushing, verify the live page returns reader.js. Standing rule from 2026-11-24: every future blog post gets reader.js. (Sandy caught their absence from the 2026-11-23 brief on 2026-11-23 — the template had never included them.)
 
 ## 4. Generate the `.txt` companion
 
