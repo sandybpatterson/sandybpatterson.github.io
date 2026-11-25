@@ -317,6 +317,11 @@ Rules for the Issues list:
 - The AI-disclosure/accuracy note lives once, at the bottom of `index.html`
   only — not repeated on every issue page.
 
+**Standing rules from Sandy (2026-11-25):**
+- **Dating:** A post gets the date it was WRITTEN on, even if published the next day. Never backfill a missed date. Don't write for tomorrow until after 10 pm Central; if published after 10 pm Central it can take tomorrow's date.
+- **AI-suspect sources:** A story from a source suspected of being AI-generated needs TWO more credible, well-known sources confirming parts of it before it counts as accurate.
+- **Local exception:** For local Murfreesboro/Rutherford County stories, ONE credible local outlet doing its own reporting (named reporter, on-the-record quotes, on-camera) counts as confirmation. The suspect source's disputed details still do not stand alone.
+
 **Wetwear Daily News Brief (`/ai-news/wetwear/`)** — a long-form daily news
 digest (biology, misinformation, health/science policy, public health
 data), written in full narrative paragraphs, one per notable story, plus a
