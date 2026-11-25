@@ -1,0 +1,290 @@
+<!--
+  Structural template for a Tennessee Today page.
+  Copy this file's structure and CSS verbatim — don't redesign it. The whole
+  point of a template is that every article looks identical; drifting the
+  markup or styling from one day to the next is the thing to avoid.
+
+  Replace every {{PLACEHOLDER}} with real content. Everything else —
+  tags, classes, the <style> block — stays exactly as written here.
+
+  Section labels ({{SECTION_LABEL}}) are, in order: The Big Story,
+  The Sticks, Good News, Sources. The Big Story is the day's most
+  significant Tennessee story (good or bad), up to about six paragraphs.
+  The Sticks are the hard-news items at one to two paragraphs each
+  (politics, bills, infrastructure, pollution and green energy,
+  misinformation, human rights, ranked choice voting, corruption,
+  politicians lying), including the standing feature Bill Watch
+  when the day's news supports it. Good News closes the
+  piece with good news stories; Tennessee history appears here only
+  occasionally, not as a daily fixture. Skip a section entirely (delete
+  its label + paragraphs) if nothing notable turned up that day — don't
+  pad it. The first <p> under each section label should carry
+  class="drop-cap" (only the very first one in the whole article gets
+  the actual drop-cap letter styling, per the CSS rule
+  .article-body p.drop-cap::first-letter, but it's harmless to mark
+  every section's opening paragraph the same way for consistency; only
+  the first-of-type will actually render the drop cap).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Tennessee Today">
+<title>TVA's $1.7 Billion Deal Has No Name on It — Tennessee Today</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .header-img { width: 100%; border: 1px solid #1e1e1e; display: block; margin-bottom: 18px; }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/original-bug-book/">Read the Book</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Tennessee Today</div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">TVA's $1.7 Billion Deal Has No Name on It</h1>
+    <img class="header-img" src="images/2026-11-24-header.jpg" alt="A data center complex glowing at dusk beneath electricity transmission towers">
+    <p class="deck">Plus a Democrat flips a Tennessee House seat, a firing squad bill, and a record gift for Alzheimer's research.</p>
+    <p class="byline">Sandy B. Patterson &middot; November 24, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">The Big Story</p>
+
+      <p class="drop-cap">The Tennessee Valley Authority has signed a $1.7 billion deal with a customer it will not name. The agreement, signed November 10, was disclosed last week in TVA's annual filing with the Securities and Exchange Commission. It is the first deal under TVA's new tariff for large power users, which took effect October 1.</p>
+
+      <p>The deal is a Capacity Commitment Charge agreement, the mechanism TVA created for data center loads above 5 megawatts. TVA is entitled to $31 million on execution, with the rest of the $1.7 billion paid in 59 installments. The tariff was approved by TVA's board in August and phases in through 2029.</p>
+
+      <p>The filing gives a rate, about $1.5 million per megawatt of requested capacity above 5 megawatts, and the math points to roughly 1,100 megawatts. TVA spokesman Scott Brooks confirmed the arithmetic but would not confirm the capacity, saying TVA does not disclose confidential business information about individual customers or prospective projects.</p>
+
+      <p>What the filing does not say is just as important. It names no company, no site, no megawatt total, no jobs, and no construction date. TVA expects to log the first $31 million payment in November. Until the customer is named, the deal is a payment stream, not a plant.</p>
+
+      <p>The scale is still striking. TVA's total operating revenue for the fiscal year was $14.2 billion, so $1.7 billion is about 12 percent of a year's revenue. The same filing shows TVA planning $13 billion in capital investment over the next three years, including 1.5 gigawatts of new natural gas generation approved in August and targeted for 2032. Regulators have also granted the first small modular reactor construction permit at Clinch River in Oak Ridge, though TVA has not decided whether to build.</p>
+
+      <p class="section-label">The Sticks</p>
+
+      <p class="drop-cap">The Associated Press called Tennessee's 4th District for Democrat Victoria Broderick on Tuesday, three weeks after Election Day. She leads Republican Rep. Scott DesJarlais by fewer than 400 votes out of about 196,000 cast. DesJarlais, a 62-year-old physician first elected in 2010, conceded on November 16.</p>
+
+      <p>The upset reverses a blowout. DesJarlais beat Broderick 70 percent to 27 percent in 2024. Broderick, a 34-year-old working-class mother from Lincoln County, has campaigned since May 2024 on reproductive freedom and the rising costs of groceries, child care, and housing. She was outspent more than five to one, and beat Nashville Councilman Mike Cortese in the August Democratic primary despite being heavily outspent.</p>
+
+      <p>The map did much of the work. The Republican-led mid-decade redraw, pushed at President Trump's urging after the Supreme Court rolled back Voting Rights Act protections, split up the majority-minority 9th District and added part of southeast Nashville and Rutherford County to the 4th. Trump carried the district by about 24 points in 2024, and forecasters rated it solid Republican. Nationally, the win gives Democrats 259 House seats, their largest majority since 1992, with one race still uncalled and two Louisiana runoffs in December. Broderick takes office January 3, 2027, as the only Democrat in Tennessee's congressional delegation.</p>
+
+      <p>Governor-elect Marsha Blackburn announced November 20 that Jeff Long will stay on as commissioner of Safety and Homeland Security when she takes office in January. Long has led the department, which oversees driver licensing, law enforcement, traffic safety, and homeland security, since Governor Bill Lee appointed him in January 2019. Greg Gonzales also stays on as Financial Institutions Commissioner.</p>
+
+      <p>The State Funding Board voted 4-0 on November 23 to approve a revenue forecast of roughly 3 percent growth, the guardrails the new governor and lawmakers will use to write next year's budget. Total tax revenue is projected at about $24.3 billion, with about $21 billion in the general fund. Lottery money for college scholarships is expected to slip from $427.3 million last year to about $408 million to $413 million this year.</p>
+
+      <p>Lack of affordable child care costs Tennessee an estimated $2.6 billion a year, according to a 2022 study by Tennesseans for Quality Early Education that was cited again in a report released in September. Families lose about $1.65 billion in earnings, employers about $497 million, and the state about $413 million in tax revenue. More recent figures in the group's October policy document put center-based infant care at a median $13,926 a year, with 13,835 children on a waitlist as of June.</p>
+
+      <p>Bill Watch: Representative Paul Sherrell, a Republican from Sparta, filed HB0017 on November 19. The bill would let a person sentenced to death choose execution by firing squad by signing a written waiver giving up lethal injection or electrocution. It follows two botched lethal-injection executions in Tennessee this year, Christa Pike on September 30 and Tony Carruthers earlier in the year. A similar bill in 2023 was set aside over an estimated $50,000 setup cost.</p>
+
+      <p>Tennessee will receive $210,344,524 in the second year of the federal Rural Health Transformation Program, the Department of Health and Human Services announced November 9. With the first year's $206.9 million, the two-year total is about $417.2 million. The money covers 17 initiatives in 89 of Tennessee's 95 counties, and up to $1 billion is possible over the program's five years.</p>
+
+      <p class="section-label">Good News</p>
+
+      <p class="drop-cap">A Berry Hill family has made the largest single donation the Alzheimer's Association has ever received in Tennessee. Abbie Giompoletti, her husband Jason, and their three sons turn their front yard into elaborate Halloween skeleton scenes each year. This year, honoring Abbie's father, who is living with dementia, she put up a sign with a QR code asking visitors to donate. Neighbors, relatives, and friends gave more than $50,000, and with the parents' match the family presented a check for $118,250 in early November.</p>
+
+      <p>A Knoxville family spends most Thanksgivings in Ohio with the young woman who received their son's heart. Michael Wells died in 2018 at 22 from a brain injury, and his parents, Mike and Tami Wells, donated three of his organs. His heart went to Rose Hajjar, then 11 and living in Michigan, who is now 19 and in college. Monday would have been Michael's birthday. The family urges people to sign up as organ donors.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.utilitydive.com/news/tva-announces-17b-data-center-deal-under-new-large-load-tariff/875630/">Utility Dive — TVA announces $1.7B data center deal under new large-load tariff</a></li>
+        <li><a href="https://www.wvlt.tv/2026/11/24/tennessee-valley-authority-filing-references-17-billion-data-center-deal/">WVLT — Tennessee Valley Authority filing references $1.7 billion data center deal</a></li>
+        <li><a href="https://www.ottumwacourier.com/news/national_news/democrat-victoria-broderick-wins-tennessee-house-seat-ousting-rep-scott-desjarlais/article_c9727d8a-2734-5028-ab0f-e2c6ab541c59.html">Associated Press — Democrat Victoria Broderick wins Tennessee House seat, ousting Rep. Scott DesJarlais</a></li>
+        <li><a href="https://www.tennessean.com/story/news/politics/elections/2026/11/04/who-victoria-broderick-upset-gop-scott-desjarlais-tennessee/92609850007/">The Tennessean — Who is Victoria Broderick, the Democrat who upset GOP Rep. Scott DesJarlais</a></li>
+        <li><a href="https://www.tennessean.com/story/news/politics/elections/2026/11/03/election-results-tennessee-congressional-races/92520154007/">The Tennessean — Election results: Tennessee congressional races</a></li>
+        <li><a href="https://www.williamsonscene.com/news/blackburn-retains-safety-and-homeland-security-commissioner-jeff-long/article_5f2786fa-57e3-595a-8f1b-a2a638a070c8.html">Williamson Scene — Blackburn retains safety and homeland security commissioner Jeff Long</a></li>
+        <li><a href="https://dunlap.today/%ef%b8%8f-courthouse-corner-the-state-sets-a-steady-money-forecast-for-next-years-budget-the-governor-elect-keeps-tennessees-tax-collector-winter-trout-head-to-a-grundy-county-lake-de/">Dunlap.Today — Courthouse Corner: The state sets a steady money forecast for next year's budget</a></li>
+        <li><a href="https://www.tqee.org/2022-child-care-study/">Tennesseans for Quality Early Education — Workforce of today and tomorrow: The economics of Tennessee's child care crisis</a></li>
+        <li><a href="https://legisgo.io/public/bills/115/HB0017">LegisGo — HB0017, execution by firing squad</a></li>
+        <li><a href="https://www.memphisflyer.com/tennessee-republicans-want-electrocution-or-firing-squads-to-replace-lethal-injection/">Memphis Flyer — Tennessee Republicans want electrocution or firing squads to replace lethal injection</a></li>
+        <li><a href="https://www.hhs.gov/press-room/trump-administration-awards-10-billion-rural-health-transformation-program-year-two.html">HHS — Trump administration awards $10 billion Rural Health Transformation Program year two</a></li>
+        <li><a href="https://www.tennessean.com/story/news/health/2026/11/24/how-this-tennessee-family-raised-a-record-breaking-gift-to-alzheimers-association/92940672007/">The Tennessean — How this Tennessee family raised a record-breaking gift to Alzheimer's Association</a></li>
+        <li><a href="https://www.wvlt.tv/2026/11/24/knoxville-family-travels-ohio-meet-recipient-sons-donated-heart/">WVLT — Knoxville family travels to Ohio to meet recipient of son's donated heart</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Tennessee Today</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
