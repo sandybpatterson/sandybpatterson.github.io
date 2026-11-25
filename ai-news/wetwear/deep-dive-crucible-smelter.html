@@ -154,6 +154,51 @@
     text-transform: uppercase;
   }
 
+  .comment-box {
+    border: 1px solid #c9a84c;
+    padding: 1.4rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .comment-box .comment-title {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 0.9rem;
+  }
+  .comment-box p { text-align: left; }
+  .comment-box .email-line { margin: 0.9rem 0; }
+  .copy-btn {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: #c9a84c;
+    color: #0a0a0a;
+    border: 1px solid #c9a84c;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: #d9b95c; }
+  .copy-btn.ghost {
+    background: transparent;
+    color: #c9a84c;
+  }
+  .copy-btn.ghost:hover { background: #1a1a1a; }
+  .comment-text {
+    background: #111;
+    border: 1px solid #1e1e1e;
+    color: #e8e8e8;
+    font-family: Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding: 1rem 1.1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0.9rem 0;
+  }
+
   footer {
     border-top: 1px solid #1a1a1a;
     padding: 28px 24px;
@@ -260,6 +305,59 @@
 
       <p>The smelter will test a simple question. The United States has decided it cannot depend on China for the metals its chips and weapons need, and it is willing to pay billions to fix that. Clarksville is where that decision lands: on a river, in a fast-growing city, next to a plant that has been there since 1978. The jobs and the tax money are real. So are the wetlands, the water, and the trucks. Which side of that ledger matters more will be decided one permit at a time.</p>
 
+
+      <div class="comment-box">
+        <p class="comment-title">Want to weigh in?</p>
+        <p>Written comments on the water permit are due November 26, Thanksgiving Day. Email them to <a href="mailto:ARAP.permits@tn.gov?subject=Comment%20on%20Crucible%20Metals%20-%20Permit%20NRS26.194">ARAP.permits@tn.gov</a>, naming Crucible Metals and permit NRS26.194. Only people who comment in writing or spoke at the hearing can appeal the final permit.</p>
+        <p class="email-line"><button class="copy-btn ghost" type="button" data-copy="ARAP.permits@tn.gov" onclick="copyText(this)">Copy the email address</button></p>
+        <p>Here is a comment you can send as written, or rewrite in your own words. Put your own name, town, and contact details in place of the brackets before you send it.</p>
+        <pre class="comment-text" id="comment-text">To the Tennessee Department of Environment and Conservation,
+
+I am writing to comment on the proposed water permit NRS26.194 for Crucible Metals in Clarksville, and to ask that the department answer the following in writing when it decides:
+
+1. River withdrawal: please confirm how the increase to 8.8 million gallons a day will be measured and reported, and what happens if low-flow conditions change.
+2. Wetlands: please confirm the 2:1 mitigation credits are secured before construction, and where they are located.
+3. Residue ponds: the new plant is described as reprocessing the existing ponds over 10 to 15 years. Please confirm whether that schedule will be a permit condition, and how progress will be reported.
+4. Monitoring: please confirm what water monitoring will be required at the barge dock and the piped stream section, and how the public can see the results.
+
+Thank you for the public hearing on November 16 and for considering these comments.
+
+[Your name]
+[Your town], Tennessee
+[phone/email to add]</pre>
+        <p><button class="copy-btn" type="button" onclick="copyComment(this)">Copy the comment</button></p>
+      </div>
+      <script>
+      function copyText(btn) {
+        copyToClipboard(btn.getAttribute('data-copy'), btn);
+      }
+      function copyComment(btn) {
+        copyToClipboard(document.getElementById('comment-text').innerText, btn);
+      }
+      function copyToClipboard(text, btn) {
+        var done = function () {
+          var label = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function () { btn.textContent = label; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+        } else {
+          fallbackCopy(text, done);
+        }
+      }
+      function fallbackCopy(text, done) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        done();
+      }
+      </script>
 
       <p class="section-label">Sources</p>
 
