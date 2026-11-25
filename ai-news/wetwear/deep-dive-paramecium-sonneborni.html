@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Deep Dive">
+<title>A Single Cell That Breaks the Species Barrier — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .header-img { width: 100%; display: block; margin: 0 0 1.8rem; border: 1px solid #1e1e1e; }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html">Podcast</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <article class="page">
+
+    <h1 class="headline">A Single Cell That Breaks the Species Barrier</h1>
+    <p class="deck">Paramecium sonneborni carries whole chromosomes from species as distant from it as a platypus is from a human. It gets away with it by keeping two genomes, and reading only one of them.</p>
+    <p class="byline">Sandy B. Patterson &middot; November 25, 2026</p>
+
+    <img class="header-img" src="images/deep-dive-paramecium-sonneborni-header.jpg" alt="A golden Paramecium cell with cilia, surrounded by glowing DNA strands in dark water" />
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">The Paradox</p>
+
+      <p class="drop-cap">In the laboratory, a single-celled pond creature refuses to have sex with strangers. Paramecium sonneborni will not conjugate with any other species of its own group, not even its closest relative. Put it in a dish with a cousin and nothing happens. Yet when French researchers read its genome, they found it full of strangers. The germline of this one species carries 521 long stretches of DNA taken from four other species, some of them whole chromosomes in size, adding up to nearly 10 million letters of genetic code. The donors are as genetically distant from it as a platypus is from a human. By every rule biologists have measured in animals and plants, those matings should have produced nothing. A paper in the Proceedings of the National Academy of Sciences, published November 11, says they happened repeatedly, and left viable, fertile descendants.</p>
+
+      <p>That is the paradox at the center of the paper, and it is the most interesting thing about it. A creature that will not mate with its own cousins in the laboratory carries the genetic fingerprints of repeated matings with species far more distant. The authors, led by Florian Bénitière and Laurent Duret at the University of Lyon, do not claim to have watched these matings happen. Nobody has. They read them out of the genome, the way a detective reads a break-in from a footprint. What the footprints show is a species barrier broken not once but over and over, at a genetic distance where animals and plants stop exchanging genes entirely. The explanation, the paper argues, is that Paramecium keeps two genomes, and only ever reads one of them.</p>
+
+      <p class="section-label">The Numbers</p>
+
+      <p>The numbers are what make the claim hard to dismiss. The researchers sequenced the germline genome, the micronucleus, of seven species in the Paramecium aurelia complex, and compared them against the genomes of thirteen. In six of the seven, they found almost nothing: one to twenty-two short foreign segments, at most 144,000 letters long, none longer than 25,000. In Paramecium sonneborni they found 521 segments totaling almost 10 million letters. The average segment is 18,400 letters long. One hundred and twenty of them are longer than 25,000 letters. The longest run past 220,000 letters, approaching the size of a whole germline chromosome, which in this group runs from 300,000 to about 1.2 million letters.</p>
+
+      <p>The donors are four lineages: Paramecium sexaurelia, at a synonymous divergence of about 0.8, and Paramecium tredecaurelia, Paramecium quadecaurelia, and Paramecium novaurelia, at about 1.0. Synonymous divergence, written dS, counts changes at DNA positions where a change does not alter the protein. Those positions accumulate changes roughly like a clock, so dS is a measure of how long two lineages have been evolving apart. A dS of 1 means that, on average, every such position has changed once. Because a site can change more than once, that figure is a lower bound on the true divergence. The paper notes that this is roughly the genetic distance between the most divergent mammals alive, the egg-laying monotremes, like the platypus, and the placental mammals, like us.</p>
+
+      <p>To see how far past the limit that is, consider the limit. In animals, gene flow between diverging lineages falls off a cliff as divergence grows. A 2016 study of 61 animal species pairs put the grey zone, the range where species status gets ambiguous, at 0.5 to 2 percent net synonymous divergence. Above about 2 percent, gene flow effectively stops. Plants shut down even earlier: a 2025 study in Science, comparing 280 plant pairs with 61 animal pairs, found the transition at about 0.2 percent in plants against about 0.6 percent in animals. Paramecium sonneborni sits at about 100 percent. That is roughly fifty times the animal limit. The previous record for a eukaryote exchanging genes across such a gap was a dS of 0.12 to 0.14, in fruit flies and sea squirts, and the foreign tracts there were a few thousand letters long, not hundreds of thousands.</p>
+
+      <p>Two older cases show why time apart is not the same as genetic distance. A fern hybrid and a sturgeon-paddlefish hybrid each joined species separated for 60 and 184 million years, yet their synonymous divergence was only 0.10 and 0.12, because their genomes evolve slowly. Two gar species, separated about 100 million years, produced viable and fertile hybrids, again on slowly evolving genomes. The Paramecium case is different in kind: the divergence is large, the pieces are huge, and it happened repeatedly, with four different donors. The closest single-celled comparison makes the point sharper still. In budding yeast, hybrid viability falls to almost zero above about 10 percent genetic divergence. Yeast has one genome doing both jobs. Paramecium has two.</p>
+
+      <p class="section-label">The Trick</p>
+
+      <p>The trick is nuclear dimorphism, the defining feature of ciliates. Every Paramecium cell carries two kinds of nucleus. The micronucleus is the germline: diploid, silent, never read during ordinary life, passed on only at sex. The macronucleus is the soma: hugely polyploid, about 800 copies of each gene in the best-studied species, Paramecium tetraurelia, and the only nucleus the cell ever reads. At each sexual generation the old macronucleus is thrown away and a new one is built from the micronucleus. The phenotype of the cell is decided by the macronucleus, not the micronucleus. That sentence, a classic result from the genetics of this organism, is the whole mechanism in miniature.</p>
+
+      <p>Sex in Paramecium is conjugation, and it is not mating as animals do it. Two cells pair up, each divides its micronucleus by meiosis, and they swap one haploid nucleus each. Then they separate. No offspring are produced. The same two cells swim away, genetically changed, and each rebuilds its macronucleus from the new micronucleus. The rebuilding is where the filter runs. During macronucleus development, the cell cuts out the DNA it does not want: the short internal eliminated sequences that interrupt genes, the transposons, and whole stretches of germline-only DNA. In Paramecium tetraurelia roughly a quarter to a third of the germline genome is removed.</p>
+
+      <p>The filter decides what to cut by a process called genome scanning, and its rule is historical, not chemical. During meiosis the micronucleus is transcribed, and the transcripts are chopped into short scan RNAs about 25 letters long. Those are compared against transcripts of the old macronucleus. Anything that matches the old macronucleus is treated as self and discarded. What survives the comparison, the DNA that was never in the old macronucleus, is marked for removal from the new one. The cutting is done by PiggyMac, a domesticated transposase, a tamed jumping gene the cell uses to cut out jumping genes. The key point is that the system never asks where a piece of DNA came from. It asks only whether it was in the last macronucleus. A foreign chromosome that arrived in the micronucleus at the last conjugation was never in the parental macronucleus, so it fails the test by definition, and it is cut out of the new soma like a transposon.</p>
+
+      <p>That is why the foreign DNA can sit in the germline without changing the animal. In the micronucleus it is silent, so it makes no protein and causes no incompatibility. In the macronucleus it is mostly gone. The numbers bear this out. Eighty-five percent of the 521 foreign segments sit in the part of the germline that is deleted when the macronucleus develops. Only 1 percent sit in the part that is always kept. Of the 35 foreign genes that do land in the kept part, at least 25 are pseudogenes, broken copies, and of the ten that look intact, only four show any sign of being read. The authors' own conclusion is blunt: the foreign DNA appears to make very little contribution to the adaptive potential of the species. It is not a gift. It is clutter that the cell tolerates because its filing system keeps it out of the way.</p>
+
+      <p>Two details support the model. First, mating type itself is set by the same machinery. In Paramecium tetraurelia, one gene decides the mating type, and in one type the scan RNAs silence that gene's promoter during macronucleus development. The macronucleus, not the raw sequence, decides the cell's working identity. Second, the mitochondria tell the same story from the other side. If the hybrids had been ordinary crosses, some donor mitochondria should have slipped through. They did not. The mitochondrial family tree of Paramecium sonneborni matches its macronuclear tree exactly, which is what the model predicts when the foreign DNA arrives through the nucleus and the cytoplasm stays maternal.</p>
+
+      <p class="section-label">Why Animals Can't</p>
+
+      <p>Animals cannot do this because they have one genome doing both jobs. Foreign DNA that enters an animal germline is inherited in every cell, read during development, and forced to cooperate with the rest of the genome through embryogenesis. When the two sets of genes do not cooperate, the hybrid fails. The classic name for the failure is Dobzhansky-Muller incompatibility: alleles that are harmless in their own species interact badly when combined. In fruit flies, the cross between Drosophila melanogaster and Drosophila simulans produces sterile males. The incompatibilities pile up as lineages diverge, which is why the animal grey zone ends where it does.</p>
+
+      <p>The yeast comparison is the cleanest demonstration that the second nucleus is doing the work. Budding yeast is also single-celled, and it also has sex. But it has one genome, and when two yeast species about 12 percent divergent cross, the hybrid lives and divides, yet more than 99 percent of the gametes it makes are inviable, mostly because the mismatched chromosomes cannot segregate properly at meiosis. One genome, no filter, no second copy to fall back on: the wall arrives at about 10 percent divergence. Paramecium, with the split, sails past 100 percent synonymous divergence. The difference is not that Paramecium is simpler. It is that it keeps its archive and its working copy separate, and rebuilds the working copy from scratch every sexual generation.</p>
+
+      <p>There are partial parallels elsewhere, and they sharpen the picture rather than blurring it. The black-winged fungus gnat carries two large chromosomes that exist only in its germline and are thrown out of the soma early in development. In 2022, researchers showed those chromosomes are more similar to another family of flies, the gall midges, than to the gnat's own family, which points to an ancient hybridization with the foreign chromosomes then confined to the germline. That is the same trick, but it was one ancient event, not recurrent transfers from four lineages. The famous foreign-DNA animals, the bdelloid rotifers, are a different case again. These all-female, asexual microscopic animals carry about 10 percent of their active genes as imports, but the donors are mostly bacteria, the imports are single genes picked up from the environment, and the genes are used. Paramecium's imports are chromosome-sized, arrive by sex, and are mostly silenced. The gnat shows the strategy can evolve outside ciliates. The rotifer shows what foreign DNA looks like when it is actually put to work.</p>
+
+      <p class="section-label">The Species Problem</p>
+
+      <p>The paper's claim reaches beyond one pond creature because it touches the definition of a species. The biological species concept, the one Ernst Mayr formalized, defines species by reproductive isolation: if two populations cannot produce viable, fertile offspring together, they are different species. Under a strict reading, Paramecium sonneborni should not be a species at all, since its ancestry is full of viable, fertile crosses with lineages a platypus-distance away. The authors do not throw the concept out. They propose a technical extension: gene flow should count only in the expressed genome. As long as gene flow is maintained in the macronucleus-destined part of the genome, which is about a third of the sonneborni germline, individuals can be considered the same species, even if their germline-only compartment is not shared. The fix works only because ciliates keep the two compartments separate. It does not rescue the concept for animals or plants.</p>
+
+      <p>There is an irony in the name, and the paper itself points it out. The species is named for Tracy Sonneborn, the geneticist who discovered the sibling species of the Paramecium aurelia complex in 1937 and who, in the 1950s, publicly pushed back against Mayr's concept for excluding the protozoa, arguing it invalidated perhaps half or more of the species recognized by students of protozoa. The paper closes on the joke: the promiscuous sibling is the one that bears the name of the father of Paramecium genetics. Sonneborn split what looked like one species, Paramecium aurelia, into fourteen sibling species that look identical and will not mate with each other. Modern sequencing confirmed them, and the complex now counts twenty species. Yet the definitions still disagree at the edges. Strains of Paramecium sonneborni from Texas and Cyprus show low viability in their hybrid offspring despite low genetic diversity, and keeping the species inside the aurelia complex makes that complex paraphyletic, a grouping that excludes some descendants of a common ancestor. The paper changes no names. What it changes is the justification: reproductive isolation in the laboratory can coexist with extensive historical gene flow in the genome.</p>
+
+      <p>That is a narrower claim than it first sounds, and the authors are careful about it. They are not saying the species concept is dead. They are saying it needs a qualifier, which genome, in organisms that keep a separate germline archive. In ciliates, species was always a looser fit than in animals, and this paper explains part of why.</p>
+
+      <p class="section-label">What It Doesn't Mean</p>
+
+      <p>The caveats matter as much as the claim, and the honest version of this story carries them in the open. First, the detailed numbers in this article, the 521 segments, the 10 million letters, the 18,400-letter average, come from the authors' preprint of the same work, posted in February 2026. The peer-reviewed paper in the Proceedings of the National Academy of Sciences carries the same abstract and the same conclusions, but its full text sits behind a paywall, and the free version is embargoed until May 2027. The preprint was revised into the published paper, and one author was added along the way, so the counts should be read as the authors' numbers, pending a check against the published text.</p>
+
+      <p>Second, nobody watched these matings happen. The claim that the hybrids were viable and fertile is inferred from the genome: foreign chromosomes persist in a living, established species, so the original hybrids must have been fit enough to pass them on. No hybrid was made or observed, no hybrid fertility was measured, and the paper gives no number of hybridization events. The paradox stands in the open: in the laboratory, Paramecium sonneborni does not conjugate with any other species of its group, not even its closest relative. The authors ask, in the paper's own words, what makes these conjugation events possible in nature. Nobody knows. The species is rare, known from only three stands, in Texas, the Dominican Republic, and Cyprus, and little is known about its ecology.</p>
+
+      <p>Third, the foreign DNA does nothing, as far as anyone can tell. It is mostly silenced, mostly broken, and the authors say it makes very little contribution to the species' adaptive potential. Any telling of this story that makes the imports sound like a gift, or like evolution handing the species new tools, would be wrong on the paper's own terms. Fourth, this is one species, one strain, one genome. The same screen found almost nothing in the other six species tested, and whether other ciliates do this, or whether other strains of sonneborni carry the same segments, is untested. The mechanism itself is a model, built from work on Paramecium tetraurelia and its relatives, not from experiments on sonneborni. The mitochondria check supports it. A direct demonstration does not yet exist.</p>
+
+      <p>Finally, the paper has had a quiet reception. Two weeks after publication, no major science outlet appears to have covered it, and no independent expert reaction has appeared in print, only automated summaries. The preprint has been public since February, which may have blunted the news value by November. That silence is not evidence against the work. The paper went through peer review at the Proceedings of the National Academy of Sciences, and its numbers are checkable in the open dataset the authors posted. But it means the reaction, if any is coming, has not arrived yet. The claim stands on the genome alone, and for now, that is where it should be judged.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.pnas.org/doi/10.1073/pnas.2611799123">Bénitière et al. — Recurrent hybridization between highly divergent paramecium species, PNAS 123(46) e2611799123</a></li>
+        <li><a href="https://cnrs.hal.science/hal-05523174v1/file/2026.02.20.707023v1.full.pdf">Bénitière et al. — Breaking the species barrier: recurrent genomic introgressions from very distant lineages in a ciliate, bioRxiv preprint, Feb. 2026</a></li>
+        <li><a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2000234">Roux et al. — Shedding Light on the Grey Zone of Speciation along a Continuum of Genomic Divergence, PLoS Biology, 2016</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/40934327/">Monnet et al. — Rapid establishment of species barriers in plants compared with that in animals, Science, 2025</a></li>
+        <li><a href="https://www.jstor.org/stable/10.1086/679662">Rothfels et al. — Natural Hybridization between Genera That Diverged from Each Other Approximately 60 Million Years Ago, American Naturalist, 2015</a></li>
+        <li><a href="https://doi.org/10.3390/genes11070753">Káldy et al. — Hybridization of Russian Sturgeon and American Paddlefish and Evaluation of Their Progeny, Genes, 2020</a></li>
+        <li><a href="https://doi.org/10.1038/s41467-023-38714-z">Redmond et al. — Independent rediploidization masks shared whole genome duplication in the sturgeon-paddlefish ancestor, Nature Communications, 2023</a></li>
+        <li><a href="https://journals.plos.org/plosgenetics/article/file?rev=1&id=10.1371/journal.pgen.1006971&type=printable">Turissini and Matute — Introgression in the Drosophila yakuba clade, PLoS Genetics, 2017</a></li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7198630/">Bozdag and Ono — Hybrid sterility in budding yeast (S. cerevisiae x S. paradoxus), 2022</a></li>
+        <li><a href="https://www.nature.com/articles/nature05230">Aury et al. — Global trends of whole-genome duplications revealed by the ciliate Paramecium tetraurelia, Nature, 2006</a></li>
+        <li><a href="https://www.cell.com/fulltext/S0092-8674(13)00006-8">Chalker et al. — Genomes on the Edge: Programmed Genome Instability in Ciliates, Cell, 2013</a></li>
+        <li><a href="https://presse.inserm.fr/en/a-new-type-of-heredity-described-in-paramecia/53587/">Inserm — A new type of heredity described in Paramecia (Singh et al., Nature, 2014)</a></li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2940278/">Ninety Years of Drosophila melanogaster Hybrids, Genetics, 2010</a></li>
+        <li><a href="https://journals.plos.org/plosbiology/article?id=10.1371%2Fjournal.pbio.3001559">Hodson et al. — Germline-restricted chromosomes in the black-winged fungus gnat, PLoS Biology, 2022</a></li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3499245/">Boschetti et al. — Foreign genes in bdelloid rotifers, PLoS Genetics, 2012</a></li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S1434461015000449">Przyboś et al. — Species boundaries in Paramecium sonneborni, Protist, 2015</a></li>
+        <li><a href="https://nap.nationalacademies.org/resource/biomems/tsonneborn.html">National Academies — Tracy Sonneborn, Biographical Memoir</a></li>
+        <li><a href="https://doi.org/10.5281/zenodo.18684075">Zenodo — HT-segment list and analysis scripts for the Paramecium sonneborni study</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </article>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
