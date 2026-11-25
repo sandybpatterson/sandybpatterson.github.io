@@ -94,6 +94,11 @@ Save the finished file as `ai-news/tennessee-today/YYYY-MM-DD.html`.
 
 The template carries the shared audio reader: a `<meta name="book-title" content="Tennessee Today">` tag in `<head>` and `<script src="../../reader.js"></script>` just before `</body>`. Both come with the template; do not drop them when filling it in. Before publishing, check the built file contains both; after pushing, verify the live page returns reader.js. Standing rule from 2026-11-24: every future blog post gets reader.js. (Sandy caught their absence from the 2026-11-23 article on 2026-11-23 — the template had never included them.)
 
+**Standing rules from Sandy (2026-11-25):**
+- **Dating:** A post gets the date it was WRITTEN on, even if published the next day. Never backfill a missed date. Don't write for tomorrow until after 10 pm Central; if published after 10 pm Central it can take tomorrow's date.
+- **AI-suspect sources:** A story from a source suspected of being AI-generated needs TWO more credible, well-known sources confirming parts of it before it counts as accurate.
+- **Local exception:** For local Murfreesboro/Rutherford County stories, ONE credible local outlet doing its own reporting (named reporter, on-the-record quotes, on-camera) counts as confirmation. The suspect source's disputed details still do not stand alone.
+
 **Header image (Muse only).** When Muse is the one running this skill, generate a header image for the top of the article: an editorial image tied to the Big Story, in the site's dark-and-gold style, at a 16:9 ratio (1600x900) — not a wide panoramic banner; Sandy found 3:1 too wide on 2026-11-23. Save it as `ai-news/tennessee-today/images/YYYY-MM-DD-header.jpg` at 1600px wide, and insert `<img class="header-img" src="images/YYYY-MM-DD-header.jpg" alt="...">` between the headline and the deck (the template already carries the `.header-img` CSS rule). If words appear in the image at all, they must be part of the object or scene itself — forged, carved, or printed into it — never a label laid over the picture; Sandy rejected that pasted-on look on 2026-11-23. When Claude or anyone else runs this skill, skip the image entirely and publish the page without one. Do not leave a broken image tag behind.
 
 ## 4. Add the permanent index rows
