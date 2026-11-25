@@ -118,6 +118,11 @@ Save the finished file as `ai-news/wetwear/YYYY-MM-DD.html`.
 
 The template carries the shared audio reader: a `<meta name="book-title" content="Wetwear Daily News Brief">` tag in `<head>` and `<script src="../../reader.js"></script>` just before `</body>`. Both come with the template; do not drop them when filling it in. Before publishing, check the built file contains both; after pushing, verify the live page returns reader.js. Standing rule from 2026-11-24: every future blog post gets reader.js. (Sandy caught their absence from the 2026-11-23 brief on 2026-11-23 — the template had never included them.)
 
+**Standing rules from Sandy (2026-11-25):**
+- **Dating:** A post gets the date it was WRITTEN on, even if published the next day. Never backfill a missed date. Don't write for tomorrow until after 10 pm Central; if published after 10 pm Central it can take tomorrow's date.
+- **AI-suspect sources:** A story from a source suspected of being AI-generated needs TWO more credible, well-known sources confirming parts of it before it counts as accurate.
+- **Local exception:** For local Murfreesboro/Rutherford County stories, ONE credible local outlet doing its own reporting (named reporter, on-the-record quotes, on-camera) counts as confirmation. The suspect source's disputed details still do not stand alone.
+
 ## 4. Generate the `.txt` companion
 
 Don't hand-write this — run the bundled converter, which turns your finished HTML
