@@ -1,0 +1,272 @@
+<!--
+  Structural template for a Wetwear Daily News Brief page.
+  Copy this file's structure and CSS verbatim — don't redesign it. The whole
+  point of a template is that every brief looks identical; drifting the
+  markup or styling from one day to the next is the thing to avoid.
+
+  Replace every {{PLACEHOLDER}} with real content. Everything else —
+  tags, classes, the <style> block — stays exactly as written here.
+
+  Section labels ({{SECTION_LABEL}}) are usually, in order: Biggest Story,
+  Biology, Misinformation, Public Health Data, Politics, Good News, Sources.
+  Skip a section entirely (delete its label + paragraphs) if nothing notable
+  turned up that day in that area — don't pad it. The first <p> under each
+  section label should carry class="drop-cap" (only the very first one in
+  the whole article gets the actual drop-cap letter styling, per the CSS
+  rule .article-body p.drop-cap::first-letter, but it's harmless to mark
+  every section's opening paragraph the same way for consistency; only the
+  first-of-type will actually render the drop cap).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Daily News Brief">
+<title>Measles Deaths Climb as the CDC and the States Split Over the Count — Wetwear Daily News Brief</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .header-img { width: 100%; border: 1px solid #1e1e1e; display: block; margin-bottom: 18px; }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html">Podcast</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Daily News Brief</div>
+    <hr>
+  </div>
+
+  <div class="page">
+
+    <h1 class="headline">Measles Deaths Climb as the CDC and the States Split Over the Count</h1>
+    <img class="header-img" src="images/2026-11-25-header.jpg" alt="A vaccine vial and syringe on dark slate in golden light">
+    <p class="deck">Plus a vaccine study that does not prove what its promoters claim, Ebola's toll in Congo, a vetoed food safety bill, and two firsts from the FDA.</p>
+    <p class="byline">Sandy B. Patterson &middot; November 25, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">Biggest Story</p>
+
+      <p class="drop-cap">Virginia reported its first measles death since 1978 on November 20, a child under four who tested positive for the virus. It brings the number of measles deaths reported by states this year to 12. Pennsylvania has reported eight of them, all in unvaccinated people, while Wisconsin has reported two and New York one. The CDC has acknowledged six deaths, and says the number is subject to change as reviews are completed. The split is the sharpest sign yet of how the outbreak has outrun the official count. The CDC's national total now stands at 5,838 cases, up 426 in a week, the largest weekly increase in decades and the 15th straight week of triple-digit growth. Adults 20 and older now account for 41 percent of cases, up from 29 percent in 2025. A study published November 16 found measles infected 112 pregnant women and 13 newborns over 21 months. The United States lost the measles elimination status it earned in 2000 after the Pan American Health Organization found the same strain had circulated continuously for at least 12 months.</p>
+
+      <p class="section-label">Biology</p>
+
+      <p>Stanford researchers have found that slower bacteria-killing peptides work better against biofilms, the thick bacterial layers behind stubborn infections. The team, writing in Nature Microbiology on November 24, sorted 14 antimicrobial peptides into two classes by watching them act on single E. coli cells. Fast peptides kill single cells quickly but struggle against dense growth. Slow peptides cross membranes without punching permanent holes, and that lets them reach bacteria buried in a biofilm. The researchers now want to learn to predict a peptide's mechanism from its amino acid sequence alone, which would let them design new antibiotics around the slower approach.</p>
+
+      <p class="section-label">Misinformation</p>
+
+      <p>A paper claiming vaccinated children are three times as likely to develop autism is spreading widely on anti-vaccine accounts, and a fact check by Tech ARP published November 23 rates it false. The paper, by Josh Mitteldorf and Brian Hooker of Children's Health Defense, drew 14,235 children from a Florida Medicaid database of more than 10 million without explaining how they were chosen, and relied on billing records that do not reliably capture vaccination. Lead author Mitteldorf admitted the data set was 'crummy' when biostatistician Jeffrey Morris of the University of Pennsylvania laid out the flaws. The paper's journal is not indexed in PubMed, MEDLINE, or Scopus. The same flawed sample also underpins its claim of a fourfold asthma risk.</p>
+
+      <p class="section-label">Public Health Data</p>
+
+      <p>Ebola in the Democratic Republic of Congo has passed 11,700 confirmed cases. The health ministry reported 11,762 cases and 5,775 deaths across 68 health zones in eight provinces as of November 20, up from the World Health Organization's count of 11,613 cases and 5,678 deaths on November 17. Heavy fighting near a hospital in Ituri province, the epicenter of the outbreak, forced Ebola responders to shelter in a maternity ward for more than 24 hours, stalling containment, according to a United Nations update on November 24. The outbreak is the Bundibugyo strain, for which no vaccine is licensed.</p>
+
+      <p class="section-label">Politics</p>
+
+      <p>New York Governor Kathy Hochul vetoed a first-in-the-nation food ingredient disclosure bill on November 24. The bill would have required safety data when manufacturers self-affirm ingredients as Generally Recognized as Safe, and it would have banned propylparaben and potassium bromate. Hochul said the reform should be handled at the federal level. The veto is a setback for the Make America Healthy Again agenda, which has looked to states as federal action on ultraprocessed foods stalls.</p>
+
+      <p>The Department of Health and Human Services launched a 'Radical Transparency' records website on November 24, putting tens of thousands of government records from the FDA, the CDC, the National Institutes of Health, and the Centers for Medicare and Medicaid Services into one searchable location. The site replaces the department's FOIA reading room. Featured records include a Biden-era NIH memo about leaving Twitter after Elon Musk's purchase, plus Secretary Kennedy's calendars.</p>
+
+      <p class="section-label">Good News</p>
+
+      <p>The FDA approved the first new hormone therapy for early-stage breast cancer in more than 20 years on November 23. The once-daily pill, Wilserdly, is for adults with estrogen receptor-positive, HER2-negative stage one to three breast cancer at intermediate to high risk of recurrence after surgery. In a trial of 4,170 patients, it cut the risk of invasive recurrence or death by 30 percent compared with standard hormone therapy. At three years, 92.4 percent of patients were alive and free of invasive cancer, versus 89.6 percent on standard therapy.</p>
+
+      <p>The FDA also authorized the first point-of-care test for active syphilis, announced November 24. Roche's cobas liat Lesion Panel, evaluated through the National Institutes of Health's RADx program, directly detects active syphilis instead of relying on antibody tests that cannot tell an old infection from an active one. It is meant for clinics, emergency departments, and public health facilities, and should be available in the United States in the coming months.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://www.beckershospitalreview.com/quality/public-health/measles-posts-biggest-one-week-jump-in-decades-7-updates/">Becker's Hospital Review — Measles posts biggest one-week jump in decades: 7 updates</a></li>
+        <li><a href="https://www.cdc.gov/measles/data-research/">CDC — Measles Data and Research</a></li>
+        <li><a href="https://phys.org/news/2026-11-biologists-bacteria-peptides-smooth-effective.html">Phys.org — Biologists find slower bacteria-killing peptides work better against biofilms</a></li>
+        <li><a href="https://www.techarp.com/fact-check/florida-medicaid-vaccine-study-autism-asthma/">Tech ARP — Fact Check: Florida Medicaid study claims vaccines cause autism and asthma</a></li>
+        <li><a href="https://news.un.org/en/story/2026/11/1168865">UN News — Heavy fighting in Ituri traps DR Congo Ebola responders</a></li>
+        <li><a href="https://www.africa-newsroom.com/press/printview/heavy-fighting-in-ituri-traps-democratic-republic-of-the-congo-ebola-responders-world-health-organization-who">Africa Newsroom — Heavy fighting in Ituri traps Democratic Republic of the Congo Ebola responders: WHO</a></li>
+        <li><a href="https://www.fooddive.com/news/new-york-gras-bill-veto/875600/">Food Dive — New York governor vetoes first-in-the-nation food ingredient disclosure bill</a></li>
+        <li><a href="https://www.hhs.gov/press-room/hhs-launches-radical-transparency-website-government-records.html">HHS — HHS launches Radical Transparency website for government records</a></li>
+        <li><a href="https://www.fda.gov/news-events/press-announcements/fda-approves-first-new-hormone-therapy-early-stage-breast-cancer-more-20-years">FDA — FDA approves first new hormone therapy for early-stage breast cancer in more than 20 years</a></li>
+        <li><a href="https://www.nih.gov/news-events/news-releases/nih-diagnostics-accelerator-enables-first-ever-fda-authorization-point-care-test-active-syphilis">NIH — NIH diagnostics accelerator enables first-ever FDA authorization of point-of-care test for active syphilis</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Daily News Brief</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </div>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
