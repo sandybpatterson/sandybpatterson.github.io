@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="book-title" content="Wetwear Deep Dive">
+<title>Blackburn's AI Plan Has a Hole in the Middle — Wetwear Deep Dive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.06rem;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  a { color: #c9a84c; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    padding: 5px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover { color: #c9a84c; border-color: #c9a84c44; text-decoration: none; }
+
+  .masthead-strip {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    text-align: center;
+  }
+  .masthead-strip .name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: #f4f0e6;
+  }
+  .masthead-strip hr {
+    border: none;
+    border-top: 3px double #c9a84c;
+    margin: 12px 0 0;
+  }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 36px 28px 100px; }
+
+  .headline {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .deck {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .byline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #1e1e1e; margin: 32px 0; }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 1.8rem;
+    margin: 2.4rem 0 1.1rem;
+  }
+  .section-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .article-body p { margin: 0 0 1.2rem; text-align: justify; hyphens: auto; }
+  .article-body p.drop-cap { text-indent: 0; }
+  .article-body p.drop-cap::first-letter {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.08em;
+    margin-top: 0.1em;
+    color: #c9a84c;
+  }
+
+  .sources-list {
+    list-style: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 2.1;
+    color: #888;
+  }
+  .sources-list a { color: #a89358; }
+
+  .closing {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+  }
+  .author {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: #888;
+    text-align: center;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid #1a1a1a;
+    padding: 28px 24px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand"><a href="https://sandybpatterson.github.io/bookshelf.html" style="color:#c9a84c;">&larr; Bookshelf</a></span>
+    <div class="nav-links">
+      <a href="https://sandybpatterson.github.io/ai-news/wetwear/podcast.html">Podcast</a>
+      <a href="https://sandybpatterson.github.io/ai-tools-directory/">AI Tools</a>
+      <a href="https://sandybpatterson.github.io/ai-news/">&larr; Sandy's Blog</a>
+    </div>
+  </nav>
+
+  <div class="masthead-strip">
+    <div class="name">Wetwear Deep Dive</div>
+    <hr>
+  </div>
+
+  <article class="page">
+
+    <h1 class="headline">Blackburn's AI Plan Has a Hole in the Middle</h1>
+    <p class="deck">Tennessee's governor-elect says she will lead the states in policing AI and protecting kids online. The courts have tilted her way, but the technology she would lean on misses by years, and her own record pulls in two directions at once.</p>
+    <p class="byline">Sandy B. Patterson &middot; November 25, 2026</p>
+
+    <hr class="divider">
+
+    <div class="article-body">
+
+      <p class="section-label">The Win</p>
+
+      <p class="drop-cap">On November 3, Marsha Blackburn won the Tennessee governor's race with 45.52 percent of the vote, 957,136 ballots, against Democrat Jerri Green's 42.95 percent and independent David Hatley's 9.30 percent. The margin was 54,183 votes, about two and a half points, in a state Donald Trump carried by nearly 30 points two years earlier. She is the first woman elected governor of Tennessee, and the first governor elected with less than half the vote since 1932. She takes office on January 16, 2027, succeeding term-limited Republican Bill Lee, and she must give up her U.S. Senate seat to do it.</p>
+
+      <p>The narrow win matters because it shapes what she can claim. A governor who won by 32 points, as Lee did in 2022, can say the state endorsed her whole program. Blackburn won by two and a half points with a third candidate taking nine percent, so her mandate is thinner and her opposition is louder. It also matters because of who she is. She has spent more than a decade in Washington as the Senate's most persistent critic of Big Tech, and she arrives in Nashville with a plan she has been building in Congress for years. The question is whether that plan works as well as a governor's program as it did as a senator's crusade.</p>
+
+      <p class="section-label">The Pitch</p>
+
+      <p>Blackburn has not yet published a governor's tech plan. What she has given is a direction, stated twice in the week after the election. In an interview with Bloomberg Government published November 24, she said: 'I will be leading the governors and passing legislation at the state level to protect our children and to protect our citizens. And if Congress can't get their act together, the states will, and I'll be honored to lead that charge.' On election night she promised a 'Tennessee standard' for Big Tech privacy, one she said would become the national standard and protect citizens and children in the virtual space.</p>
+
+      <p>No bill text, no named policies, and no timeline have followed. That is not unusual for a governor-elect three weeks from taking office, but it means the plan, as announced, is a promise to lead rather than a program to judge. The substance has to be read from her Senate record, where the bills are written, the votes are counted, and the contradictions are on the record too.</p>
+
+      <p class="section-label">The Portfolio</p>
+
+      <p>The centerpiece is the Kids Online Safety Act, known as KOSA, which Blackburn co-leads with Democratic Senator Richard Blumenthal of Connecticut. She first introduced it in February 2022. It passed the Senate 91 to 3 in July 2024, then died without a House vote. She reintroduced it as S. 1748 in May 2025, with Majority Leader John Thune and Minority Leader Chuck Schumer as co-sponsors. The bill's core is a duty of care: platforms must exercise reasonable care in designing features to prevent and mitigate a fixed list of harms to minors, including suicide and self-harm, eating disorders, substance use, and sexual exploitation. The Federal Trade Commission enforces it and cannot add new harms. The bill also requires the strongest privacy settings for minors by default, lets minors opt out of personalized recommendations and addictive features, and requires independent audits.</p>
+
+      <p>KOSA is not law, and it is running out of time. The Senate Commerce Committee advanced it by unanimous voice vote on August 5, 2026, with the duty of care intact and 76 co-sponsors behind it. On September 30, Senator Rand Paul blocked a request to pass it by unanimous consent, forcing a regular floor vote. The House passed a different version, the KIDS Act, on June 29, 2026, by 267 to 117, and that version drops the duty of care entirely. The 119th Congress ends on January 3, 2027. If neither chamber's version is enacted by then, both bills die and must be reintroduced.</p>
+
+      <p>One nuance matters and is often missed. The Congressional Research Service notes that the Senate bill does not itself require age verification. Critics argue the duty of care practically forces platforms to know which users are minors, and therefore to verify age anyway. Both halves of that argument should be kept in view, because Blackburn's own draft bill, unlike KOSA, does require government identification for chatbot accounts.</p>
+
+      <p>The rest of the portfolio fills out the picture. The Take It Down Act, which Blackburn co-sponsored, was signed into law on May 19, 2025. It criminalizes nonconsensual intimate imagery, including AI deepfakes, and requires platforms to remove such content within 48 hours of a victim's notice. The GUARD Act, which she also co-sponsors, would ban minors from AI companion chatbots and require age verification for chatbot accounts. It was reported by the Senate Judiciary Committee on May 11, 2026, and is not law. Her most comprehensive statement is the TRUMP AMERICA AI Act, a 291-page discussion draft released March 18, 2026, and never formally introduced. It folds in KOSA, the GUARD Act, and the NO FAKES Act, adds a duty of care for AI developers, and would repeal Section 230, the law that shields platforms from liability for user content, two years after enactment. The App Store Accountability Act, sometimes credited to her in coverage, is not hers. It is led by Senator Mike Lee and Representative John James.</p>
+
+      <p class="section-label">The Contradiction</p>
+
+      <p>Here is the hole in the middle of the pitch. Blackburn's November message is that the states will lead if Congress cannot. Her March draft bill would create one national rulebook and preempt many state AI laws, though it lets states keep stricter protections in places. Both positions can be held in sequence, as a federal first choice with the states as a fallback, but she has not publicly reconciled them, and the two postures pull in opposite directions.</p>
+
+      <p>The record shows her moving between them. In mid-2026 she negotiated with the White House over a deal that would trade federal preemption of state AI laws, limited to the subjects the federal package covers, for the advance of KOSA and other children's safety bills. Her own Democratic co-author on KOSA, Senator Richard Blumenthal, rejected the linkage, arguing preemption should not be part of kids' safety legislation. That is the opposite of the states-will-lead line, and it sits next to her most famous vote on the subject. In July 2025 she first co-authored a five-year compromise with Senator Ted Cruz to shorten a proposed ten-year ban on state AI laws, then abandoned it and co-led the amendment that killed the ban outright, 99 to 1, with only Senator Thom Tillis voting to keep it. She argued the ban would have blocked state protections like Tennessee's own ELVIS Act, which guards voice and likeness against AI clones.</p>
+
+      <p>The White House has since moved in the same direction she negotiated toward. Its March 2026 framework asks Congress to preempt state AI laws that impose an undue burden, while sparing generally applicable child-protection laws. Her own party is split on the question, with Cruz behind the moratorium idea and the White House behind the executive order that followed. When she takes office in Nashville, the first test of which Blackburn shows up will be whether she pushes Tennessee's own laws or waits for a federal deal that would override them.</p>
+
+      <p class="section-label">What Tennessee Already Has</p>
+
+      <p>She does not start from scratch. Tennessee already has two of the laws her plan would build on, and one unfinished bill that is the obvious first item on her agenda. The Protecting Children from Social Media Act, signed by Governor Lee on May 2, 2024 and in force since January 1, 2025, requires social media companies to verify the age of new users and get parental consent for minors, and it bars them from keeping the identifying data used for verification. The state attorney general enforces it.</p>
+
+      <p>That law has never been blocked, which makes Tennessee an outlier, but the reason is procedural rather than a ruling that the law is constitutional. The trade group NetChoice sued in October 2024. A district judge denied its request for a preliminary injunction in June 2025 without reaching the merits. The Sixth Circuit vacated that denial in August 2026 and sent the case back, and the district court ruled on a motion to dismiss in October 2026. The law stands, and its fate is still open.</p>
+
+      <p>The ELVIS Act, signed March 21, 2024, added voice to Tennessee's protection of name, image, and likeness, making it the first such law in the country. Its first real AI test arrived November 6, 2026, when Elvis Presley Enterprises sued the AI music generator Suno in federal court in California, alleging it produces songs in Elvis's voice. No ruling has come yet.</p>
+
+      <p>The unfinished piece is Tennessee's own App Store Accountability Act, introduced as SB 2263 in February 2026. It would require app stores to verify the age category of account holders and get parental consent before minors download apps or make purchases. The Senate Judiciary Committee deferred it to summer study on March 23, 2026, and it has sat there since. Reviving it is the most concrete first step a Governor Blackburn could take, and she has not yet said on the record whether she will.</p>
+
+      <p class="section-label">Can a State Do This?</p>
+
+      <p>The legal ground has shifted under her feet, and mostly in her favor. Congress twice declined to impose a moratorium on state AI laws: the Senate stripped the ten-year ban 99 to 1 in July 2025, and a second attempt was left out of the defense bill in December 2025. As of today, no federal statute preempts state AI laws.</p>
+
+      <p>The threat then changed shape. On December 11, 2025, the president signed Executive Order 14365, which declares a national AI framework that, in its words, must forbid state laws that conflict with it. It directs the attorney general to set up a Litigation Task Force to challenge state AI laws, and it directs the Commerce Department to make states with what it calls onerous AI laws ineligible for non-deployment funds under the 42.45 billion dollar broadband program. But an executive order cannot preempt state law by itself. It is not self-executing, it requires further agency action, and no court has held that it preempts anything. The order also expressly preserves space for state action on child safety, which is Blackburn's best shield, though that carve-out is a policy statement in an executive order rather than a statutory safe harbor, and the order does not define what counts as child safety.</p>
+
+      <p>The Task Force's record so far is one case. The Justice Department intervened on April 24, 2026 in a suit against Colorado's AI law, and Colorado agreed not to enforce it while the litigation runs. Twenty-three state attorneys general, including Tennessee's, filed comments with the Federal Communications Commission in December 2025 opposing preemption. No standalone Justice Department suit against a state AI law had been filed as of November 25, 2026.</p>
+
+      <p>The Supreme Court settled one corner of the fight in June 2025. In Free Speech Coalition v. Paxton, the Court upheld Texas's age-verification law for adult websites by 6 to 3, holding it only incidentally burdens adults' speech. Twenty-seven states now have adult-site age-verification laws in effect. That holding covers pornography, not general social media, where the content is protected speech for minors as well as adults, and it does not settle AI companions or verification methods.</p>
+
+      <p>The lower courts tilted toward the states in the autumn of 2026. The Fifth Circuit vacated an injunction against Mississippi's age-verification law on November 19. The Eleventh Circuit vacated an injunction against Florida's social media law in October. The Sixth Circuit reversed a permanent injunction against Ohio's law in June. None of these is a final ruling that the laws are constitutional. They are vacated injunctions and remands, and the cases continue. The other side of the scoreboard is just as real. Arkansas's social media law was permanently enjoined in March 2025, and Louisiana's in December 2025. A Blackburn law would face years of litigation before it is settled, and the Tennessee law she would build on is itself still in court.</p>
+
+      <p class="section-label">The Technology</p>
+
+      <p>The diagnosis is the strongest part of the plan. The harm she cites is documented, and the worst of it involves AI companion chatbots. Sewell Setzer III, 14, of Orlando, died by suicide on February 28, 2024, after months of conversation with a Character.AI chatbot modeled on a television character. His mother sued that October. The case settled in January 2026. Character.AI filed for bankruptcy in October 2026, and 40 state attorneys general, including Tennessee's Jonathan Skrmetti, filed in the bankruptcy case two days later, citing chatbots posing as licensed professionals and sexualized chats with child accounts.</p>
+
+      <p>The enforcement mechanism is where the technical case gets thin. The plan leans on facial age estimation, and the best independent benchmark says it misses by about three years on average. The National Institute of Standards and Technology tested six systems in 2024 and found the best mean absolute error on a standard photo set had improved from 4.3 years in 2014 to 3.1 years in 2024. That is real progress and still an average error of three years. The institute found no single standout algorithm, and error rates were almost always higher for female faces. Accuracy is worst at the boundary the law cares about most: Britain's Parliamentary Office of Science and Technology puts the error at about 2.5 years for the best systems at the 16 to 18 boundary, and notes that a 12-year-old can be mistaken for 14, or a 16-year-old for 18.</p>
+
+      <p>Vendor claims run well ahead of the independent numbers. Yoti, one of the largest age-estimation vendors, claims in its own white paper an average error of 1.1 years for ages 13 to 17, measured on its own test sets. Those are a seller's numbers, not an independent finding. Australia's 6.5 million dollar age-assurance trial found the same pattern in the other direction: the Guardian's analysis of the trial data found estimation seven percentage points less accurate for Indigenous participants and five points less for South-East Asian participants, while the trial's official summary described performance as broadly consistent across groups.</p>
+
+      <p>The systems are also easy to bypass, and the experts say so in unusually blunt terms. More than 405 security and privacy researchers signed a joint statement in March 2026 calling age checks easy to bypass through VPNs, borrowed credentials, deepfakes, and parents' help, and calling for a moratorium on deployment until the evidence settles. The live experiment in Britain backs them up. When the Online Safety Act's age checks took effect on July 25, 2025, sign-ups for Proton VPN rose more than 1,400 percent in a day. Ofcom's first statutory report, published in July 2026, counted more than 69 million age checks across 32 services in the second half of 2025, a 23-fold rise, and found the share of children facing a highly effective check rose from 25 percent to 43 percent. The system works as friction on the big compliant sites. It fails as a wall, because the determined user walks to an unchecked site or turns on a VPN, and the British government has ruled out banning VPNs.</p>
+
+      <p>App-store gates are the most practical enforcement point and still not a solution. Apple and Google now return an age band, not a birthdate, to apps that ask. Texas's app-store law is in force only because a federal appeals court stayed an injunction against it, and the Supreme Court declined to vacate that stay in July 2026. Utah and Louisiana have delayed their app-store laws to 2027, and California's takes effect January 1, 2027. A store gate is tied to an account, so a VPN does not defeat it, but a borrowed account or a parent-created account defeats it just as easily, and it covers only apps distributed through the store. Regulators still expect platforms to run their own checks as well.</p>
+
+      <p>Chatbot safety measures have the same problem at a deeper level. Classifiers screen for banned words and toxic language, but the danger in the Setzer case was not a single toxic message. It was months of romantic, validating conversation, and researchers reported in August 2026 that harmful outcomes in chatbot conversations often emerge without explicitly toxic language, in ways surface-level safety systems cannot see. The bluntest measure in the whole file is also the clearest: Character.AI ended open-ended chat for under-18s in October 2025. That is a product removal, not a filter. Content filtering at scale has the same structural limit. Filters cannot parse intent or nuance, so a filter trained to catch eating-disorder promotion also removes eating-disorder recovery content, and a law that makes platforms liable for the misses pushes them toward removing more lawful speech, not less.</p>
+
+      <p class="section-label">What It Costs Adults</p>
+
+      <p>Every age check collects something, and the collection itself is the first cost. Government identification checks take a photo of a license or passport, often with a selfie. Facial estimation takes a face image. Card checks take payment data. Behavioral inference takes browsing history and metadata. The data usually sits not with the platform but with a third-party verification vendor, whose security the user never sees.</p>
+
+      <p>That vendor is a target, and the proof is on the record. In June 2024, the identity-verification company AU10TIX, used by TikTok, Uber, and X, was found to have left administrative credentials exposed online for more than a year, potentially giving access to names, dates of birth, identification numbers, and images of identity documents. The company said it saw no evidence the data was exploited, and no confirmed mass theft was established. The distinction matters and should be kept. What was exposed was the possibility, and the possibility is the point: every verification database is a new target, and a driver's license image is not a password that can be reset.</p>
+
+      <p>Adults also get blocked. California's own proposed rules for its social media addiction law tolerate false-positive rates up to 8 percent for 16-year-olds and 15 percent for 17-year-olds, and set no benchmark at all for adults wrongly flagged as minors. The trade-off is structural: to catch most 16- and 17-year-olds, a system must set its threshold high enough that many 18- to 20-year-olds, and some older adults, are flagged and pushed to a second check. People without accepted identification, disproportionately low-income, elderly, immigrant, and rural users, cannot clear that fallback at all. The errors are not random either. The independent benchmarks show them falling harder on women and on some ethnic groups.</p>
+
+      <p>The deeper cost is to anonymous speech. To find the minors, a platform must check everyone, and the Electronic Frontier Foundation's warning is that KOSA-style rules push services to require people to identify themselves before they can speak, read, or participate online. That is not a hypothetical harm to a small group. It is the design of the system, and it is why privacy advocates treat age verification as a bill that endangers the privacy of all users, not only of children.</p>
+
+      <p>The most charged criticism concerns the duty of care itself. The American Civil Liberties Union warned in September 2024 that it would stifle critical information about reproductive health care, sexual orientation, and gender identity, and that officials hostile to abortion or LGBTQ people could weaponize it by claiming such information harms children. The precedent critics cite is FOSTA-SESTA, the 2018 sex-trafficking law, after which platforms restricted LGBTQ identity information for all users. Supporters answer that the duty targets product design, not content. Blackburn said in the Congressional Record in May 2025 that it applies only to product features like algorithms, not content, and Blumenthal has called the bill a product design bill. The bill's sponsors also amended it in February 2024 to limit enforcement of the duty to the Federal Trade Commission, after which GLAAD and the Trevor Project dropped their opposition. The House answered the concern differently, by dropping the duty of care entirely.</p>
+
+      <p class="section-label">What Happens Next</p>
+
+      <p>The clock is the first constraint. The 119th Congress ends January 3, 2027, and Blackburn leaves the Senate to take office as governor on January 16. If KOSA is not enacted in the lame-duck session, and Senator Paul's objection in September showed how easily one senator can force it onto the slow path, her signature bill dies in Congress and her governorship begins with its central piece unfinished.</p>
+
+      <p>The Tennessee General Assembly is the second constraint and the second opportunity. Its 2027 session is where the state App Store Accountability Act could be revived, and where any new Blackburn bill would have to pass. The Assembly deferred the app-store bill to summer study in March 2026, which suggests it was not a priority then. A new governor who made the issue her signature could change that, but she will need the legislature, and the legislature has its own views.</p>
+
+      <p>The courts are the third constraint, and they will not move fast. The autumn 2026 rulings favoring the states are vacated injunctions, not final holdings, and the Arkansas and Louisiana rulings show the opposite outcome is just as available. Any Blackburn law would be sued on the day it is signed, and it would be years before a final answer arrives. Enforcement is the fourth constraint, and the quietest. The flagship AI laws give enforcement to the attorney general alone, with cure periods and no private right of action, and no fine has been reported under any of them. The industry's answer so far has been to withdraw from states rather than comply, as the parent company of Pornhub did in about 25 states.</p>
+
+      <p>The honest version of the plan is friction, not a wall. Age checks will stop the youngest and least determined users on the largest compliant platforms, and they will cost adults time, privacy, and sometimes access. They will not stop a motivated teenager, and they will not settle the question of who decides what children see online. That question is still being fought in the courts, in Congress, and now, with Blackburn's move to Nashville, in Tennessee. Which Blackburn shows up there, the states'-rights governor or the federal-preemption dealmaker, is the first thing to watch, and the answer will shape not only Tennessee's internet but the national fight over who regulates it.</p>
+
+      <p class="section-label">Sources</p>
+
+      <ul class="sources-list">
+        <li><a href="https://en.wikipedia.org/wiki/2026_Tennessee_gubernatorial_election">Wikipedia — 2026 Tennessee gubernatorial election</a></li>
+        <li><a href="https://news.bgov.com/bloomberg-government-news/marsha-blackburn-wants-to-lead-governors-on-ai-tech-regulation">Bloomberg Government — Marsha Blackburn Wants to Lead Governors on AI, Tech Regulation</a></li>
+        <li><a href="https://ceointerviews.ai/interview/3378331/">CEOInterviews.AI — Blackburn speaks as results continue to come in in Tennessee (transcript, Nov. 3, 2026)</a></li>
+        <li><a href="https://www.everycrsreport.com/files/2026-08-24_IF12730_584f068130570c3b8485457e58a3a05dcae55406.html">Congressional Research Service — Kids Online Safety Act (In Focus IF12730, Aug. 24, 2026)</a></li>
+        <li><a href="https://techcrunch.com/2024/07/30/controversial-internet-bill-kosa-passed-by-senate/">TechCrunch — Controversial internet bill KOSA passed by Senate</a></li>
+        <li><a href="https://www.biometricupdate.com/202610/kosa-stalls-in-senate-as-age-assurance-moves-into-online-safety-debate">Biometric Update — KOSA stalls in Senate as age assurance moves into online safety debate</a></li>
+        <li><a href="https://er.educause.edu/articles/2026/8/house-passes-kids-internet-and-digital-safety-act">EDUCAUSE Review — House Passes Kids Internet and Digital Safety Act</a></li>
+        <li><a href="https://www.klobuchar.senate.gov/public/index.cfm/news-releases?id=AA0201AD-B3D4-4D0F-BA2D-2C5A85700371">Senator Amy Klobuchar — Klobuchar's Bipartisan TAKE IT DOWN Act Signed into Law</a></li>
+        <li><a href="https://www.govinfo.gov/content/pkg/BILLS-119s3062rs/xhtml/BILLS-119s3062rs.html">GovInfo — S. 3062, Guidelines for User Age-verification and Responsible Dialogue Act (GUARD Act), reported in Senate</a></li>
+        <li><a href="https://www.blackburn.senate.gov/2026/3/technology/blackburn-releases-discussion-draft-of-national-policy-framework-for-artificial-intelligence/3b3b6458-b6c7-478b-9859-374949586765">Senator Marsha Blackburn — Blackburn Releases Discussion Draft of National Policy Framework for Artificial Intelligence</a></li>
+        <li><a href="https://www.legal500.com/intelligence/united-states/technology/proposed-senate-bill-could-bring-sweeping-changes-to-ai-liability-section-230-and-state-regulation-and-introduces-protections-for-ai-use">Legal 500 — Proposed Senate Bill Could Bring Sweeping Changes To AI Liability, Section 230, And State Regulation</a></li>
+        <li><a href="https://www.biometricupdate.com/202606/white-house-senate-revive-push-to-block-state-ai-laws-through-kids-safety-deal">Biometric Update — White House, Senate revive push to block state AI laws through kids safety deal</a></li>
+        <li><a href="https://www.brookings.edu/articles/congress-should-make-childrens-privacy-the-on-ramp-to-a-national-privacy-law-for-all/">Brookings — Congress should make children's privacy the on-ramp to a national privacy law for all</a></li>
+        <li><a href="https://www.commerce.senate.gov/press/dem/release/senate-strikes-ai-moratorium-from-budget-reconciliation-bill-in-overwhelming-99-1-vote-2025-7/">U.S. Senate Committee on Commerce, Science, and Transportation — Senate Strikes AI Moratorium From Budget Reconciliation Bill in Overwhelming 99-1 Vote</a></li>
+        <li><a href="https://www.blackburn.senate.gov/2025/7/technology/on-ai-congress-just-provided-a-huge-win-for-children-creators-and-conservatives">Senator Marsha Blackburn — On AI, Congress Just Provided a Huge Win for Children, Creators, and Conservatives</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Protecting_Kids_From_Social_Media_Act">Wikipedia — Protecting Kids From Social Media Act (Tennessee HB 1891)</a></li>
+        <li><a href="https://Law.justia.com/cases/federal/district-courts/tennessee/tnmdce/3:2024cv01191/101398/78/">U.S. District Court, M.D. Tenn. — NetChoice v. Skrmetti, Memorandum Opinion, June 18, 2025</a></li>
+        <li><a href="https://www.govinfo.gov/content/pkg/USCOURTS-ca6-25-05660/pdf/USCOURTS-ca6-25-05660-0.pdf">U.S. Court of Appeals, Sixth Circuit — NetChoice v. Skrmetti, No. 25-5660, Aug. 28, 2026</a></li>
+        <li><a href="https://www.tn.gov/governor/news/2024/3/21">Tennessee Governor's Office — Gov. Lee Signs ELVIS Act Into Law</a></li>
+        <li><a href="https://mubert.com/blog/elvis-suno-lawsuit-voice-cloning-elvis-act">Mubert — Elvis Presley Enterprises v. Suno lawsuit (ELVIS Act test case)</a></li>
+        <li><a href="https://legiscan.com/TN/bill/SB2263/2025">LegiScan — Tennessee SB 2263, App Store Accountability Act</a></li>
+        <li><a href="https://www.whitehouse.gov/presidential-actions/2025/12/eliminating-state-law-obstruction-of-national-artificial-intelligence-policy/?query-11-page=11">The White House — Ensuring a National Policy Framework for Artificial Intelligence (Executive Order 14365)</a></li>
+        <li><a href="https://www.whitehouse.gov/wp-content/uploads/2026/03/03.20.26-National-Policy-Framework-for-Artificial-Intelligence-Legislative-Recommendations.pdf">The White House — A National Policy Framework for Artificial Intelligence, Legislative Recommendations, March 2026</a></li>
+        <li><a href="https://www.justice.gov/crt/media/1437846/dl">U.S. Department of Justice — Complaint in Intervention, United States v. Weiser (D. Colo.)</a></li>
+        <li><a href="https://www.supremecourt.gov/opinions/24pdf/23-1122_3e04.pdf">U.S. Supreme Court — Free Speech Coalition v. Paxton, No. 23-1122, slip opinion, June 27, 2025</a></li>
+        <li><a href="https://www.ca5.uscourts.gov/opinions/pub/25/25-60348-CV0.pdf">U.S. Court of Appeals, Fifth Circuit — NetChoice v. Fitch, No. 25-60348, Nov. 19, 2026</a></li>
+        <li><a href="https://media.ca11.uscourts.gov/opinions/pub/files/202511881.pdf">U.S. Court of Appeals, Eleventh Circuit — CCIA v. Attorney General, State of Florida, No. 25-11881, Oct. 14, 2026</a></li>
+        <li><a href="https://netchoice.org/wp-content/uploads/2025/04/Court-Permanently-Halts-Ohio-Age-Verification-Law_NetChoice-v-Yost_April-16-2025.pdf">U.S. District Court, S.D. Ohio — NetChoice v. Yost, Opinion and Order, Apr. 16, 2025</a></li>
+        <li><a href="https://docs.justia.com/cases/federal/district-courts/arkansas/arwdce/5:2023cv05105/68680/77">U.S. District Court, W.D. Ark. — NetChoice v. Griffin, Memorandum Opinion and Order, Mar. 31, 2025</a></li>
+        <li><a href="https://www.mediapost.com/publications/article/411437/judge-blocks-louisiana-social-media-parental-conse.html">MediaPost — Judge Blocks Louisiana Social Media Parental Consent Law</a></li>
+        <li><a href="https://pdfserver.amlaw.com/legalradar/55564052_complaint.pdf">Garcia v. Character Technologies, Complaint, M.D. Fla. No. 6:24-cv-01903, Oct. 22, 2024</a></li>
+        <li><a href="https://decrypt.co/353927/google-character-ai-settle-us-lawsuit-teens-suicide">Decrypt — Google, Character.AI Agree to Settle US Lawsuit Over Teen's Suicide</a></li>
+        <li><a href="https://portal.ct.gov/ag/press-releases/2026-press-releases/attorney-general-tong-seeks-consumer-protections-in-characterai-bankruptcy">Connecticut Attorney General — Attorney General Tong Seeks Consumer Protections for CharacterAI in Bankruptcy Filing</a></li>
+        <li><a href="https://doi.org/10.6028/NIST.IR.8525">NIST — Face Analysis Technology Evaluation: Age Estimation and Verification (NISTIR 8525)</a></li>
+        <li><a href="https://post.parliament.uk/facial-age-estimation/">UK Parliament POST — Facial age estimation</a></li>
+        <li><a href="https://sencanada.ca/Content/Sen/Committee/451/LCJC/briefs/LCJC_S-209_Bundle-Brief_YOTI_e.pdf">Yoti — Facial Age Estimation White Paper, July 2025</a></li>
+        <li><a href="https://www.biometricupdate.com/202509/age-assurance-trials-statement-on-bias-called-into-question-in-data-analysis">Biometric Update — Age assurance trial's statement on bias called into question in data analysis</a></li>
+        <li><a href="https://csa-scientist-open-letter.org/ageverif-Feb2026">Joint statement of security and privacy scientists and researchers on Age Assurance, Mar. 2, 2026</a></li>
+        <li><a href="https://www.ofcom.org.uk/siteassets/resources/documents/online-safety/information-for-industry/age-assurance-report-2026/report-on-the-use-of-age-assurance.pdf?p=65&v=423162">Ofcom — Report on the use of age assurance, July 2026</a></li>
+        <li><a href="https://arxiv.org/html/2512.06193v2">arXiv — Do You Feel Comfortable? Detecting Hidden Conversational Escalation in AI Chatbots for Children</a></li>
+        <li><a href="https://www.404media.co/id-verification-service-for-tiktok-uber-x-exposed-driver-licenses-au10tix/">404 Media — ID Verification Service for TikTok, Uber, X Exposed Driver Licenses</a></li>
+        <li><a href="https://www.eff.org/deeplinks/2026/08/senate-should-reject-kosas-privacy-risks">EFF — The Senate Should Reject KOSA's Privacy Risks</a></li>
+        <li><a href="https://assets.aclu.org/live/uploads/2024/09/aclu-urges-house-to-oppose-kosa.pdf">ACLU — Letter urging the House to oppose KOSA, Sept. 17, 2024</a></li>
+        <li><a href="https://www.congress.gov/congressional-record/volume-171/issue-81/senate-section/article/S2929-2">Congress.gov — Congressional Record, Vol. 171, No. 81, Introductory Statement on S. 1748, May 14, 2025</a></li>
+        <li><a href="https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint/consumer-ai-rights">Texas Attorney General — Consumer AI Rights (TRAIGA overview)</a></li>
+        <li><a href="https://www.chicagobooth.edu/review/its-difficult-not-impossible-regulate-online-porn">Chicago Booth Review — It's Difficult, Not Impossible, to Regulate Online Porn</a></li>
+      </ul>
+
+    </div>
+
+    <div class="closing"><em>Wetwear Deep Dive</em></div>
+    <div class="author">Sandy B. Patterson</div>
+
+  </article>
+
+  <footer>&copy; Sandy B. Patterson</footer>
+
+  <script src="../../reader.js"></script>
+
+</body>
+</html>
