@@ -26,9 +26,9 @@
         --shadow: 6px 6px 0 #000;
       }
       *{box-sizing:border-box}
-      html{scroll-behavior:smooth}
+      html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; overflow-x:clip}
       body{
-        margin:0;
+        margin:0; overflow-x:clip;
         background:var(--bg);
         color:var(--ink);
         font-family: ui-sans-system, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -206,6 +206,56 @@
       footer{padding:28px 0 40px; color:var(--ink-2); font-size:13.5px}
       footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:20px}
       footer p{margin:0}
+
+      /* ---------- Mobile (phones) ---------- */
+      @media(max-width:640px){
+        .wrap{padding-left:max(16px, env(safe-area-inset-left)); padding-right:max(16px, env(safe-area-inset-right))}
+
+        /* Hero: stack brand over a tidy 2×2 nav grid, full-width tap targets */
+        .hero{padding-top:26px}
+        .hero-top{flex-direction:column; align-items:stretch; gap:14px; padding-bottom:20px}
+        .hero-nav{display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%}
+        .hero-nav a{justify-content:center; min-height:44px; text-align:center}
+        .hero-grid{padding:28px 0 32px; gap:24px}
+        h1{font-size:clamp(38px, 11.5vw, 48px)}
+        .lede{font-size:16.5px; margin-top:14px}
+
+        /* Facts: one per row, dividers run horizontally */
+        .facts{flex-direction:column; margin-top:22px}
+        .fact{border-right:0; border-bottom:1px solid var(--line); padding:11px 14px}
+        .fact:last-child{border-bottom:0}
+
+        section{padding:32px 0}
+        .sec-head{margin-bottom:18px}
+        .sec-head p{font-size:15px}
+
+        /* Cards: smaller offset shadow so nothing crowds the screen edge */
+        .run-card, .explorer{box-shadow:4px 4px 0 #000}
+        .run-body{padding:14px}
+        .codebox{font-size:12.5px; overflow-wrap:anywhere}
+        .run-actions .btn{flex:1 1 100%; justify-content:center}
+        .copied{flex:1 1 100%; text-align:center}
+
+        .step{padding:18px}
+        .step-num{font-size:34px}
+
+        /* Format tabs: stack full-width so labels never squeeze */
+        .tabs{flex-direction:column}
+        .tab{border-right:0; border-bottom:1px solid var(--line); text-align:left; width:100%; padding:12px 16px}
+        .tab:last-child{border-bottom:0}
+        .pane{padding:16px}
+        pre.sample{font-size:12.5px; min-height:0; padding:14px}
+
+        /* At-a-glance rows: label sits above its value instead of squeezing it */
+        .card{padding:18px}
+        .card li{flex-direction:column; gap:2px}
+        .card li b{min-width:0; flex:none}
+
+        .shelf-strip{padding:16px}
+        .shelf-strip .btn{width:100%; justify-content:center}
+
+        footer .wrap{flex-direction:column; gap:6px}
+      }
     </style>
   </head>
   <body>
@@ -348,7 +398,6 @@
                 <li><b>Input</b><span>Video files (MP4, MOV, MKV, AVI) or video links — YouTube, Facebook, and other yt-dlp sites</span></li>
                 <li><b>Output</b><span>.txt, subtitles (.srt), Word (.docx)</span></li>
                 <li><b>Internet</b><span>Not needed to transcribe a file. Needed only to fetch a video from a link</span></li>
-                <li><b>Get it</b><span><a href="https://github.com/sandybpatterson/transcriber-gui">github.com/sandybpatterson/transcriber-gui</a> — setup steps are at the top of this page</span></li>
               </ul>
             </article>
           </div>
@@ -358,7 +407,6 @@
       <section class="shelf-section" id="bookshelf">
         <div class="wrap">
           <div class="shelf-strip">
-            <p><strong>On the bookshelf.</strong> Transcriber is shelved with Sandy B. Patterson's other tools and projects. This page is its entry — what it does, how to get it, and how to run it.</p>
             <a class="btn" href="https://sandybpatterson.github.io/bookshelf.html">← Back to the bookshelf</a>
           </div>
         </div>
