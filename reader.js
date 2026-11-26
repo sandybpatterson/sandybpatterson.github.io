@@ -36,52 +36,6 @@
     return /iPhone|iPad|iPod/.test(navigator.userAgent);
   }
 
-  // Returns true if the user has any non-novelty, non-Samantha English voice installed.
-  // Samantha is the only pre-installed iOS English voice — anything else means
-  // the user has downloaded something better.
-  function hasGoodVoice() {
-    const usableEnglish = allVoices.filter(v =>
-      !NOVELTY_VOICES.has(v.name.toLowerCase()) &&
-      v.lang.toLowerCase().startsWith('en')
-    );
-    return usableEnglish.some(v => {
-      const n = v.name.toLowerCase();
-      return n !== 'samantha'; // anything other than Samantha counts
-    });
-  }
-
-  function checkVoiceQuality() {
-    if (!isIOS()) return;
-    if (hasGoodVoice()) return;
-    if (localStorage.getItem('sbp-voice-hint-v2')) return;
-    setTimeout(showVoicePrompt, 900);
-  }
-
-  function showVoicePrompt() {
-    if (document.getElementById('sbp-voice-prompt')) return;
-    const reader = document.getElementById('sbp-reader');
-    if (!reader) return;
-
-    const el = document.createElement('div');
-    el.id = 'sbp-voice-prompt';
-    el.className = 'sbp-voice-prompt';
-    el.innerHTML = `
-      <span class="sbp-vp-text">A much better voice is available for your iPhone — free.</span>
-      <button class="sbp-vp-btn sbp-vp-yes" id="sbp-vp-yes">Set up now</button>
-      <button class="sbp-vp-btn sbp-vp-no" id="sbp-vp-no">✕</button>
-    `;
-    reader.appendChild(el);
-
-    document.getElementById('sbp-vp-yes').addEventListener('click', () => {
-      el.remove();
-      showVoiceInstructions();
-    });
-    // ✕ just hides for this session — does NOT set localStorage
-    document.getElementById('sbp-vp-no').addEventListener('click', () => {
-      el.remove();
-    });
-  }
-
   function showVoiceInstructions() {
     const overlay = document.createElement('div');
     overlay.id = 'sbp-voice-overlay';
@@ -325,7 +279,6 @@
   function loadVoices() {
     allVoices = synth.getVoices();
     populateVoiceSelect();
-    checkVoiceQuality();
   }
 
   // Returns voices sorted by best fit for the given language tag.
